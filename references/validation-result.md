@@ -5,14 +5,14 @@
 Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix and the mixed skill lifecycle prefactor.
 
 - `npm run validate`: PASS, exactly 18 skills and four scaffold targets.
-- `npm test`: PASS, 36 tests, zero failures/skips.
+- `npm test`: PASS, 38 tests, zero failures/skips.
 - `npm run skills:validate`: PASS.
 - `node bin/ai-dev-skills.mjs --help`: PASS (exit 0).
 - `node bin/ai-dev-skills.mjs validate`: PASS (exit 0).
 
 Regression evidence: before the fix, `node --test --test-name-pattern='with (LF|CRLF)' tests/validate-skills.test.mjs` passed all three LF cases and failed all three CRLF cases. After the fix, the full suite passes. The six new cases explicitly set line endings in temporary copies of artifact contracts/templates, independently of checkout settings. They accept valid LF/CRLF documents and assert the exact missing-section error for SPEC Acceptance Criteria and ADR Decision in both formats.
 
-Lifecycle evidence: ten regressions accept one consistent `implemented` fixture and reject unknown status, divergence originating in each of manifest/contract/source, pending or unavailable workflow declarations, missing `Workflow` sections, placeholders and unsupported operational execution. The checked-in catalogue remains 18 `scaffold` skills and four declarative `scaffold` targets.
+Lifecycle evidence: twelve regressions accept one consistent `implemented` fixture and reject unknown status, divergence originating in each of manifest/contract/source, pending or unavailable workflow declarations, missing `Workflow` sections, placeholders and unsupported/non-operational capability statements. The checked-in catalogue remains 18 `scaffold` skills and four declarative `scaffold` targets.
 
 The fix normalizes CRLF to LF only in strings read for artifact contracts and templates. No checkout-wide conversion, dependency, catalogue, target or contract change was needed. `git ls-files --eol contracts/artifacts.md templates/artifacts/spec.md` still reports `i/lf w/crlf` for both files. Production dependencies remain `{}`; existing required/conditional/optional dependency checks still pass.
 
@@ -42,6 +42,6 @@ Reconciled baseline v1 validated on 2026-10-05 with Node.js v26.5.0 and Git 2.54
 - `npm test`: PASS, 17 tests. Isolated fixtures reject unknown/undeclared artifacts, absent templates/sections, ready templates, invented named-only schemas, missing R17/failure fields, duplicate/incompatible/executable targets, hardcoded target paths and mandatory/conditional cycles. Optional composition cycles are accepted.
 - The original scaffold passes after isolated fixture cleanup. Production dependencies remain {}.
 
-Validation checks the emitted name/description frontmatter subset, not arbitrary YAML. Artifact templates are checked for canonical headings, metadata, draft status and declared producers. Routing/gate checks validate structure; they do not certify semantics or execute production workflows. No semantic routing overlap suite is implemented.
+Validation checks the emitted name/description frontmatter subset, not arbitrary YAML. Artifact templates are checked for canonical headings, metadata, draft status and declared producers. Lifecycle checks require workflow sections and reject explicit pending/unavailable sentinels; they do not interpret arbitrary natural-language paraphrases or execute workflows. Routing/gate checks validate structure; they do not certify semantics. No semantic routing overlap suite is implemented.
 
 Windows/Linux execution and platform installation were not tested. Target descriptors express Tier 1 intent and remain scaffolds; live Cursor/Codex/Antigravity compatibility is unverified. The workspace has no Git repository, so no Git diff/commit was available. Full baseline sections 1–27 are now recorded; see [provenance](provenance.md).

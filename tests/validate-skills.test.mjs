@@ -103,6 +103,14 @@ const failures = [
     const skill = await implementSkill(root,'implement');
     await changeText(root,skill.path,s=>`${s}\nOperational execution remains unsupported.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
+  ['implemented skill with pending implementation', async root=>{
+    const skill = await implementSkill(root,'implement');
+    await changeText(root,skill.path,s=>`${s}\nImplementation pending.\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
+  ['implemented skill with non-operational capability', async root=>{
+    const skill = await implementSkill(root,'implement');
+    await changeText(root,skill.path,s=>`${s}\nThis capability is not operational.\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
   ['missing Claude Code target', root=>changeManifest(root,m=>m.targets=m.targets.filter(t=>t.name!=='claude-code')), /Invalid targets/],
   ['Claude Code installation enabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /claude-code: incompatible scaffold descriptor/],
   ['hardcoded Claude Code path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .claude/skills\n'), /hardcoded target/],
