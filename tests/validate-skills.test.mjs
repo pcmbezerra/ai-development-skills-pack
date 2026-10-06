@@ -26,7 +26,7 @@ async function changeText(root,path,edit) {
   const target = join(root,path);
   await writeFile(target,edit(await readFile(target,'utf8')));
 }
-async function implementSkill(root, name) {
+async function markSkillImplemented(root, name) {
   let skill;
   await changeManifest(root,m=>{
     skill = m.skills.find(s=>s.name===name);
@@ -40,6 +40,15 @@ async function implementSkill(root, name) {
     .replace('Status: scaffold; the operational workflow is not implemented.', 'Status: implemented; the operational workflow is available.')
     .replace('When preparing this skill for implementation,', 'Before executing this skill,')
     .replace('Do not claim to have executed this skill from this skeleton.', 'Execute the workflow and report its observable result.'));
+  return skill;
+}
+async function implementSkill(root, name) {
+  const skill = await markSkillImplemented(root,name);
+  await changeText(root,skill.contract,s=>s.replace(
+    /## Workflow\r?\n\r?\n(?=## Quality gates)/,
+    '## Workflow\n\n1. Read the approved input and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and record evidence.\n\n',
+  ));
+  await changeText(root,skill.path,s=>`${s}\n## Workflow\n\n1. Read the requested change and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and report evidence.\n`);
 }
 async function artifactLineEndings(root, eol) {
   const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
@@ -84,6 +93,7 @@ const failures = [
     await implementSkill(root,'implement');
     await changeText(root,'skills/development/implement/SKILL.md',s=>`${s}\nDo not claim to have executed this skill from this skeleton.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
+  ['implemented skill without operational workflow', root=>markSkillImplemented(root,'implement'), /implement: implemented skill must define workflow in contract and source/],
   ['missing Claude Code target', root=>changeManifest(root,m=>m.targets=m.targets.filter(t=>t.name!=='claude-code')), /Invalid targets/],
   ['Claude Code installation enabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /claude-code: incompatible scaffold descriptor/],
   ['hardcoded Claude Code path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .claude/skills\n'), /hardcoded target/],

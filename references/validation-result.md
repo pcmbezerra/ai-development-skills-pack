@@ -2,15 +2,17 @@
 
 ## Current observation — Windows, 2026-10-06
 
-Node.js v25.2.0, npm 11.6.2, PowerShell; HEAD `347b05a` plus local changes. Validation now passes after the LF/CRLF parser fix.
+Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix and the mixed skill lifecycle prefactor.
 
 - `npm run validate`: PASS, exactly 18 skills and four scaffold targets.
-- `npm test`: PASS, 26 tests, zero failures/skips.
+- `npm test`: PASS, 34 tests, zero failures/skips.
 - `npm run skills:validate`: PASS.
 - `node bin/ai-dev-skills.mjs --help`: PASS (exit 0).
 - `node bin/ai-dev-skills.mjs validate`: PASS (exit 0).
 
 Regression evidence: before the fix, `node --test --test-name-pattern='with (LF|CRLF)' tests/validate-skills.test.mjs` passed all three LF cases and failed all three CRLF cases. After the fix, the full suite passes. The six new cases explicitly set line endings in temporary copies of artifact contracts/templates, independently of checkout settings. They accept valid LF/CRLF documents and assert the exact missing-section error for SPEC Acceptance Criteria and ADR Decision in both formats.
+
+Lifecycle evidence: eight regressions accept one consistent `implemented` fixture and reject unknown status, divergence originating in each of manifest/contract/source, pending or unavailable workflow declarations, and an `implemented` skill without non-empty `Workflow` sections in both contract and source. The checked-in catalogue remains 18 `scaffold` skills and four declarative `scaffold` targets.
 
 The fix normalizes CRLF to LF only in strings read for artifact contracts and templates. No checkout-wide conversion, dependency, catalogue, target or contract change was needed. `git ls-files --eol contracts/artifacts.md templates/artifacts/spec.md` still reports `i/lf w/crlf` for both files. Production dependencies remain `{}`; existing required/conditional/optional dependency checks still pass.
 

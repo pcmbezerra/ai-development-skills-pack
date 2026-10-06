@@ -14,7 +14,7 @@ Consult [routing](routing.md) for prerequisites, [quality gates](quality-gates.m
 
 ## Skill lifecycle and scaffold boundary
 
-Each skill declares exactly one lifecycle status, `scaffold` or `implemented`, consistently in the manifest, its contract and its source. `scaffold` means the operational workflow is pending. `implemented` means the source contains an operational workflow and cannot retain notices that the workflow is pending or unavailable. The current catalogue remains entirely `scaffold`.
+Each skill declares exactly one lifecycle status, `scaffold` or `implemented`, consistently in the manifest, its contract and its source. `scaffold` means the operational workflow is pending. `implemented` requires a non-empty `Workflow` section in both contract and source and cannot retain notices that the workflow is pending or unavailable. The current catalogue remains entirely `scaffold`.
 
 Skill lifecycle is independent from target readiness. No installer, sync, doctor, list, automatic router, PR/release/deployment automation or platform detection is implemented. The manifest is designed to support future list/doctor/documentation/routing tests; semantic overlap testing remains future work. Node.js and Git are runtime prerequisites; Node >=22 is a scaffold choice. Production npm dependencies remain {}.
 
