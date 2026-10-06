@@ -1,6 +1,6 @@
 # 02 — Operacionalizar context-engineering
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Title
 
@@ -42,26 +42,26 @@ O workflow é executado pelo agente. Automação auxiliar só se justifica para 
 
 ## Acceptance Criteria
 
-- [ ] Em fixture sem contexto, a execução cria os cinco documentos canônicos com afirmações baseadas em evidência local.
-- [ ] Em fixture com contexto e decisões existentes, valores e conteúdo não contradito são preservados.
-- [ ] Uma segunda execução sem mudança de entrada produz diff vazio.
-- [ ] Conflito material com decisão explícita retorna `BLOCKED` com os quatro campos obrigatórios e não sobrescreve a decisão.
-- [ ] Segredos presentes em fixture não aparecem nas saídas.
-- [ ] `PROJECT_CONTEXT` continua sem schema ou template canônico novo.
-- [ ] Somente `context-engineering` está `implemented`; as outras 17 skills permanecem `scaffold`.
-- [ ] A validação identifica corretamente qualquer inconsistência dessa migração.
-- [ ] Nenhum arquivo de aplicação é alterado pelos cenários de conformidade.
+- [x] Em fixture sem contexto, a execução cria os cinco documentos canônicos com afirmações baseadas em evidência local.
+- [x] Em fixture com contexto e decisões existentes, valores e conteúdo não contradito são preservados.
+- [x] Uma segunda execução sem mudança de entrada produz diff vazio.
+- [x] Conflito material com decisão explícita retorna `BLOCKED` com os quatro campos obrigatórios e não sobrescreve a decisão.
+- [x] Segredos presentes em fixture não aparecem nas saídas.
+- [x] `PROJECT_CONTEXT` continua sem schema ou template canônico novo.
+- [x] Somente `context-engineering` está `implemented`; as outras 17 skills permanecem `scaffold`.
+- [x] A validação identifica corretamente qualquer inconsistência dessa migração.
+- [x] Nenhum arquivo de aplicação é alterado pelos cenários de conformidade.
 
 ## Validation
 
-- Executar os cenários de conformidade em repositórios temporários isolados e registrar `TEST_EVIDENCE`.
-- Comparar o diff da primeira e da segunda execução.
-- Executar suíte, validação estrutural, alias e CLI.
-- Verificar ausência de novos schemas, dependências e caminhos específicos de target ou sistema operacional.
+- `TEST-20261006-002`: cenários isolados de criação, preservação, repetição, conflito e sigilo aprovados; a repetição preservou os cinco hashes e o conflito manteve os documentos intactos.
+- `npm.cmd test`: PASS, 40/40; teste RED inicial falhou pela ausência da migração e passou após o GREEN.
+- `npm.cmd run validate`, `npm.cmd run skills:validate`, ajuda e validação da CLI: PASS.
+- Confirmados: nenhum schema/template novo, nenhuma dependência, nenhum caminho específico de target/sistema operacional e nenhuma alteração de aplicação pelas fixtures.
 
 ## Definition of Done
 
-- [ ] O workflow pode ser seguido por um agente sem decisões operacionais ausentes.
-- [ ] Todos os critérios de aceitação foram demonstrados.
-- [ ] Evidência automatizada e de conformidade está separada claramente.
-- [ ] Documentação deixa explícitas as 17 skills ainda scaffold e a compatibilidade não certificada.
+- [x] O workflow pode ser seguido por um agente sem decisões operacionais ausentes.
+- [x] Todos os critérios de aceitação foram demonstrados.
+- [x] Evidência automatizada e de conformidade está separada claramente.
+- [x] Documentação deixa explícitas as 17 skills ainda scaffold e a compatibilidade não certificada.

@@ -135,7 +135,7 @@
       "path": "skills/core/context-engineering/SKILL.md",
       "description": "Discover and maintain project context.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Discover and maintain project context",
       "inputs": [
         "repository evidence",

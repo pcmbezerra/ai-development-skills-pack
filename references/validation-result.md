@@ -2,21 +2,21 @@
 
 ## Current observation — Windows, 2026-10-06
 
-Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix and the mixed skill lifecycle prefactor.
+Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix, the mixed skill lifecycle prefactor and the operational `context-engineering` migration.
 
 - `npm run validate`: PASS, exactly 18 skills and four scaffold targets.
-- `npm test`: PASS, 38 tests, zero failures/skips.
+- `npm test`: PASS, 40 tests, zero failures/skips.
 - `npm run skills:validate`: PASS.
 - `node bin/ai-dev-skills.mjs --help`: PASS (exit 0).
 - `node bin/ai-dev-skills.mjs validate`: PASS (exit 0).
 
 Regression evidence: before the fix, `node --test --test-name-pattern='with (LF|CRLF)' tests/validate-skills.test.mjs` passed all three LF cases and failed all three CRLF cases. After the fix, the full suite passes. The six new cases explicitly set line endings in temporary copies of artifact contracts/templates, independently of checkout settings. They accept valid LF/CRLF documents and assert the exact missing-section error for SPEC Acceptance Criteria and ADR Decision in both formats.
 
-Lifecycle evidence: twelve regressions accept one consistent `implemented` fixture and reject unknown status, divergence originating in each of manifest/contract/source, pending or unavailable workflow declarations, missing `Workflow` sections, placeholders and unsupported/non-operational capability statements. The checked-in catalogue remains 18 `scaffold` skills and four declarative `scaffold` targets.
+Lifecycle evidence: regressions accept a consistent mixed fixture and reject unknown status, divergence originating in each of manifest/contract/source, pending or unavailable workflow declarations, missing `Workflow` sections, placeholders and unsupported/non-operational capability statements. The checked-in catalogue contains `context-engineering` as `implemented`, 17 `scaffold` skills and four declarative `scaffold` targets. `TEST-20261006-002` separately records agent-executed conformance for creation, preservation, idempotence, conflict blocking and secret exclusion.
 
 The fix normalizes CRLF to LF only in strings read for artifact contracts and templates. No checkout-wide conversion, dependency, catalogue, target or contract change was needed. `git ls-files --eol contracts/artifacts.md templates/artifacts/spec.md` still reports `i/lf w/crlf` for both files. Production dependencies remain `{}`; existing required/conditional/optional dependency checks still pass.
 
-Linux and a fresh macOS run, Node.js 22, and live Cursor/Codex/Antigravity/Claude Code execution remain unverified. LF fixtures on Windows establish parser coverage, not operating-system compatibility. Workflows and installation remain unimplemented; the next implementation slice is defined in the project handoff.
+Linux and a fresh macOS run, Node.js 22, and live Cursor/Codex/Antigravity/Claude Code execution remain unverified. LF fixtures on Windows establish parser coverage, not operating-system compatibility. Apart from `context-engineering`, workflows and installation remain unimplemented; the next implementation slice is defined in the project handoff.
 
 ## Historical failure — Windows, 2026-10-06, before the fix
 

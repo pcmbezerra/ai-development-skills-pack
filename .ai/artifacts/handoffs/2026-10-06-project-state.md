@@ -1,23 +1,23 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 6
+version: 7
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "347b05a", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "347b05a", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "TEST-20261006-002"]
 ---
 
 ## Objective
 
-Corrigir a incompatibilidade LF/CRLF do validador, registrar regressões e validação, e definir a primeira etapa futura dos workflows. Preservar o histórico de configuração e continuidade. Documento consolidado pela skill externa `handoff` a partir de evidências verificadas. Não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável após operacionalizar `context-engineering`, mantendo o histórico de validação e a frontier executável. Documento consolidado pela skill externa `handoff` a partir de evidências verificadas. Não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
-Baseline v1 reconciliado + emenda v1-A1 (2026-10-06), commit inspecionado `347b05a`, branch inicial `main`, working tree inicialmente limpo. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2 (2026-10-06), commit inspecionado `347b05a`, branch `main`. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
-18 skills: 13 com invocação primária user e 5 model. Todas permanecem esqueletos. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
+18 skills: 13 com invocação primária user e 5 model. `context-engineering` está `implemented`; as outras 17 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 38/38 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A fase operacional não começou; o validador já admite ciclo de vida misto consistente, mas o catálogo permanece com 18 skills `scaffold`. O ticket 01 foi concluído; a frontier contém somente o ticket 02. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 40/40 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. O ticket 02 concluiu o primeiro workflow operacional e a frontier contém somente o ticket 03. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
 
 ## Completed Work
 
@@ -33,6 +33,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 3
 - Atualização da documentação de validação sem apagar o histórico de macOS.
 - Criação da SPEC pronta de contexto/bootstrap e decomposição aprovada em quatro tickets lineares, todos `ready-for-agent`, com fallback Markdown local.
 - Conclusão do ticket 01 nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`: ciclo de vida misto estrito, consistência entre manifest/contrato/fonte e regressões de workflow pendente ou indisponível. Reviews finais de Standards e Spec sem achados.
+- Conclusão do ticket 02: workflow operacional de `context-engineering`, emenda v1-A2 iniciada, migração consistente para `implemented`, regressões estruturais e `TEST-20261006-002` com cinco cenários de conformidade.
 
 ## Decisions
 
@@ -44,19 +45,21 @@ Confirmadas pelo mantenedor nesta sessão:
 - Escopo inicial: documentação e configuração. Solicitações posteriores autorizaram Claude Code no contrato/scaffold e a correção LF/CRLF com regressões e definição da primeira etapa futura dos workflows.
 - Claude Code é o quarto target Tier 1, com identificador `claude-code` e descritor `targets/claude-code.mjs`. A emenda v1-A1 preserva as 18 skills, esquemas de artefatos, routing e dependências.
 
-A ampliação de targets foi registrada diretamente no contrato e na proveniência como emenda v1-A1, sem ADR duplicado. A solicitação atual define o próximo recorte de workflows, mas não implementa workflows operacionais ou instalador.
+A ampliação de targets foi registrada diretamente no contrato e na proveniência como emenda v1-A1, sem ADR duplicado. A emenda v1-A2 começou com o workflow operacional de `context-engineering`; não há instalador e as outras 17 skills permanecem scaffold.
 
 ## Artifacts
 
 `CONTEXT.md`; `.ai/config.json`; `.ai/project.md`; `.ai/architecture.md`; `.ai/standards.md`; `.ai/tech-stack.md`; `.ai/business-rules.md`; `docs/agents/issue-tracker.md`; `docs/agents/triage-labels.md`; `docs/agents/domain.md`; este handoff.
 
-SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET pronto: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
+SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET pronto: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. Evidência do ticket 02: `.ai/artifacts/tests/2026-10-06-context-engineering.md`. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
 
 ## Files Changed
 
 Histórico: criados os arquivos listados em Artifacts; atualizados `AGENTS.md`, `README.md` e `references/validation-result.md`. Na emenda v1-A1, atualizados também `references/architecture-contract-v1.md`, `references/provenance.md`, `contracts/skill-contract.md`, `manifest/skills.json`, `scripts/validate-skills.mjs` e `tests/validate-skills.test.mjs`; criado `targets/claude-code.mjs`.
 
 Na correção LF/CRLF: `scripts/validate-skills.mjs`, `tests/validate-skills.test.mjs`, `references/validation-result.md`, `references/provenance.md`, `README.md`, `.ai/architecture.md` e este handoff. Essas mudanças foram versionadas no commit `0d3b98e`. O ticket 01 atualizou `AGENTS.md`, `README.md`, `contracts/skill-contract.md`, `references/provenance.md`, `references/validation-result.md`, `scripts/validate-skills.mjs` e `tests/validate-skills.test.mjs`, sem migrar nenhuma skill. Manifest, targets, dependências, routing e schemas de artefatos permaneceram inalterados.
+
+O ticket 02 atualizou a fonte/contrato/manifest de `context-engineering`, regressões, emenda v1-A2, documentação de estado e os artefatos de ticket, teste e handoff. Targets, dependências, routing, CLI e schemas/templates de artefatos permaneceram inalterados.
 
 ## Validation
 
@@ -74,10 +77,11 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 - Após criar `SPEC-20261006-001`, `npm run validate`: PASS, 18 skills e quatro targets. A SPEC contém todos os campos canônicos, está `ready` e não contém placeholders.
 - Após criar `TICKET-SET-20261006-001`, validação estrutural reexecutada. Os quatro tickets têm escopo delimitado, dependências explícitas e acíclicas e critérios verificáveis.
+- Ticket 02: RED focado confirmado; GREEN focado 3/3; suíte final 40/40; validação, alias e dois comandos CLI com saída zero. Cenários de conformidade aprovados para criação, preservação, idempotência, conflito e sigilo; detalhes em `TEST-20261006-002`.
 
 ## Known Issues
 
-1. **Limite intencional do scaffold:** workflows, instalação, sync, doctor, list e routing automático inexistentes; sem testes de sobreposição semântica de routing ou validação de prontidão de artefatos de projetos.
+1. **Limite intencional do estado parcial:** as outras 17 skills, instalação, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem testes de sobreposição semântica de routing ou validação de prontidão de artefatos de projetos.
 2. **Plataformas não verificadas nesta correção:** Linux, nova execução macOS, Node.js 22 e execução real nos quatro targets. LF/CRLF cobertos em fixtures Windows.
 3. **Integrações não verificadas:** `gh` ausente no PATH na sessão anterior; issues/labels remotas não verificadas.
 4. **Publicação futura:** licença placeholder e pacote privado exigirão decisão própria antes de distribuir.
@@ -88,11 +92,11 @@ Nenhuma questão bloqueante. A transição de status, os limites de schema e os 
 
 ## Next Actions
 
-1. Implementar o ticket 02, único item na frontier atual.
-2. Prosseguir em ordem linear pelos tickets 03 e 04 somente após os respectivos bloqueadores concluírem.
+1. Implementar o ticket 03, único item na frontier atual.
+2. Prosseguir para o ticket 04 somente após seu bloqueador concluir.
 3. Reconciliar os arquivos locais com GitHub Issues e aplicar `ready-for-agent` quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 02 e não avance para tickets bloqueados."
+Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 03 e não avance para tickets bloqueados."
 
 ## Suggested Skills
 
@@ -102,4 +106,4 @@ Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001
 
 ## Constraints
 
-Preservar as 18 skills e os quatro targets da emenda v1-A1. Nesta correção, não implementar workflows/instalador, adicionar dependências ou ampliar contratos. A primeira etapa futura está delimitada acima. Helpers externos de manutenção não integram o runtime. Não interpretar configuração local como validação de integração remota ou compatibilidade de targets. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
+Preservar as 18 skills, os quatro targets e o estado parcial da emenda v1-A2: somente `context-engineering` implementada até o ticket 03. Não adicionar dependências nem ampliar schemas, routing ou targets. Helpers externos de manutenção não integram o runtime. Não interpretar fixtures locais como validação de integração remota ou compatibilidade de targets. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.

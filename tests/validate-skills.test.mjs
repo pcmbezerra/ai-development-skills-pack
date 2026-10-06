@@ -82,6 +82,7 @@ test('accepts one consistently implemented skill in the scaffold catalogue',()=>
   assert.equal(result.skills,18);
 }));
 const failures = [
+  ['implemented context migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').status='scaffold'), /context-engineering: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],
   ['skill status divergence in contract', root=>changeText(root,'contracts/skills/implement.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')), /implement: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
   ['skill status divergence in source', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')), /implement: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
@@ -141,7 +142,16 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current scaffold satisfies the complete baseline checks',async()=>{
+test('current catalogue implements only context-engineering without defining PROJECT_CONTEXT',async()=>{
+  const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['context-engineering']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,17);
+  assert.deepEqual(manifest.artifacts.PROJECT_CONTEXT,{
+    contract: 'contracts/artifacts.md',
+    schema: 'named-only',
+  });
+});
+test('current mixed catalogue satisfies the complete baseline checks',async()=>{
   const result = await validate(source);
   assert.equal(result.ok,true,result.errors.join('\n'));
   assert.equal(result.skills,18);

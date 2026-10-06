@@ -1,6 +1,6 @@
 # Arquitetura atual
 
-- `skills/`: 18 esqueletos, divididos em core, discovery, development, quality, documentation e modernization.
+- `skills/`: 18 skills divididas em core, discovery, development, quality, documentation e modernization; `context-engineering` está operacional e as outras 17 permanecem scaffold.
 - `manifest/skills.json`: catálogo, classificação de invocação, artefatos e dependências tipadas.
 - `contracts/`: contratos compartilhados e por skill; routing R1–R17, gates e falhas.
 - `templates/`: 15 templates de artefatos e modelos de contexto do projeto.
@@ -13,4 +13,4 @@ Fontes normativas: `references/architecture-contract-v1.md`, `references/provena
 
 Dados específicos deste repositório ficam em `.ai/`; regras para helpers externos ficam em `docs/agents/`; vocabulário fica em `CONTEXT.md`. ADRs futuros usarão `.ai/decisions`, criados apenas quando houver decisão que os justifique.
 
-O validador não verifica prontidão semântica, compatibilidade real dos targets ou execução dos workflows. Contratos/templates aceitam LF e CRLF por normalização apenas em memória; validação Windows e 26 testes aprovados: ver handoff e resultado de validação.
+O validador não verifica prontidão semântica, compatibilidade real dos targets ou execução dos workflows. Contratos/templates aceitam LF e CRLF por normalização apenas em memória; validação Windows e 40 testes aprovados: ver handoff e resultado de validação.

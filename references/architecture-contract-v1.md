@@ -1,10 +1,10 @@
 # Normative baseline v1 — complete user-supplied contract
 
-The text below records the supplied contract, sections 1–27, with amendment v1-A1 (2026-10-06): Claude Code is added as a fourth Tier 1 target at the user's request. Sections 1, 20 and 24 and the target summary incorporate this amendment. The 18-skill catalogue, artifact schemas, routing and dependency semantics are unchanged. Repository adaptations are documented in [provenance](provenance.md).
+The text below records the supplied contract, sections 1–27, with amendment v1-A1 (2026-10-06): Claude Code is added as a fourth Tier 1 target at the user's request. Amendment v1-A2 (2026-10-06) begins the transition to a partially implemented catalogue by making `context-engineering` operational; it does not change the 18-skill catalogue, artifact schemas, routing, dependency semantics or target readiness. Repository adaptations are documented in [provenance](provenance.md).
 
 AI - Development Skills Pack v1
 Architecture Contract
-Status: Baseline v1 + amendment v1-A1
+Status: Baseline v1 + amendments v1-A1 and v1-A2
 Targets Tier 1: Cursor, Codex, Gemini Antigravity, Claude Code
 Architecture: Multi-agent, tool-agnostic, artifact-driven
 Principle: Skills implement reusable workflows; project knowledge and state remain outside the skills.
