@@ -25,7 +25,7 @@ Validator and tests for dependency/canonical CLI entrypoint invariants; behavior
 
 ## Validation Performed
 
-Focused RED/GREEN, full 43-test suite, both validation aliases, CLI help/validation, adversarial agent fixtures and two-axis code review.
+Focused RED/GREEN, full 44-test suite, both validation aliases, CLI help/validation, adversarial agent fixtures and two-axis code review.
 
 ## Tests
 
@@ -41,4 +41,4 @@ None for `SPEC-20261006-001`; its ticket frontier is empty.
 
 ## Change Reference
 
-Commit `800db27` plus the closing documentation commit on branch `main`.
+Commits `800db27`, `9634dfe` and `9a15a46`, plus the final review-evidence commit on branch `main`.
