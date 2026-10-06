@@ -4,8 +4,8 @@ Estado verificado em 2026-10-06. Pacote privado `ai-development-skills-pack`, ve
 
 Objetivo: manter 18 skills reutilizáveis de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. Entrega atual: catálogo, contratos, templates, descritores declarativos, CLI de ajuda/validação e testes do validador.
 
-`context-engineering` possui workflow operacional; as outras 17 skills, incluindo o bootstrap, permanecem scaffold. Instalação, sync, doctor, list e routing automático não estão implementados.
+`context-engineering` e `setup-ai-development-skills` possuem workflows operacionais; as outras 16 skills permanecem scaffold. Instalação, sync, doctor, list e routing automático não estão implementados.
 
-GitHub Issues com fallback local e rótulos padrão foram confirmados pelo mantenedor. A configuração foi preenchida manualmente; isso não demonstra execução da skill scaffold de bootstrap.
+GitHub Issues com fallback local e rótulos padrão foram confirmados pelo mantenedor. A configuração deste repositório foi preenchida manualmente; a conformidade do bootstrap foi demonstrada separadamente em fixtures locais.
 
 Continuidade: `.ai/artifacts/handoffs/2026-10-06-project-state.md`.

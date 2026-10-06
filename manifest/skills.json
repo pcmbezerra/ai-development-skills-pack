@@ -28,7 +28,7 @@
       "path": "skills/core/setup-ai-development-skills/SKILL.md",
       "description": "Bootstrap repository for the pack.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Bootstrap repository for the pack",
       "inputs": [
         "repository",

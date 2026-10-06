@@ -1,6 +1,6 @@
 # 03 — Operacionalizar bootstrap local
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Title
 
@@ -42,15 +42,15 @@ O bootstrap deve inspecionar antes de escrever. O default local é aplicado some
 
 ## Acceptance Criteria
 
-- [ ] Em repositório sem estado do pack, a execução cria a configuração mínima e os cinco documentos de contexto.
-- [ ] A configuração criada usa versão suportada, tracker local e caminhos canônicos dentro do repositório.
-- [ ] O bootstrap invoca `context-engineering`; sem conclusão válida da dependência, não retorna `READY`.
-- [ ] Ao concluir com sucesso, retorna `Status: READY` sem persistir novo artefato/schema de readiness.
-- [ ] Configuração JSON inválida produz `BLOCKED` e permanece inalterada.
-- [ ] Nenhum arquivo da aplicação, decisão existente ou configuração de build é modificado.
-- [ ] As duas skills deste recorte estão `implemented`; as outras 16 permanecem `scaffold`.
-- [ ] As 18 skills, os quatro targets e a dependência obrigatória original são preservados.
-- [ ] Nenhuma dependência ou comando CLI novo é adicionado.
+- [x] Em repositório sem estado do pack, a execução cria a configuração mínima e os cinco documentos de contexto.
+- [x] A configuração criada usa versão suportada, tracker local e caminhos canônicos dentro do repositório.
+- [x] O bootstrap invoca `context-engineering`; sem conclusão válida da dependência, não retorna `READY`.
+- [x] Ao concluir com sucesso, retorna `Status: READY` sem persistir novo artefato/schema de readiness.
+- [x] Configuração JSON inválida produz `BLOCKED` e permanece inalterada.
+- [x] Nenhum arquivo da aplicação, decisão existente ou configuração de build é modificado.
+- [x] As duas skills deste recorte estão `implemented`; as outras 16 permanecem `scaffold`.
+- [x] As 18 skills, os quatro targets e a dependência obrigatória original são preservados.
+- [x] Nenhuma dependência ou comando CLI novo é adicionado.
 
 ## Validation
 
@@ -59,9 +59,11 @@ O bootstrap deve inspecionar antes de escrever. O default local é aplicado some
 - Executar cenário mínimo de JSON inválido e confirmar preservação byte a byte.
 - Executar suíte, validação estrutural, alias e CLI.
 
+Evidência: `TEST-20261006-003`. A fixture nova terminou em `Status: READY` com somente configuração e cinco documentos adicionados; JSON inválido preservou o SHA-256; conflito de runtime em decisão explícita foi propagado como `BLOCKED`; 41/41 testes e todos os comandos estruturais/CLI passaram.
+
 ## Definition of Done
 
-- [ ] O caminho completo de repositório novo termina em `READY` com evidência.
-- [ ] Os bloqueios mínimos impedem sucesso indevido ou sobrescrita.
-- [ ] Todos os critérios de aceitação foram demonstrados.
-- [ ] O repositório permanece verde e pronto para o endurecimento do ticket 04.
+- [x] O caminho completo de repositório novo termina em `READY` com evidência.
+- [x] Os bloqueios mínimos impedem sucesso indevido ou sobrescrita.
+- [x] Todos os critérios de aceitação foram demonstrados.
+- [x] O repositório permanece verde e pronto para o endurecimento do ticket 04.

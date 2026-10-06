@@ -1,6 +1,6 @@
 # Normative baseline v1 — complete user-supplied contract
 
-The text below records the supplied contract, sections 1–27, with amendment v1-A1 (2026-10-06): Claude Code is added as a fourth Tier 1 target at the user's request. Amendment v1-A2 (2026-10-06) begins the transition to a partially implemented catalogue by making `context-engineering` operational; it does not change the 18-skill catalogue, artifact schemas, routing, dependency semantics or target readiness. Repository adaptations are documented in [provenance](provenance.md).
+The text below records the supplied contract, sections 1–27, with amendment v1-A1 (2026-10-06): Claude Code is added as a fourth Tier 1 target at the user's request. Amendment v1-A2 (2026-10-06) makes `context-engineering` and `setup-ai-development-skills` operational; it does not change the 18-skill catalogue, artifact schemas, routing, dependency semantics or target readiness. Repository adaptations are documented in [provenance](provenance.md).
 
 AI - Development Skills Pack v1
 Architecture Contract
