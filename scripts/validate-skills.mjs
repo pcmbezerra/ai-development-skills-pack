@@ -54,7 +54,8 @@ export async function validate(root = rootDirectory) {
         continue;
       }
       await reference(a.template,name);
-      const template = await readFile(resolve(root,a.template),'utf8');
+      // Normalize only in memory so artifact parsing is independent of checkout line endings.
+      const template = (await readFile(resolve(root,a.template),'utf8')).replace(/\r\n/g,'\n');
       const metadata = template.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/)?.[1];
       check(!!metadata, `${name}: missing artifact frontmatter`);
       for (const field of ['artifact','id','version','status','created_by','inputs']) check(new RegExp(`^${field}: .+$`,'m').test(metadata ?? ''), `${name}: missing metadata ${field}`);
@@ -62,7 +63,7 @@ export async function validate(root = rootDirectory) {
       check(/^status: draft$/m.test(metadata ?? '') && /^version: 1$/m.test(metadata ?? ''), `${name}: template must be draft v1`);
       const producer = metadata?.match(/^created_by: (.+)$/m)?.[1];
       check(m.skills.some(s=>s.name===producer && s.artifactOutputs?.includes(name)), `${name}: invalid template producer`);
-      const contract = await readFile(resolve(root,a.contract),'utf8');
+      const contract = (await readFile(resolve(root,a.contract),'utf8')).replace(/\r\n/g,'\n');
       const start = name === 'ADR' ? contract.indexOf('ADR format:') : contract.indexOf(`\n${name}\n`);
       const remainder = contract.slice(start);
       const fields = name === 'ADR' ? remainder.match(/```text\n([\s\S]*?)\n```/)?.[1] : remainder.match(/(?:Required sections:|Each ticket SHALL contain:|Required information:|Each finding:)\s*```text\n([\s\S]*?)\n```/)?.[1];
@@ -93,7 +94,7 @@ export async function validate(root = rootDirectory) {
       }
       for (const path of [s.path,s.contract,...s.references]) await reference(path,s.name);
       const body = await readFile(resolve(root,s.path),'utf8');
-      check(!/\.(?:cursor|codex|gemini|antigravity)[/\\]/i.test(body), `${s.name}: hardcoded target installation path`);
+      check(!/\.(?:cursor|codex|gemini|antigravity|claude)[/\\]/i.test(body), `${s.name}: hardcoded target installation path`);
       const fm = body.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
       check(!!fm, `${s.name}: missing frontmatter`);
       if (fm) {
@@ -125,8 +126,8 @@ export async function validate(root = rootDirectory) {
       }
       names.forEach(n=>visit(n));
     }
-    check(m.targets.length === 3 && ['cursor','codex','antigravity'].every(n=>m.targets.some(t=>t.name===n)), 'Invalid targets');
-    check(new Set(m.targets.map(t=>t.name)).size === 3, 'Duplicate targets');
+    check(m.targets.length === 4 && ['cursor','codex','antigravity','claude-code'].every(n=>m.targets.some(t=>t.name===n)), 'Invalid targets');
+    check(new Set(m.targets.map(t=>t.name)).size === 4, 'Duplicate targets');
     for (const t of m.targets) {
       check(t.path === `targets/${t.name}.mjs`, `${t.name}: invalid target path`);
       await reference(t.path,t.name);

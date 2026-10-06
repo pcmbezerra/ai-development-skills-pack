@@ -1,10 +1,13 @@
 # Normative baseline v1 — complete user-supplied contract
 
-The text below preserves the full supplied contract, sections 1–27. Repository adaptations are documented in [provenance](provenance.md).
+The text below records the supplied contract, sections 1–27, with amendment v1-A1 (2026-10-06): Claude Code is added as a fourth Tier 1 target at the user's request. Sections 1, 20 and 24 and the target summary incorporate this amendment. The 18-skill catalogue, artifact schemas, routing and dependency semantics are unchanged. Repository adaptations are documented in [provenance](provenance.md).
 
 AI - Development Skills Pack v1
 Architecture Contract
-Status: Baseline v1Targets Tier 1: Cursor, Codex, Gemini AntigravityArchitecture: Multi-agent, tool-agnostic, artifact-drivenPrinciple: Skills implement reusable workflows; project knowledge and state remain outside the skills.
+Status: Baseline v1 + amendment v1-A1
+Targets Tier 1: Cursor, Codex, Gemini Antigravity, Claude Code
+Architecture: Multi-agent, tool-agnostic, artifact-driven
+Principle: Skills implement reusable workflows; project knowledge and state remain outside the skills.
 
 1. Purpose
 The AI - Development Skills Pack provides a consistent software-engineering workflow for AI coding agents.
@@ -29,7 +32,8 @@ The pack SHALL support:
 The same source skills SHALL be distributable to:
 	•	Cursor;
 	•	Codex;
-	•	Gemini Antigravity.
+	•	Gemini Antigravity;
+	•	Claude Code.
 Skills SHALL NOT contain project-specific knowledge.
 
 2. Architectural principles
@@ -1077,14 +1081,15 @@ The canonical skill source SHALL remain independent of target IDE/agent.
                     │
              Skill Distributor
                     │
-       ┌────────────┼────────────┐
-       ▼            ▼            ▼
-     Cursor        Codex      Antigravity
+       ┌────────────┼──────────────┬──────────────┐
+       ▼            ▼              ▼              ▼
+     Cursor        Codex       Antigravity     Claude Code
 Target-specific logic belongs under:
 targets/
 ├── cursor.mjs
 ├── codex.mjs
-└── antigravity.mjs
+├── antigravity.mjs
+└── claude-code.mjs
 Skills SHALL NOT contain hardcoded target-specific installation paths.
 
 21. Skill manifest
@@ -1194,7 +1199,8 @@ ai-development-skills-pack/
 ├── targets/
 │   ├── cursor.mjs
 │   ├── codex.mjs
-│   └── antigravity.mjs
+│   ├── antigravity.mjs
+│   └── claude-code.mjs
 │
 ├── manifest/
 │   └── skills.json

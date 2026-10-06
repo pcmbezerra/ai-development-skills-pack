@@ -5,6 +5,10 @@
   "skillCount": 18,
   "targets": [
     {
+      "name": "claude-code",
+      "path": "targets/claude-code.mjs"
+    },
+    {
       "name": "cursor",
       "path": "targets/cursor.mjs"
     },

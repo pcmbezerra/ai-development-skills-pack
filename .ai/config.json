@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "issueTracker": "github",
+  "specPath": ".ai/artifacts/specs",
+  "ticketPath": ".ai/artifacts/tickets",
+  "adrPath": ".ai/decisions",
+  "docsPath": "docs"
+}

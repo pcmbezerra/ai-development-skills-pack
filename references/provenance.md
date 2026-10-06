@@ -6,6 +6,12 @@ The [complete normative contract](architecture-contract-v1.md) was supplied by t
 
 The [recovered contract](architecture-contract-v1.recovered.md) remains historical evidence from ChatGPT conversation 6ab241d8-d530-83e9-a9de-d6493ffa7f3d, message c7cf3f10-fcf2-4cf9-a6c5-cb8866e37764. That snapshot was capped at 20,000 characters inside R10. Previous truncation warnings apply only to that snapshot.
 
+## Amendment v1-A1 — Claude Code, 2026-10-06
+
+The user explicitly requested Claude Code as an additional Tier 1 distribution target. The active contract, manifest, descriptor and validator now include four targets. This versioned amendment changes only the target set; architectureVersion=1, schemaVersion=1, package version and the 18-skill catalogue remain unchanged.
+
+The Claude Code descriptor remains declarative, with installation disabled. No installation path, runtime capability, frontmatter extension or working integration is claimed. The recovered historical snapshot is unchanged.
+
 ## Representation choices and remaining limitations
 
 - Exactly 18 runtime skills; primary invocation remains a classification allowing composition and explicit requests for model skills.
@@ -15,5 +21,5 @@ The [recovered contract](architecture-contract-v1.recovered.md) remains historic
 - WORKFLOW_PLAN, PROJECT_CONTEXT, CHANGE_SET and bootstrap readiness still have no complete schemas in the full baseline. Registry entries identify named-only outputs; no schemas are invented. TICKET is a record within TICKET_SET.
 - Existing centralized artifact and per-skill contracts/templates remain authoritative operational references. The canonical tree in section 24 is represented using these existing paths; optional meta-skills and detailed cross-cutting guidance are not invented.
 - Node >=22, frontmatter limited to name/description (JSON-quoted descriptions), declarative target descriptors, and help/validate-only CLI remain scaffold choices. skills:validate aliases the existing validator.
-- Target validation checks descriptor/manifest structure and tool-agnostic sources; it does not certify installation, execution or live platform compatibility. Windows/Linux and Cursor/Codex/Antigravity installations remain unverified.
+- Target validation checks descriptor/manifest structure and tool-agnostic sources; it does not certify installation, execution or live platform compatibility. Linux execution and Cursor/Codex/Antigravity/Claude Code installations remain unverified; Windows validation now passes with in-memory LF/CRLF artifact parsing and 26 passing tests, as recorded in validation-result.md.
 - No installer, sync, doctor, list, automatic routing, platform detection, production workflow or npm production dependencies are implemented. Semantic routing overlap tests remain future work.
