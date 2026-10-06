@@ -12,9 +12,11 @@ Project knowledge and state belong outside skills, in .ai/ or configured externa
 
 Consult [routing](routing.md) for prerequisites, [quality gates](quality-gates.md) for completion criteria, [failure](failure.md) for BLOCKED reports, [cross-cutting concerns](../references/cross-cutting.md) for security/performance/testing responsibilities, and [workflow sequences](workflows.md) for lifecycle composition.
 
-## Scaffold boundary
+## Skill lifecycle and scaffold boundary
 
-This repository contains skeletons, not executable engineering workflows. No installer, sync, doctor, list, automatic router, PR/release/deployment automation or platform detection is implemented. The manifest is designed to support future list/doctor/documentation/routing tests; semantic overlap testing remains future work. Node.js and Git are runtime prerequisites; Node >=22 is a scaffold choice. Production npm dependencies remain {}.
+Each skill declares exactly one lifecycle status, `scaffold` or `implemented`, consistently in the manifest, its contract and its source. `scaffold` means the operational workflow is pending. `implemented` means the source contains an operational workflow and cannot retain notices that the workflow is pending or unavailable. The current catalogue remains entirely `scaffold`.
+
+Skill lifecycle is independent from target readiness. No installer, sync, doctor, list, automatic router, PR/release/deployment automation or platform detection is implemented. The manifest is designed to support future list/doctor/documentation/routing tests; semantic overlap testing remains future work. Node.js and Git are runtime prerequisites; Node >=22 is a scaffold choice. Production npm dependencies remain {}.
 
 Exactly 18 runtime skills are maintained. A future meta-skills/skill-authoring may be added outside the runtime catalogue, but is not implemented here. Prototype, resolve-conflicts, large-work decision mapping, triage, PR automation, release management, deployment automation and standalone security-review/performance-review/dependency-upgrade are outside v1 (baseline section 26).
 

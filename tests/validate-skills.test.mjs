@@ -26,6 +26,21 @@ async function changeText(root,path,edit) {
   const target = join(root,path);
   await writeFile(target,edit(await readFile(target,'utf8')));
 }
+async function implementSkill(root, name) {
+  let skill;
+  await changeManifest(root,m=>{
+    skill = m.skills.find(s=>s.name===name);
+    skill.status = 'implemented';
+  });
+  await changeText(root,skill.contract,s=>s
+    .replace('Status: scaffold.', 'Status: implemented.')
+    .replace(/Pending implementation\. Read inputs and the shared artifact contract; operational steps are outside this scaffold\.\r?\n/, '')
+    .replace(' This scaffold does not execute the workflow or produce ready artifacts.', ''));
+  await changeText(root,skill.path,s=>s
+    .replace('Status: scaffold; the operational workflow is not implemented.', 'Status: implemented; the operational workflow is available.')
+    .replace('When preparing this skill for implementation,', 'Before executing this skill,')
+    .replace('Do not claim to have executed this skill from this skeleton.', 'Execute the workflow and report its observable result.'));
+}
 async function artifactLineEndings(root, eol) {
   const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
   const paths = new Set(Object.values(manifest.artifacts).flatMap(a=>[a.contract,a.template]).filter(Boolean));
@@ -50,7 +65,25 @@ for (const [format,eol] of [['LF','\n'],['CRLF','\r\n']]) {
     assert.deepEqual(result.errors,[`${artifact}: missing template section ${section}`]);
   }));
 }
+test('accepts one consistently implemented skill in the scaffold catalogue',()=>fixture(async root=>{
+  await implementSkill(root,'implement');
+  const result = await validate(root);
+  assert.equal(result.ok,true,result.errors.join('\n'));
+  assert.equal(result.skills,18);
+}));
 const failures = [
+  ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],
+  ['skill status divergence in contract', root=>changeText(root,'contracts/skills/implement.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')), /implement: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
+  ['skill status divergence in source', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')), /implement: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
+  ['skill status divergence in manifest', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='implemented'), /implement: status mismatch \(manifest implemented, contract scaffold, source scaffold\)/],
+  ['implemented skill with pending workflow', async root=>{
+    await implementSkill(root,'implement');
+    await changeText(root,'contracts/skills/implement.md',s=>`${s}\nPending implementation.\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
+  ['implemented skill denying operational capability', async root=>{
+    await implementSkill(root,'implement');
+    await changeText(root,'skills/development/implement/SKILL.md',s=>`${s}\nDo not claim to have executed this skill from this skeleton.\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
   ['missing Claude Code target', root=>changeManifest(root,m=>m.targets=m.targets.filter(t=>t.name!=='claude-code')), /Invalid targets/],
   ['Claude Code installation enabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /claude-code: incompatible scaffold descriptor/],
   ['hardcoded Claude Code path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .claude/skills\n'), /hardcoded target/],

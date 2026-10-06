@@ -15,6 +15,7 @@ The Claude Code descriptor remains declarative, with installation disabled. No i
 ## Representation choices and remaining limitations
 
 - Exactly 18 runtime skills; primary invocation remains a classification allowing composition and explicit requests for model skills.
+- Skill lifecycle is declared per skill as `scaffold` or `implemented` and must agree across manifest, contract and source. The current 18-skill catalogue remains entirely `scaffold`; target status remains independent and declarative.
 - JSON manifest uses an array and schemaVersion, preserving existing consumers; architectureVersion=1 identifies the normative baseline. artifactInputs/artifactOutputs index artifacts without replacing prose input alternatives or dependency semantics.
 - Dependencies retain required/conditional/optional semantics. External research is an optional capability with unresolved-claims fallback, never a hard skill/npm dependency.
 - R13 has a “mandatory” title but SHOULD in its normative body. The scaffold preserves SHOULD rather than silently strengthening it to SHALL.

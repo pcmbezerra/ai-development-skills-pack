@@ -71,6 +71,7 @@ export async function validate(root = rootDirectory) {
       for (const field of (fields ?? '').split('\n').filter(Boolean)) check(template.includes(`## ${field}\n`), `${name}: missing template section ${field}`);
     }
     const skills = m.skills, names = skills.map(s=>s.name), expected = Object.values(catalogue).flat();
+    const skillStatuses = ['scaffold','implemented'];
     check(skills.length === 18 && new Set(names).size === 18 && expected.every(n=>names.includes(n)), 'Invalid canonical catalogue');
     for (const s of skills) {
       check(typeof s.name === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.name) && s.name.length < 64, `Invalid name ${s.name}`);
@@ -80,7 +81,7 @@ export async function validate(root = rootDirectory) {
       check(s.primaryInvocation === (model ? 'model' : 'user'), `${s.name}: invalid invocation`);
       for (const f of ['description','goal']) check(typeof s[f] === 'string' && s[f].trim(), `${s.name}: missing ${f}`);
       for (const f of ['inputs','outputs','references']) check(Array.isArray(s[f]) && s[f].length && s[f].every(v=>typeof v === 'string' && v.trim()), `${s.name}: invalid ${f}`);
-      check(s.status === 'scaffold', `${s.name}: only scaffold status is supported`);
+      check(skillStatuses.includes(s.status), `${s.name}: invalid skill status ${s.status}`);
       for (const key of ['artifactInputs','artifactOutputs']) {
         check(Array.isArray(s[key]) && new Set(s[key]).size === s[key].length, `${s.name}: invalid ${key}`);
         for (const id of s[key] ?? []) check(artifactNames.includes(id), `${s.name}: unknown declared artifact ${id}`);
@@ -94,6 +95,16 @@ export async function validate(root = rootDirectory) {
       }
       for (const path of [s.path,s.contract,...s.references]) await reference(path,s.name);
       const body = await readFile(resolve(root,s.path),'utf8');
+      const contract = await readFile(resolve(root,s.contract),'utf8');
+      const contractStatus = contract.match(/^Status: ([^.;\r\n]+)[.;]/m)?.[1];
+      const sourceStatus = body.match(/^Status: ([^.;\r\n]+)[.;]/m)?.[1];
+      check(skillStatuses.includes(contractStatus), `${s.name}: invalid contract status ${contractStatus}`);
+      check(skillStatuses.includes(sourceStatus), `${s.name}: invalid source status ${sourceStatus}`);
+      check(s.status === contractStatus && s.status === sourceStatus, `${s.name}: status mismatch (manifest ${s.status}, contract ${contractStatus}, source ${sourceStatus})`);
+      if (s.status === 'implemented') {
+        const unavailableWorkflow = /pending implementation|operational workflow is not implemented|does not execute the workflow|operational steps are outside this scaffold|do not claim to have executed this skill from this skeleton/i;
+        check(!unavailableWorkflow.test(`${contract}\n${body}`), `${s.name}: implemented skill declares pending or unavailable workflow`);
+      }
       check(!/\.(?:cursor|codex|gemini|antigravity|claude)[/\\]/i.test(body), `${s.name}: hardcoded target installation path`);
       const fm = body.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
       check(!!fm, `${s.name}: missing frontmatter`);
@@ -156,7 +167,7 @@ export async function validate(root = rootDirectory) {
   } catch (e) { errors.push(e.message); return {ok:false,errors}; }
 }
 export function report(r) {
-  if (r.ok) console.log(`PASS: ${r.skills} skills; catalogue, frontmatter, artifacts/templates, R1–R17, gates, failure contract, dependencies, references, mandatory/conditional cycles and scaffold targets validated. Live platform compatibility is unverified.`);
+  if (r.ok) console.log(`PASS: ${r.skills} skills; catalogue, lifecycle status, frontmatter, artifacts/templates, R1–R17, gates, failure contract, dependencies, references, mandatory/conditional cycles and scaffold targets validated. Live platform compatibility is unverified.`);
   else console.error(`FAIL:\n${r.errors.map(e=>`- ${e}`).join('\n')}`);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
