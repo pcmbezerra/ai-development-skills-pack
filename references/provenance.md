@@ -18,6 +18,14 @@ The approved context/bootstrap specification authorizes incremental implementati
 
 The five context documents compose the named-only `PROJECT_CONTEXT`, and `BOOTSTRAP_READINESS` remains a named-only execution result; no schema, template, wrapper artifact, runtime executor or dependency is added. Target readiness is unchanged. Cursor, Codex, Gemini Antigravity and Claude Code remain declarative `scaffold` targets with live compatibility unverified. Ticket 04 closed the amendment with adversarial agent fixtures and deterministic dependency/CLI regressions; all 14 specification criteria have traceable evidence.
 
+## Amendment v1-A3 — target distribution, 2026-10-06
+
+The user explicitly authorized installer and packaging support for the four Tier 1 targets. Target descriptors remain declarative data but are now `implemented`, with project paths verified against the current official product documentation: Codex and Antigravity use `.agents/skills`, Cursor uses `.cursor/skills`, and Claude Code uses `.claude/skills`.
+
+The shared distributor packages all targets, installs into an explicit destination and validates every installed skill against the canonical source. Installation is idempotent for identical content and rejects any divergent existing skill before copying. No uninstall, overwrite, sync, global installation, automatic platform detection, archive format or production dependency was added.
+
+Path sources: [Codex skills](https://developers.openai.com/codex/skills), [Cursor skills](https://cursor.com/docs/skills), [Antigravity skills](https://codelabs.developers.google.com/antigravity/how-to-create-agent-skills-for-antigravity-cli), and [Claude Code skills](https://code.claude.com/docs/en/skills).
+
 ## Representation choices and remaining limitations
 
 - Exactly 18 runtime skills; primary invocation remains a classification allowing composition and explicit requests for model skills.
@@ -27,6 +35,6 @@ The five context documents compose the named-only `PROJECT_CONTEXT`, and `BOOTST
 - R13 has a “mandatory” title but SHOULD in its normative body. The scaffold preserves SHOULD rather than silently strengthening it to SHALL.
 - WORKFLOW_PLAN, PROJECT_CONTEXT, CHANGE_SET and bootstrap readiness still have no complete schemas in the full baseline. Registry entries identify named-only outputs; no schemas are invented. TICKET is a record within TICKET_SET.
 - Existing centralized artifact and per-skill contracts/templates remain authoritative operational references. The canonical tree in section 24 is represented using these existing paths; optional meta-skills and detailed cross-cutting guidance are not invented.
-- Node >=22, frontmatter limited to name/description (JSON-quoted descriptions), declarative target descriptors, and help/validate-only CLI remain scaffold choices. skills:validate aliases the existing validator.
-- Target validation checks descriptor/manifest structure and tool-agnostic sources; it does not certify installation, execution or live platform compatibility. Linux execution and Cursor/Codex/Antigravity/Claude Code installations remain unverified; Windows validation now passes with in-memory LF/CRLF artifact parsing and 44 passing tests, as recorded in validation-result.md.
-- No installer, sync, doctor, list, automatic routing, platform detection or npm production dependencies are implemented. Apart from context and bootstrap, skill workflows remain scaffold; semantic routing overlap tests remain future work.
+- Node >=22, frontmatter limited to name/description (JSON-quoted descriptions), declarative target descriptors and zero npm dependencies remain deliberate constraints. `skills:validate` aliases the structural validator.
+- Target validation checks descriptor/manifest structure and byte equality of installed skill directories. It does not execute Cursor, Codex, Antigravity or Claude Code; live discovery remains unverified.
+- Package, project installation and per-target validation are implemented. Sync, doctor, list, uninstall, overwrite, global installation, automatic routing and platform detection are not. Apart from context and bootstrap, skill workflows remain scaffold; semantic routing overlap tests remain future work.

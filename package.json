@@ -14,7 +14,7 @@
   "scripts": {
     "validate": "node scripts/validate-skills.mjs",
     "skills:validate": "node scripts/validate-skills.mjs",
-    "test": "node --test tests/validate-skills.test.mjs"
+    "test": "node --test tests/validate-skills.test.mjs tests/distribute-skills.test.mjs"
   },
   "dependencies": {}
 }

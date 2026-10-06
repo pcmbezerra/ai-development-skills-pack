@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — Windows, 2026-10-06
+## Current observation — target distribution, Windows, 2026-10-06
+
+Node.js v25.2.0, npm 11.6.2, PowerShell. Amendment v1-A3 implements deterministic packaging, explicit project installation and canonical-content validation for Codex, Cursor, Gemini Antigravity and Claude Code.
+
+- `npm run validate`: PASS, exactly 18 skills and four implemented declarative target descriptors.
+- `npm run skills:validate`: PASS.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos.
+- `node bin/ai-dev-skills.mjs --help`: PASS; exposes `validate`, `install` and `package`.
+- Distribution regressions package and validate all four layouts, confirm 18 installed skills, prove identical reinstall idempotence, reject a divergent collision before copying a missing skill, and exercise package/validate through subprocess CLI calls.
+- `git diff --check`: PASS.
+
+The implementation uses only Node.js standard modules. Production and development dependencies remain empty. The installer requires an explicit destination, never overwrites divergent skill directories and does not implement uninstall, sync, global installation or platform detection. Validation proves package structure and byte equality with canonical sources; live discovery inside the four products, Linux/macOS and Node.js 22 remain unverified.
+
+## Previous observation — context/bootstrap hardening, Windows, 2026-10-06
 
 Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix, mixed lifecycle support and the operational context/bootstrap migrations.
 

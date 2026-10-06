@@ -1,9 +1,10 @@
-// Declarative scaffold only. Installation paths require verification before implementation.
+// Declarative target descriptor. Parsed as data by validation and distribution code.
 export default Object.freeze({
   "name": "antigravity",
   "displayName": "Gemini Antigravity",
   "tier": 1,
-  "status": "scaffold",
+  "status": "implemented",
   "source": "manifest/skills.json",
-  "installationImplemented": false
+  "installationImplemented": true,
+  "projectSkillsPath": ".agents/skills"
 });

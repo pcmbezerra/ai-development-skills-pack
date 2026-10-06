@@ -1,10 +1,78 @@
 #!/usr/bin/env node
+import { packageTargets, installTarget, validateTarget } from '../scripts/distribute-skills.mjs';
 import { validate, report } from '../scripts/validate-skills.mjs';
-const args = process.argv.slice(2);
-if (!args.length || (args.length === 1 && ['--help', 'help', '-h'].includes(args[0]))) {
-  console.log('AI - Development Skills Pack (scaffold)\nUsage: ai-dev-skills [validate|--help]\nInstall, sync and doctor are not implemented.');
-} else if (args.length === 1 && args[0] === 'validate') {
-  const result = await validate(); report(result); process.exitCode = result.ok ? 0 : 1;
-} else {
-  console.error('Unsupported command. Use --help.'); process.exitCode = 1;
+
+const HELP = `AI - Development Skills Pack
+Usage:
+  ai-dev-skills validate
+  ai-dev-skills validate --target <codex|cursor|antigravity|claude-code> --path <root>
+  ai-dev-skills install --target <target> --destination <project-root>
+  ai-dev-skills package --target <target|all> --output <directory>
+  ai-dev-skills --help`;
+
+function options(args) {
+  const parsed = {};
+  for (let index = 0; index < args.length; index += 2) {
+    const key = args[index];
+    const value = args[index + 1];
+    if (!key?.startsWith('--') || value === undefined || value.startsWith('--')) {
+      throw new Error(`Invalid option: ${key ?? ''}`);
+    }
+    if (key.slice(2) in parsed) throw new Error(`Duplicate option: ${key}`);
+    parsed[key.slice(2)] = value;
+  }
+  return parsed;
+}
+
+function requireOnly(actual, allowed) {
+  for (const key of Object.keys(actual)) {
+    if (!allowed.includes(key)) throw new Error(`Unsupported option: --${key}`);
+  }
+}
+
+async function main(args) {
+  if (!args.length || (args.length === 1 && ['--help', 'help', '-h'].includes(args[0]))) {
+    console.log(HELP);
+    return;
+  }
+
+  const [command, ...rest] = args;
+  const parsed = options(rest);
+  if (command === 'validate' && !rest.length) {
+    const result = await validate();
+    report(result);
+    if (!result.ok) process.exitCode = 1;
+    return;
+  }
+  if (command === 'validate') {
+    requireOnly(parsed, ['target', 'path']);
+    const result = await validateTarget({ target: parsed.target, path: parsed.path });
+    if (result.ok) console.log(`PASS: ${result.target}; ${result.skills} canonical skills validated at ${result.path}.`);
+    else {
+      console.error(`FAIL: ${result.target}\n${result.errors.map(error => `- ${error}`).join('\n')}`);
+      process.exitCode = 1;
+    }
+    return;
+  }
+  if (command === 'install') {
+    requireOnly(parsed, ['target', 'destination']);
+    const result = await installTarget({ target: parsed.target, destination: parsed.destination });
+    const installed = result.actions.filter(action => action.status === 'installed').length;
+    console.log(`PASS: ${result.target}; ${installed} installed, ${result.actions.length - installed} unchanged at ${result.skillsRoot}.`);
+    return;
+  }
+  if (command === 'package') {
+    requireOnly(parsed, ['target', 'output']);
+    const results = await packageTargets({ target: parsed.target, output: parsed.output });
+    for (const result of results) console.log(`PASS: packaged ${result.target} at ${result.destination}.`);
+    return;
+  }
+  throw new Error(`Unsupported command: ${command}. Use --help.`);
+}
+
+try {
+  await main(process.argv.slice(2));
+} catch (error) {
+  console.error(`ERROR: ${error.message}`);
+  process.exitCode = 1;
 }

@@ -144,7 +144,8 @@ export async function validate(root = rootDirectory) {
       }
       names.forEach(n=>visit(n));
     }
-    check(m.targets.length === 4 && ['cursor','codex','antigravity','claude-code'].every(n=>m.targets.some(t=>t.name===n)), 'Invalid targets');
+    const targetPaths = { cursor: '.cursor/skills', codex: '.agents/skills', antigravity: '.agents/skills', 'claude-code': '.claude/skills' };
+    check(m.targets.length === 4 && Object.keys(targetPaths).every(n=>m.targets.some(t=>t.name===n)), 'Invalid targets');
     check(new Set(m.targets.map(t=>t.name)).size === 4, 'Duplicate targets');
     for (const t of m.targets) {
       check(t.path === `targets/${t.name}.mjs`, `${t.name}: invalid target path`);
@@ -155,8 +156,9 @@ export async function validate(root = rootDirectory) {
       check(!!match, `${t.name}: target must remain a declarative descriptor`);
       if (match) {
         const descriptor = JSON.parse(match[1]);
-        check(descriptor.name === t.name && descriptor.tier === 1 && descriptor.status === 'scaffold' && descriptor.source === 'manifest/skills.json' && descriptor.installationImplemented === false, `${t.name}: incompatible scaffold descriptor`);
-        check(Object.keys(descriptor).every(k=>['name','displayName','tier','status','source','installationImplemented'].includes(k)), `${t.name}: unsupported target capability`);
+        check(descriptor.name === t.name && descriptor.tier === 1 && descriptor.status === 'implemented' && descriptor.source === 'manifest/skills.json' && descriptor.installationImplemented === true, `${t.name}: incompatible target descriptor`);
+        check(descriptor.projectSkillsPath === targetPaths[t.name], `${t.name}: invalid project skills path`);
+        check(Object.keys(descriptor).every(k=>['name','displayName','tier','status','source','installationImplemented','projectSkillsPath'].includes(k)), `${t.name}: unsupported target capability`);
       }
     }
     const files = await walk(root);
@@ -174,7 +176,7 @@ export async function validate(root = rootDirectory) {
   } catch (e) { errors.push(e.message); return {ok:false,errors}; }
 }
 export function report(r) {
-  if (r.ok) console.log(`PASS: ${r.skills} skills; catalogue, lifecycle status, frontmatter, artifacts/templates, R1–R17, gates, failure contract, dependencies, references, mandatory/conditional cycles and scaffold targets validated. Live platform compatibility is unverified.`);
+  if (r.ok) console.log(`PASS: ${r.skills} skills; catalogue, lifecycle status, frontmatter, artifacts/templates, R1–R17, gates, failure contract, dependencies, references, mandatory/conditional cycles and target descriptors validated.`);
   else console.error(`FAIL:\n${r.errors.map(e=>`- ${e}`).join('\n')}`);
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

@@ -127,7 +127,7 @@ const failures = [
     await changeText(root,skill.path,s=>`${s}\nThis capability is not operational.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
   ['missing Claude Code target', root=>changeManifest(root,m=>m.targets=m.targets.filter(t=>t.name!=='claude-code')), /Invalid targets/],
-  ['Claude Code installation enabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /claude-code: incompatible scaffold descriptor/],
+  ['Claude Code installation disabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": true','"installationImplemented": false')), /claude-code: incompatible target descriptor/],
   ['hardcoded Claude Code path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .claude/skills\n'), /hardcoded target/],
   ['unknown artifact', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').artifactOutputs.push('UNKNOWN')), /unknown declared artifact/],
   ['missing artifact declaration', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').artifactOutputs=[]), /undeclared output artifact/],
@@ -139,7 +139,8 @@ const failures = [
   ['missing R17', root=>changeText(root,'contracts/routing.md',s=>s.replace('## R17 —','## Removed —')), /ordered R1–R17/],
   ['missing failure field', root=>changeText(root,'contracts/failure.md',s=>s.replace('Missing prerequisite','Missing requirement')), /Missing failure field/],
   ['duplicate target', root=>changeManifest(root,m=>m.targets[2]=m.targets[1]), /Duplicate targets/],
-  ['target installation enabled', root=>changeText(root,'targets/codex.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /incompatible scaffold descriptor/],
+  ['target installation disabled', root=>changeText(root,'targets/codex.mjs',s=>s.replace('"installationImplemented": true','"installationImplemented": false')), /incompatible target descriptor/],
+  ['invalid target skills path', root=>changeText(root,'targets/codex.mjs',s=>s.replace('".agents/skills"','".codex/skills"')), /invalid project skills path/],
   ['executable target prelude', root=>changeText(root,'targets/codex.mjs',s=>'console.log("side effect");\n'+s), /declarative descriptor/],
   ['hardcoded target path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .cursor/skills\n'), /hardcoded target/],
   ['mandatory cycle', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').dependencies.required.push('setup-ai-development-skills')), /Mandatory cycle/],
@@ -170,17 +171,18 @@ test('current catalogue implements context and bootstrap without defining named-
     schema: 'named-only',
   });
 });
-test('CLI exposes help and validation while rejecting unsupported commands',()=>{
+test('CLI exposes distribution commands while rejecting unsupported commands',()=>{
   const cli = join(source,'bin/ai-dev-skills.mjs');
   for (const command of ['--help','help','-h']) {
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);
-    assert.match(result.stdout,/Usage: ai-dev-skills \[validate\|--help\]/);
+    assert.match(result.stdout,/ai-dev-skills install --target/);
+    assert.match(result.stdout,/ai-dev-skills package --target/);
   }
-  for (const command of ['bootstrap','doctor','install','list','sync']) {
+  for (const command of ['bootstrap','doctor','list','sync']) {
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,1,`${command}: ${result.stdout}${result.stderr}`);
-    assert.match(result.stderr,/Unsupported command/);
+    assert.match(result.stderr,/ERROR:/);
   }
 });
 test('current mixed catalogue satisfies the complete baseline checks',async()=>{
