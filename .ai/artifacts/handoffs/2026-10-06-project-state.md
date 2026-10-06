@@ -17,7 +17,7 @@ Baseline v1 reconciliado + emenda v1-A1 (2026-10-06), commit inspecionado `347b0
 
 18 skills: 13 com invocação primária user e 5 model. Todas permanecem esqueletos. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 38/38 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A fase operacional não começou; o validador já admite ciclo de vida misto consistente, mas o catálogo permanece com 18 skills `scaffold`. `SPEC-20261006-001` foi decomposta no `TICKET-SET-20261006-001`. A frontier contém somente o ticket 01. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 38/38 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A fase operacional não começou; o validador já admite ciclo de vida misto consistente, mas o catálogo permanece com 18 skills `scaffold`. O ticket 01 foi concluído; a frontier contém somente o ticket 02. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
 
 ## Completed Work
 
@@ -32,6 +32,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 3
 - Execução da validação, testes e CLI; isolamento da incompatibilidade LF/CRLF por comparação em memória.
 - Atualização da documentação de validação sem apagar o histórico de macOS.
 - Criação da SPEC pronta de contexto/bootstrap e decomposição aprovada em quatro tickets lineares, todos `ready-for-agent`, com fallback Markdown local.
+- Conclusão do ticket 01 nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`: ciclo de vida misto estrito, consistência entre manifest/contrato/fonte e regressões de workflow pendente ou indisponível. Reviews finais de Standards e Spec sem achados.
 
 ## Decisions
 
@@ -55,11 +56,11 @@ SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET p
 
 Histórico: criados os arquivos listados em Artifacts; atualizados `AGENTS.md`, `README.md` e `references/validation-result.md`. Na emenda v1-A1, atualizados também `references/architecture-contract-v1.md`, `references/provenance.md`, `contracts/skill-contract.md`, `manifest/skills.json`, `scripts/validate-skills.mjs` e `tests/validate-skills.test.mjs`; criado `targets/claude-code.mjs`.
 
-Na correção LF/CRLF: `scripts/validate-skills.mjs`, `tests/validate-skills.test.mjs`, `references/validation-result.md`, `references/provenance.md`, `README.md`, `.ai/architecture.md` e este handoff. Essas mudanças foram versionadas no commit `0d3b98e`. Na etapa atual, foram criados a SPEC e o TICKET_SET de contexto/bootstrap; este handoff foi atualizado. Skills, manifest, targets, contratos e templates ainda não foram alterados para a fase operacional.
+Na correção LF/CRLF: `scripts/validate-skills.mjs`, `tests/validate-skills.test.mjs`, `references/validation-result.md`, `references/provenance.md`, `README.md`, `.ai/architecture.md` e este handoff. Essas mudanças foram versionadas no commit `0d3b98e`. O ticket 01 atualizou `AGENTS.md`, `README.md`, `contracts/skill-contract.md`, `references/provenance.md`, `references/validation-result.md`, `scripts/validate-skills.mjs` e `tests/validate-skills.test.mjs`, sem migrar nenhuma skill. Manifest, targets, dependências, routing e schemas de artefatos permaneceram inalterados.
 
 ## Validation
 
-Windows/PowerShell; Node.js v25.2.0; npm 11.6.2; HEAD `347b05a` mais alterações locais.
+Windows/PowerShell; Node.js v25.2.0; npm 11.6.2; ticket 01 implementado nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`.
 
 - Reprodução antes da correção: `npm run validate` falhou com 15 erros; `npm test` teve 17 aprovados e 3 falhos em 20 testes.
 - RED das novas regressões: `node --test --test-name-pattern='with (LF|CRLF)' tests/validate-skills.test.mjs`: 3 LF aprovadas e 3 CRLF falhas.
@@ -87,11 +88,11 @@ Nenhuma questão bloqueante. A transição de status, os limites de schema e os 
 
 ## Next Actions
 
-1. Implementar o ticket 01, único item na frontier atual.
-2. Prosseguir em ordem linear pelos tickets 02, 03 e 04 somente após os respectivos bloqueadores concluírem.
+1. Implementar o ticket 02, único item na frontier atual.
+2. Prosseguir em ordem linear pelos tickets 03 e 04 somente após os respectivos bloqueadores concluírem.
 3. Reconciliar os arquivos locais com GitHub Issues e aplicar `ready-for-agent` quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 01 e não avance para tickets bloqueados."
+Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 02 e não avance para tickets bloqueados."
 
 ## Suggested Skills
 
