@@ -10,7 +10,7 @@ const source = fileURLToPath(new URL('../', import.meta.url));
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), 'skills-validation-'));
   try {
-    for (const path of ['skills','contracts','templates','targets','manifest','references','package.json','README.md','AGENTS.md']) await cp(join(source,path),join(root,path),{recursive:true});
+    for (const path of ['bin','skills','contracts','templates','targets','manifest','references','package.json','README.md','AGENTS.md']) await cp(join(source,path),join(root,path),{recursive:true});
     await run(root);
   } finally {
     await rm(root,{recursive:true,force:true});
@@ -82,6 +82,16 @@ test('accepts one consistently implemented skill in the scaffold catalogue',()=>
   assert.equal(result.skills,18);
 }));
 const failures = [
+  ['npm development dependency', async root=>{
+    const path = join(root,'package.json');
+    const packageJson = JSON.parse(await readFile(path,'utf8'));
+    packageJson.devDependencies = {fixture: '1.0.0'};
+    await writeFile(path,JSON.stringify(packageJson));
+  }, /Package dependencies forbidden/],
+  ['expanded CLI command surface', root=>changeText(root,'bin/ai-dev-skills.mjs',s=>s.replace(
+    "} else if (args.length === 1 && args[0] === 'validate') {",
+    "} else if (args.length === 1 && args[0] === 'doctor') {\n  console.log('doctor');\n} else if (args.length === 1 && args[0] === 'validate') {",
+  )), /CLI must remain limited to help and validate/],
   ['implemented bootstrap migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='setup-ai-development-skills').status='scaffold'), /setup-ai-development-skills: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['implemented context migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').status='scaffold'), /context-engineering: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],

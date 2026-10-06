@@ -26,7 +26,13 @@ export async function validate(root = rootDirectory) {
   try {
     const m = JSON.parse(await readFile(resolve(root,'manifest/skills.json'),'utf8'));
     const p = JSON.parse(await readFile(resolve(root,'package.json'),'utf8'));
-    check(!Object.keys(p.dependencies ?? {}).length, 'Production dependencies forbidden');
+    const dependencyFields = ['dependencies','devDependencies','optionalDependencies','peerDependencies'];
+    check(dependencyFields.every(field=>!Object.keys(p[field] ?? {}).length), 'Package dependencies forbidden');
+    check(Object.keys(p.bin ?? {}).length === 1 && p.bin['ai-dev-skills'] === 'bin/ai-dev-skills.mjs', 'Invalid CLI entrypoint');
+    await reference(p.bin?.['ai-dev-skills'],'package bin');
+    const cli = await readFile(resolve(root,p.bin?.['ai-dev-skills'] ?? ''),'utf8');
+    const cliCommands = [...cli.matchAll(/args\[0\]\s*===\s*['"]([^'"]+)['"]/g)].map(match=>match[1]);
+    check(cliCommands.length === 1 && cliCommands[0] === 'validate', 'CLI must remain limited to help and validate');
     check(m.schemaVersion === 1 && m.skillCount === 18, 'Invalid schema/count');
     check(m.architectureVersion === 1, 'Invalid architecture baseline version');
     check(p.scripts?.validate === 'node scripts/validate-skills.mjs' && p.scripts?.['skills:validate'] === p.scripts.validate, 'Missing validation script/alias');
