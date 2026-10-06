@@ -17,7 +17,7 @@ Baseline v1 reconciliado + emendas v1-A1/v1-A2 (2026-10-06), endurecimento deter
 
 18 skills: 13 com invocação primária user e 5 model. `context-engineering` e `setup-ai-development-skills` estão `implemented`; as outras 16 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 43/43 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. O ticket 04 concluiu o endurecimento e a frontier de `SPEC-20261006-001` está vazia. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 44/44 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. O ticket 04 concluiu o endurecimento e a frontier de `SPEC-20261006-001` está vazia. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
 
 ## Completed Work
 
@@ -35,7 +35,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 4
 - Conclusão do ticket 01 nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`: ciclo de vida misto estrito, consistência entre manifest/contrato/fonte e regressões de workflow pendente ou indisponível. Reviews finais de Standards e Spec sem achados.
 - Conclusão do ticket 02: workflow operacional de `context-engineering`, emenda v1-A2 iniciada, migração consistente para `implemented`, regressões estruturais e `TEST-20261006-002` com cinco cenários de conformidade.
 - Conclusão do ticket 03: workflow operacional de bootstrap, composição obrigatória de contexto, migração consistente para `implemented`, regressões estruturais e `TEST-20261006-003` com sucesso, JSON inválido e dependência bloqueada.
-- Conclusão do ticket 04: invariantes de dependências/CLI protegidas pelo validador, matriz adversarial aprovada, rastreabilidade dos 14 critérios em `TEST-20261006-004` e emenda v1-A2 fechada.
+- Conclusão do ticket 04: dependências e entrypoint canônico protegidos pelo validador, superfície da CLI coberta por comportamento externo, matriz adversarial aprovada, rastreabilidade dos 14 critérios em `TEST-20261006-004` e emenda v1-A2 fechada.
 
 ## Decisions
 
@@ -86,7 +86,7 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 - Ticket 02: RED focado confirmado; GREEN focado 3/3; suíte final 40/40; validação, alias e dois comandos CLI com saída zero. Cenários de conformidade aprovados para criação, preservação, idempotência, conflito e sigilo; detalhes em `TEST-20261006-002`.
 - Ticket 03: RED/GREEN focado confirmado; suíte final 41/41; validação, alias e dois comandos CLI com saída zero. Cenários de conformidade aprovados para repositório novo, JSON inválido e bloqueio propagado de `context-engineering`; detalhes em `TEST-20261006-003`.
 - Review final do ticket 03: Standards 0 achados; Spec 0 achados; detalhes em `REVIEW-20261006-003`.
-- Ticket 04: RED focado 0/2 e GREEN 2/2; suíte final 43/43; validação, alias e dois comandos CLI com saída zero. Cinco cenários adversariais conduzidos pelo agente cobriram preservação, idempotência, limite de escrita, sigilo e bloqueios; detalhes em `TEST-20261006-004`.
+- Ticket 04: RED inicial 0/2, correção de review 3/3 e suíte final 44/44; validação, alias e dois comandos CLI com saída zero. Cinco cenários adversariais conduzidos pelo agente cobriram preservação, idempotência, limite de escrita, sigilo e bloqueios; detalhes em `TEST-20261006-004`.
 - Review final do ticket 04: Standards e Spec registrados separadamente em `REVIEW-20261006-004`.
 
 ## Known Issues

@@ -17,11 +17,11 @@ Protect remaining deterministic invariants, execute the adversarial fixture matr
 
 ## Files Changed
 
-Validator and tests for dependency/CLI invariants; final test evidence, implementation report, provenance, validation state, ticket state, README and handoff.
+Validator and tests for dependency/canonical CLI entrypoint invariants; behavior-level CLI coverage; final test evidence, implementation report, provenance, validation state, ticket state, README and handoff.
 
 ## Behaviour Changed
 
-`validate(root)` now rejects npm dependencies in production, development, optional or peer fields and rejects CLI command expansion beyond help/validation.
+`validate(root)` now rejects npm dependencies in production, development, optional or peer fields and rejects a noncanonical CLI entrypoint without reading it. Subprocess tests verify that help works and unsupported commands remain rejected.
 
 ## Validation Performed
 

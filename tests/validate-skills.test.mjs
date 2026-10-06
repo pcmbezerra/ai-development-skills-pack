@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -88,10 +89,12 @@ const failures = [
     packageJson.devDependencies = {fixture: '1.0.0'};
     await writeFile(path,JSON.stringify(packageJson));
   }, /Package dependencies forbidden/],
-  ['expanded CLI command surface', root=>changeText(root,'bin/ai-dev-skills.mjs',s=>s.replace(
-    "} else if (args.length === 1 && args[0] === 'validate') {",
-    "} else if (args.length === 1 && args[0] === 'doctor') {\n  console.log('doctor');\n} else if (args.length === 1 && args[0] === 'validate') {",
-  )), /CLI must remain limited to help and validate/],
+  ['escaping CLI entrypoint', async root=>{
+    const path = join(root,'package.json');
+    const packageJson = JSON.parse(await readFile(path,'utf8'));
+    packageJson.bin['ai-dev-skills'] = '../outside.mjs';
+    await writeFile(path,JSON.stringify(packageJson));
+  }, /Invalid CLI entrypoint/],
   ['implemented bootstrap migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='setup-ai-development-skills').status='scaffold'), /setup-ai-development-skills: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['implemented context migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').status='scaffold'), /context-engineering: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],
@@ -166,6 +169,19 @@ test('current catalogue implements context and bootstrap without defining named-
     contract: 'contracts/artifacts.md',
     schema: 'named-only',
   });
+});
+test('CLI exposes help and validation while rejecting unsupported commands',()=>{
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  for (const command of ['--help','help','-h']) {
+    const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
+    assert.equal(result.status,0,result.stderr);
+    assert.match(result.stdout,/Usage: ai-dev-skills \[validate\|--help\]/);
+  }
+  for (const command of ['bootstrap','doctor','install','list','sync']) {
+    const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
+    assert.equal(result.status,1,`${command}: ${result.stdout}${result.stderr}`);
+    assert.match(result.stderr,/Unsupported command/);
+  }
 });
 test('current mixed catalogue satisfies the complete baseline checks',async()=>{
   const result = await validate(source);
