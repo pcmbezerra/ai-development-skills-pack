@@ -1,0 +1,817 @@
+{
+  "schemaVersion": 1,
+  "name": "ai-development-skills-pack",
+  "version": "1.0.0-scaffold",
+  "skillCount": 18,
+  "targets": [
+    {
+      "name": "cursor",
+      "path": "targets/cursor.mjs"
+    },
+    {
+      "name": "codex",
+      "path": "targets/codex.mjs"
+    },
+    {
+      "name": "antigravity",
+      "path": "targets/antigravity.mjs"
+    }
+  ],
+  "skills": [
+    {
+      "name": "setup-ai-development-skills",
+      "category": "core",
+      "path": "skills/core/setup-ai-development-skills/SKILL.md",
+      "description": "Bootstrap repository for the pack.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Bootstrap repository for the pack",
+      "inputs": [
+        "repository",
+        "existing configuration"
+      ],
+      "outputs": [
+        ".ai/config.json",
+        "initial project context",
+        "bootstrap readiness result"
+      ],
+      "dependencies": {
+        "required": [
+          "context-engineering"
+        ],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/setup-ai-development-skills.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [],
+      "artifactOutputs": [
+        "PROJECT_CONTEXT",
+        "BOOTSTRAP_READINESS"
+      ]
+    },
+    {
+      "name": "workflow",
+      "category": "core",
+      "path": "skills/core/workflow/SKILL.md",
+      "description": "Route work to the correct skill/workflow.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Route work to the correct skill/workflow",
+      "inputs": [
+        "user request",
+        "project context",
+        "available artifacts",
+        "skill manifest"
+      ],
+      "outputs": [
+        "WORKFLOW_PLAN"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/workflow.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "WORKFLOW_PLAN"
+      ]
+    },
+    {
+      "name": "clarify",
+      "category": "core",
+      "path": "skills/core/clarify/SKILL.md",
+      "description": "Resolve material ambiguities.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Resolve material ambiguities",
+      "inputs": [
+        "request",
+        "project context",
+        "existing decisions"
+      ],
+      "outputs": [
+        "DECISION_SET"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "context-engineering"
+        ]
+      },
+      "contract": "contracts/skills/clarify.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "DECISION_SET"
+      ]
+    },
+    {
+      "name": "context-engineering",
+      "category": "core",
+      "path": "skills/core/context-engineering/SKILL.md",
+      "description": "Discover and maintain project context.",
+      "primaryInvocation": "model",
+      "status": "scaffold",
+      "goal": "Discover and maintain project context",
+      "inputs": [
+        "repository evidence",
+        "project configuration",
+        "existing documentation"
+      ],
+      "outputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/context-engineering.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [],
+      "artifactOutputs": [
+        "PROJECT_CONTEXT"
+      ]
+    },
+    {
+      "name": "handoff",
+      "category": "core",
+      "path": "skills/core/handoff/SKILL.md",
+      "description": "Transfer verified work state between agents/sessions.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Transfer verified work state between agents/sessions",
+      "inputs": [
+        "current state",
+        "existing artifacts",
+        "change state"
+      ],
+      "outputs": [
+        "HANDOFF"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/handoff.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [],
+      "artifactOutputs": [
+        "HANDOFF"
+      ]
+    },
+    {
+      "name": "research",
+      "category": "discovery",
+      "path": "skills/discovery/research/SKILL.md",
+      "description": "Establish externally verifiable technical facts.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Establish externally verifiable technical facts",
+      "inputs": [
+        "research question",
+        "project context",
+        "decision context"
+      ],
+      "outputs": [
+        "RESEARCH_REPORT"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/research.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "RESEARCH_REPORT"
+      ],
+      "capabilities": {
+        "optional": [
+          {
+            "name": "external-research",
+            "when": "externally verifiable facts require external access",
+            "fallback": "Leave unsupported claims explicitly unresolved."
+          }
+        ]
+      }
+    },
+    {
+      "name": "to-spec",
+      "category": "discovery",
+      "path": "skills/discovery/to-spec/SKILL.md",
+      "description": "Convert resolved requirements into implementation-ready specification.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Convert resolved requirements into implementation-ready specification",
+      "inputs": [
+        "DECISION_SET",
+        "PROJECT_CONTEXT",
+        "RESEARCH_REPORT optional"
+      ],
+      "outputs": [
+        "SPEC"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [
+          {
+            "skill": "clarify",
+            "when": "material ambiguity exists"
+          }
+        ],
+        "optional": []
+      },
+      "contract": "contracts/skills/to-spec.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "DECISION_SET",
+        "PROJECT_CONTEXT",
+        "RESEARCH_REPORT"
+      ],
+      "artifactOutputs": [
+        "SPEC"
+      ]
+    },
+    {
+      "name": "domain-modelling",
+      "category": "discovery",
+      "path": "skills/discovery/domain-modelling/SKILL.md",
+      "description": "Model business concepts and invariants when warranted.",
+      "primaryInvocation": "model",
+      "status": "scaffold",
+      "goal": "Model business concepts and invariants when warranted",
+      "inputs": [
+        "SPEC or DECISION_SET",
+        "PROJECT_CONTEXT"
+      ],
+      "outputs": [
+        "DOMAIN_MODEL"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/domain-modelling.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "SPEC",
+        "DECISION_SET",
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "DOMAIN_MODEL"
+      ]
+    },
+    {
+      "name": "architecture-design",
+      "category": "discovery",
+      "path": "skills/discovery/architecture-design/SKILL.md",
+      "description": "Define technical solution and architectural decisions.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Define technical solution and architectural decisions",
+      "inputs": [
+        "SPEC",
+        "PROJECT_CONTEXT",
+        "DOMAIN_MODEL optional",
+        "RESEARCH_REPORT optional"
+      ],
+      "outputs": [
+        "ARCHITECTURE_DESIGN",
+        "ADR optional"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [
+          {
+            "skill": "research",
+            "when": "external facts affect decisions"
+          },
+          {
+            "skill": "domain-modelling",
+            "when": "business invariants affect design"
+          }
+        ],
+        "optional": []
+      },
+      "contract": "contracts/skills/architecture-design.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "SPEC",
+        "PROJECT_CONTEXT",
+        "DOMAIN_MODEL",
+        "RESEARCH_REPORT"
+      ],
+      "artifactOutputs": [
+        "ARCHITECTURE_DESIGN",
+        "ADR"
+      ]
+    },
+    {
+      "name": "to-tickets",
+      "category": "discovery",
+      "path": "skills/discovery/to-tickets/SKILL.md",
+      "description": "Decompose specification into executable work.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Decompose specification into executable work",
+      "inputs": [
+        "SPEC",
+        "ARCHITECTURE_DESIGN optional",
+        "DOMAIN_MODEL optional"
+      ],
+      "outputs": [
+        "TICKET_SET"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/to-tickets.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "SPEC",
+        "ARCHITECTURE_DESIGN",
+        "DOMAIN_MODEL"
+      ],
+      "artifactOutputs": [
+        "TICKET_SET"
+      ]
+    },
+    {
+      "name": "diagnose",
+      "category": "development",
+      "path": "skills/development/diagnose/SKILL.md",
+      "description": "Identify root cause of unknown failures.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Identify root cause of unknown failures",
+      "inputs": [
+        "symptom",
+        "repository",
+        "PROJECT_CONTEXT",
+        "logs/tests/runtime evidence when available"
+      ],
+      "outputs": [
+        "DIAGNOSIS_REPORT"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "tdd"
+        ]
+      },
+      "contract": "contracts/skills/diagnose.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "DIAGNOSIS_REPORT"
+      ]
+    },
+    {
+      "name": "implement",
+      "category": "development",
+      "path": "skills/development/implement/SKILL.md",
+      "description": "Execute a defined change.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Execute a defined change",
+      "inputs": [
+        "TICKET",
+        "SPEC",
+        "DIAGNOSIS_REPORT",
+        "explicit change request",
+        "PROJECT_CONTEXT"
+      ],
+      "outputs": [
+        "CHANGE_SET",
+        "IMPLEMENTATION_REPORT",
+        "TEST_EVIDENCE"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "tdd",
+          "edge-case-analysis",
+          "code-review",
+          "context-engineering"
+        ]
+      },
+      "contract": "contracts/skills/implement.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "TICKET",
+        "SPEC",
+        "DIAGNOSIS_REPORT",
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "CHANGE_SET",
+        "IMPLEMENTATION_REPORT",
+        "TEST_EVIDENCE"
+      ]
+    },
+    {
+      "name": "tdd",
+      "category": "development",
+      "path": "skills/development/tdd/SKILL.md",
+      "description": "Execute Red → Green → Refactor workflow.",
+      "primaryInvocation": "model",
+      "status": "scaffold",
+      "goal": "Execute Red → Green → Refactor workflow",
+      "inputs": [
+        "acceptance criteria",
+        "ticket/spec",
+        "existing tests"
+      ],
+      "outputs": [
+        "TEST_EVIDENCE",
+        "test changes",
+        "implementation changes when composed by implement"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/tdd.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "TICKET",
+        "SPEC"
+      ],
+      "artifactOutputs": [
+        "TEST_EVIDENCE"
+      ]
+    },
+    {
+      "name": "refactor",
+      "category": "development",
+      "path": "skills/development/refactor/SKILL.md",
+      "description": "Improve internal structure without changing external behaviour.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Improve internal structure without changing external behaviour",
+      "inputs": [
+        "refactor objective",
+        "behaviour baseline",
+        "PROJECT_CONTEXT",
+        "tests"
+      ],
+      "outputs": [
+        "CHANGE_SET",
+        "IMPLEMENTATION_REPORT",
+        "TEST_EVIDENCE"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/refactor.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "CHANGE_SET",
+        "IMPLEMENTATION_REPORT",
+        "TEST_EVIDENCE"
+      ]
+    },
+    {
+      "name": "edge-case-analysis",
+      "category": "quality",
+      "path": "skills/quality/edge-case-analysis/SKILL.md",
+      "description": "Identify untested boundary/adversarial scenarios.",
+      "primaryInvocation": "model",
+      "status": "scaffold",
+      "goal": "Identify untested boundary/adversarial scenarios",
+      "inputs": [
+        "SPEC",
+        "CHANGE_SET",
+        "DOMAIN_MODEL optional",
+        "existing tests"
+      ],
+      "outputs": [
+        "EDGE_CASE_REPORT"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/edge-case-analysis.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "SPEC",
+        "CHANGE_SET",
+        "DOMAIN_MODEL"
+      ],
+      "artifactOutputs": [
+        "EDGE_CASE_REPORT"
+      ]
+    },
+    {
+      "name": "code-review",
+      "category": "quality",
+      "path": "skills/quality/code-review/SKILL.md",
+      "description": "Perform semantic review of a change.",
+      "primaryInvocation": "model",
+      "status": "scaffold",
+      "goal": "Perform semantic review of a change",
+      "inputs": [
+        "CHANGE_SET",
+        "SPEC/TICKET optional",
+        "PROJECT_CONTEXT",
+        "TEST_EVIDENCE optional"
+      ],
+      "outputs": [
+        "REVIEW_REPORT"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/code-review.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "CHANGE_SET",
+        "SPEC",
+        "TICKET",
+        "PROJECT_CONTEXT",
+        "TEST_EVIDENCE"
+      ],
+      "artifactOutputs": [
+        "REVIEW_REPORT"
+      ]
+    },
+    {
+      "name": "docs",
+      "category": "documentation",
+      "path": "skills/documentation/docs/SKILL.md",
+      "description": "Create/update documentation from evidence.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Create/update documentation from evidence",
+      "inputs": [
+        "repository evidence",
+        "CHANGE_SET",
+        "SPEC optional",
+        "ARCHITECTURE_DESIGN optional",
+        "existing documentation"
+      ],
+      "outputs": [
+        "documentation changes",
+        "DOC_UPDATE"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      },
+      "contract": "contracts/skills/docs.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "CHANGE_SET",
+        "SPEC",
+        "ARCHITECTURE_DESIGN"
+      ],
+      "artifactOutputs": [
+        "DOC_UPDATE"
+      ]
+    },
+    {
+      "name": "modernize",
+      "category": "modernization",
+      "path": "skills/modernization/modernize/SKILL.md",
+      "description": "Plan and orchestrate legacy modernization.",
+      "primaryInvocation": "user",
+      "status": "scaffold",
+      "goal": "Plan and orchestrate legacy modernization",
+      "inputs": [
+        "PROJECT_CONTEXT",
+        "modernization objective",
+        "existing architecture",
+        "runtime/dependency information"
+      ],
+      "outputs": [
+        "MODERNIZATION_PLAN"
+      ],
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "diagnose",
+          "research",
+          "architecture-design",
+          "tdd",
+          "to-tickets"
+        ]
+      },
+      "contract": "contracts/skills/modernize.md",
+      "references": [
+        "contracts/skill-contract.md",
+        "contracts/artifacts.md",
+        "contracts/routing.md"
+      ],
+      "artifactInputs": [
+        "PROJECT_CONTEXT"
+      ],
+      "artifactOutputs": [
+        "MODERNIZATION_PLAN"
+      ]
+    }
+  ],
+  "architectureVersion": 1,
+  "baseline": "references/architecture-contract-v1.md",
+  "routingContract": "contracts/routing.md",
+  "qualityGatesContract": "contracts/quality-gates.md",
+  "failureContract": "contracts/failure.md",
+  "artifacts": {
+    "DECISION_SET": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/decision-set.md",
+      "schema": "defined"
+    },
+    "RESEARCH_REPORT": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/research-report.md",
+      "schema": "defined"
+    },
+    "SPEC": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/spec.md",
+      "schema": "defined"
+    },
+    "DOMAIN_MODEL": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/domain-model.md",
+      "schema": "defined"
+    },
+    "ARCHITECTURE_DESIGN": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/architecture-design.md",
+      "schema": "defined"
+    },
+    "TICKET_SET": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/ticket-set.md",
+      "schema": "defined"
+    },
+    "DIAGNOSIS_REPORT": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/diagnosis-report.md",
+      "schema": "defined"
+    },
+    "TEST_EVIDENCE": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/test-evidence.md",
+      "schema": "defined"
+    },
+    "IMPLEMENTATION_REPORT": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/implementation-report.md",
+      "schema": "defined"
+    },
+    "EDGE_CASE_REPORT": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/edge-case-report.md",
+      "schema": "defined"
+    },
+    "REVIEW_REPORT": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/review-report.md",
+      "schema": "defined"
+    },
+    "DOC_UPDATE": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/doc-update.md",
+      "schema": "defined"
+    },
+    "MODERNIZATION_PLAN": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/modernization-plan.md",
+      "schema": "defined"
+    },
+    "HANDOFF": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/handoff.md",
+      "schema": "defined"
+    },
+    "ADR": {
+      "contract": "contracts/artifacts.md",
+      "template": "templates/artifacts/adr.md",
+      "schema": "defined"
+    },
+    "TICKET": {
+      "contract": "contracts/artifacts.md",
+      "container": "TICKET_SET",
+      "schema": "defined"
+    },
+    "PROJECT_CONTEXT": {
+      "contract": "contracts/artifacts.md",
+      "schema": "named-only"
+    },
+    "WORKFLOW_PLAN": {
+      "contract": "contracts/artifacts.md",
+      "schema": "named-only"
+    },
+    "CHANGE_SET": {
+      "contract": "contracts/artifacts.md",
+      "schema": "named-only"
+    },
+    "BOOTSTRAP_READINESS": {
+      "contract": "contracts/artifacts.md",
+      "schema": "named-only"
+    }
+  }
+}

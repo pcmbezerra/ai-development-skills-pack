@@ -1,0 +1,20 @@
+{
+  "name": "ai-development-skills-pack",
+  "version": "1.0.0-scaffold",
+  "private": true,
+  "description": "Architecture v1 scaffold for 18 AI development skills",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "ai-dev-skills": "bin/ai-dev-skills.mjs"
+  },
+  "scripts": {
+    "validate": "node scripts/validate-skills.mjs",
+    "skills:validate": "node scripts/validate-skills.mjs",
+    "test": "node --test tests/validate-skills.test.mjs"
+  },
+  "dependencies": {}
+}
