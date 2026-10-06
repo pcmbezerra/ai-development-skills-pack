@@ -49,6 +49,7 @@ async function implementSkill(root, name) {
     '## Workflow\n\n1. Read the approved input and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and record evidence.\n\n',
   ));
   await changeText(root,skill.path,s=>`${s}\n## Workflow\n\n1. Read the requested change and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and report evidence.\n`);
+  return skill;
 }
 async function artifactLineEndings(root, eol) {
   const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
@@ -94,6 +95,14 @@ const failures = [
     await changeText(root,'skills/development/implement/SKILL.md',s=>`${s}\nDo not claim to have executed this skill from this skeleton.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
   ['implemented skill without operational workflow', root=>markSkillImplemented(root,'implement'), /implement: implemented skill must define workflow in contract and source/],
+  ['implemented skill with workflow placeholder', async root=>{
+    const skill = await implementSkill(root,'implement');
+    await changeText(root,skill.path,s=>`${s}\nTBD\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
+  ['implemented skill with unsupported operational execution', async root=>{
+    const skill = await implementSkill(root,'implement');
+    await changeText(root,skill.path,s=>`${s}\nOperational execution remains unsupported.\n`);
+  }, /implement: implemented skill declares pending or unavailable workflow/],
   ['missing Claude Code target', root=>changeManifest(root,m=>m.targets=m.targets.filter(t=>t.name!=='claude-code')), /Invalid targets/],
   ['Claude Code installation enabled', root=>changeText(root,'targets/claude-code.mjs',s=>s.replace('"installationImplemented": false','"installationImplemented": true')), /claude-code: incompatible scaffold descriptor/],
   ['hardcoded Claude Code path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .claude/skills\n'), /hardcoded target/],

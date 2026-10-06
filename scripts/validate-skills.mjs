@@ -103,9 +103,10 @@ export async function validate(root = rootDirectory) {
       check(s.status === contractStatus && s.status === sourceStatus, `${s.name}: status mismatch (manifest ${s.status}, contract ${contractStatus}, source ${sourceStatus})`);
       if (s.status === 'implemented') {
         const workflow = text=>text.replace(/\r\n/g,'\n').match(/(?:^|\n)## Workflow\n+([\s\S]*?)(?=\n## |$)/)?.[1].trim();
-        check(!!workflow(contract) && !!workflow(body), `${s.name}: implemented skill must define workflow in contract and source`);
-        const unavailableWorkflow = /pending implementation|operational workflow is not implemented|workflow (?:is )?unavailable|does not execute the workflow|operational steps are outside this scaffold|do not claim to have executed this skill from this skeleton/i;
-        check(!unavailableWorkflow.test(`${contract}\n${body}`), `${s.name}: implemented skill declares pending or unavailable workflow`);
+        const contractWorkflow = workflow(contract), sourceWorkflow = workflow(body);
+        check(!!contractWorkflow && !!sourceWorkflow, `${s.name}: implemented skill must define workflow in contract and source`);
+        const unavailableWorkflow = /pending implementation|(?:workflow|operational execution)\s+(?:is |remains )?(?:pending|unavailable|unsupported|not (?:implemented|supported|available))|does not execute the workflow|operational steps are outside this scaffold|do not claim to have executed this skill from this skeleton/i;
+        check(!/\b(?:todo|tbd)\b/i.test(`${contractWorkflow}\n${sourceWorkflow}`) && !unavailableWorkflow.test(`${contract}\n${body}`), `${s.name}: implemented skill declares pending or unavailable workflow`);
       }
       check(!/\.(?:cursor|codex|gemini|antigravity|claude)[/\\]/i.test(body), `${s.name}: hardcoded target installation path`);
       const fm = body.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
