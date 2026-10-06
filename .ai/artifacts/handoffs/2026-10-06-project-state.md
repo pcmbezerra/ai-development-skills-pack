@@ -1,10 +1,10 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 4
+version: 6
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "347b05a", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06"]
+inputs: ["baseline-v1", "amendment-v1-A1", "347b05a", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001"]
 ---
 
 ## Objective
@@ -17,7 +17,7 @@ Baseline v1 reconciliado + emenda v1-A1 (2026-10-06), commit inspecionado `347b0
 
 18 skills: 13 com invocação primária user e 5 model. Todas permanecem esqueletos. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 26/26 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A fase operacional não começou; sua primeira etapa está definida em Next Actions. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 38/38 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A fase operacional não começou; o validador já admite ciclo de vida misto consistente, mas o catálogo permanece com 18 skills `scaffold`. `SPEC-20261006-001` foi decomposta no `TICKET-SET-20261006-001`. A frontier contém somente o ticket 01. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
 
 ## Completed Work
 
@@ -31,6 +31,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 2
 - Criação de configuração, contexto local, glossário e regras de consumo para helpers.
 - Execução da validação, testes e CLI; isolamento da incompatibilidade LF/CRLF por comparação em memória.
 - Atualização da documentação de validação sem apagar o histórico de macOS.
+- Criação da SPEC pronta de contexto/bootstrap e decomposição aprovada em quatro tickets lineares, todos `ready-for-agent`, com fallback Markdown local.
 
 ## Decisions
 
@@ -48,13 +49,13 @@ A ampliação de targets foi registrada diretamente no contrato e na proveniênc
 
 `CONTEXT.md`; `.ai/config.json`; `.ai/project.md`; `.ai/architecture.md`; `.ai/standards.md`; `.ai/tech-stack.md`; `.ai/business-rules.md`; `docs/agents/issue-tracker.md`; `docs/agents/triage-labels.md`; `docs/agents/domain.md`; este handoff.
 
-Os diretórios de specs, tickets e ADRs são caminhos configurados e serão criados quando houver conteúdo real. Não há SPEC ou TICKET_SET pronto para uma nova fase. Não foram inventados esquemas ou alterados templates normativos.
+SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET pronto: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
 
 ## Files Changed
 
 Histórico: criados os arquivos listados em Artifacts; atualizados `AGENTS.md`, `README.md` e `references/validation-result.md`. Na emenda v1-A1, atualizados também `references/architecture-contract-v1.md`, `references/provenance.md`, `contracts/skill-contract.md`, `manifest/skills.json`, `scripts/validate-skills.mjs` e `tests/validate-skills.test.mjs`; criado `targets/claude-code.mjs`.
 
-Nesta correção: `scripts/validate-skills.mjs`, `tests/validate-skills.test.mjs`, `references/validation-result.md`, `references/provenance.md`, `README.md`, `.ai/architecture.md` e este handoff. Skills, manifest, targets, contratos e templates não foram alterados nesta etapa. Alterações locais anteriores preservadas; nenhum commit criado.
+Na correção LF/CRLF: `scripts/validate-skills.mjs`, `tests/validate-skills.test.mjs`, `references/validation-result.md`, `references/provenance.md`, `README.md`, `.ai/architecture.md` e este handoff. Essas mudanças foram versionadas no commit `0d3b98e`. Na etapa atual, foram criados a SPEC e o TICKET_SET de contexto/bootstrap; este handoff foi atualizado. Skills, manifest, targets, contratos e templates ainda não foram alterados para a fase operacional.
 
 ## Validation
 
@@ -63,12 +64,15 @@ Windows/PowerShell; Node.js v25.2.0; npm 11.6.2; HEAD `347b05a` mais alteraçõe
 - Reprodução antes da correção: `npm run validate` falhou com 15 erros; `npm test` teve 17 aprovados e 3 falhos em 20 testes.
 - RED das novas regressões: `node --test --test-name-pattern='with (LF|CRLF)' tests/validate-skills.test.mjs`: 3 LF aprovadas e 3 CRLF falhas.
 - GREEN: `npm run validate` e `npm run skills:validate` PASS, 18 skills e quatro targets declarativos.
-- `npm test`: PASS, 26 testes, zero falhas ou testes ignorados.
+- `npm test`: PASS, 38 testes, zero falhas ou testes ignorados; doze regressões cobrem ciclo de vida misto, status inválido, divergências, ausência, placeholder e negação de workflow operacional.
 - `node bin/ai-dev-skills.mjs --help` e `node bin/ai-dev-skills.mjs validate`: PASS, saída 0.
 - `git ls-files --eol contracts/artifacts.md templates/artifacts/spec.md`: ambos continuam i/lf e w/crlf.
 - Dependências de produção permanecem vazias; testes de dependências required/conditional/optional continuam aprovados.
 
 Evidência detalhada e histórico preservados em `references/validation-result.md`. Fixtures LF no Windows não comprovam execução em Linux/macOS.
+
+- Após criar `SPEC-20261006-001`, `npm run validate`: PASS, 18 skills e quatro targets. A SPEC contém todos os campos canônicos, está `ready` e não contém placeholders.
+- Após criar `TICKET-SET-20261006-001`, validação estrutural reexecutada. Os quatro tickets têm escopo delimitado, dependências explícitas e acíclicas e critérios verificáveis.
 
 ## Known Issues
 
@@ -79,27 +83,15 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Open Questions
 
-Nenhuma questão bloqueia a correção concluída. A futura implementação precisa formalizar a transição de status: hoje o validador exige `scaffold` para todas as skills. Essa mudança deve ser delimitada na SPEC antes de executar workflows; não relaxar a validação global nem inventar esquemas para saídas apenas nomeadas.
+Nenhuma questão bloqueante. A transição de status, os limites de schema e os critérios de validação estão definidos em `SPEC-20261006-001`; a ordem executável está no `TICKET-SET-20261006-001`.
 
 ## Next Actions
 
-Primeira etapa de implementação definida após validação verde: **contexto e bootstrap local**, começando por `context-engineering` (sem dependências), seguido de `setup-ai-development-skills` (dependência obrigatória de contexto). Esta é uma definição de trabalho futuro, não evidência de execução.
+1. Implementar o ticket 01, único item na frontier atual.
+2. Prosseguir em ordem linear pelos tickets 02, 03 e 04 somente após os respectivos bloqueadores concluírem.
+3. Reconciliar os arquivos locais com GitHub Issues e aplicar `ready-for-agent` quando `gh` estiver disponível, sem criar duplicatas.
 
-1. Escrever SPEC no caminho configurado usando o template existente, com o recorte abaixo e a transição explícita do estado scaffold para as duas skills. Gerar tickets somente quando a SPEC estiver ready, conforme R10.
-2. Implementar as instruções operacionais de `context-engineering`: descobrir evidências do repositório e manter `.ai/project.md`, `.ai/architecture.md`, `.ai/standards.md`, `.ai/tech-stack.md` e `.ai/business-rules.md`; separar fatos, hipóteses e lacunas, preservar decisões existentes e manter estado fora das skills.
-3. Implementar `setup-ai-development-skills`: preservar configuração existente, criar configuração mínima ausente conforme o contrato, compor obrigatoriamente contexto e reportar readiness ou BLOCKED. Não alterar código da aplicação nem sobrescrever decisões.
-
-Critérios de aceitação do recorte:
-
-- Repositório sem `.ai/`: produzir configuração mínima e os cinco documentos de contexto fundamentados em fontes locais; lacunas materiais devem ser explícitas.
-- Repositório com configuração/decisões: preservar valores e decisões; segunda execução sem novas evidências não deve duplicar nem reescrever conteúdo sem necessidade.
-- Entrada inacessível, configuração inválida ou conflito material: relatar BLOCKED com Reason, Evidence, Missing prerequisite e Recommended next skill/action, sem afirmar prontidão ou sobrescrever arquivos inválidos.
-- Fixtures verificáveis para bootstrap novo, estado existente, repetição e bloqueios; manter verdes validação, suíte LF/CRLF e CLI.
-- Preservar 18 skills, quatro targets, sem dependências novas, fonte independente de ferramenta e sem novo schema/template canônico de PROJECT_CONTEXT ou BOOTSTRAP_READINESS.
-
-Fora do recorte: instalador, sync/doctor/list, roteador automático, integrações remotas e demais workflows. A CLI continua help/validate; execução real nos targets exige evidência própria futura.
-
-Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06, confirme a validação verde e escreva a SPEC da primeira etapa contexto/bootstrap conforme Next Actions. Delimite a transição de status das duas skills antes da implementação."
+Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 01 e não avance para tickets bloqueados."
 
 ## Suggested Skills
 
