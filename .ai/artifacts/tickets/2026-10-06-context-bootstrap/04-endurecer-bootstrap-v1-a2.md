@@ -1,6 +1,6 @@
 # 04 — Endurecer bootstrap e fechar v1-A2
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Title
 
@@ -41,18 +41,18 @@ Este ticket fecha o recorte, mas não deve mascarar limitações com documentaç
 
 ## Acceptance Criteria
 
-- [ ] Configuração válida existente, inclusive campos opcionais desconhecidos, é preservada integralmente.
-- [ ] Versão incompatível, JSON inválido e caminho fora da raiz retornam `BLOCKED` sem modificar a configuração.
-- [ ] A segunda execução completa sem mudança de entradas produz diff vazio.
-- [ ] O diff de uma execução bem-sucedida não contém alteração em código ou configuração de build da aplicação.
-- [ ] Valores secretos usados nas fixtures não aparecem em contexto, readiness, logs ou evidências.
-- [ ] Bloqueio de `context-engineering` impede `READY` do bootstrap.
-- [ ] Exatamente duas skills estão `implemented`, 16 estão `scaffold` e quatro targets permanecem `scaffold`.
-- [ ] Não existem schemas/templates novos para `PROJECT_CONTEXT` ou `BOOTSTRAP_READINESS`.
-- [ ] Dependências npm permanecem vazias e a CLI continua limitada a ajuda/validação.
-- [ ] Toda a suíte, validação, alias e CLI terminam com código zero.
-- [ ] Documentação e handoff descrevem o estado parcial real e listam plataformas/targets não verificados.
-- [ ] Todos os 14 critérios da SPEC possuem evidência rastreável.
+- [x] Configuração válida existente, inclusive campos opcionais desconhecidos, é preservada integralmente.
+- [x] Versão incompatível, JSON inválido e caminho fora da raiz retornam `BLOCKED` sem modificar a configuração.
+- [x] A segunda execução completa sem mudança de entradas produz diff vazio.
+- [x] O diff de uma execução bem-sucedida não contém alteração em código ou configuração de build da aplicação.
+- [x] Valores secretos usados nas fixtures não aparecem em contexto, readiness, logs ou evidências.
+- [x] Bloqueio de `context-engineering` impede `READY` do bootstrap.
+- [x] Exatamente duas skills estão `implemented`, 16 estão `scaffold` e quatro targets permanecem `scaffold`.
+- [x] Não existem schemas/templates novos para `PROJECT_CONTEXT` ou `BOOTSTRAP_READINESS`.
+- [x] Dependências npm permanecem vazias e a CLI continua limitada a ajuda/validação.
+- [x] Toda a suíte, validação, alias e CLI terminam com código zero.
+- [x] Documentação e handoff descrevem o estado parcial real e listam plataformas/targets não verificados.
+- [x] Todos os 14 critérios da SPEC possuem evidência rastreável.
 
 ## Validation
 
@@ -63,7 +63,7 @@ Este ticket fecha o recorte, mas não deve mascarar limitações com documentaç
 
 ## Definition of Done
 
-- [ ] Todos os critérios desta unidade e da SPEC estão cobertos por evidência.
-- [ ] Não há falha, skip não explicado ou modificação fora do escopo.
-- [ ] Emenda v1-A2, estado do projeto e handoff estão coerentes com o comportamento validado.
-- [ ] O próximo trabalho pode iniciar a partir de uma frontier vazia, sem pendência desta SPEC.
+- [x] Todos os critérios desta unidade e da SPEC estão cobertos por evidência.
+- [x] Não há falha, skip não explicado ou modificação fora do escopo.
+- [x] Emenda v1-A2, estado do projeto e handoff estão coerentes com o comportamento validado.
+- [x] O próximo trabalho pode iniciar a partir de uma frontier vazia, sem pendência desta SPEC.

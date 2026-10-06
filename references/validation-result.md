@@ -5,7 +5,7 @@
 Node.js v25.2.0, npm 11.6.2, PowerShell. Validation passes after the LF/CRLF parser fix, mixed lifecycle support and the operational context/bootstrap migrations.
 
 - `npm run validate`: PASS, exactly 18 skills and four scaffold targets.
-- `npm test`: PASS, 41 tests, zero failures/skips.
+- `npm test`: PASS, 43 tests, zero failures/skips/todos.
 - `npm run skills:validate`: PASS.
 - `node bin/ai-dev-skills.mjs --help`: PASS (exit 0).
 - `node bin/ai-dev-skills.mjs validate`: PASS (exit 0).
@@ -16,9 +16,11 @@ Lifecycle evidence: regressions accept a consistent mixed fixture and reject unk
 
 Bootstrap evidence: `TEST-20261006-003` records RED/GREEN lifecycle coverage and agent-executed fixtures. A new repository produced version 1/local configuration plus exactly five context documents and `Status: READY`; a repeat evaluation preserved all six hashes. Invalid JSON returned `BLOCKED` with the original SHA-256 unchanged. A material runtime conflict blocked `context-engineering`, propagated through bootstrap without `READY`, preserved all inputs and created no context documents.
 
+Hardening evidence: `TEST-20261006-004` separates deterministic checks from agent conformance. New regressions reject npm dependency fields and CLI expansion beyond help/validation. Agent fixtures preserved an existing CRLF configuration with an unknown extension and project-selected paths, proved a five-file write boundary and repeat hashes, excluded a secret value, and blocked incompatible version, invalid JSON, root escape and material conflict without modifying tracked inputs. All 14 `SPEC-20261006-001` criteria are mapped to evidence there.
+
 The fix normalizes CRLF to LF only in strings read for artifact contracts and templates. No checkout-wide conversion, dependency, catalogue, target or contract change was needed. `git ls-files --eol contracts/artifacts.md templates/artifacts/spec.md` still reports `i/lf w/crlf` for both files. Production dependencies remain `{}`; existing required/conditional/optional dependency checks still pass.
 
-Linux and a fresh macOS run, Node.js 22, and live Cursor/Codex/Antigravity/Claude Code execution remain unverified. LF fixtures on Windows establish parser coverage, not operating-system compatibility. Apart from context and bootstrap, workflows and installation remain unimplemented; ticket 04 owns adversarial hardening.
+Linux and a fresh macOS run, Node.js 22, and live Cursor/Codex/Antigravity/Claude Code execution remain unverified. LF fixtures on Windows establish parser coverage, not operating-system compatibility. Apart from context and bootstrap, workflows and installation remain unimplemented. Amendment v1-A2 is closed; `SPEC-20261006-001` has no remaining ticket frontier.
 
 ## Historical failure — Windows, 2026-10-06, before the fix
 

@@ -1,23 +1,23 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 8
+version: 9
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "347b05a", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "TEST-20261006-002", "TEST-20261006-003", "REVIEW-20261006-003"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "800db27", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "REVIEW-20261006-003", "REVIEW-20261006-004"]
 ---
 
 ## Objective
 
-Preservar continuidade verificável após operacionalizar contexto e bootstrap local, mantendo o histórico de validação e a frontier executável. Documento consolidado pela skill externa `handoff` a partir de evidências verificadas. Não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável após fechar a emenda v1-A2, mantendo histórico de validação, limitações explícitas e frontier vazia para `SPEC-20261006-001`. Documento consolidado pela skill externa `handoff` a partir de evidências verificadas. Não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2 (2026-10-06), commit inspecionado `347b05a`, branch `main`. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2 (2026-10-06), endurecimento determinístico no commit `800db27`, branch `main`. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
 18 skills: 13 com invocação primária user e 5 model. `context-engineering` e `setup-ai-development-skills` estão `implemented`; as outras 16 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos: Cursor, Codex, Gemini Antigravity e Claude Code; sem instalação implementada.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 41/41 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. O ticket 03 concluiu o bootstrap local e a frontier contém somente o ticket 04. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 43/43 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. O ticket 04 concluiu o endurecimento e a frontier de `SPEC-20261006-001` está vazia. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
 
 ## Completed Work
 
@@ -35,6 +35,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 4
 - Conclusão do ticket 01 nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`: ciclo de vida misto estrito, consistência entre manifest/contrato/fonte e regressões de workflow pendente ou indisponível. Reviews finais de Standards e Spec sem achados.
 - Conclusão do ticket 02: workflow operacional de `context-engineering`, emenda v1-A2 iniciada, migração consistente para `implemented`, regressões estruturais e `TEST-20261006-002` com cinco cenários de conformidade.
 - Conclusão do ticket 03: workflow operacional de bootstrap, composição obrigatória de contexto, migração consistente para `implemented`, regressões estruturais e `TEST-20261006-003` com sucesso, JSON inválido e dependência bloqueada.
+- Conclusão do ticket 04: invariantes de dependências/CLI protegidas pelo validador, matriz adversarial aprovada, rastreabilidade dos 14 critérios em `TEST-20261006-004` e emenda v1-A2 fechada.
 
 ## Decisions
 
@@ -52,7 +53,7 @@ A ampliação de targets foi registrada diretamente no contrato e na proveniênc
 
 `CONTEXT.md`; `.ai/config.json`; `.ai/project.md`; `.ai/architecture.md`; `.ai/standards.md`; `.ai/tech-stack.md`; `.ai/business-rules.md`; `docs/agents/issue-tracker.md`; `docs/agents/triage-labels.md`; `docs/agents/domain.md`; este handoff.
 
-SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET pronto: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. Evidências: `.ai/artifacts/tests/2026-10-06-context-engineering.md` e `.ai/artifacts/tests/2026-10-06-bootstrap-local.md`. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
+SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET concluído: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. Evidências: `.ai/artifacts/tests/2026-10-06-context-engineering.md`, `.ai/artifacts/tests/2026-10-06-bootstrap-local.md` e `.ai/artifacts/tests/2026-10-06-bootstrap-hardening.md`. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
 
 ## Files Changed
 
@@ -63,6 +64,8 @@ Na correção LF/CRLF: `scripts/validate-skills.mjs`, `tests/validate-skills.tes
 O ticket 02 atualizou a fonte/contrato/manifest de `context-engineering`, regressões, emenda v1-A2, documentação de estado e os artefatos de ticket, teste e handoff. Targets, dependências, routing, CLI e schemas/templates de artefatos permaneceram inalterados.
 
 O ticket 03 atualizou a fonte/contrato/manifest de `setup-ai-development-skills`, regressões, documentação v1-A2 e os artefatos de ticket, teste, implementação e handoff. Preservou targets, dependência obrigatória, routing, CLI e schemas/templates de artefatos.
+
+O ticket 04 atualizou o validador e seus testes para impedir dependências npm e ampliação da CLI; registrou matriz adversarial, implementação, review e estado final. Não alterou skills, manifest, contratos, routing, schemas/templates, targets, código de aplicação ou configuração de build.
 
 ## Validation
 
@@ -83,6 +86,8 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 - Ticket 02: RED focado confirmado; GREEN focado 3/3; suíte final 40/40; validação, alias e dois comandos CLI com saída zero. Cenários de conformidade aprovados para criação, preservação, idempotência, conflito e sigilo; detalhes em `TEST-20261006-002`.
 - Ticket 03: RED/GREEN focado confirmado; suíte final 41/41; validação, alias e dois comandos CLI com saída zero. Cenários de conformidade aprovados para repositório novo, JSON inválido e bloqueio propagado de `context-engineering`; detalhes em `TEST-20261006-003`.
 - Review final do ticket 03: Standards 0 achados; Spec 0 achados; detalhes em `REVIEW-20261006-003`.
+- Ticket 04: RED focado 0/2 e GREEN 2/2; suíte final 43/43; validação, alias e dois comandos CLI com saída zero. Cinco cenários adversariais conduzidos pelo agente cobriram preservação, idempotência, limite de escrita, sigilo e bloqueios; detalhes em `TEST-20261006-004`.
+- Review final do ticket 04: Standards e Spec registrados separadamente em `REVIEW-20261006-004`.
 
 ## Known Issues
 
@@ -93,21 +98,19 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Open Questions
 
-Nenhuma questão bloqueante. A transição de status, os limites de schema e os critérios de validação estão definidos em `SPEC-20261006-001`; a ordem executável está no `TICKET-SET-20261006-001`.
+Nenhuma questão bloqueante. `SPEC-20261006-001` está concluída e sua frontier está vazia.
 
 ## Next Actions
 
-1. Implementar o ticket 04, único item na frontier atual.
-2. Reconciliar os arquivos locais com GitHub Issues e aplicar `ready-for-agent` quando `gh` estiver disponível, sem criar duplicatas.
+1. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas; isso não bloqueia a SPEC concluída.
 
-Prompt de retomada: "Leia AGENTS.md, o handoff de 2026-10-06, `SPEC-20261006-001` e `TICKET-SET-20261006-001`. Implemente o ticket 04 e não amplie o escopo além do endurecimento contratado."
+Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261006-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 
 - `research`, apenas se a SPEC depender de compatibilidade externa ainda não documentada.
 - `domain-modeling`, se o vocabulário de contexto/bootstrap revelar conflito com `CONTEXT.md`.
-- `tdd`, para implementar os casos de bootstrap novo, estado existente, repetição e bloqueios antes do workflow.
 
 ## Constraints
 
-Preservar as 18 skills, os quatro targets e o estado parcial da emenda v1-A2: somente contexto e bootstrap implementados antes do ticket 04. Não adicionar dependências nem ampliar schemas, routing ou targets. Helpers externos de manutenção não integram o runtime. Não interpretar fixtures locais como validação de integração remota ou compatibilidade de targets. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
+Preservar as 18 skills, os quatro targets e o estado parcial fechado pela emenda v1-A2: somente contexto e bootstrap estão implementados. Não adicionar dependências nem ampliar schemas, routing ou targets. Helpers externos de manutenção não integram o runtime. Não interpretar fixtures locais como validação de integração remota ou compatibilidade de targets. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
