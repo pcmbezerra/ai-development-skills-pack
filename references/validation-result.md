@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — target distribution, Windows, 2026-10-06
+## Current observation — operational workflow router, Windows, 2026-10-08
+
+Node.js v25.2.0, npm 11.6.2, PowerShell. Amendment v1-A4 implements `workflow` as a consultative router without adding an executor, dependency, schema, template, target or CLI command.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 3 `implemented` and 15 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos.
+- `git diff --check`: PASS.
+- `WORKFLOW_PLAN` remains named-only and has no persisted file, schema or template.
+- `TEST-20261008-001` records nine isolated agent-conducted scenarios: explicit invocation, ambiguity, unknown failure, bounded change, unknown external fact, missing material context, unusable artifact, scaffold blocking and absence of execution/write/persistence with secret redaction.
+- The semantic matrix passed all scenarios and maps all 17 criteria of `SPEC-20261008-001`. It is evidence from this agent session, not a deterministic Node.js test or live product certification.
+
+Node.js 22, Linux, a fresh macOS run and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. Model-to-model routing consistency is not proven.
+
+## Previous observation — target distribution, Windows, 2026-10-06
 
 Node.js v25.2.0, npm 11.6.2, PowerShell. Amendment v1-A3 implements deterministic packaging, explicit project installation and canonical-content validation for Codex, Cursor, Gemini Antigravity and Claude Code.
 

@@ -1,25 +1,29 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 10
+version: 11
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "800db27", "9634dfe", "9a15a46", "maintainer-confirmations-2026-10-06", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "REVIEW-20261006-003", "REVIEW-20261006-004"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "REVIEW-20261006-003", "REVIEW-20261006-004"]
 ---
 
 ## Objective
 
-Preservar continuidade verificável após implementar a emenda v1-A3, mantendo histórico de validação, limitações explícitas e frontier vazia para `SPEC-20261006-001`. Documento consolidado pela skill externa `handoff` a partir de evidências verificadas. Não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável após implementar e validar a emenda v1-A4, mantendo histórico, limitações explícitas e frontier vazia para `SPEC-20261008-001`. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3 (2026-10-06), endurecimento determinístico no commit `800db27`, branch `main`. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4, branch `main`. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
-18 skills: 13 com invocação primária user e 5 model. `context-engineering` e `setup-ai-development-skills` estão `implemented`; as outras 16 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
+18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills` e `workflow` estão `implemented`; as outras 15 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
 
-Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 48/48 testes passam. O parser normaliza apenas as strings de contratos/templates de artefatos em memória. A emenda v1-A3 implementou distribuição sem dependências e sem alterar o catálogo. A configuração de manutenção está documentada localmente; não foram criadas issues ou labels remotas.
+Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 48/48 testes passam. A emenda v1-A4 adiciona somente roteamento consultivo: `WORKFLOW_PLAN` continua named-only, não persistido, e nenhuma execução automática foi criada. Nove cenários agent-driven aprovados estão separados da suíte Node. Não foram criadas issues ou labels remotas.
 
 ## Completed Work
+
+- Emenda v1-A4: `workflow` operacional com rota mínima, contexto condicional, gates de artefato, lifecycle explícito, bloqueio no primeiro scaffold, sigilo e auditabilidade por regra/evidência; 3 skills implementadas e 15 scaffold.
+- Ticket 01 concluído nos commits `9a252e6`, `cf7b39e` e `68d607d`; review de implementação corrigiu consistência normativa, sigilo, auditabilidade e duplicação antes de PASS.
+- Ticket 02: nove cenários semânticos aprovados sem escrita/persistência, suíte 48/48 e documentação de estado reconciliada. Evidência em `TEST-20261008-001` e relatório em `IMPLEMENTATION-20261008-001`.
 
 - Emenda v1-A3: CLI `package`, `install` e `validate --target`; descritores declarativos com paths nativos; empacotamento isolado por target; instalação idempotente e bloqueio atômico de colisões divergentes; 3 regressões novas, total 48/48.
 - Paths documentados: Codex e Antigravity `.agents/skills`, Cursor `.cursor/skills`, Claude Code `.claude/skills`. Nenhuma dependência npm, sobrescrita, instalação global ou detecção automática foi adicionada.
@@ -52,11 +56,15 @@ Confirmadas pelo mantenedor nesta sessão:
 
 A ampliação de targets foi registrada diretamente no contrato e na proveniência como emenda v1-A1, sem ADR duplicado. A emenda v1-A2 inclui os workflows operacionais de contexto e bootstrap; a v1-A3 implementa distribuição por target; as outras 16 skills permanecem scaffold.
 
+A emenda v1-A4 implementa `workflow` como roteador consultivo. Ele retorna uma sequência mínima na conversa, não executa skills, não persiste `WORKFLOW_PLAN` e não introduz dependência, schema, template, target, comando CLI ou alteração em R1–R17. As outras 15 skills permanecem scaffold.
+
 ## Artifacts
 
 `CONTEXT.md`; `.ai/config.json`; `.ai/project.md`; `.ai/architecture.md`; `.ai/standards.md`; `.ai/tech-stack.md`; `.ai/business-rules.md`; `docs/agents/issue-tracker.md`; `docs/agents/triage-labels.md`; `docs/agents/domain.md`; este handoff.
 
 SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET concluído: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. Evidências: `.ai/artifacts/tests/2026-10-06-context-engineering.md`, `.ai/artifacts/tests/2026-10-06-bootstrap-local.md` e `.ai/artifacts/tests/2026-10-06-bootstrap-hardening.md`. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
+
+`SPEC-20261008-001`; `TICKET-SET-20261008-001`; `TEST-20261008-001`; `IMPLEMENTATION-20261008-001`. O diretório de ADRs continua ausente por não haver decisão que o justifique.
 
 ## Files Changed
 
@@ -73,6 +81,10 @@ O ticket 03 atualizou a fonte/contrato/manifest de `setup-ai-development-skills`
 O ticket 04 atualizou o validador e seus testes para impedir dependências npm e ampliação da CLI; registrou matriz adversarial, implementação, review e estado final. Não alterou skills, manifest, contratos, routing, schemas/templates, targets, código de aplicação ou configuração de build.
 
 ## Validation
+
+- Emenda v1-A4: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs.
+- Matriz agent-driven: 9/9 cenários aprovados; invocação explícita, ambiguidade, falha desconhecida, mudança delimitada, fato externo, contexto ausente, artefato não pronto, scaffold e ausência de execução/escrita/persistência com sigilo.
+- Ambiente: Windows/PowerShell, Node.js v25.2.0, npm 11.6.2. Node.js 22, Linux, nova execução macOS e execução real nos quatro produtos permanecem não verificados.
 
 Windows/PowerShell; Node.js v25.2.0; npm 11.6.2; ticket 01 implementado nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`.
 
@@ -98,21 +110,22 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Known Issues
 
-1. **Limite intencional do estado parcial:** as outras 16 skills, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem testes de sobreposição semântica de routing ou validação de prontidão de artefatos de projetos.
+1. **Limite intencional do estado parcial:** as outras 15 skills, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem executor de workflow. A cobertura semântica limita-se aos nove cenários agent-driven.
 2. **Plataformas não verificadas:** Linux, nova execução macOS, Node.js 22 e descoberta real das skills nos quatro produtos. Estrutura e conteúdo dos quatro layouts foram validados em fixtures Windows.
 3. **Integrações não verificadas:** `gh` ausente no PATH na sessão anterior; issues/labels remotas não verificadas.
 4. **Publicação futura:** licença placeholder e pacote privado exigirão decisão própria antes de distribuir.
 
 ## Open Questions
 
-Nenhuma questão bloqueante. `SPEC-20261006-001` está concluída e sua frontier está vazia.
+Nenhuma questão bloqueante. `SPEC-20261006-001` e `SPEC-20261008-001` estão concluídas e suas frontiers estão vazias.
 
 ## Next Actions
 
-1. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
-2. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
+1. Iniciar somente um novo recorte de skill explicitamente aprovado.
+2. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
+3. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261006-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
+Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261008-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 
@@ -121,4 +134,4 @@ Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261006-00
 
 ## Constraints
 
-Preservar as 18 skills, os quatro targets e o estado parcial: somente contexto e bootstrap estão implementados como workflows; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. Helpers externos de manutenção não integram o runtime. Não interpretar fixtures locais como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
+Preservar as 18 skills, os quatro targets e o estado parcial: contexto, bootstrap e workflow estão implementados; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. `workflow` permanece consultivo, sem executor ou persistência. Helpers externos de manutenção não integram o runtime. Não interpretar cenários agent-driven como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
