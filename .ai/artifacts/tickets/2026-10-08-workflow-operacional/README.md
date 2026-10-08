@@ -17,7 +17,7 @@ Publicação remota não foi solicitada. O Markdown local é a fonte de verdade 
 ## Tickets
 
 1. [Operacionalizar workflow](01-workflow-operacional.md) — concluído.
-2. [Validar e fechar v1-A4](02-validar-fechar-v1-a4.md) — `ready-for-agent`.
+2. [Validar e fechar v1-A4](02-validar-fechar-v1-a4.md) — concluído.
 
 ## Dependency graph
 
@@ -25,4 +25,4 @@ Publicação remota não foi solicitada. O Markdown local é a fonte de verdade 
 01 -> 02
 ```
 
-Frontier atual: ticket 02.
+Frontier atual: vazia; `SPEC-20261008-001` concluída.

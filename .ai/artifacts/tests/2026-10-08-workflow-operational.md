@@ -2,7 +2,7 @@
 artifact: test_evidence
 id: TEST-20261008-001
 version: 1
-status: draft
+status: ready
 created_by: tdd
 inputs: ["TICKET-SET-20261008-001/02", "SPEC-20261008-001", "68d607d"]
 ---
@@ -68,7 +68,7 @@ O RED estrutural pertence ao ticket 01: a expectativa 3/15 falhou antes da migra
 | 14 | Esta matriz separa explicitamente avaliação agent-driven da suíte Node. |
 | 15 | Matriz de comandos em Regression Suite, todos com saída zero. |
 | 16 | Proveniência, README, arquitetura, validação e handoff atualizados neste ticket. |
-| 17 | Pendente até o re-review final e a criação de `REVIEW-20261008-001`. |
+| 17 | `REVIEW-20261008-001`: Standards PASS e Spec PASS sem achados remanescentes. |
 
 ## Failures
 

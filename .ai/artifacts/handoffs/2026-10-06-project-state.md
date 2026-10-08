@@ -1,15 +1,15 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 11
+version: 12
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "REVIEW-20261006-003", "REVIEW-20261006-004"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001"]
 ---
 
 ## Objective
 
-Preservar continuidade verificável durante o fechamento da emenda v1-A4, mantendo histórico, limitações explícitas e o ticket 02 na frontier até o re-review final. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável após fechar a emenda v1-A4, mantendo histórico, limitações explícitas e frontier vazia para `SPEC-20261008-001`. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
@@ -23,7 +23,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 4
 
 - Emenda v1-A4: `workflow` operacional com rota mínima, contexto condicional, gates de artefato, lifecycle explícito, bloqueio no primeiro scaffold, sigilo e auditabilidade por regra/evidência; 3 skills implementadas e 15 scaffold.
 - Ticket 01 concluído nos commits `9a252e6`, `cf7b39e` e `68d607d`; review de implementação corrigiu consistência normativa, sigilo, auditabilidade e duplicação antes de PASS.
-- Ticket 02 em fechamento: nove cenários semânticos aprovados sem escrita/persistência, suíte 48/48 e documentação reconciliada. `TEST-20261008-001` e `IMPLEMENTATION-20261008-001` permanecem draft até o re-review final.
+- Ticket 02 concluído: nove cenários semânticos aprovados sem escrita/persistência, suíte 48/48, documentação reconciliada e Standards/Spec PASS. Evidências em `TEST-20261008-001`, `IMPLEMENTATION-20261008-001` e `REVIEW-20261008-001`.
 
 - Emenda v1-A3: CLI `package`, `install` e `validate --target`; descritores declarativos com paths nativos; empacotamento isolado por target; instalação idempotente e bloqueio atômico de colisões divergentes; 3 regressões novas, total 48/48.
 - Paths documentados: Codex e Antigravity `.agents/skills`, Cursor `.cursor/skills`, Claude Code `.claude/skills`. Nenhuma dependência npm, sobrescrita, instalação global ou detecção automática foi adicionada.
@@ -64,7 +64,7 @@ A emenda v1-A4 implementa `workflow` como roteador consultivo. Ele retorna uma s
 
 SPEC pronta: `.ai/artifacts/specs/2026-10-06-context-bootstrap.md`. TICKET_SET concluído: `.ai/artifacts/tickets/2026-10-06-context-bootstrap/`, com manifesto e quatro registros. Evidências: `.ai/artifacts/tests/2026-10-06-context-engineering.md`, `.ai/artifacts/tests/2026-10-06-bootstrap-local.md` e `.ai/artifacts/tests/2026-10-06-bootstrap-hardening.md`. O diretório de ADRs será criado quando houver conteúdo real. Não foram inventados esquemas ou alterados templates normativos.
 
-`SPEC-20261008-001`; `TICKET-SET-20261008-001`; `TEST-20261008-001`; `IMPLEMENTATION-20261008-001`. O diretório de ADRs continua ausente por não haver decisão que o justifique.
+`SPEC-20261008-001`; `TICKET-SET-20261008-001`; `TEST-20261008-001`; `IMPLEMENTATION-20261008-001`; `REVIEW-20261008-001`. O diretório de ADRs continua ausente por não haver decisão que o justifique.
 
 ## Files Changed
 
@@ -84,6 +84,7 @@ O ticket 04 atualizou o validador e seus testes para impedir dependências npm e
 
 - Emenda v1-A4: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs.
 - Matriz agent-driven: 9/9 cenários aprovados; invocação explícita, ambiguidade, falha desconhecida, mudança delimitada, fato externo, contexto ausente, artefato não pronto, scaffold e ausência de execução/escrita/persistência com sigilo.
+- Review final: Standards PASS e Spec PASS após correções; detalhes em `REVIEW-20261008-001`.
 - Ambiente: Windows/PowerShell, Node.js v25.2.0, npm 11.6.2. Node.js 22, Linux, nova execução macOS e execução real nos quatro produtos permanecem não verificados.
 
 Windows/PowerShell; Node.js v25.2.0; npm 11.6.2; ticket 01 implementado nos commits `105307a`, `adb3261`, `f027f29` e `dd28f12`.
@@ -117,16 +118,15 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Open Questions
 
-Nenhuma questão de domínio bloqueante. `SPEC-20261006-001` está concluída; `SPEC-20261008-001` mantém o ticket 02 na frontier até re-review, REVIEW_REPORT e fechamento dos artefatos.
+Nenhuma questão bloqueante. `SPEC-20261006-001` e `SPEC-20261008-001` estão concluídas e suas frontiers estão vazias.
 
 ## Next Actions
 
-1. Reexecutar review de Standards e Spec, registrar `REVIEW-20261008-001` e fechar o ticket 02.
-2. Depois da frontier vazia, iniciar somente um novo recorte de skill explicitamente aprovado.
-3. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
-4. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
+1. Iniciar somente um novo recorte de skill explicitamente aprovado.
+2. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
+3. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. Reexecute o review final do ticket 02 de `SPEC-20261008-001` antes de fechar a frontier."
+Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261008-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 

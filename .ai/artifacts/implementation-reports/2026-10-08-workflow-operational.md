@@ -2,7 +2,7 @@
 artifact: implementation_report
 id: IMPLEMENTATION-20261008-001
 version: 1
-status: draft
+status: ready
 created_by: implement
 inputs: ["TICKET-SET-20261008-001/02", "SPEC-20261008-001", "TEST-20261008-001"]
 ---
@@ -17,7 +17,7 @@ Executar a matriz semântica pelo seam aprovado, separar essa evidência da suí
 
 ## Files Changed
 
-Evidência de teste, este relatório, proveniência, README, arquitetura, resultado de validação e handoff. Review e estado do ticket/conjunto permanecem pendentes do fechamento final.
+Evidência de teste, este relatório, proveniência, README, arquitetura, resultado de validação, handoff, review e estado do ticket/conjunto.
 
 ## Behaviour Changed
 
@@ -37,8 +37,8 @@ Não existe executor determinístico de `workflow`; as rotas semânticas depende
 
 ## Remaining Work
 
-Reexecutar o review final, registrar `REVIEW-20261008-001` e fechar o ticket/conjunto. Routing automático, persistência de plano e implementação das demais skills continuam fora do escopo.
+Nenhum para `SPEC-20261008-001`. Routing automático, persistência de plano e implementação das demais skills continuam fora do escopo.
 
 ## Change Reference
 
-Commits `9a252e6`, `cf7b39e`, `68d607d`, `6ea8c2c` e `61bbe7e` no branch `main`; o último contém as correções solicitadas no primeiro review deste ticket.
+Commits `9a252e6`, `cf7b39e`, `68d607d`, `6ea8c2c`, `61bbe7e` e `0baf527` no branch `main`, mais o commit que contém os artefatos finais de review/fechamento.
