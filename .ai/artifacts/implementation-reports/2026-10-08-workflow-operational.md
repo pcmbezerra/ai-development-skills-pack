@@ -17,7 +17,7 @@ Executar a matriz semântica pelo seam aprovado, separar essa evidência da suí
 
 ## Files Changed
 
-Evidência de teste, este relatório, proveniência, README, arquitetura, resultado de validação, handoff, review e estado do ticket/conjunto.
+Evidência de teste, este relatório, proveniência, README, arquitetura, resultado de validação e handoff. Review e estado do ticket/conjunto permanecem pendentes do fechamento final.
 
 ## Behaviour Changed
 
@@ -41,4 +41,4 @@ Reexecutar o review final, registrar `REVIEW-20261008-001` e fechar o ticket/con
 
 ## Change Reference
 
-Commits `9a252e6`, `cf7b39e`, `68d607d` e `6ea8c2c` no branch `main`; correções de review estão no working tree até o re-review.
+Commits `9a252e6`, `cf7b39e`, `68d607d`, `6ea8c2c` e `61bbe7e` no branch `main`; o último contém as correções solicitadas no primeiro review deste ticket.
