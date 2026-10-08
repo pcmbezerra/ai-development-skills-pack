@@ -64,7 +64,7 @@
       "path": "skills/core/workflow/SKILL.md",
       "description": "Route work to the correct skill/workflow.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Route work to the correct skill/workflow",
       "inputs": [
         "user request",

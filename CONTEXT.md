@@ -45,6 +45,10 @@ Possibilidade de composição que não obriga a execução da outra skill.
 Regras de seleção e precedência das skills conforme intenção e pré-requisitos do trabalho.
 _Avoid_: execução automática de todo o trabalho
 
+**Plano de workflow**:
+Sequência mínima e justificada de skills recomendada para uma solicitação, com pré-requisitos, disponibilidade, bloqueios e próxima ação executável.
+_Avoid_: execução do workflow, pipeline automático
+
 **Quality gate**:
 Critério para aceitar uma etapa com base em evidências e ausência dos bloqueios relevantes.
 _Avoid_: mera presença de seções
