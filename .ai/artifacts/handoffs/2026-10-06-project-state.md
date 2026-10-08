@@ -9,7 +9,7 @@ inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3",
 
 ## Objective
 
-Preservar continuidade verificável após implementar e validar a emenda v1-A4, mantendo histórico, limitações explícitas e frontier vazia para `SPEC-20261008-001`. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável durante o fechamento da emenda v1-A4, mantendo histórico, limitações explícitas e o ticket 02 na frontier até o re-review final. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
@@ -23,7 +23,7 @@ Validação estrutural, alias e CLI aprovados neste checkout Windows com CRLF; 4
 
 - Emenda v1-A4: `workflow` operacional com rota mínima, contexto condicional, gates de artefato, lifecycle explícito, bloqueio no primeiro scaffold, sigilo e auditabilidade por regra/evidência; 3 skills implementadas e 15 scaffold.
 - Ticket 01 concluído nos commits `9a252e6`, `cf7b39e` e `68d607d`; review de implementação corrigiu consistência normativa, sigilo, auditabilidade e duplicação antes de PASS.
-- Ticket 02: nove cenários semânticos aprovados sem escrita/persistência, suíte 48/48 e documentação de estado reconciliada. Evidência em `TEST-20261008-001` e relatório em `IMPLEMENTATION-20261008-001`.
+- Ticket 02 em fechamento: nove cenários semânticos aprovados sem escrita/persistência, suíte 48/48 e documentação reconciliada. `TEST-20261008-001` e `IMPLEMENTATION-20261008-001` permanecem draft até o re-review final.
 
 - Emenda v1-A3: CLI `package`, `install` e `validate --target`; descritores declarativos com paths nativos; empacotamento isolado por target; instalação idempotente e bloqueio atômico de colisões divergentes; 3 regressões novas, total 48/48.
 - Paths documentados: Codex e Antigravity `.agents/skills`, Cursor `.cursor/skills`, Claude Code `.claude/skills`. Nenhuma dependência npm, sobrescrita, instalação global ou detecção automática foi adicionada.
@@ -117,15 +117,16 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Open Questions
 
-Nenhuma questão bloqueante. `SPEC-20261006-001` e `SPEC-20261008-001` estão concluídas e suas frontiers estão vazias.
+Nenhuma questão de domínio bloqueante. `SPEC-20261006-001` está concluída; `SPEC-20261008-001` mantém o ticket 02 na frontier até re-review, REVIEW_REPORT e fechamento dos artefatos.
 
 ## Next Actions
 
-1. Iniciar somente um novo recorte de skill explicitamente aprovado.
-2. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
-3. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
+1. Reexecutar review de Standards e Spec, registrar `REVIEW-20261008-001` e fechar o ticket 02.
+2. Depois da frontier vazia, iniciar somente um novo recorte de skill explicitamente aprovado.
+3. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
+4. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. `SPEC-20261008-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
+Prompt de retomada: "Leia AGENTS.md e o handoff de 2026-10-06. Reexecute o review final do ticket 02 de `SPEC-20261008-001` antes de fechar a frontier."
 
 ## Suggested Skills
 

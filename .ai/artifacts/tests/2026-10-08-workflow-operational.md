@@ -2,7 +2,7 @@
 artifact: test_evidence
 id: TEST-20261008-001
 version: 1
-status: ready
+status: draft
 created_by: tdd
 inputs: ["TICKET-SET-20261008-001/02", "SPEC-20261008-001", "68d607d"]
 ---
@@ -15,17 +15,17 @@ Nenhum teste determinístico novo neste ticket. Foram adicionados nove cenários
 
 Cada cenário partiu de uma entrada isolada, consultou manifest, R1–R17, lifecycle e artefatos declarados, e comparou a rota observada com a SPEC. A execução apenas produziu o plano em memória/conversa; não invocou as skills roteadas.
 
-| # | Entrada isolada | Rota observada | Resultado |
-| --- | --- | --- | --- |
-| 1 | `/diagnose` explícito, sintoma/logs/contexto fornecidos | `diagnose -> implement -> code-review` | R1 preservada; `BLOCKED` em `diagnose` por lifecycle `scaffold`. |
-| 2 | “Melhore o onboarding”, sem objetivo ou critérios | `clarify -> to-spec -> to-tickets -> implement -> code-review` | R3; `BLOCKED` em `clarify`. |
-| 3 | Teste falha intermitentemente, causa desconhecida | `diagnose -> implement -> code-review` | R5; `BLOCKED` em `diagnose`. |
-| 4 | Corrigir um título específico do README | `implement` | R6; rota mínima, `BLOCKED` em `implement`. |
-| 5 | Decidir suporte a Node.js 26 com base no upstream atual | `research` | R4; `BLOCKED` em `research` antes da decisão. |
-| 6 | Refatorar acesso a dados sem `PROJECT_CONTEXT` | `context-engineering -> refactor -> code-review` | Contexto condicional primeiro; próxima ação executável `context-engineering`; primeiro indisponível `refactor`. |
-| 7 | Gerar tickets de SPEC `draft` sem Acceptance Criteria | `to-spec -> to-tickets` | Retorno ao produtor da SPEC; R7/R10; `BLOCKED` em `to-spec`. |
-| 8 | Feature com SPEC pronta, invariantes de domínio e impacto arquitetural | `domain-modelling -> architecture-design -> to-tickets -> implement -> tdd -> edge-case-analysis -> code-review -> docs` | R8–R14 aplicadas condicionalmente; rota completa; `BLOCKED` em `domain-modelling`. |
-| 9 | Mudança de configuração delimitada, com token secreto na entrada | `implement -> code-review -> docs` | R6/R13/R14; valor omitido; plano não persistido; `BLOCKED` em `implement`. |
+| # | Entrada isolada | Evidência consultada | Rota observada: status; pré-requisito; condição | Primeiro bloqueio | Divergência |
+| --- | --- | --- | --- | --- | --- |
+| 1 | `/diagnose` explícito, sintoma/logs/contexto fornecidos | Manifest; R1, R5, R6, R13; failure contract | `diagnose` [scaffold; entradas presentes; invocação explícita] -> `implement` [scaffold; diagnóstico pronto; correção] -> `code-review` [scaffold; CHANGE_SET; mudança não trivial] | `diagnose`; `Status: BLOCKED` | Nenhuma. |
+| 2 | “Melhore o onboarding”, sem objetivo ou critérios | Manifest; R3, R7, R10, R13 | `clarify` [scaffold; pedido ambíguo; decisão material] -> `to-spec` [scaffold; DECISION_SET; requisitos resolvidos] -> `to-tickets` [scaffold; SPEC ready; decomposição] -> `implement` [scaffold; TICKET; mudança] -> `code-review` [scaffold; CHANGE_SET; não trivial] | `clarify`; `Status: BLOCKED` | Nenhuma. |
+| 3 | Teste falha intermitentemente, causa desconhecida | Manifest; R5, R6, R13 | `diagnose` [scaffold; sintoma; causa desconhecida] -> `implement` [scaffold; DIAGNOSIS_REPORT; correção] -> `code-review` [scaffold; CHANGE_SET; bug não trivial] | `diagnose`; `Status: BLOCKED` | Nenhuma. |
+| 4 | Corrigir um título específico do README | Manifest; R6 e exceção trivial de R13 | `implement` [scaffold; pedido autocontido; mudança clara e trivial] | `implement`; `Status: BLOCKED` | Nenhuma; review omitido por risco negligível. |
+| 5 | Decidir suporte a Node.js 26 com base no upstream atual | Manifest; R4, R9, R14; contratos de research/architecture/docs | `research` [scaffold; pergunta externa; compatibilidade desconhecida] -> `architecture-design` [scaffold; RESEARCH_REPORT; decisão de runtime/plataforma] -> `docs` [scaffold; decisão aprovada; suporte público] | `research`; `Status: BLOCKED` | Nenhuma. |
+| 6 | Refatorar acesso a dados sem `PROJECT_CONTEXT` | Manifest; SPEC FR7/FR8; R15, R13 | `context-engineering` [implemented; repositório; contexto material ausente] -> `refactor` [scaffold; PROJECT_CONTEXT e baseline; comportamento estável] -> `code-review` [scaffold; CHANGE_SET; não trivial] | `refactor`; próxima ação executável: `context-engineering`; `Status: BLOCKED` | Nenhuma. |
+| 7 | Gerar tickets de SPEC `draft` sem Acceptance Criteria | Metadata/seções da SPEC; specification gate; R7/R10 | `to-spec` [scaffold; SPEC draft; completar produtor] -> `to-tickets` [scaffold; SPEC ready; decomposição] | `to-spec`; `Status: BLOCKED` | Nenhuma. |
+| 8 | Feature com SPEC pronta, invariantes de domínio e impacto arquitetural | SPEC ready; manifest; R8–R14 | `domain-modelling` [scaffold; SPEC; invariantes] -> `architecture-design` [scaffold; DOMAIN_MODEL; impacto arquitetural] -> `to-tickets` [scaffold; design ready; decomposição] -> `implement` [scaffold; TICKET; mudança] -> `tdd` [scaffold; critérios; risco material] -> `edge-case-analysis` [scaffold; CHANGE_SET; estados/integração] -> `code-review` [scaffold; CHANGE_SET; não trivial] -> `docs` [scaffold; mudança pública; documentação] | `domain-modelling`; `Status: BLOCKED` | Nenhuma. |
+| 9 | Mudança de configuração delimitada, com token secreto na entrada | Manifest; R6/R13/R14; security rules; snapshot Git | `implement` [scaffold; pedido claro com valor omitido; configuração] -> `code-review` [scaffold; CHANGE_SET; mudança não trivial] -> `docs` [scaffold; configuração alterada; impacto documental] | `implement`; `Status: BLOCKED` | Nenhuma; segredo, execução, escrita e persistência ausentes. |
 
 ## Expected Failure / RED
 
@@ -58,7 +58,7 @@ O RED estrutural pertence ao ticket 01: a expectativa 3/15 falhou antes da migra
 | 4 | Cenário 2: ambiguidade material iniciou em `clarify`. |
 | 5 | Cenário 3: causa desconhecida iniciou em `diagnose`. |
 | 6 | Cenário 4: mudança delimitada roteou diretamente para `implement`. |
-| 7 | Cenário 5: fato externo iniciou em `research`. |
+| 7 | Cenário 5: fato externo iniciou em `research` antes de `architecture-design` e `docs`. |
 | 8 | Cenário 6 e demais: contexto ausente foi condicional, não global. |
 | 9 | Cenário 7: SPEC não pronta retornou a `to-spec`. |
 | 10 | Cenários 1–9: rota completa e `BLOCKED` no primeiro scaffold requerido. |
@@ -68,7 +68,7 @@ O RED estrutural pertence ao ticket 01: a expectativa 3/15 falhou antes da migra
 | 14 | Esta matriz separa explicitamente avaliação agent-driven da suíte Node. |
 | 15 | Matriz de comandos em Regression Suite, todos com saída zero. |
 | 16 | Proveniência, README, arquitetura, validação e handoff atualizados neste ticket. |
-| 17 | `REVIEW-20261008-001` registra Standards e Spec sem achados remanescentes. |
+| 17 | Pendente até o re-review final e a criação de `REVIEW-20261008-001`. |
 
 ## Failures
 

@@ -2,7 +2,7 @@
 artifact: implementation_report
 id: IMPLEMENTATION-20261008-001
 version: 1
-status: ready
+status: draft
 created_by: implement
 inputs: ["TICKET-SET-20261008-001/02", "SPEC-20261008-001", "TEST-20261008-001"]
 ---
@@ -25,7 +25,7 @@ Nenhum comportamento adicional neste ticket. O comportamento implementado no tic
 
 ## Validation Performed
 
-Nove cenários semânticos agent-driven; suíte Node completa; validadores principal e alias; inspeção de catálogo, artefatos, dependências, targets, CLI e R1–R17; `git diff --check`; review independente de Standards e Spec.
+Nove cenários semânticos agent-driven; suíte Node completa; validadores principal e alias; inspeção de catálogo, artefatos, dependências, targets, CLI e R1–R17; `git diff --check`. O primeiro review de Standards e Spec solicitou correções de rastreabilidade e estado, agora pendentes de re-review.
 
 ## Tests
 
@@ -37,8 +37,8 @@ Não existe executor determinístico de `workflow`; as rotas semânticas depende
 
 ## Remaining Work
 
-Nenhum para `SPEC-20261008-001` após o review final e o fechamento do ticket. Routing automático, persistência de plano e implementação das demais skills continuam fora do escopo.
+Reexecutar o review final, registrar `REVIEW-20261008-001` e fechar o ticket/conjunto. Routing automático, persistência de plano e implementação das demais skills continuam fora do escopo.
 
 ## Change Reference
 
-Commits `9a252e6`, `cf7b39e` e `68d607d`, mais o commit final de evidências/documentação deste ticket no branch `main`.
+Commits `9a252e6`, `cf7b39e`, `68d607d` e `6ea8c2c` no branch `main`; correções de review estão no working tree até o re-review.
