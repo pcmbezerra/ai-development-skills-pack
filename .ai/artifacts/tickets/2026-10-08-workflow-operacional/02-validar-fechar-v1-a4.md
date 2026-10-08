@@ -1,6 +1,6 @@
 # 02 — Validar e fechar v1-A4
 
-**Status:** blocked
+**Status:** ready-for-agent
 
 ## Title
 
@@ -33,7 +33,7 @@ O ticket 01 entrega a migração estrutural e as instruções operacionais. Este
 
 ## Dependencies
 
-Bloqueado por: **01 — Operacionalizar workflow**.
+Dependência satisfeita: **01 — Operacionalizar workflow**, concluído nos commits `9a252e6` e `cf7b39e`.
 
 ## Implementation Notes
 
