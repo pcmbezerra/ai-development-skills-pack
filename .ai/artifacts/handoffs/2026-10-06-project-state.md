@@ -1,10 +1,10 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 17
+version: 18
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392", "amendment-v1-A7", "SPEC-20261009-001", "TICKET-SET-20261009-001", "TEST-20261009-001", "e3cfc47", "c65bf52", "REVIEW-20261009-001", "HANDOFF-20261009-002"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392", "amendment-v1-A7", "SPEC-20261009-001", "TICKET-SET-20261009-001", "TEST-20261009-001", "e3cfc47", "c65bf52", "REVIEW-20261009-001", "HANDOFF-20261009-002", "83d54eb", "HANDOFF-20261009-003"]
 ---
 
 ## Objective
@@ -13,7 +13,7 @@ Preservar continuidade verificável após fechar a emenda v1-A7, com frontier va
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7, branch `main`. A emenda v1-A7 começa depois de `db2d995`. A operacionalização está em `e3cfc47` e `c65bf52`. O fechamento documental acompanha `HANDOFF-20261009-002`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7, branch `main`. A emenda v1-A7 começa depois de `db2d995`. A operacionalização está em `e3cfc47` e `c65bf52`. Este fechamento está em `83d54eb`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
 18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `to-spec` e `to-tickets` estão `implemented`; as outras 12 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
 
@@ -144,7 +144,7 @@ Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-202
 3. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
 4. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261009-002 e o handoff de 2026-10-06. `SPEC-20261009-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
+Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261009-003 e o handoff de 2026-10-06. `SPEC-20261009-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 
