@@ -1,26 +1,27 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 16
+version: 17
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392", "amendment-v1-A7", "SPEC-20261009-001", "TICKET-SET-20261009-001", "TEST-20261009-001", "e3cfc47", "c65bf52", "REVIEW-20261009-001", "HANDOFF-20261009-002"]
 ---
 
 ## Objective
 
-Preservar continuidade verificável após fechar a emenda v1-A6, com frontier vazia para `SPEC-20261008-003`. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
+Preservar continuidade verificável após fechar a emenda v1-A7, com frontier vazia para `SPEC-20261009-001`. Documento mantido pela skill externa `handoff`; não representa execução da skill scaffold homônima deste pacote.
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6, branch `main`. A emenda v1-A6 começa depois de `6d7b09d`. A operacionalização está em `e1c00b4` e `263f227`. Este fechamento está em `8e96392`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7, branch `main`. A emenda v1-A7 começa depois de `db2d995`. A operacionalização está em `e3cfc47` e `c65bf52`. O fechamento documental acompanha `HANDOFF-20261009-002`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
-18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify` e `to-spec` estão `implemented`; as outras 13 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
+18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `to-spec` e `to-tickets` estão `implemented`; as outras 12 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
 
-Validação estrutural, alias e suíte aprovados em macOS 26.6.2 (Darwin 25.6.0), Node.js v26.5.0, npm 11.17.0; 48/48 testes passam. A emenda v1-A6 operacionaliza `to-spec`: grava `SPEC` `ready` com o template existente e devolve `BLOCKED` sem arquivo quando o gate não passa. Dezesseis cenários agent-driven estão separados da suíte Node. Não foram criadas issues ou labels remotas. O envio ao remoto não foi solicitado.
+Validação estrutural, alias e suíte aprovados em macOS 26.6.2 (Darwin 25.6.0), Node.js v26.5.0, npm 11.17.0; 48/48 testes passam. A emenda v1-A7 operacionaliza `to-tickets`: grava `TICKET_SET` `ready` com o template existente e devolve `BLOCKED` sem arquivo quando o gate não passa. Dezoito cenários agent-driven estão separados da suíte Node. Não foram criadas issues ou labels remotas. O envio ao remoto não foi solicitado.
 
 ## Completed Work
 
+- Emenda v1-A7: `to-tickets` operacional. Spec `ready` produz conjunto `ready`; o mesmo objetivo atualiza o mesmo arquivo; o caminho bloqueado não grava conjunto e recomenda a skill do bloqueio mais cedo. ADR `0001` não foi estendido. 6 skills implementadas e 12 scaffold.
 - Emenda v1-A6: `to-spec` operacional. Conjunto `ready` e contexto do projeto produzem spec `ready`; o mesmo objetivo atualiza o mesmo arquivo; o caminho bloqueado não grava spec e recomenda a skill do bloqueio mais cedo. ADR `0001` não foi estendido. 5 skills implementadas e 13 scaffold.
 - Emenda v1-A5: `clarify` operacional, com decisão resolvida, premissa, questão aberta, questão bloqueante e fato externo distintos; persistência `ready` e `blocked` no ADR `0001`; composição opcional de `context-engineering` quando a evidência do repositório pode responder; 4 skills implementadas e 14 scaffold.
 - Emenda v1-A4: `workflow` operacional com rota mínima, contexto condicional, gates de artefato, lifecycle explícito, bloqueio no primeiro scaffold, sigilo e auditabilidade por regra/evidência; 3 skills implementadas e 15 scaffold naquele fechamento.
@@ -62,7 +63,9 @@ A emenda v1-A4 implementa `workflow` como roteador consultivo. Ele retorna uma s
 
 A emenda v1-A5 implementou `clarify`. O mantenedor aprovou persistir conjunto `ready` e `blocked`; o ADR `0001` registra essa escolha. Premissa não fecha ambiguidade material, fato externo segue para `research` e a skill não invoca a próxima etapa. Naquele fechamento, as outras 14 skills permaneciam scaffold.
 
-A emenda v1-A6 implementa `to-spec`. O mantenedor confirmou o seam de catálogo e de comportamento. A skill grava somente spec `ready` e devolve `BLOCKED` sem arquivo quando o gate não passa. O ADR `0001` não foi estendido. As outras 13 skills permanecem scaffold.
+A emenda v1-A6 implementa `to-spec`. O mantenedor confirmou o seam de catálogo e de comportamento. A skill grava somente spec `ready` e devolve `BLOCKED` sem arquivo quando o gate não passa. O ADR `0001` não foi estendido.
+
+A emenda v1-A7 implementa `to-tickets`. O mantenedor confirmou o seam de catálogo e de comportamento. A skill grava somente conjunto `ready` e devolve `BLOCKED` sem arquivo quando o gate não passa. O ADR `0001` não foi estendido. As outras 12 skills permanecem scaffold.
 
 ## Artifacts
 
@@ -92,6 +95,7 @@ O ticket 04 atualizou o validador e seus testes para impedir dependências npm e
 
 ## Validation
 
+- Emenda v1-A7: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 18/18 cenários, em `TEST-20261009-001`. Review: `REVIEW-20261009-001`, PASS após correções.
 - Emenda v1-A6: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 16/16 cenários, em `TEST-20261008-003`. Review: `REVIEW-20261008-003`, PASS após correções.
 - Emenda v1-A5: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 11/11 cenários, em `TEST-20261008-002`. Review: `REVIEW-20261008-002`, PASS após correções.
 - Emenda v1-A4: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs.
@@ -124,30 +128,30 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 
 ## Known Issues
 
-1. **Limite intencional do estado parcial:** as outras 13 skills, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem executor de workflow, de clarify ou de to-spec. A cobertura semântica é a soma dos nove cenários de workflow, dos onze de clarify e dos dezesseis de to-spec.
+1. **Limite intencional do estado parcial:** as outras 12 skills, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem executor de workflow, de clarify, de to-spec ou de to-tickets. A cobertura semântica é a soma dos nove cenários de workflow, dos onze de clarify, dos dezesseis de to-spec e dos dezoito de to-tickets.
 2. **Plataformas não verificadas:** Linux, Node.js 22 e descoberta real das skills nos quatro produtos. As suítes estruturais de v1-A5 e v1-A6 rodaram em macOS; os layouts dos targets foram validados antes em fixtures Windows.
 3. **Integrações não verificadas:** `gh` ausente no PATH na sessão anterior; issues/labels remotas não verificadas.
 4. **Publicação futura:** licença placeholder e pacote privado exigirão decisão própria antes de distribuir.
 
 ## Open Questions
 
-Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-20261008-002` e `SPEC-20261008-003` estão concluídas e suas frontiers estão vazias.
+Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-20261008-002`, `SPEC-20261008-003` e `SPEC-20261009-001` estão concluídas e suas frontiers estão vazias.
 
 ## Next Actions
 
-1. Enviar os commits de v1-A5 e v1-A6 somente com autorização explícita.
+1. Enviar os commits de v1-A5, v1-A6 e v1-A7 somente com autorização explícita.
 2. Iniciar somente um novo recorte de skill explicitamente aprovado.
 3. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
 4. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261009-001 e o handoff de 2026-10-06. `SPEC-20261008-003` está concluída; inicie somente um novo recorte explicitamente aprovado."
+Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261009-002 e o handoff de 2026-10-06. `SPEC-20261009-001` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 
 - Nenhuma skill até o mantenedor nomear o próximo recorte.
-- Se um recorte novo for aprovado: `domain-modeling`, depois `to-spec`, `to-tickets`, `tdd` e `code-review`.
+- Se um recorte novo for aprovado: `domain-modelling`, depois `to-spec`, `to-tickets`, `tdd` e `code-review`.
 - `handoff`: consolidar a sessão seguinte quando houver nova frontier.
 
 ## Constraints
 
-Preservar as 18 skills, os quatro targets e o estado parcial: contexto, bootstrap, workflow, clarify e to-spec estão implementados; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. `workflow` permanece consultivo, sem executor ou persistência. `clarify` grava somente o conjunto de decisões e não executa a skill seguinte. `to-spec` grava somente spec `ready` e não executa a skill seguinte. Helpers externos de manutenção não integram o runtime. Não interpretar cenários agent-driven como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
+Preservar as 18 skills, os quatro targets e o estado parcial: contexto, bootstrap, workflow, clarify, to-spec e to-tickets estão implementados; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. `workflow` permanece consultivo, sem executor ou persistência. `clarify` grava somente o conjunto de decisões e não executa a skill seguinte. `to-spec` grava somente spec `ready` e não executa a skill seguinte. `to-tickets` grava somente conjunto `ready` e não executa a skill seguinte. Helpers externos de manutenção não integram o runtime. Não interpretar cenários agent-driven como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.

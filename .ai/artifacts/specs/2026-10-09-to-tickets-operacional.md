@@ -203,7 +203,7 @@ Nenhuma questão bloqueante. Executor automático, arquivo de teste novo, altera
 - O conjunto `ready` é o único artefato persistido pela skill, no diretório de tickets já configurado, com o template existente e um arquivo por objetivo.
 - O caminho bloqueado devolve o relatório contratado e não persiste conjunto. Essa escolha não altera o ADR `0001`.
 - Ausência de modelo de domínio ou de desenho de arquitetura não bloqueia. Presença sem `ready`, ou exigência pela spec com artefato faltante, bloqueia e recomenda o produtor, sem nova dependência.
-- A implementação desta emenda será decomposta depois desta spec. O conjunto de tickets correspondente não faz parte deste arquivo.
+- A implementação desta emenda foi decomposta em `TICKET-SET-20261009-001`. Esse conjunto não faz parte deste arquivo de spec.
 - Publicação remota ficou pendente: `gh` não está no PATH. O Markdown local é a fonte de verdade. Triagem local: `ready-for-agent`.
 
 ## Testing Decisions
@@ -216,6 +216,6 @@ Nenhuma questão bloqueante. Executor automático, arquivo de teste novo, altera
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. O consumidor canônico seguinte é `to-tickets`. A skill do pacote continua scaffold até a implementação desta emenda, e esta spec não a invoca.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. O conjunto de tickets é `TICKET-SET-20261009-001`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.
 
 A issue remota em `pcmbezerra/ai-development-skills-pack` não foi criada nesta sessão. Quando `gh` estiver disponível, publicar este corpo com o rótulo `ready-for-agent`, reconciliando o número da issue com este arquivo para não duplicar.

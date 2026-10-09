@@ -1,6 +1,18 @@
 # Validation result
 
-## Current observation — operational to-spec, macOS, 2026-10-08
+## Current observation — operational to-tickets, macOS, 2026-10-09
+
+Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A7 implements `to-tickets` without adding an executor, dependency, schema, template, target or CLI command. A ready specification uses the existing ticket-set template. A blocked path writes no ticket-set file. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 6 `implemented` and 12 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261009-001` records eighteen isolated agent-conducted scenarios in a temporary directory: ready ticket set without optional artifacts, ready domain model and architecture design kept distinct from unadopted recommendations, in-place version update, missing and non-ready specifications, present but not-ready optional artifacts, R8 and R9, premise, material ambiguity, conflict with an existing decision, external fact, combined blockers and omitted secret.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+
+## Previous observation — operational to-spec, macOS, 2026-10-08
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A6 implements `to-spec` without adding an executor, dependency, schema, template, target or CLI command. A ready specification uses the existing template. A blocked path writes no specification file. ADR `0001` is unchanged.
 

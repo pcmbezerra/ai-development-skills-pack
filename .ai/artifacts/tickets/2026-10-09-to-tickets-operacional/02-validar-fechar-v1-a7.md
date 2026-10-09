@@ -4,7 +4,7 @@
 
 **Blocked by:** 01 — Operacionalizar to-tickets.
 
-**Status:** ready-for-agent
+**Status:** completed
 
 ## Title
 
@@ -44,29 +44,30 @@ Cada cenário usa um diretório temporário. Registrar entrada, evidência consu
 
 ## Acceptance Criteria
 
-- [ ] Spec `ready`, sem R8 nem R9, produz conjunto `ready` e não invoca `implement`. Modelo e desenho ausentes não bloqueiam.
-- [ ] Modelo ou desenho `ready` é incorporado sem ampliar a spec. Recomendação não adotada pela spec não vira requisito de ticket.
-- [ ] A continuação do mesmo objetivo atualiza o mesmo arquivo e incrementa `version`.
-- [ ] Spec ausente, `draft`, `blocked` ou `superseded` não grava conjunto e recomenda `to-spec`.
-- [ ] Artefato opcional presente e não `ready`, ou exigido por R8 ou R9 e ausente, recomenda o produtor correspondente e não grava conjunto.
-- [ ] Premissa não vira ticket. Ambiguidade material e conflito com decisão existente recomendam `clarify` e preservam a decisão existente.
-- [ ] Fato externo que ainda altera os tickets recomenda `research`, sem acesso à rede.
-- [ ] Vários bloqueios cabem num único relatório, com a skill do bloqueio mais cedo, e não deixam arquivo.
-- [ ] Segredo não aparece no conjunto gravado.
-- [ ] Exatamente 6 skills estão `implemented`, 12 estão `scaffold` e os quatro targets permanecem inalterados.
-- [ ] Documentação, evidências e handoff refletem a v1-A7 sem declarar capacidades não verificadas.
-- [ ] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-- [ ] Review não tem achado bloqueante de Standards ou Spec.
+- [x] Spec `ready`, sem R8 nem R9, produz conjunto `ready` e não invoca `implement`. Modelo e desenho ausentes não bloqueiam.
+- [x] Modelo ou desenho `ready` é incorporado sem ampliar a spec. Recomendação não adotada pela spec não vira requisito de ticket.
+- [x] A continuação do mesmo objetivo atualiza o mesmo arquivo e incrementa `version`.
+- [x] Spec ausente, `draft`, `blocked` ou `superseded` não grava conjunto e recomenda `to-spec`.
+- [x] Artefato opcional presente e não `ready`, ou exigido por R8 ou R9 e ausente, recomenda o produtor correspondente e não grava conjunto.
+- [x] Premissa não vira ticket. Ambiguidade material e conflito com decisão existente recomendam `clarify` e preservam a decisão existente.
+- [x] Fato externo que ainda altera os tickets recomenda `research`, sem acesso à rede.
+- [x] Vários bloqueios cabem num único relatório, com a skill do bloqueio mais cedo, e não deixam arquivo.
+- [x] Segredo não aparece no conjunto gravado.
+- [x] Exatamente 6 skills estão `implemented`, 12 estão `scaffold` e os quatro targets permanecem inalterados.
+- [x] Documentação, evidências e handoff refletem a v1-A7 sem declarar capacidades não verificadas.
+- [x] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
+- [x] Review não tem achado bloqueante de Standards ou Spec.
 
 ## Validation
 
-- Matriz agent-driven separada da suíte Node, cobrindo conjunto pronto, atualização, artefato opcional, bloqueio e sigilo.
-- `npm test`, `npm run validate`, `npm run skills:validate` e `git diff --check` com código zero no fechamento.
-- Review de Standards e Spec sem achado bloqueante.
+- Matriz 18/18 em `TEST-20261009-001`, com os resultados em `.ai/artifacts/tests/2026-10-09-to-tickets-scenarios/`.
+- `npm test`: PASS, 48/48. `npm run validate`, `npm run skills:validate` e `git diff --check`: PASS.
+- Ambiente: macOS 26.6.2 (Darwin 25.6.0), Node.js v26.5.0, npm 11.17.0.
+- Review: `REVIEW-20261009-001`, PASS após correções. Nenhum achado bloqueante remanescente.
 
 ## Definition of Done
 
-- [ ] Todos os critérios possuem evidência verificável.
-- [ ] Suíte, validação e `git diff --check` passam com código zero.
-- [ ] A frontier de `SPEC-20261009-001` fica vazia.
-- [ ] Limites não verificados permanecem explícitos.
+- [x] Todos os critérios possuem evidência verificável.
+- [x] Suíte, validação e `git diff --check` passam com código zero.
+- [x] A frontier de `SPEC-20261009-001` fica vazia.
+- [x] Limites não verificados permanecem explícitos.

@@ -1,6 +1,6 @@
 # Arquitetura atual
 
-- `skills/`: 18 skills divididas em core, discovery, development, quality, documentation e modernization; contexto, bootstrap, workflow, clarify e to-spec estão operacionais e as outras 13 permanecem scaffold.
+- `skills/`: 18 skills divididas em core, discovery, development, quality, documentation e modernization; contexto, bootstrap, workflow, clarify, to-spec e to-tickets estão operacionais e as outras 12 permanecem scaffold.
 - `manifest/skills.json`: catálogo, classificação de invocação, artefatos e dependências tipadas.
 - `contracts/`: contratos compartilhados e por skill; routing R1–R17, gates e falhas.
 - `templates/`: 15 templates de artefatos e modelos de contexto do projeto.
