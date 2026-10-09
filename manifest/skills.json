@@ -242,7 +242,7 @@
       "path": "skills/discovery/to-spec/SKILL.md",
       "description": "Convert resolved requirements into implementation-ready specification.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Convert resolved requirements into implementation-ready specification",
       "inputs": [
         "DECISION_SET",
