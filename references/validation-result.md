@@ -1,6 +1,30 @@
 # Validation result
 
-## Current observation — operational to-tickets, macOS, 2026-10-09
+## Current observation — operational architecture-design, macOS, 2026-10-09
+
+Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A9 implements `architecture-design` without adding an executor, dependency, schema, template, target or CLI command. A ready specification uses the existing architecture-design template. A durable architectural decision already in that specification also uses the existing ADR template. A blocked path writes no file from that attempt. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 8 `implemented` and 10 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261009-003` records eighteen isolated agent-conducted scenarios in a temporary directory: a ready design without an ADR, a ready design with a durable-decision ADR, an unchanged rerun, an in-place version update, a change that does not justify a design, a glossary entry that does not trigger R9, missing project context, a missing specification, an omitted secret, a required missing domain model, a present domain model that is not ready, unadopted recommendations kept out of the design, a premise, material ambiguity, conflict with an existing decision, an external fact, a research report that is not ready, and combined blockers.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+
+## Previous observation — operational domain-modelling, macOS, 2026-10-09
+
+Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A8 implements `domain-modelling` without adding an executor, dependency, schema, template, target or CLI command. A ready specification or a ready decision set uses the existing domain-model template. A blocked path writes no domain-model file. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 7 `implemented` and 11 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261009-002` records eighteen isolated agent-conducted scenarios in a temporary directory: a ready model from a specification, a ready model from a decision set, an unchanged rerun, an in-place version update, CRUD and glossary-only refusals, missing project context, missing and non-ready inputs, a premise, material ambiguity, conflict with an existing decision, an external fact, an adopted aggregate with R9, an omitted secret and combined blockers.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+
+## Previous observation — operational to-tickets, macOS, 2026-10-09
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A7 implements `to-tickets` without adding an executor, dependency, schema, template, target or CLI command. A ready specification uses the existing ticket-set template. A blocked path writes no ticket-set file. ADR `0001` is unchanged.
 

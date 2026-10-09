@@ -20,6 +20,14 @@ _Avoid_: produto operacional, workflow concluído
 Registro estruturado de trabalho que permite transferir decisões, evidências e resultados entre etapas.
 _Avoid_: contexto apenas conversacional
 
+**Modelo de domínio**:
+Registro dos conceitos de negócio, das relações e das invariantes de um contexto consumidor.
+_Avoid_: glossário local, especificação, desenho de arquitetura
+
+**Desenho de arquitetura**:
+Registro da solução técnica, das interfaces e dos trade-offs quando a mudança afeta uma fronteira arquitetural.
+_Avoid_: modelo de domínio, especificação, ADR de conjunto de decisões
+
 **Template de artefato**:
 Modelo ainda não preenchido de um artefato, sem evidência de prontidão para consumo.
 _Avoid_: artefato pronto

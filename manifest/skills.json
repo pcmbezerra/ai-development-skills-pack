@@ -283,7 +283,7 @@
       "path": "skills/discovery/domain-modelling/SKILL.md",
       "description": "Model business concepts and invariants when warranted.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Model business concepts and invariants when warranted",
       "inputs": [
         "SPEC or DECISION_SET",
@@ -318,7 +318,7 @@
       "path": "skills/discovery/architecture-design/SKILL.md",
       "description": "Define technical solution and architectural decisions.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Define technical solution and architectural decisions",
       "inputs": [
         "SPEC",
