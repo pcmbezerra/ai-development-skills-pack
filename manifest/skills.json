@@ -367,7 +367,7 @@
       "path": "skills/discovery/to-tickets/SKILL.md",
       "description": "Decompose specification into executable work.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Decompose specification into executable work",
       "inputs": [
         "SPEC",

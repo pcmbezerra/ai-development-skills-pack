@@ -157,10 +157,16 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current catalogue implements to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
+test('current catalogue implements to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','to-spec']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,13);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','to-spec','to-tickets']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,12);
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='to-tickets').dependencies,{required:[],conditional:[],optional:[]});
+  assert.deepEqual(manifest.artifacts.TICKET_SET,{
+    contract: 'contracts/artifacts.md',
+    template: 'templates/artifacts/ticket-set.md',
+    schema: 'defined',
+  });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='to-spec').dependencies,{required:[],conditional:[{skill:'clarify',when:'material ambiguity exists'}],optional:[]});
   assert.deepEqual(manifest.artifacts.SPEC,{
     contract: 'contracts/artifacts.md',
