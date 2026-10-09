@@ -17,7 +17,7 @@ Triagem local: `ready-for-agent`. Publicação remota pendente: `gh` não está 
 ## Tickets
 
 1. [Operacionalizar to-spec](01-operacionalizar-to-spec.md) — concluído.
-2. [Validar e fechar v1-A6](02-validar-fechar-v1-a6.md) — pronto para agente.
+2. [Validar e fechar v1-A6](02-validar-fechar-v1-a6.md) — concluído.
 
 ## Dependency graph
 
@@ -25,4 +25,4 @@ Triagem local: `ready-for-agent`. Publicação remota pendente: `gh` não está 
 01 -> 02
 ```
 
-Frontier atual: ticket 02. `SPEC-20261008-003` permanece aberta.
+Frontier atual: vazia; `SPEC-20261008-003` concluída.

@@ -1,10 +1,10 @@
 # Projeto
 
-Estado verificado em 2026-10-08. Pacote privado `ai-development-skills-pack`, versão `1.0.0-scaffold`, baseline arquitetural v1 + emendas v1-A1 (Claude Code), v1-A2 (contexto e bootstrap), v1-A3 (distribuição), v1-A4 (workflow consultivo) e v1-A5 (`clarify`). Repositório: `pcmbezerra/ai-development-skills-pack`; commit inicial inspecionado: `347b05a`.
+Estado verificado em 2026-10-08. Pacote privado `ai-development-skills-pack`, versão `1.0.0-scaffold`, baseline arquitetural v1 + emendas v1-A1 (Claude Code), v1-A2 (contexto e bootstrap), v1-A3 (distribuição), v1-A4 (workflow consultivo), v1-A5 (`clarify`) e v1-A6 (`to-spec`). Repositório: `pcmbezerra/ai-development-skills-pack`; commit inicial inspecionado: `347b05a`.
 
 Objetivo: manter 18 skills reutilizáveis de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. Entrega atual: catálogo, contratos, templates, descritores declarativos, CLI de ajuda/validação e testes do validador.
 
-`context-engineering`, `setup-ai-development-skills`, `workflow` e `clarify` possuem workflows operacionais; as outras 14 skills permanecem scaffold. Sync, doctor, list e routing automático não estão implementados. A distribuição por target está implementada.
+`context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify` e `to-spec` possuem workflows operacionais; as outras 13 skills permanecem scaffold. Sync, doctor, list e routing automático não estão implementados. A distribuição por target está implementada.
 
 GitHub Issues com fallback local e rótulos padrão foram confirmados pelo mantenedor. A configuração deste repositório foi preenchida manualmente; a conformidade do bootstrap foi demonstrada separadamente em fixtures locais.
 
