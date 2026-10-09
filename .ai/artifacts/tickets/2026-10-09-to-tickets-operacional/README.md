@@ -16,7 +16,7 @@ Triagem local: `ready-for-agent`. Publicação remota pendente: `gh` não está 
 
 ## Tickets
 
-1. [Operacionalizar to-tickets](01-operacionalizar-to-tickets.md) — concluído.
+1. [Operacionalizar to-tickets](01-operacionalizar-to-tickets.md) — workflow publicado; a observação de comportamento fica no ticket 02.
 2. [Validar e fechar v1-A7](02-validar-fechar-v1-a7.md) — pronto para o agente.
 
 ## Dependency graph
@@ -25,4 +25,4 @@ Triagem local: `ready-for-agent`. Publicação remota pendente: `gh` não está 
 01 -> 02
 ```
 
-Frontier atual: ticket 02. O ticket 01 está concluído.
+Frontier atual: ticket 02. O workflow do ticket 01 está publicado. A matriz de comportamento ainda não foi executada.

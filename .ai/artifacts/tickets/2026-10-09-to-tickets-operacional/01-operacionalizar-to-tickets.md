@@ -4,7 +4,7 @@
 
 **Blocked by:** None (can start immediately).
 
-**Status:** completed
+**Status:** workflow published
 
 ## Title
 
@@ -16,7 +16,7 @@ Implementar a skill `to-tickets` para gravar um conjunto `ready` quando o gate d
 
 ## Context
 
-`SPEC-20261009-001` define a emenda v1-A7. O mantenedor confirmou um único seam de comportamento, com a suíte Node acompanhando o catálogo, as dependências vazias e o esquema definido de `TICKET_SET`. `to-tickets` permanece scaffold. O ADR `0001` continua restrito ao conjunto de decisões.
+`SPEC-20261009-001` define a emenda v1-A7. O mantenedor confirmou um único seam de comportamento, com a suíte Node acompanhando o catálogo, as dependências vazias e o esquema definido de `TICKET_SET`. Este ticket publica o workflow e migra `to-tickets` para `implemented`. O ADR `0001` continua restrito ao conjunto de decisões. A observação agent-driven do comportamento fica no ticket 02.
 
 ## Scope
 
@@ -53,16 +53,16 @@ Começar pela regressão do catálogo. A fonte e o contrato devem expressar o me
 - [x] O catálogo contém exatamente 6 skills `implemented` e 12 `scaffold`.
 - [x] As dependências de `to-tickets` permanecem vazias.
 - [x] Contrato e fonte possuem workflow operacional não vazio e sem linguagem de indisponibilidade.
-- [x] Spec `ready`, sem R8 nem R9, produz um conjunto `ready`, com o template existente, um bloco completo por ticket e o gate de ticket satisfeito. Modelo e desenho ausentes não bloqueiam.
-- [x] Modelo ou desenho `ready` entra como evidência e não amplia a spec. Recomendação não adotada pela spec não vira requisito de ticket.
-- [x] O mesmo objetivo atualiza o mesmo arquivo, incrementa `version` e não cria duplicata. Conjunto histórico em diretório não é reformatado.
-- [x] Spec ausente, `draft`, `blocked` ou `superseded` produz `BLOCKED`, recomenda `to-spec` e não grava conjunto.
-- [x] Artefato opcional presente e não `ready`, ou exigido por R8 ou R9 e ausente, produz `BLOCKED` e recomenda o produtor correspondente.
-- [x] Premissa não vira ticket. Ambiguidade material e conflito com decisão existente produzem `BLOCKED` e recomendam `clarify`.
-- [x] Fato externo que ainda altera os tickets produz `BLOCKED` e recomenda `research`, sem acesso à rede.
-- [x] O relatório bloqueado traz os cinco campos contratados, nomeia cada pré-requisito ausente e recomenda a skill do bloqueio mais cedo. Não deixa arquivo.
-- [x] A skill informa se `implement` está autorizado e não o invoca. Conjunto `ready` autoriza somente `implement`.
-- [x] Segredo não é copiado. O arquivo gravado não conserva marcador de rascunho do template.
+- [ ] Spec `ready`, sem R8 nem R9, produz um conjunto `ready`, com o template existente, um bloco completo por ticket e o gate de ticket satisfeito. Modelo e desenho ausentes não bloqueiam.
+- [ ] Modelo ou desenho `ready` entra como evidência e não amplia a spec. Recomendação não adotada pela spec não vira requisito de ticket.
+- [ ] O mesmo objetivo atualiza o mesmo arquivo, incrementa `version` e não cria duplicata. Conjunto histórico em diretório não é reformatado.
+- [ ] Spec ausente, `draft`, `blocked` ou `superseded` produz `BLOCKED`, recomenda `to-spec` e não grava conjunto.
+- [ ] Artefato opcional presente e não `ready`, ou exigido por R8 ou R9 e ausente, produz `BLOCKED` e recomenda o produtor correspondente.
+- [ ] Premissa não vira ticket. Ambiguidade material e conflito com decisão existente produzem `BLOCKED` e recomendam `clarify`.
+- [ ] Fato externo que ainda altera os tickets produz `BLOCKED` e recomenda `research`, sem acesso à rede.
+- [ ] O relatório bloqueado traz os cinco campos contratados, nomeia cada pré-requisito ausente e recomenda a skill do bloqueio mais cedo. Não deixa arquivo.
+- [ ] A skill informa se `implement` está autorizado e não o invoca. Conjunto `ready` autoriza somente `implement`.
+- [ ] Segredo não é copiado. O arquivo gravado não conserva marcador de rascunho do template.
 - [x] Nenhuma dependência, schema, template, target, CLI, regra de routing ou extensão do ADR `0001` é introduzida.
 
 ## Validation
@@ -73,11 +73,12 @@ Começar pela regressão do catálogo. A fonte e o contrato devem expressar o me
 - `npm run validate` e `npm run skills:validate`: PASS.
 - `git diff --check`: PASS.
 - Ambiente: macOS 26.6.2 (Darwin 25.6.0), Node.js v26.5.0, npm 11.17.0.
-- A observação agent-driven dos critérios de comportamento permanece no ticket 02.
+- A observação agent-driven dos critérios de comportamento permanece aberta no ticket 02. Esses critérios estão especificados no workflow e não foram marcados como observados.
 
 ## Definition of Done
 
-- [x] Todos os critérios possuem evidência verificável.
+- [x] Os critérios estruturais possuem evidência da suíte.
+- [ ] Os critérios de comportamento aguardam a matriz do ticket 02.
 - [x] Suíte e validação passam com código zero.
-- [x] O ticket 02 está desbloqueado.
+- [x] O ticket 02 está desbloqueado para essa matriz.
 - [x] Nenhuma mudança fora do escopo foi incluída.
