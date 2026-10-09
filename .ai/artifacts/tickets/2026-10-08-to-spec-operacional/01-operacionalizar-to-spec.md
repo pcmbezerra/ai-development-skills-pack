@@ -71,6 +71,7 @@ Começar pela regressão do catálogo. A fonte e o contrato devem expressar o me
 - `npm run validate` e `npm run skills:validate`: PASS.
 - `git diff --check`: PASS.
 - Ambiente: macOS 26.6.2 (Darwin 25.6.0), Node.js v26.5.0, npm 11.17.0.
+- Review de `e1c00b4` corrigiu a ordem do bloqueio: os bloqueios são acumulados e o relatório único recomenda a skill do bloqueio mais cedo. A observação agent-driven desses critérios permanece no ticket 02.
 
 ## Definition of Done
 

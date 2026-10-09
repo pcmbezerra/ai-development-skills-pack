@@ -201,6 +201,6 @@ Nenhuma questão bloqueante. Executor automático, alteração de esquema, exten
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. O conjunto de tickets ainda não existe e só deve ser criado a partir desta spec `ready`.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. O conjunto de tickets é `TICKET-SET-20261008-003`. O ticket 01 está concluído. O ticket 02 permanece a frontier.
 
 A issue remota em `pcmbezerra/ai-development-skills-pack` não foi criada nesta sessão. Quando `gh` estiver disponível, publicar este corpo com o rótulo `ready-for-agent`, reconciliando o número da issue com este arquivo para não duplicar.
