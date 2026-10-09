@@ -32,10 +32,14 @@ The maintainer approved `workflow` as the third operational skill. It reads the 
 
 `WORKFLOW_PLAN` remains named-only without a schema or template. Missing material context conditionally places `context-engineering` first without adding a manifest dependency. Draft, blocked, incomplete or incompatible artifacts return to their producer. A required scaffold skill remains visible in the complete route but produces the contracted `BLOCKED` result at the first unavailable step. Nine agent-conducted scenarios validate these semantics separately from the deterministic Node.js suite.
 
+## Amendment v1-A5 — operational clarify, 2026-10-08
+
+The maintainer approved `clarify` as the fourth operational skill. It resolves material ambiguity; distinguishes resolved decisions, premises, open questions, blocking questions and external facts; and persists both ready and blocked decision sets under `.ai/artifacts/decisions/` with the existing template. ADR `0001` records why a blocked set is persisted. Repository evidence that already answers a question closes it. `context-engineering` stays optional and runs only when repository evidence could answer or reclassify a material question. The skill stops after the decision set and does not invoke the next skill. Eleven agent-conducted scenarios validate these semantics separately from the deterministic Node.js suite.
+
 ## Representation choices and remaining limitations
 
 - Exactly 18 runtime skills; primary invocation remains a classification allowing composition and explicit requests for model skills.
-- Skill lifecycle is declared per skill as `scaffold` or `implemented` and must agree across manifest, contract and source. `context-engineering`, `setup-ai-development-skills` and `workflow` are implemented and the other 15 skills remain scaffold; target status remains independent and declarative.
+- Skill lifecycle is declared per skill as `scaffold` or `implemented` and must agree across manifest, contract and source. `context-engineering`, `setup-ai-development-skills`, `workflow` and `clarify` are implemented and the other 14 skills remain scaffold; target status remains independent and declarative.
 - JSON manifest uses an array and schemaVersion, preserving existing consumers; architectureVersion=1 identifies the normative baseline. artifactInputs/artifactOutputs index artifacts without replacing prose input alternatives or dependency semantics.
 - Dependencies retain required/conditional/optional semantics. External research is an optional capability with unresolved-claims fallback, never a hard skill/npm dependency.
 - R13 has a “mandatory” title but SHOULD in its normative body. The scaffold preserves SHOULD rather than silently strengthening it to SHALL.
@@ -43,4 +47,4 @@ The maintainer approved `workflow` as the third operational skill. It reads the 
 - Existing centralized artifact and per-skill contracts/templates remain authoritative operational references. The canonical tree in section 24 is represented using these existing paths; optional meta-skills and detailed cross-cutting guidance are not invented.
 - Node >=22, frontmatter limited to name/description (JSON-quoted descriptions), declarative target descriptors and zero npm dependencies remain deliberate constraints. `skills:validate` aliases the structural validator.
 - Target validation checks descriptor/manifest structure and byte equality of installed skill directories. It does not execute Cursor, Codex, Antigravity or Claude Code; live discovery remains unverified.
-- Package, project installation and per-target validation are implemented. Sync, doctor, list, uninstall, overwrite, global installation, automatic routing and platform detection are not. Apart from context, bootstrap and the consultative workflow router, skill workflows remain scaffold; semantic coverage is limited to the nine documented agent scenarios.
+- Package, project installation and per-target validation are implemented. Sync, doctor, list, uninstall, overwrite, global installation, automatic routing and platform detection are not. Apart from context, bootstrap, the consultative workflow router and operational `clarify`, skill workflows remain scaffold. Semantic coverage is the nine workflow scenarios plus the eleven clarify scenarios.

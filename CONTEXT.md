@@ -63,3 +63,41 @@ _Avoid_: skill específica de IDE
 **Handoff**:
 Registro verificável do estado do trabalho, suas pendências e próximos passos para continuidade.
 _Avoid_: promessa de conclusão
+
+## Decisões
+
+**Ambiguidade material**:
+Pergunta sem resposta que pode alterar o escopo, o comportamento, a arquitetura, o modelo de dados, a segurança ou os critérios de aceitação do próximo passo pedido.
+_Avoid_: dúvida genérica, preferência irrelevante ao próximo passo
+
+**Conjunto de decisões**:
+Registro das escolhas que desbloqueiam o próximo passo, separado das questões que ainda não o afetam e das que o impedem.
+_Avoid_: especificação, modelo de domínio, plano de workflow
+
+**Decisão resolvida**:
+Escolha explícita do solicitante, decisão já registrada, ou resposta já presente na evidência do repositório, que fecha uma ambiguidade material.
+_Avoid_: premissa, inferência do agente, fato externo
+
+**Decisão existente**:
+Escolha já registrada em ADR, em conjunto de decisões anterior ou no contexto do projeto.
+_Avoid_: verbete de glossário
+
+**Questão bloqueante**:
+Pergunta sem resposta que impede o conjunto de decisões de ficar pronto, seja ambiguidade material ou fato externo que altera o próximo passo.
+_Avoid_: questão aberta
+
+**Questão aberta**:
+Pergunta sem resposta que não altera o próximo passo pedido.
+_Avoid_: questão bloqueante
+
+**Premissa**:
+Condição rotulada como aceita que não fecha, por si só, uma ambiguidade material.
+_Avoid_: decisão resolvida
+
+**Alternativa rejeitada**:
+Opção descartada por uma decisão resolvida ou por uma decisão existente.
+_Avoid_: sugestão ainda não decidida
+
+**Fato externo**:
+Informação de fora do repositório que não é uma escolha do projeto.
+_Avoid_: decisão resolvida

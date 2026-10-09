@@ -157,10 +157,16 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current catalogue implements workflow, context and bootstrap without defining named-only outputs',async()=>{
+test('current catalogue implements clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','context-engineering']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,15);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,14);
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='clarify').dependencies.optional,['context-engineering']);
+  assert.deepEqual(manifest.artifacts.DECISION_SET,{
+    contract: 'contracts/artifacts.md',
+    template: 'templates/artifacts/decision-set.md',
+    schema: 'defined',
+  });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='setup-ai-development-skills').dependencies.required,['context-engineering']);
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='workflow').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.artifacts.PROJECT_CONTEXT,{

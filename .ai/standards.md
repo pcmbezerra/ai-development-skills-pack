@@ -1,6 +1,6 @@
 # Convenções
 
-Preservar exatamente as 18 skills do manifest. Fonte reutilizável independente da ferramenta; estado específico fora de `skills/`. Sem dependências npm de produção ou implementação de instalador. Contexto, bootstrap e workflow estão operacionais nesta etapa; as outras 15 skills permanecem scaffold.
+Preservar exatamente as 18 skills do manifest. Fonte reutilizável independente da ferramenta; estado específico fora de `skills/`. Sem dependências npm de produção ou implementação de instalador. Contexto, bootstrap, workflow e clarify estão operacionais nesta etapa; as outras 14 skills permanecem scaffold.
 
 Antes de alterar contratos, ler proveniência e contrato da skill; para artefatos ou routing, ler os contratos compartilhados correspondentes. Alterações arquiteturais exigem tratamento explícito de versão.
 

@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — operational workflow router, Windows, 2026-10-08
+## Current observation — operational clarify, macOS, 2026-10-08
+
+Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A5 implements `clarify` without adding an executor, dependency, schema, template, target or CLI command. Ready and blocked decision sets use the existing template. ADR `0001` records persistence of the blocked set.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 4 `implemented` and 14 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion was extended; no new test file was added.
+- `git diff --check`: PASS.
+- RED before migration: the catalogue test expected `clarify` among the implemented skills and observed only `setup-ai-development-skills`, `workflow` and `context-engineering`.
+- `TEST-20261008-002` records eleven isolated agent-conducted scenarios in a temporary directory: decided request, unanswered ambiguity, partial answer with in-place update, repository evidence, user preference, unaccepted premise, conflict with an existing decision, non-material open question, blocked input, external fact and omitted secret.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+
+## Previous observation — operational workflow router, Windows, 2026-10-08
 
 Node.js v25.2.0, npm 11.6.2, PowerShell. Amendment v1-A4 implements `workflow` as a consultative router without adding an executor, dependency, schema, template, target or CLI command.
 

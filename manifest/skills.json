@@ -99,7 +99,7 @@
       "path": "skills/core/clarify/SKILL.md",
       "description": "Resolve material ambiguities.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Resolve material ambiguities",
       "inputs": [
         "request",

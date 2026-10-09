@@ -16,6 +16,10 @@ inputs:
 
 # AI Development Skills Pack — continuidade após v1-A4
 
+## Continuation
+
+O corpo abaixo é o snapshot anterior a v1-A5. As duas perguntas foram fechadas depois deste registro. `origin/main` já continha `361a617`. O mantenedor aprovou `clarify` como emenda v1-A5 e a persistência de conjuntos `ready` e `blocked`. O estado seguinte está em `SPEC-20261008-002` e no handoff `.ai/artifacts/handoffs/2026-10-06-project-state.md`.
+
 ## Objective
 
 Permitir que uma nova sessão retome o projeto após o fechamento verificado da emenda v1-A4, sem repetir análise já persistida. O próximo recorte deve ser explicitamente aprovado; `clarify` é a recomendação atual, não uma decisão confirmada.

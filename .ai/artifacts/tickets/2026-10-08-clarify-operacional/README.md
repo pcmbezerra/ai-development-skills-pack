@@ -1,0 +1,28 @@
+---
+artifact: ticket_set
+id: TICKET-SET-20261008-002
+version: 1
+status: ready
+created_by: to-tickets
+inputs:
+  - SPEC-20261008-002
+---
+
+# Clarify operacional — emenda v1-A5
+
+Conjunto executável derivado de `SPEC-20261008-002`. Cada arquivo vinculado é um registro TICKET com todas as seções exigidas pelo contrato.
+
+Publicação remota não foi solicitada. O Markdown local é a fonte de verdade até eventual reconciliação com GitHub Issues, sem criação de duplicatas.
+
+## Tickets
+
+1. [Operacionalizar clarify](01-clarify-operacional.md) — concluído.
+2. [Validar e fechar v1-A5](02-validar-fechar-v1-a5.md) — concluído.
+
+## Dependency graph
+
+```text
+01 -> 02
+```
+
+Frontier atual: vazia; `SPEC-20261008-002` concluída.

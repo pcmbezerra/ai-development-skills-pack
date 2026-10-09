@@ -6,6 +6,7 @@ Fonte: baseline v1, contratos compartilhados e manifest existentes.
 - Invocação primária não impede solicitação explícita ou composição.
 - Dependências obrigatórias e potencialmente obrigatórias não podem formar ciclos; composição opcional pode.
 - Artefatos admitem draft, ready, blocked e superseded. Artefato blocked não autoriza implementação.
+- `clarify` grava conjunto de decisões ready e blocked. Premissa não fecha ambiguidade material. Fato externo não é decisão resolvida.
 - SPEC pronta exige escopo delimitado, aceitação testável e ausência de ambiguidade bloqueante; tickets executáveis exigem SPEC pronta.
 - Estado e conhecimento de projeto ficam fora das skills. Integrações externas são opcionais, com fallback local.
 - WORKFLOW_PLAN, PROJECT_CONTEXT, CHANGE_SET e BOOTSTRAP_READINESS são saídas apenas nomeadas; TICKET é registro de TICKET_SET.
