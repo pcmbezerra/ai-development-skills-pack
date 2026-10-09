@@ -1,10 +1,10 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 15
+version: 16
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "e1c00b4", "263f227"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392"]
 ---
 
 ## Objective
@@ -13,7 +13,7 @@ Preservar continuidade verificável após fechar a emenda v1-A6, com frontier va
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6, branch `main`. A emenda v1-A6 começa depois de `6d7b09d`. A operacionalização está em `e1c00b4` e `263f227`. Este fechamento parte de `263f227`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6, branch `main`. A emenda v1-A6 começa depois de `6d7b09d`. A operacionalização está em `e1c00b4` e `263f227`. Este fechamento está em `8e96392`. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
 
 18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify` e `to-spec` estão `implemented`; as outras 13 permanecem `scaffold`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
 
@@ -140,15 +140,14 @@ Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-202
 3. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
 4. Reconciliar os arquivos locais com GitHub Issues quando `gh` estiver disponível, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261008-003 e o handoff de 2026-10-06. `SPEC-20261008-003` está concluída; inicie somente um novo recorte explicitamente aprovado."
+Prompt de retomada: "Leia AGENTS.md, HANDOFF-20261009-001 e o handoff de 2026-10-06. `SPEC-20261008-003` está concluída; inicie somente um novo recorte explicitamente aprovado."
 
 ## Suggested Skills
 
-- `domain-modeling`: fechar a linguagem de `to-spec` se esse recorte for aprovado.
-- `tdd`: executar os tickets aprovados em RED/GREEN.
-- `code-review`: revisar Standards e Spec antes do fechamento.
+- Nenhuma skill até o mantenedor nomear o próximo recorte.
+- Se um recorte novo for aprovado: `domain-modeling`, depois `to-spec`, `to-tickets`, `tdd` e `code-review`.
 - `handoff`: consolidar a sessão seguinte quando houver nova frontier.
 
 ## Constraints
 
-Preservar as 18 skills, os quatro targets e o estado parcial: contexto, bootstrap, workflow e clarify estão implementados; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. `workflow` permanece consultivo, sem executor ou persistência. `clarify` grava somente o conjunto de decisões e não executa a skill seguinte. Helpers externos de manutenção não integram o runtime. Não interpretar cenários agent-driven como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
+Preservar as 18 skills, os quatro targets e o estado parcial: contexto, bootstrap, workflow, clarify e to-spec estão implementados; distribuição por target está implementada separadamente. Não adicionar dependências nem ampliar schemas, routing ou targets. `workflow` permanece consultivo, sem executor ou persistência. `clarify` grava somente o conjunto de decisões e não executa a skill seguinte. `to-spec` grava somente spec `ready` e não executa a skill seguinte. Helpers externos de manutenção não integram o runtime. Não interpretar cenários agent-driven como execução real dos produtos. Manter decisões e estado fora das skills; registrar fatos e planos futuros separadamente.
