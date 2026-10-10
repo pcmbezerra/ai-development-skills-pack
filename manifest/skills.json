@@ -440,7 +440,7 @@
       "path": "skills/development/implement/SKILL.md",
       "description": "Execute a defined change.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Execute a defined change",
       "inputs": [
         "TICKET",
