@@ -488,7 +488,7 @@
       "path": "skills/development/tdd/SKILL.md",
       "description": "Execute Red → Green → Refactor workflow.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Execute Red → Green → Refactor workflow",
       "inputs": [
         "acceptance criteria",
@@ -601,7 +601,7 @@
       "path": "skills/quality/code-review/SKILL.md",
       "description": "Perform semantic review of a change.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Perform semantic review of a change",
       "inputs": [
         "CHANGE_SET",
