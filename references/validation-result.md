@@ -1,6 +1,18 @@
 # Validation result
 
-## Current observation — operational implement, macOS, 2026-10-09
+## Current observation — operational tdd and code-review, macOS, 2026-10-10
+
+Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A11 implements `tdd` and `code-review` without adding an executor, dependency, schema, template, target or CLI command. `tdd` writes its own ready test evidence and does not rewrite evidence whose `created_by` is `implement`. `code-review` writes a ready review report and does not edit code. A blocked path writes no file from that attempt. ADR `0001` is unchanged. `implement` still does not invoke either skill.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 11 `implemented` and 7 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261010-002` records thirteen isolated agent-conducted scenarios in a temporary directory: a ready test with no existing tests, an unchanged rerun, an in-place version update, explicit TDD with RED before any implementation edit, a missing objective, a draft ticket, a draft specification, a review without spec or ticket, an unchanged review rerun, missing project context, a missing change, an omitted secret, and a conflict with an existing decision.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+
+## Previous observation — operational implement, macOS, 2026-10-09
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A10 implements `implement` without adding an executor, dependency, schema, template, target or CLI command. A bounded ready objective uses the existing implementation-report and test-evidence templates. `CHANGE_SET` stays named-only and is cited as the working tree. A blocked path writes no file and applies no change from that attempt. ADR `0001` is unchanged.
 

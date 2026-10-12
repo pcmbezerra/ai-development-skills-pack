@@ -115,25 +115,25 @@ Os cenários aplicam as skills publicadas; não as reimplementam. Evidência `re
 
 ## Acceptance Criteria
 
-- [ ] Invocação de `tdd` com objetivo definido e sem testes existentes produz evidência `ready` com `created_by: tdd`, registra RED, depois GREEN, depois REFACTOR, aplica a mudança de teste e não reescreve evidência de `implement`. Sem composição por `implement`, não há mudança de implementação.
-- [ ] Pedido explícito de TDD demonstra o RED antes de qualquer mudança de implementação.
-- [ ] A execução seguinte do mesmo objetivo de `tdd`, com insumos iguais, incrementa `version` e não reaplica a mudança. O insumo alterado atualiza o mesmo arquivo a partir da versão 1.
-- [ ] Objetivo de `tdd` sem critério de aceite e sem ticket ou spec que o defina produz `BLOCKED` sem arquivo. Ticket não pronto recomenda `to-tickets`. Spec não pronta recomenda `to-spec`.
-- [ ] `tdd` não invoca `implement`, `code-review` nem `refactor`.
-- [ ] Review com contexto e mudança, sem spec, ticket ou evidência, produz relatório `ready` com um dos quatro vereditos, sem arquivo de `CHANGE_SET` e sem diff de código.
-- [ ] A execução seguinte do mesmo objetivo de `code-review`, com insumos iguais, incrementa `version`.
-- [ ] Contexto ausente na review produz `BLOCKED` e recomenda `context-engineering`. Mudança ausente produz `BLOCKED`, recomenda `implement` e não autoriza implementação.
-- [ ] `code-review` não invoca `implement`, `tdd` nem `docs`.
-- [ ] Segredo não é copiado. Conflito com o ADR `0001` preserva o ADR e recomenda `clarify`.
-- [ ] `implement` continua sem invocar `tdd` e `code-review`.
-- [ ] A documentação declara onze skills `implemented` e sete `scaffold`, sem capability não verificada.
-- [ ] `npm test` e `git diff --check` terminam com código zero.
+- [x] Invocação de `tdd` com objetivo definido e sem testes existentes produz evidência `ready` com `created_by: tdd`, registra RED, depois GREEN, depois REFACTOR, aplica a mudança de teste e não reescreve evidência de `implement`. Sem composição por `implement`, não há mudança de implementação.
+- [x] Pedido explícito de TDD demonstra o RED antes de qualquer mudança de implementação.
+- [x] A execução seguinte do mesmo objetivo de `tdd`, com insumos iguais, incrementa `version` e não reaplica a mudança. O insumo alterado atualiza o mesmo arquivo a partir da versão 1.
+- [x] Objetivo de `tdd` sem critério de aceite e sem ticket ou spec que o defina produz `BLOCKED` sem arquivo. Ticket não pronto recomenda `to-tickets`. Spec não pronta recomenda `to-spec`.
+- [x] `tdd` não invoca `implement`, `code-review` nem `refactor`.
+- [x] Review com contexto e mudança, sem spec, ticket ou evidência, produz relatório `ready` com um dos quatro vereditos, sem arquivo de `CHANGE_SET` e sem diff de código.
+- [x] A execução seguinte do mesmo objetivo de `code-review`, com insumos iguais, incrementa `version`.
+- [x] Contexto ausente na review produz `BLOCKED` e recomenda `context-engineering`. Mudança ausente produz `BLOCKED`, recomenda `implement` e não autoriza implementação.
+- [x] `code-review` não invoca `implement`, `tdd` nem `docs`.
+- [x] Segredo não é copiado. Conflito com o ADR `0001` preserva o ADR e recomenda `clarify`.
+- [x] `implement` continua sem invocar `tdd` e `code-review`.
+- [x] A documentação declara onze skills `implemented` e sete `scaffold`, sem capability não verificada.
+- [x] `npm test` e `git diff --check` terminam com código zero.
 
 ## Validation
 
-- Matriz agent-driven separada da suíte Node, cobrindo ciclo, evidência própria, review concluída, atualização, bloqueio e sigilo.
-- `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-- Review final sem achado bloqueante de Standards ou Spec.
+- Matriz agent-driven: 13/13, em `TEST-20261010-002`.
+- `npm run validate`, `npm run skills:validate` e `npm test`: PASS, 48/48. `git diff --check`: PASS.
+- Review do ticket 01: `REVIEW-20261010-001`, PASS. A review desta mudança de documentação não foi invocada.
 
 ## Definition of Done
 
