@@ -199,7 +199,7 @@
       "path": "skills/discovery/research/SKILL.md",
       "description": "Establish externally verifiable technical facts.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Establish externally verifiable technical facts",
       "inputs": [
         "research question",
@@ -403,7 +403,7 @@
       "path": "skills/development/diagnose/SKILL.md",
       "description": "Identify root cause of unknown failures.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Identify root cause of unknown failures",
       "inputs": [
         "symptom",

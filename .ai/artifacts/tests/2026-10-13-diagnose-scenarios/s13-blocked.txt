@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The named cause is an unverified external fact.
+
+Evidence
+The request states that widget v9 removed Widget.create. That claim was not observed in the repository.
+
+Missing prerequisite
+verified external fact for the widget v9 API
+
+Recommended next skill/action
+research

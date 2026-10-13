@@ -1,18 +1,18 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-004
+id: TEST-20261013-008
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-002
-  - SPEC-20261013-002
-  - TEST-20261013-003
+  - TICKET-SET-20261013-004
+  - SPEC-20261013-004
+  - TEST-20261013-007
 ---
 
 ## Tests Added
 
-Nenhum arquivo de teste Node novo. A asserção de catálogo do ticket 01 já exige 13 skills `implemented` e 5 `scaffold`. Os dezoito cenários abaixo são avaliação agent-driven, separada da suíte Node. Os arquivos observados estão em `.ai/artifacts/tests/2026-10-13-refactor-scenarios/`.
+Nenhum arquivo de teste Node novo. A asserção de catálogo do ticket 01 já exige 15 skills `implemented` e 3 `scaffold`. Os dezoito cenários abaixo são avaliação agent-driven, separada da suíte Node. Os arquivos observados estão em `.ai/artifacts/tests/2026-10-13-refactor-scenarios/`.
 
 ## Tests Executed
 
@@ -41,7 +41,7 @@ Cada cenário partiu de uma entrada isolada em `/tmp/refactor-a13`. O contrato e
 
 ## Expected Failure / RED
 
-O RED do catálogo está em `TEST-20261013-003`. Nesta matriz, os cenários 6 e 14 observaram exit 1 do teste de fixture, e os caminhos bloqueados não gravaram relatório.
+O RED do catálogo está em `TEST-20261013-007`. Nesta matriz, os cenários 6 e 14 observaram exit 1 do teste de fixture, e os caminhos bloqueados não gravaram relatório.
 
 ## Passing Evidence / GREEN
 
@@ -55,7 +55,7 @@ O RED do catálogo está em `TEST-20261013-003`. Nesta matriz, os cenários 6 e 
 - `npm run validate`: PASS.
 - `npm run skills:validate`: PASS.
 - `npm test`: PASS, 48/48, sem falhas, skips ou TODOs.
-- Manifest: 13 skills `implemented` e 5 `scaffold`; quatro targets preservados; `IMPLEMENTATION_REPORT` e `TEST_EVIDENCE` com esquema `defined`; `CHANGE_SET` named-only.
+- Manifest: 15 skills `implemented` e 3 `scaffold`; quatro targets preservados; `IMPLEMENTATION_REPORT` e `TEST_EVIDENCE` com esquema `defined`; `CHANGE_SET` named-only.
 
 ## Failures
 

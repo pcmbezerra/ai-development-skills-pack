@@ -1,17 +1,17 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-003
+id: TEST-20261013-007
 version: 1
 status: ready
 created_by: tdd
 inputs:
-  - TICKET-SET-20261013-002
-  - SPEC-20261013-002
+  - TICKET-SET-20261013-004
+  - SPEC-20261013-004
 ---
 
 ## Tests Added
 
-Nenhum arquivo de teste novo. A asserção de catálogo em `tests/validate-skills.test.mjs` passou a exigir `refactor` entre as skills `implemented`, treze no total e cinco `scaffold`, com listas de dependência vazias, `IMPLEMENTATION_REPORT` e `TEST_EVIDENCE` no esquema `defined`, `CHANGE_SET` named-only, as linhas de produtor com `refactor` e os templates atuais com `created_by` `implement` e `tdd`.
+Nenhum arquivo de teste novo. A asserção de catálogo em `tests/validate-skills.test.mjs` passou a exigir `refactor` entre as skills `implemented`, quinze no total e três `scaffold`, com listas de dependência vazias, `IMPLEMENTATION_REPORT` e `TEST_EVIDENCE` no esquema `defined`, `CHANGE_SET` named-only, as linhas de produtor com `refactor` e os templates atuais com `created_by` `implement` e `tdd`.
 
 ## Tests Executed
 
@@ -39,4 +39,4 @@ Nenhum.
 
 ## Environment Limitations
 
-Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Esta execução cobre a suíte estrutural nesse ambiente. Descoberta real nos quatro produtos não foi executada. A matriz agent-driven fica em `TEST-20261013-004`.
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Esta execução cobre a suíte estrutural nesse ambiente. Descoberta real nos quatro produtos não foi executada. A matriz agent-driven fica em `TEST-20261013-008`.

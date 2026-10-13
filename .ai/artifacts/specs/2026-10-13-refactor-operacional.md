@@ -1,11 +1,11 @@
 ---
 artifact: spec
-id: SPEC-20261013-002
+id: SPEC-20261013-004
 version: 1
 status: ready
 created_by: to-spec
 inputs:
-  - DECISION-SET-20261013-002
+  - DECISION-SET-20261013-004
   - HANDOFF-20261013-001
   - HANDOFF-20261006-001
   - SPEC-20261013-001
@@ -15,7 +15,7 @@ inputs:
   - ADR-0001
 ---
 
-# refactor operacional — emenda v1-A13
+# refactor operacional — emenda v1-A15
 
 ## Problem
 
@@ -23,11 +23,11 @@ A skill `refactor` existe apenas como scaffold. O contrato, o invariante, o gate
 
 ## Goal
 
-Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora a estrutura interna sem mudar o comportamento externo, salvo autorização explícita de uma mudança nomeada, grava relatório e evidência `ready` e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa.
+Tornar `refactor` operacional na emenda v1-A15. Quando invocada, a skill melhora a estrutura interna sem mudar o comportamento externo, salvo autorização explícita de uma mudança nomeada, grava relatório e evidência `ready` e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa.
 
 ## Scope
 
-- Implementar o workflow de `refactor` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-002` e a regra de status `implemented` em `contracts/skill-contract.md`.
+- Implementar o workflow de `refactor` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-004` e a regra de status `implemented` em `contracts/skill-contract.md`.
 - Migrar `refactor` de `scaffold` para `implemented` no manifest, no contrato e na fonte.
 - Consumir objetivo de refactor, linha de base de comportamento, contexto do projeto e testes.
 - Aplicar a menor mudança estrutural no working tree. Citar `CHANGE_SET` como `working tree`. Não gravar arquivo de `CHANGE_SET`.
@@ -38,7 +38,7 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 - Nomear `refactor` como produtor adicional de `IMPLEMENTATION_REPORT` e de `TEST_EVIDENCE` no contrato operacional de artefatos. Não alterar esquema, template nem seções obrigatórias.
 - Manter as listas de dependência vazias de `refactor`.
 - Estender a regressão estrutural de catálogo já existente e executar os cenários da skill por agente, separados da suíte Node.
-- Registrar a mudança como emenda v1-A13 e reconciliar a documentação que declara a contagem de skills.
+- Registrar a mudança como emenda v1-A15 e reconciliar a documentação que declara a contagem de skills.
 
 ## Non-goals
 
@@ -47,13 +47,13 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 - Alterar o esquema, os templates ou as seções obrigatórias de `IMPLEMENTATION_REPORT` e de `TEST_EVIDENCE`.
 - Acrescentar chave de caminho em `.ai/config.json`. Os diretórios usados são o layout já recomendado.
 - Alterar R1–R17, sequências canônicas ou as dependências do manifest.
-- Fazer `implement` ou `tdd` invocarem `refactor`, ou reabrir `SPEC-20261009-004`, `SPEC-20261010-001` ou `SPEC-20261013-001`.
+- Fazer `implement` ou `tdd` invocarem `refactor`, ou reabrir `SPEC-20261009-004`, `SPEC-20261010-001`, `SPEC-20261013-001`, `SPEC-20261013-002` ou `SPEC-20261013-003`.
 - Estender ou modificar o ADR `0001`.
 - Reescrever `references/architecture-contract-v1.md`.
 - Gravar relatório ou evidência `draft`, `blocked` ou parcial.
 - Apagar relatório ou evidência existente.
 - Invocar `implement`, `tdd`, `diagnose`, `code-review`, `modernize`, `research` ou qualquer outra skill a partir de `refactor`.
-- Implementar `research`, `diagnose`, `edge-case-analysis`, `docs`, `modernize` ou qualquer outra skill scaffold.
+- Implementar `edge-case-analysis`, `docs`, `modernize` ou qualquer outra skill scaffold. `diagnose` e `research` já estão operacionais nas emendas v1-A13 e v1-A14.
 - Adicionar comando CLI ou target.
 - Certificar descoberta real em Cursor, Codex, Gemini Antigravity ou Claude Code.
 - Produzir modelo de domínio ou desenho de arquitetura desta emenda.
@@ -66,20 +66,20 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 
 ## Functional Requirements
 
-1. `refactor`, quando invocada, lê o contexto do projeto, o objetivo, a linha de base e os testes. Não copia valor secreto; o relatório e a evidência registram só existência e efeito. A invocação é objetivo estrutural sob R15. Evidência: `DECISION-SET-20261013-002` e R15.
-2. Quando o gate passa, a skill aplica a menor mudança estrutural no working tree, não grava arquivo de `CHANGE_SET` e cita `working tree`. Grava um relatório `ready` e uma evidência `ready`, com os templates existentes, `created_by: refactor` e as seções obrigatórias. O comportamento externo permanece. Evidência: `DECISION-SET-20261013-002`.
-3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza os mesmos dois arquivos, incrementa `version` e não reaplica a mudança. Evidência: `DECISION-SET-20261013-002`.
-4. O mesmo objetivo, com o insumo alterado, atualiza os mesmos arquivos a partir da versão 1 e aplica só o acréscimo estrutural. Evidência: `DECISION-SET-20261013-002`.
-5. Contexto do projeto ausente produz `BLOCKED`, recomenda `context-engineering` e não grava arquivo. A skill não executa a recomendada. Evidência: `DECISION-SET-20261013-002`.
-6. Linha de base não observada produz `BLOCKED`, recomenda observá-la e repetir `refactor`, e não grava arquivo. Teste que falha antes da mudança, com causa desconhecida, produz `BLOCKED`, recomenda `diagnose` e não altera código. Evidência: `DECISION-SET-20261013-002`.
-7. Objetivo ausente, não delimitado ou não estrutural produz `BLOCKED` e recomenda `clarify`. Pedido cujo propósito é mudar comportamento, sem objetivo estrutural e sem autorização explícita, produz `BLOCKED` e recomenda `implement`. Pedido de modernização sob R16 produz `BLOCKED` e recomenda `modernize`. Evidência: `DECISION-SET-20261013-002`, R15 e R16.
-8. Objetivo estrutural que autoriza explicitamente uma mudança de comportamento nomeada produz artefatos `ready`. A seção Behaviour Changed registra essa autorização e afirma que o restante do comportamento externo não mudou. Evidência: o invariante da skill e `DECISION-SET-20261013-002`.
-9. Pesquisa presente fora de `ready`, ou fato externo que ainda pode mudar o refactor, produz `BLOCKED` e recomenda `research`, sem acesso à rede. Conflito com decisão existente, inclusive o ADR `0001`, produz `BLOCKED`, recomenda `clarify` e preserva a decisão. Evidência: `DECISION-SET-20261013-002`.
-10. Mudança que não permanece estrutural, inclusive abstração especulativa, produz `BLOCKED` e não altera código. Teste relevante que falha depois da mudança faz a skill reverter a mudança desta tentativa e devolver `BLOCKED`, sem arquivo desta tentativa. Evidência: o gate de implementação e `DECISION-SET-20261013-002`.
-11. Bloqueios combinados nomeiam cada pré-requisito e recomendam o mais cedo. A tentativa bloqueada não apaga relatório ou evidência já existente e não altera código de aplicação desta tentativa. A skill não reescreve arquivo cujo `created_by` seja `implement` ou `tdd`. Evidência: o contrato de falha e `DECISION-SET-20261013-002`.
-12. `refactor` não invoca outra skill. Refatoração pronta e não trivial autoriza `code-review` e não o invoca. Refatoração trivial registra que `code-review` pode ser omitido. A skill não grava o glossário, `CONTEXT.md` nem outro artefato, e não estende o ADR `0001`. Evidência: `DECISION-SET-20261013-002` e R13.
-13. O catálogo final contém exatamente treze skills `implemented` e cinco `scaffold`. `refactor` junta-se às doze já implementadas. As cinco que permanecem `scaffold` são `research`, `diagnose`, `edge-case-analysis`, `docs` e `modernize`. As listas de dependência de `refactor` permanecem vazias. Evidência: `DECISION-SET-20261013-002`.
-14. O contrato operacional de artefatos nomeia `refactor` como produtor de `IMPLEMENTATION_REPORT`, ao lado de `implement`, e de `TEST_EVIDENCE`, ao lado de `tdd` e `implement`. Esquema, template e seções obrigatórias permanecem. Evidência: `DECISION-SET-20261013-002`.
+1. `refactor`, quando invocada, lê o contexto do projeto, o objetivo, a linha de base e os testes. Não copia valor secreto; o relatório e a evidência registram só existência e efeito. A invocação é objetivo estrutural sob R15. Evidência: `DECISION-SET-20261013-004` e R15.
+2. Quando o gate passa, a skill aplica a menor mudança estrutural no working tree, não grava arquivo de `CHANGE_SET` e cita `working tree`. Grava um relatório `ready` e uma evidência `ready`, com os templates existentes, `created_by: refactor` e as seções obrigatórias. O comportamento externo permanece. Evidência: `DECISION-SET-20261013-004`.
+3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza os mesmos dois arquivos, incrementa `version` e não reaplica a mudança. Evidência: `DECISION-SET-20261013-004`.
+4. O mesmo objetivo, com o insumo alterado, atualiza os mesmos arquivos a partir da versão 1 e aplica só o acréscimo estrutural. Evidência: `DECISION-SET-20261013-004`.
+5. Contexto do projeto ausente produz `BLOCKED`, recomenda `context-engineering` e não grava arquivo. A skill não executa a recomendada. Evidência: `DECISION-SET-20261013-004`.
+6. Linha de base não observada produz `BLOCKED`, recomenda observá-la e repetir `refactor`, e não grava arquivo. Teste que falha antes da mudança, com causa desconhecida, produz `BLOCKED`, recomenda `diagnose` e não altera código. Evidência: `DECISION-SET-20261013-004`.
+7. Objetivo ausente, não delimitado ou não estrutural produz `BLOCKED` e recomenda `clarify`. Pedido cujo propósito é mudar comportamento, sem objetivo estrutural e sem autorização explícita, produz `BLOCKED` e recomenda `implement`. Pedido de modernização sob R16 produz `BLOCKED` e recomenda `modernize`. Evidência: `DECISION-SET-20261013-004`, R15 e R16.
+8. Objetivo estrutural que autoriza explicitamente uma mudança de comportamento nomeada produz artefatos `ready`. A seção Behaviour Changed registra essa autorização e afirma que o restante do comportamento externo não mudou. Evidência: o invariante da skill e `DECISION-SET-20261013-004`.
+9. Pesquisa presente fora de `ready`, ou fato externo que ainda pode mudar o refactor, produz `BLOCKED` e recomenda `research`, sem acesso à rede. Conflito com decisão existente, inclusive o ADR `0001`, produz `BLOCKED`, recomenda `clarify` e preserva a decisão. Evidência: `DECISION-SET-20261013-004`.
+10. Mudança que não permanece estrutural, inclusive abstração especulativa, produz `BLOCKED` e não altera código. Teste relevante que falha depois da mudança faz a skill reverter a mudança desta tentativa e devolver `BLOCKED`, sem arquivo desta tentativa. Evidência: o gate de implementação e `DECISION-SET-20261013-004`.
+11. Bloqueios combinados nomeiam cada pré-requisito e recomendam o mais cedo. A tentativa bloqueada não apaga relatório ou evidência já existente e não altera código de aplicação desta tentativa. A skill não reescreve arquivo cujo `created_by` seja `implement` ou `tdd`. Evidência: o contrato de falha e `DECISION-SET-20261013-004`.
+12. `refactor` não invoca outra skill. Refatoração pronta e não trivial autoriza `code-review` e não o invoca. Refatoração trivial registra que `code-review` pode ser omitido. A skill não grava o glossário, `CONTEXT.md` nem outro artefato, e não estende o ADR `0001`. Evidência: `DECISION-SET-20261013-004` e R13.
+13. O catálogo final contém exatamente quinze skills `implemented` e três `scaffold`. `refactor` junta-se às quatorze já implementadas. As três que permanecem `scaffold` são `edge-case-analysis`, `docs` e `modernize`. As listas de dependência de `refactor` permanecem vazias. Evidência: `DECISION-SET-20261013-004`.
+14. O contrato operacional de artefatos nomeia `refactor` como produtor de `IMPLEMENTATION_REPORT`, ao lado de `implement`, e de `TEST_EVIDENCE`, ao lado de `tdd` e `implement`. Esquema, template e seções obrigatórias permanecem. Evidência: `DECISION-SET-20261013-004`.
 
 ## Business Rules
 
@@ -102,7 +102,7 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 
 ## Technical Constraints
 
-- Alterar somente o necessário para operacionalizar `refactor` e registrar a emenda v1-A13.
+- Alterar somente o necessário para operacionalizar `refactor` e registrar a emenda v1-A15.
 - Não alterar o contrato de routing, as sequências canônicas nem os templates.
 - A única alteração em `contracts/artifacts.md` são as duas linhas de produtor.
 - Não criar runtime nem executor da skill.
@@ -119,7 +119,7 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 
 ## Acceptance Criteria
 
-1. `refactor` está `implemented` de forma consistente no manifest, no contrato e na fonte. O catálogo contém 13 skills `implemented` e 5 `scaffold`. As listas de dependência permanecem vazias.
+1. `refactor` está `implemented` de forma consistente no manifest, no contrato e na fonte. O catálogo contém 15 skills `implemented` e 3 `scaffold`. As listas de dependência permanecem vazias.
 2. Objetivo estrutural delimitado, com contexto do projeto e linha de base observada que passa, produz relatório `ready`, evidência `ready` com `created_by: refactor`, a mudança estrutural no working tree, comportamento externo inalterado e nenhum arquivo de `CHANGE_SET`.
 3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza os mesmos arquivos e incrementa `version`, sem segunda edição.
 4. O mesmo objetivo, com o insumo alterado, atualiza os mesmos arquivos a partir da versão 1 e aplica só o acréscimo estrutural.
@@ -139,10 +139,10 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 18. `refactor` não invoca outra skill. Refatoração não trivial autoriza `code-review` e não o invoca. Refatoração trivial registra que `code-review` pode ser omitido.
 19. A skill não reescreve relatório ou evidência de `implement` ou `tdd`, não grava glossário nem `CONTEXT.md`, e não estende o ADR `0001`.
 20. Esquema, templates, R1–R17, dependências, targets, CLI e as outras skills permanecem inalterados, salvo as duas linhas de produtor. O ADR `0001` não é estendido. Nenhuma chave nova entra em `.ai/config.json`. `tdd` e `implement` não passam a invocar `refactor`.
-21. A regressão determinística cobre a migração 13/5, as listas de dependência vazias, a preservação dos esquemas e templates e as linhas de produtor. Nenhum arquivo de teste novo é adicionado.
+21. A regressão determinística cobre a migração 15/3, as listas de dependência vazias, a preservação dos esquemas e templates e as linhas de produtor. Nenhum arquivo de teste novo é adicionado.
 22. Os cenários de estrutura, atualização, autorização, bloqueio e sigilo ficam em evidência separada dos testes Node.
 23. `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-24. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A13 sem declarar capacidades não verificadas.
+24. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A15 sem declarar capacidades não verificadas.
 
 ## Risks
 
@@ -154,16 +154,16 @@ Tornar `refactor` operacional na emenda v1-A13. Quando invocada, a skill melhora
 
 ## Open Questions
 
-Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação das outras cinco skills scaffold permanecem fora deste recorte.
+Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação das outras três skills scaffold permanecem fora deste recorte.
 
 ## Testing Decisions
 
 - Um bom teste observa comportamento externo: insumos entram, relatório e evidência `ready` saem com a mudança estrutural, ou o relatório `BLOCKED` sai sem arquivo e sem mudança desta tentativa. Não afirma redação interna da skill além do resultado observável.
-- O teste determinístico, no seam de catálogo já existente, passa a exigir `refactor` entre as skills `implemented`, treze no total e cinco `scaffold`, preserva as listas de dependência vazias, preserva os esquemas e os templates atuais e passa a exigir as linhas de produtor com `refactor`. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
+- O teste determinístico, no seam de catálogo já existente, passa a exigir `refactor` entre as skills `implemented`, quinze no total e três `scaffold`, preserva as listas de dependência vazias, preserva os esquemas e os templates atuais e passa a exigir as linhas de produtor com `refactor`. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
 - Os cenários conduzidos por agente aplicam o contrato e a fonte em diretório temporário e inspecionam o relatório, a evidência e a árvore, ou a ausência de arquivo junto com o relatório `BLOCKED`. Cobrem estrutura estável, atualização do mesmo arquivo, autorização nomeada, bloqueio e sigilo.
 - O precedente é a asserção de catálogo da v1-A12 e a evidência separada da suíte Node naquela emenda.
 - Asserções não serão relaxadas para acomodar a implementação.
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-002`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-004`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.
