@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — structural suite on Linux, Node.js 22, 2026-10-13
+## Current observation — operational research, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A12 implements `research` without adding an executor, dependency, schema, template, target or CLI command. A question that is an external fact, with project context, writes one ready research report. Unsupported claims stay in Unknowns when external access cannot be used. A blocked path writes no file from that attempt. ADR `0001` is unchanged. The skill does not invoke `to-spec`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 12 `implemented` and 6 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-001` records the catalogue RED before migration and GREEN after it.
+- `TEST-20261013-002` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited repository fact, an unchanged rerun, an in-place version update, an unresolved external claim, missing project context, a missing question, a project choice, a conflict with an existing decision, an omitted secret, a premise left unresolved, a blocked decision set whose blocker is the researched fact, a different ambiguity, an evidenced absence, no neighboring artifacts, combined blockers, a rejected alternative, a separated recommendation, and a rerun that preserves the unknown.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios.
+
+## Previous observation — structural suite on Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. `node_modules` was absent. The scripts use Node.js built-ins only. This run re-executes the structural suite and CLI after amendment v1-A11. It does not re-run the agent-driven semantic matrices and does not certify live discovery in Cursor, Codex, Gemini Antigravity or Claude Code.
 
