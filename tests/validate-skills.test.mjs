@@ -159,8 +159,14 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
 }));
 test('current catalogue implements code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','to-spec','domain-modelling','architecture-design','to-tickets','implement','tdd','code-review']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,7);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','to-spec','domain-modelling','architecture-design','to-tickets','implement','tdd','code-review']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,6);
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='handoff').dependencies,{required:[],conditional:[],optional:[]});
+  assert.deepEqual(manifest.artifacts.HANDOFF,{
+    contract: 'contracts/artifacts.md',
+    template: 'templates/artifacts/handoff.md',
+    schema: 'defined',
+  });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='tdd').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='code-review').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.artifacts.REVIEW_REPORT,{

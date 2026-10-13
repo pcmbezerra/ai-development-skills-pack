@@ -167,7 +167,7 @@
       "path": "skills/core/handoff/SKILL.md",
       "description": "Transfer verified work state between agents/sessions.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Transfer verified work state between agents/sessions",
       "inputs": [
         "current state",
