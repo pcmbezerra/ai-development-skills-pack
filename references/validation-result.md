@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — merged catalogue, Linux, Node.js 22, 2026-10-13
+## Current observation — operational modernize, v1-A18, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A18 implements `modernize` without adding an executor, dependency, schema, template, target or CLI command. `origin/main` is `ecbd29e`, the v1-A17 close. This record uses `SPEC-20261013-007`, `TEST-20261013-013`, `TEST-20261013-014`, `REVIEW-20261013-010` and `HANDOFF-20261013-007`. Eighteen skills are `implemented` and none remain `scaffold`. A bounded modernization objective uses the existing modernization-plan template. A blocked path writes no file from that attempt and leaves application code unchanged. A ready plan authorizes `to-tickets` and does not authorize `implement` directly. ADR `0001` is unchanged. The producer of `MODERNIZATION_PLAN` stays `modernize`. The optional dependencies stay `diagnose`, `research`, `architecture-design`, `tdd` and `to-tickets`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion lists `modernize`. Scaffold-sample checks restore `modernize` inside the fixture. No new test file was added.
+- `git diff --check`: PASS at the close.
+- `TEST-20261013-013` records the catalogue RED before migration and GREEN after it. The workflow text is identical in the contract and the source, 9143 characters.
+- `TEST-20261013-014` records eighteen isolated agent-conducted scenarios in a temporary directory: a bounded runtime migration, an unchanged rerun, an in-place validation update, missing architecture, an uncontrolled upgrade, a behaviour change, an unknown failure, an ordinary refactor, a documentation request, an unobserved baseline, missing rollback, missing stages, an external fact, a conflict with ADR `0001`, a non-ready research report, a non-ready architecture design, a plan created by another skill, and combined blockers.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. The next free amendment identifier is v1-A19.
+
+## Previous observation — merged catalogue, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. This merge keeps `edge-case-analysis` as amendment v1-A16 and reissues `docs` as v1-A17. Origin/main already published v1-A16 with `SPEC-20261013-005`, `TEST-20261013-009`, `TEST-20261013-010`, `REVIEW-20261013-007`, `REVIEW-20261013-008` and `HANDOFF-20261013-005`. The docs record uses `SPEC-20261013-006`, `TEST-20261013-011`, `TEST-20261013-012`, `REVIEW-20261013-009` and `HANDOFF-20261013-006`. The next free amendment identifier is v1-A18. Seventeen skills are `implemented` and `modernize` remains the only `scaffold`. Neither skill adds an executor, dependency, schema, template, target or CLI command. ADR `0001` is unchanged.
 

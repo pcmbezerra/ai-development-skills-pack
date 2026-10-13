@@ -679,7 +679,7 @@
       "path": "skills/modernization/modernize/SKILL.md",
       "description": "Plan and orchestrate legacy modernization.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Plan and orchestrate legacy modernization",
       "inputs": [
         "PROJECT_CONTEXT",
