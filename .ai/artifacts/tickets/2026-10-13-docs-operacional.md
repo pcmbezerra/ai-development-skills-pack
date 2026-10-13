@@ -1,16 +1,16 @@
 ---
 artifact: ticket_set
-id: TICKET-SET-20261013-005
+id: TICKET-SET-20261013-006
 version: 1
 status: ready
 created_by: to-tickets
 inputs:
-  - SPEC-20261013-005
+  - SPEC-20261013-006
 ---
 
-# docs operacional — emenda v1-A16
+# docs operacional — emenda v1-A17
 
-Conjunto executável derivado de `SPEC-20261013-005`. Cada bloco abaixo é um registro TICKET com as seções exigidas pelo contrato. R8 e R9 não se aplicam a esta spec: a emenda operacionaliza uma skill e não muda o domínio de um produto consumidor nem uma fronteira de arquitetura do pacote. Evidência: a própria spec e o precedente de `SPEC-20261013-004`.
+Conjunto executável derivado de `SPEC-20261013-006`. Cada bloco abaixo é um registro TICKET com as seções exigidas pelo contrato. R8 e R9 não se aplicam a esta spec: a emenda operacionaliza uma skill e não muda o domínio de um produto consumidor nem uma fronteira de arquitetura do pacote. Evidência: a própria spec e o precedente de `SPEC-20261013-004`.
 
 Triagem local: `ready-for-agent`. Publicação remota pendente até reconciliação com GitHub Issues, sem criação de duplicatas.
 
@@ -24,7 +24,7 @@ Implementar a skill `docs` para gravar `DOC_UPDATE` `ready` quando o gate passa,
 
 ## Context
 
-`SPEC-20261013-005` define a emenda v1-A16. `DECISION-SET-20261013-005` confirma um único seam de comportamento, com a suíte Node acompanhando o catálogo, as dependências vazias e o esquema definido de `DOC_UPDATE`. Este ticket publica o workflow e migra `docs` para `implemented`. O ADR `0001` continua restrito ao conjunto de decisões. A observação agent-driven do comportamento fica no ticket 02. Evidência: `SPEC-20261013-005`, requisitos 1–14 e critérios 1, 23 e 24.
+`SPEC-20261013-006` define a emenda v1-A17. `DECISION-SET-20261013-006` confirma um único seam de comportamento, com a suíte Node acompanhando o catálogo, as dependências vazias e o esquema definido de `DOC_UPDATE`. Este ticket publica o workflow e migra `docs` para `implemented`. O ADR `0001` continua restrito ao conjunto de decisões. A observação agent-driven do comportamento fica no ticket 02. Evidência: `SPEC-20261013-006`, requisitos 1–14 e critérios 1, 23 e 24.
 
 ## Scope
 
@@ -53,7 +53,7 @@ Nenhuma. Pode iniciar imediatamente.
 
 ## Implementation Notes
 
-Começar pela regressão do catálogo. A fonte e o contrato devem expressar o mesmo comportamento. A escrita da skill é o `DOC_UPDATE` `ready` e a mudança de documentação sob o caminho seguro. Recomendação de `context-engineering`, `setup-ai-development-skills`, `clarify`, `implement`, `diagnose`, `refactor`, `modernize`, `research`, `to-spec` ou `architecture-design` não é composição. O bloqueio mais cedo segue a ordem da spec. A frase de lifecycle entra neste ticket para o manifest, o contrato e a fonte permanecerem coerentes. Evidência: `SPEC-20261013-005`, requisitos 2–14 e Testing Decisions.
+Começar pela regressão do catálogo. A fonte e o contrato devem expressar o mesmo comportamento. A escrita da skill é o `DOC_UPDATE` `ready` e a mudança de documentação sob o caminho seguro. Recomendação de `context-engineering`, `setup-ai-development-skills`, `clarify`, `implement`, `diagnose`, `refactor`, `modernize`, `research`, `to-spec` ou `architecture-design` não é composição. O bloqueio mais cedo segue a ordem da spec. A frase de lifecycle entra neste ticket para o manifest, o contrato e a fonte permanecerem coerentes. Evidência: `SPEC-20261013-006`, requisitos 2–14 e Testing Decisions.
 
 ## Acceptance Criteria
 
@@ -80,7 +80,7 @@ Começar pela regressão do catálogo. A fonte e o contrato devem expressar o me
 - `npm test`: PASS, 48/48, sem falhas, skips ou TODOs.
 - `npm run validate`: PASS, 18 skills.
 - Ambiente: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9.
-- A observação agent-driven dos critérios de comportamento continua no ticket 02. Evidência: `TEST-20261013-009`.
+- A observação agent-driven dos critérios de comportamento continua no ticket 02. Evidência: `TEST-20261013-011`.
 
 ## Definition of Done
 
@@ -89,15 +89,15 @@ Começar pela regressão do catálogo. A fonte e o contrato devem expressar o me
 
 ## Title
 
-02 — Validar e fechar v1-A16
+02 — Validar e fechar v1-A17
 
 ## Goal
 
-Comprovar o comportamento de `docs` nos cenários de atualização, desenho futuro, bloqueio e sigilo, reconciliar a documentação e fechar a emenda v1-A16.
+Comprovar o comportamento de `docs` nos cenários de atualização, desenho futuro, bloqueio e sigilo, reconciliar a documentação e fechar a emenda v1-A17.
 
 ## Context
 
-O ticket 01 torna o workflow operacional. `SPEC-20261013-005` exige evidência semântica separada da suíte Node e documentação coerente com dezesseis skills implementadas. Os quatro targets e as outras duas skills scaffold permanecem fora deste fechamento. Evidência: `SPEC-20261013-005`, critérios 25–27.
+O ticket 01 torna o workflow operacional. `SPEC-20261013-006` exige evidência semântica separada da suíte Node e documentação coerente com dezesseis skills implementadas. Os quatro targets e as outras duas skills scaffold permanecem fora deste fechamento. Evidência: `SPEC-20261013-006`, critérios 25–27.
 
 ## Scope
 
@@ -120,7 +120,7 @@ Ticket 01. Este ticket só começa depois que o workflow e a migração de catá
 
 ## Implementation Notes
 
-Cada cenário usa um diretório temporário. Registrar entrada, evidência consultada, `DOC_UPDATE` observado ou ausência de arquivo, status, autorização de implementação e divergência. Cenário divergente bloqueia o fechamento até a correção permanecer dentro da v1-A16. A suíte Node não executa a skill. Evidência: `SPEC-20261013-005`, Testing Decisions e critério 25.
+Cada cenário usa um diretório temporário. Registrar entrada, evidência consultada, `DOC_UPDATE` observado ou ausência de arquivo, status, autorização de implementação e divergência. Cenário divergente bloqueia o fechamento até a correção permanecer dentro da v1-A17. A suíte Node não executa a skill. Evidência: `SPEC-20261013-006`, Testing Decisions e critério 25.
 
 ## Acceptance Criteria
 
@@ -129,18 +129,19 @@ Cada cenário usa um diretório temporário. Registrar entrada, evidência consu
 - [x] A documentação declara dezesseis skills `implemented` e duas `scaffold`, sem capability não verificada.
 - [x] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
 - [x] O review final não contém achado bloqueante de Standards ou Spec.
-- [x] A frontier de `SPEC-20261013-005` fica vazia somente depois deste ticket.
+- [x] A frontier de `SPEC-20261013-006` fica vazia somente depois deste ticket.
 
 ## Validation
 
-- Matriz agent-driven: 18/18, em `TEST-20261013-010`. Nenhum cenário invocou outra skill.
+- Matriz agent-driven: 18/18, em `TEST-20261013-012`. Nenhum cenário invocou outra skill.
 - `npm run validate` e `npm run skills:validate`: PASS, 18 skills; 16 `implemented` e 2 `scaffold`.
 - `npm test`: PASS, 48/48, sem falhas, skips ou TODOs.
 - `git diff --check`: conferido no fechamento.
 - Ambiente: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9.
-- Review: `REVIEW-20261013-007`, PASS.
+- Review: `REVIEW-20261013-009`, PASS.
+- Merge com `origin/main`: a contagem 16/2 acima registra o fechamento desta branch antes do merge. Depois do merge, 17 skills estão `implemented` e `modernize` permanece `scaffold`. Os casos negativos de scaffold usam `modernize`. Os identificadores `005`, `009`, `010`, `007` e `008` permanecem com `edge-case-analysis`.
 
 ## Definition of Done
 
-- [x] A evidência semântica, a suíte e o review autorizam o fechamento da emenda v1-A16.
+- [x] A evidência semântica, a suíte e o review autorizam o fechamento da emenda v1-A17.
 - [x] O handoff distingue esta emenda do fechamento da v1-A15.

@@ -1,11 +1,11 @@
 ---
 artifact: spec
-id: SPEC-20261013-005
+id: SPEC-20261013-006
 version: 1
 status: ready
 created_by: to-spec
 inputs:
-  - DECISION-SET-20261013-005
+  - DECISION-SET-20261013-006
   - HANDOFF-20261013-004
   - HANDOFF-20261006-001
   - SPEC-20261013-004
@@ -13,7 +13,7 @@ inputs:
   - ADR-0001
 ---
 
-# docs operacional — emenda v1-A16
+# docs operacional — emenda v1-A17
 
 ## Problem
 
@@ -21,11 +21,11 @@ A skill `docs` existe apenas como scaffold. O contrato, o gate de documentação
 
 ## Goal
 
-Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atualiza documentação a partir de evidência, grava `DOC_UPDATE` `ready` e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa.
+Tornar `docs` operacional na emenda v1-A17. Quando invocada, a skill cria ou atualiza documentação a partir de evidência, grava `DOC_UPDATE` `ready` e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa.
 
 ## Scope
 
-- Implementar o workflow de `docs` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-005` e a regra de status `implemented` em `contracts/skill-contract.md`.
+- Implementar o workflow de `docs` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-006` e a regra de status `implemented` em `contracts/skill-contract.md`.
 - Migrar `docs` de `scaffold` para `implemented` no manifest, no contrato e na fonte.
 - Consumir evidência do repositório, `CHANGE_SET` citado como working tree, spec opcional, desenho de arquitetura opcional e documentação existente.
 - Atualizar documentação sob o `docsPath` seguro, e `README.md` na raiz somente quando o objetivo nomeia esse arquivo.
@@ -36,7 +36,7 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 - Manter o produtor, o esquema, o template e as seções obrigatórias de `DOC_UPDATE`.
 - Manter as listas de dependência vazias de `docs`.
 - Estender a regressão estrutural de catálogo já existente e executar os cenários da skill por agente, separados da suíte Node.
-- Registrar a mudança como emenda v1-A16 e reconciliar a documentação que declara a contagem de skills.
+- Registrar a mudança como emenda v1-A17 e reconciliar a documentação que declara a contagem de skills.
 
 ## Non-goals
 
@@ -65,20 +65,20 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 
 ## Functional Requirements
 
-1. `docs`, quando invocada, lê o contexto do projeto, o objetivo, a evidência, o working tree, a spec quando presente, o desenho quando presente e a documentação existente. Não copia valor secreto. A invocação é um impacto documental delimitado sob R14. Evidência: `DECISION-SET-20261013-005` e R14.
-2. Quando o gate passa, a skill atualiza a documentação para o estado verificado, não grava arquivo de `CHANGE_SET` e cita `working tree`. Grava um `DOC_UPDATE` `ready`, com o template existente, `created_by: docs` e as seções obrigatórias. Evidência: `DECISION-SET-20261013-005`.
-3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza o mesmo arquivo, incrementa `version` e não reescreve documentação que já confere. Evidência: `DECISION-SET-20261013-005`.
-4. O mesmo objetivo, com o insumo alterado, atualiza o mesmo arquivo a partir da versão 1 e aplica só o acréscimo documental. Evidência: `DECISION-SET-20261013-005`.
-5. Contexto do projeto ausente produz `BLOCKED`, recomenda `context-engineering` e não grava arquivo. Configuração ausente, inválida ou com `docsPath` que escapa da raiz produz `BLOCKED`, recomenda `setup-ai-development-skills` e não escreve fora da raiz. Evidência: `DECISION-SET-20261013-005`.
-6. Objetivo ausente ou não delimitado produz `BLOCKED` e recomenda `clarify`. Pedido cujo propósito é mudar comportamento produz `BLOCKED` e recomenda `implement`. Falha de causa desconhecida produz `BLOCKED` e recomenda `diagnose`. Pedido estrutural com comportamento estável produz `BLOCKED` e recomenda `refactor`. Pedido de modernização produz `BLOCKED` e recomenda `modernize`. Evidência: `DECISION-SET-20261013-005`, R5, R6, R15 e R16.
-7. Conflito com decisão existente, inclusive o ADR `0001`, produz `BLOCKED`, recomenda `clarify` e preserva a decisão. Pesquisa presente fora de `ready`, ou fato externo que ainda pode mudar a documentação, produz `BLOCKED` e recomenda `research`, sem acesso à rede. Evidência: `DECISION-SET-20261013-005`.
-8. Spec ausente não bloqueia quando a evidência do repositório já mostra o que documentar. Spec nomeada ou presente que a documentação usaria, e que não está `ready`, produz `BLOCKED` e recomenda `to-spec`. O mesmo vale para desenho de arquitetura e `architecture-design`. Evidência: `DECISION-SET-20261013-005`.
-9. Alegação sem evidência não entra como comportamento atual. Quando nenhuma afirmação verificada permanece, o resultado é `BLOCKED` e não grava arquivo. Desenho futuro de spec ou desenho `ready` entra só marcado como desenho futuro. Evidência: a seção 7.12 e `DECISION-SET-20261013-005`.
+1. `docs`, quando invocada, lê o contexto do projeto, o objetivo, a evidência, o working tree, a spec quando presente, o desenho quando presente e a documentação existente. Não copia valor secreto. A invocação é um impacto documental delimitado sob R14. Evidência: `DECISION-SET-20261013-006` e R14.
+2. Quando o gate passa, a skill atualiza a documentação para o estado verificado, não grava arquivo de `CHANGE_SET` e cita `working tree`. Grava um `DOC_UPDATE` `ready`, com o template existente, `created_by: docs` e as seções obrigatórias. Evidência: `DECISION-SET-20261013-006`.
+3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza o mesmo arquivo, incrementa `version` e não reescreve documentação que já confere. Evidência: `DECISION-SET-20261013-006`.
+4. O mesmo objetivo, com o insumo alterado, atualiza o mesmo arquivo a partir da versão 1 e aplica só o acréscimo documental. Evidência: `DECISION-SET-20261013-006`.
+5. Contexto do projeto ausente produz `BLOCKED`, recomenda `context-engineering` e não grava arquivo. Configuração ausente, inválida ou com `docsPath` que escapa da raiz produz `BLOCKED`, recomenda `setup-ai-development-skills` e não escreve fora da raiz. Evidência: `DECISION-SET-20261013-006`.
+6. Objetivo ausente ou não delimitado produz `BLOCKED` e recomenda `clarify`. Pedido cujo propósito é mudar comportamento produz `BLOCKED` e recomenda `implement`. Falha de causa desconhecida produz `BLOCKED` e recomenda `diagnose`. Pedido estrutural com comportamento estável produz `BLOCKED` e recomenda `refactor`. Pedido de modernização produz `BLOCKED` e recomenda `modernize`. Evidência: `DECISION-SET-20261013-006`, R5, R6, R15 e R16.
+7. Conflito com decisão existente, inclusive o ADR `0001`, produz `BLOCKED`, recomenda `clarify` e preserva a decisão. Pesquisa presente fora de `ready`, ou fato externo que ainda pode mudar a documentação, produz `BLOCKED` e recomenda `research`, sem acesso à rede. Evidência: `DECISION-SET-20261013-006`.
+8. Spec ausente não bloqueia quando a evidência do repositório já mostra o que documentar. Spec nomeada ou presente que a documentação usaria, e que não está `ready`, produz `BLOCKED` e recomenda `to-spec`. O mesmo vale para desenho de arquitetura e `architecture-design`. Evidência: `DECISION-SET-20261013-006`.
+9. Alegação sem evidência não entra como comportamento atual. Quando nenhuma afirmação verificada permanece, o resultado é `BLOCKED` e não grava arquivo. Desenho futuro de spec ou desenho `ready` entra só marcado como desenho futuro. Evidência: a seção 7.12 e `DECISION-SET-20261013-006`.
 10. Documentação que já confere com a evidência permanece byte a byte. O `DOC_UPDATE` `ready` lista o arquivo em Files Considered but Unchanged. Evidência: o gate de documentação.
 11. Valor secreto citado no insumo não aparece na documentação nem no `DOC_UPDATE`. Evidência: o contrato compartilhado.
-12. Bloqueios combinados nomeiam cada pré-requisito e recomendam o mais cedo. A tentativa bloqueada não apaga atualização ou documentação já existente. A skill não reescreve arquivo cujo `created_by` não seja `docs`. Evidência: o contrato de falha e `DECISION-SET-20261013-005`.
-13. `docs` não invoca outra skill. Atualização pronta não autoriza implementação. A skill não grava o glossário, `CONTEXT.md` nem outro artefato, e não estende o ADR `0001`. Evidência: `DECISION-SET-20261013-005`.
-14. O catálogo final contém exatamente dezesseis skills `implemented` e duas `scaffold`. `docs` junta-se às quinze já implementadas. As duas que permanecem `scaffold` são `edge-case-analysis` e `modernize`. As listas de dependência de `docs` permanecem vazias. Evidência: `DECISION-SET-20261013-005`.
+12. Bloqueios combinados nomeiam cada pré-requisito e recomendam o mais cedo. A tentativa bloqueada não apaga atualização ou documentação já existente. A skill não reescreve arquivo cujo `created_by` não seja `docs`. Evidência: o contrato de falha e `DECISION-SET-20261013-006`.
+13. `docs` não invoca outra skill. Atualização pronta não autoriza implementação. A skill não grava o glossário, `CONTEXT.md` nem outro artefato, e não estende o ADR `0001`. Evidência: `DECISION-SET-20261013-006`.
+14. Depois do merge com `origin/main`, o catálogo contém exatamente dezessete skills `implemented` e uma `scaffold` (`modernize`). `docs` e `edge-case-analysis` estão ambas `implemented`. Antes desse merge, esta branch tinha dezesseis `implemented` e duas `scaffold` (`edge-case-analysis` e `modernize`). As listas de dependência de `docs` permanecem vazias. Evidência: `DECISION-SET-20261013-006`.
 
 ## Business Rules
 
@@ -101,7 +101,7 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 
 ## Technical Constraints
 
-- Alterar somente o necessário para operacionalizar `docs` e registrar a emenda v1-A16.
+- Alterar somente o necessário para operacionalizar `docs` e registrar a emenda v1-A17.
 - Não alterar o contrato de routing, as sequências canônicas, o template nem `contracts/artifacts.md`.
 - Não criar runtime nem executor da skill.
 - A escrita própria de `docs` é o `DOC_UPDATE` `ready` e a mudança de documentação sob o caminho seguro.
@@ -117,7 +117,7 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 
 ## Acceptance Criteria
 
-1. `docs` está `implemented` de forma consistente no manifest, no contrato e na fonte. O catálogo contém 16 skills `implemented` e 2 `scaffold`. As listas de dependência permanecem vazias.
+1. `docs` está `implemented` de forma consistente no manifest, no contrato e na fonte. Depois do merge, o catálogo contém 17 skills `implemented` e 1 `scaffold` (`modernize`). As listas de dependência permanecem vazias.
 2. Objetivo documental delimitado, com contexto, configuração segura e evidência que diverge da documentação, produz `DOC_UPDATE` `ready` com `created_by: docs`, a documentação atualizada, nenhum arquivo de `CHANGE_SET` e nenhuma autorização de implementação.
 3. A execução seguinte do mesmo objetivo, com insumos iguais, atualiza o mesmo arquivo e incrementa `version`, sem segunda edição da documentação.
 4. O mesmo objetivo, com o insumo alterado, atualiza o mesmo arquivo a partir da versão 1 e aplica só o acréscimo documental.
@@ -143,7 +143,7 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 24. A regressão determinística cobre a migração 16/2, as listas de dependência vazias e a preservação do esquema e do template de `DOC_UPDATE`. Nenhum arquivo de teste novo é adicionado.
 25. Os cenários de atualização, desenho futuro, bloqueio e sigilo ficam em evidência separada dos testes Node.
 26. `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-27. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A16 sem declarar capacidades não verificadas.
+27. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A17 sem declarar capacidades não verificadas.
 
 ## Risks
 
@@ -154,16 +154,16 @@ Tornar `docs` operacional na emenda v1-A16. Quando invocada, a skill cria ou atu
 
 ## Open Questions
 
-Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação das outras duas skills scaffold permanecem fora deste recorte.
+Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação de `modernize` permanecem fora deste recorte.
 
 ## Testing Decisions
 
 - Um bom teste observa comportamento externo: insumos entram, `DOC_UPDATE` `ready` sai com a documentação atualizada, ou o relatório `BLOCKED` sai sem arquivo e sem mudança desta tentativa. Não afirma redação interna da skill além do resultado observável.
-- O teste determinístico, no seam de catálogo já existente, passa a exigir `docs` entre as skills `implemented`, dezesseis no total e duas `scaffold`, preserva as listas de dependência vazias e preserva o esquema e o template atuais de `DOC_UPDATE`. Os casos negativos que usavam `docs` como amostra scaffold passam a usar `edge-case-analysis`, que permanece scaffold. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
+- O teste determinístico, no seam de catálogo já existente, passa a exigir `docs` e `edge-case-analysis` entre as skills `implemented`, dezessete no total e uma `scaffold`, preserva as listas de dependência vazias e preserva o esquema e o template atuais de `DOC_UPDATE`. Os casos negativos que usavam `docs` como amostra scaffold passaram a usar `edge-case-analysis` enquanto essa skill ainda era scaffold. No merge, `edge-case-analysis` ficou `implemented`, e esses casos passam a usar `modernize`. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
 - Os cenários conduzidos por agente aplicam o contrato e a fonte em diretório temporário e inspecionam o `DOC_UPDATE` e a árvore, ou a ausência de arquivo junto com o relatório `BLOCKED`. Cobrem atualização, repetição, desenho futuro, bloqueio e sigilo.
 - O precedente é a asserção de catálogo da v1-A15 e a evidência separada da suíte Node naquela emenda.
 - Asserções não serão relaxadas para acomodar a implementação.
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-005`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-006`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia. Esta spec foi registrada primeiro como v1-A16 com `SPEC-20261013-005`. `origin/main` publicou `edge-case-analysis` como v1-A16 e ocupou `SPEC-20261013-005`, `TEST-20261013-009`, `TEST-20261013-010`, `REVIEW-20261013-007`, `REVIEW-20261013-008` e `HANDOFF-20261013-005`. O identificador desta spec é `SPEC-20261013-006` e a emenda é v1-A17. A próxima emenda livre é v1-A18. Não reutilizar os identificadores de `edge-case-analysis`. A única skill que permanece scaffold é `modernize`.

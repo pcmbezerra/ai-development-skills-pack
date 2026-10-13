@@ -564,7 +564,7 @@
       "path": "skills/quality/edge-case-analysis/SKILL.md",
       "description": "Identify untested boundary/adversarial scenarios.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Identify untested boundary/adversarial scenarios",
       "inputs": [
         "SPEC",

@@ -1,12 +1,12 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-010
+id: TEST-20261013-012
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-005
-  - SPEC-20261013-005
+  - TICKET-SET-20261013-006
+  - SPEC-20261013-006
 ---
 
 ## Tests Added
