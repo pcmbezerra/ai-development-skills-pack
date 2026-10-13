@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The requested transfer would reverse ADR 0001.
+
+Evidence
+ADR-0001 records that blocked decision sets are persisted. The current state asks to stop persisting them.
+
+Missing prerequisite
+resolved decision
+
+Recommended next skill/action
+clarify
