@@ -1,0 +1,15 @@
+Status: BLOCKED
+
+Reason
+Project context is missing. Relevant tests fail before the change and the cause is unknown. The objective is not a bounded structural change.
+
+Evidence
+No project context was supplied. node --test greeting.test.mjs exited 1 before any edit. The request was "improve the code". greeting.js was left unchanged. No report file was written.
+
+Missing prerequisite
+project context
+confirmed cause of the failing test
+bounded structural objective
+
+Recommended next skill/action
+context-engineering

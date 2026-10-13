@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The request intentionally changes external behaviour and names no structural objective.
+
+Evidence
+The request was to change greeting() so it returns goodbye. greeting.js was left unchanged. No report file was written.
+
+Missing prerequisite
+structural objective that keeps external behaviour stable
+
+Recommended next skill/action
+implement

@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Project context is missing on this attempt.
+
+Evidence
+.ai/project.md was removed before this attempt. The existing refactor report, the existing refactor evidence, the report created by implement, the evidence created by tdd and greeting.js kept the same hashes. No file was deleted.
+
+Missing prerequisite
+project context
+
+Recommended next skill/action
+context-engineering

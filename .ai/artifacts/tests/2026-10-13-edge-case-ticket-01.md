@@ -1,17 +1,17 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-007
+id: TEST-20261013-009
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-004
-  - SPEC-20261013-004
+  - TICKET-SET-20261013-005
+  - SPEC-20261013-005
 ---
 
 ## Tests Added
 
-Nenhum arquivo de teste novo. A asserção de catálogo já existente em `tests/validate-skills.test.mjs` passou a exigir `edge-case-analysis` entre as skills `implemented`, quinze no total e três `scaffold`, listas de dependência vazias e `EDGE_CASE_REPORT` com esquema `defined`. As mutações que exigem uma skill `scaffold` continuam usando `refactor`.
+Nenhum arquivo de teste novo. A asserção de catálogo já existente em `tests/validate-skills.test.mjs` passa a exigir `edge-case-analysis` entre as skills `implemented`, dezesseis no total e duas `scaffold`, listas de dependência vazias e `EDGE_CASE_REPORT` com esquema `defined`. As mutações que exigem uma skill `scaffold` usam `docs`, porque `refactor` está `implemented` na v1-A15.
 
 ## Tests Executed
 

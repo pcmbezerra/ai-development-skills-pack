@@ -77,7 +77,7 @@ for (const [format,eol] of [['LF','\n'],['CRLF','\r\n']]) {
   }));
 }
 test('accepts one consistently implemented skill in the scaffold catalogue',()=>fixture(async root=>{
-  await implementSkill(root,'refactor');
+  await implementSkill(root,'docs');
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
   assert.equal(result.skills,18);
@@ -98,9 +98,9 @@ const failures = [
   ['implemented bootstrap migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='setup-ai-development-skills').status='scaffold'), /setup-ai-development-skills: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['implemented context migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').status='scaffold'), /context-engineering: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],
-  ['skill status divergence in contract', root=>changeText(root,'contracts/skills/refactor.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')), /refactor: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
-  ['skill status divergence in source', root=>changeText(root,'skills/development/refactor/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')), /refactor: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
-  ['skill status divergence in manifest', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='refactor').status='implemented'), /refactor: status mismatch \(manifest implemented, contract scaffold, source scaffold\)/],
+  ['skill status divergence in contract', root=>changeText(root,'contracts/skills/docs.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')), /docs: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
+  ['skill status divergence in source', root=>changeText(root,'skills/documentation/docs/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')), /docs: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
+  ['skill status divergence in manifest', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='docs').status='implemented'), /docs: status mismatch \(manifest implemented, contract scaffold, source scaffold\)/],
   ['implemented skill with pending workflow', async root=>{
     await implementSkill(root,'implement');
     await changeText(root,'contracts/skills/implement.md',s=>`${s}\nPending implementation.\n`);
@@ -109,11 +109,11 @@ const failures = [
     await implementSkill(root,'implement');
     await changeText(root,'skills/development/implement/SKILL.md',s=>`${s}\nDo not claim to have executed this skill from this skeleton.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
-  ['implemented skill without operational workflow', root=>markSkillImplemented(root,'refactor'), /refactor: implemented skill must define workflow in contract and source/],
+  ['implemented skill without operational workflow', root=>markSkillImplemented(root,'docs'), /docs: implemented skill must define workflow in contract and source/],
   ['implemented skill with workflow placeholder', async root=>{
-    const skill = await implementSkill(root,'refactor');
+    const skill = await implementSkill(root,'docs');
     await changeText(root,skill.path,s=>`${s}\nTBD\n`);
-  }, /refactor: implemented skill declares pending or unavailable workflow/],
+  }, /docs: implemented skill declares pending or unavailable workflow/],
   ['implemented skill with unsupported operational execution', async root=>{
     const skill = await implementSkill(root,'implement');
     await changeText(root,skill.path,s=>`${s}\nOperational execution remains unsupported.\n`);
@@ -157,10 +157,11 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current catalogue implements edge-case-analysis, diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
+test('current catalogue implements edge-case-analysis, refactor, diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','edge-case-analysis','code-review']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,3);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','refactor','edge-case-analysis','code-review']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,2);
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='refactor').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='diagnose').dependencies,{required:[],conditional:[],optional:['tdd']});
   assert.deepEqual(manifest.artifacts.DIAGNOSIS_REPORT,{
     contract: 'contracts/artifacts.md',
@@ -208,6 +209,13 @@ test('current catalogue implements edge-case-analysis, diagnose, research, hando
     contract: 'contracts/artifacts.md',
     schema: 'named-only',
   });
+  const artifacts = await readFile(join(source,'contracts/artifacts.md'),'utf8');
+  assert.match(artifacts, /\*\*Producer:\*\* `implement` or `refactor`/);
+  assert.match(artifacts, /\*\*Producer:\*\* `tdd`, `implement` or `refactor`/);
+  const implementationTemplate = await readFile(join(source,'templates/artifacts/implementation-report.md'),'utf8');
+  assert.match(implementationTemplate, /^created_by: implement$/m);
+  const evidenceTemplate = await readFile(join(source,'templates/artifacts/test-evidence.md'),'utf8');
+  assert.match(evidenceTemplate, /^created_by: tdd$/m);
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='architecture-design').dependencies,{required:[],conditional:[{skill:'research',when:'external facts affect decisions'},{skill:'domain-modelling',when:'business invariants affect design'}],optional:[]});
   assert.deepEqual(manifest.artifacts.ARCHITECTURE_DESIGN,{
     contract: 'contracts/artifacts.md',

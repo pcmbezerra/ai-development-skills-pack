@@ -1,18 +1,18 @@
 ---
 artifact: implementation_report
-id: IMPLEMENTATION-20261013-008
+id: IMPLEMENTATION-20261013-010
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-004
-  - SPEC-20261013-004
-  - TEST-20261013-008
+  - TICKET-SET-20261013-005
+  - SPEC-20261013-005
+  - TEST-20261013-010
 ---
 
 ## Input
 
-Ticket 02 de `TICKET-SET-20261013-004`. Objetivo: registrar os dezoito cenários e reconciliar a documentação da v1-A15.
+Ticket 02 de `TICKET-SET-20261013-005`. Objetivo: registrar os dezoito cenários e reconciliar a documentação da v1-A16.
 
 ## Plan
 
@@ -24,7 +24,7 @@ Documentação de proveniência, README, arquitetura, padrões, estado do projet
 
 ## Behaviour Changed
 
-Nenhuma skill nova foi implementada neste ticket. A documentação passa a declarar 15 skills `implemented` e 3 `scaffold`.
+Nenhuma skill nova foi implementada neste ticket. A documentação passa a declarar 16 skills `implemented` e 2 `scaffold`.
 
 ## Validation Performed
 
@@ -32,7 +32,7 @@ Checagem dos dezoito diretórios: dez relatórios `ready` com as sete seções, 
 
 ## Tests
 
-`TEST-20261013-008`.
+`TEST-20261013-010`.
 
 ## Known Limitations
 
@@ -40,7 +40,7 @@ A matriz é agent-driven e não certifica os quatro produtos. O log da checagem 
 
 ## Remaining Work
 
-Nenhum restante nesta spec. A frontier de `SPEC-20261013-004` fica vazia com este ticket e o ticket 01 concluídos. O próximo scaffold da sequência de feature nova é `docs`.
+Nenhum restante nesta spec. A frontier de `SPEC-20261013-005` fica vazia com este ticket e o ticket 01 concluídos. O próximo scaffold da sequência de feature nova é `docs`.
 
 ## Change Reference
 

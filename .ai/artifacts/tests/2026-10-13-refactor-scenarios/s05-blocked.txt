@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The behaviour baseline was not observed. Tests were not run and the objective named no check that was observed.
+
+Evidence
+CONTEXT-S05 is present. greeting.test.mjs was not executed. greeting.js was left unchanged. No report file was written.
+
+Missing prerequisite
+behaviour baseline
+
+Recommended next skill/action
+Observe the behaviour baseline, then retry refactor.

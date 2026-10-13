@@ -525,7 +525,7 @@
       "path": "skills/development/refactor/SKILL.md",
       "description": "Improve internal structure without changing external behaviour.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Improve internal structure without changing external behaviour",
       "inputs": [
         "refactor objective",

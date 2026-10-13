@@ -265,7 +265,7 @@ unconfirmed hypothesis
 
 ## 7.8 Test Evidence
 
-**Producer:** `tdd` or `implement`
+**Producer:** `tdd`, `implement` or `refactor`
 
 ```text
 TEST_EVIDENCE
@@ -288,7 +288,7 @@ Environment Limitations
 
 ## 7.9 Implementation Report
 
-**Producer:** `implement`
+**Producer:** `implement` or `refactor`
 
 ```text
 IMPLEMENTATION_REPORT

@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Project context is missing.
+
+Evidence
+No project context file was observed in /tmp/refactor-a13/s04. greeting.js was left unchanged.
+
+Missing prerequisite
+project context
+
+Recommended next skill/action
+context-engineering

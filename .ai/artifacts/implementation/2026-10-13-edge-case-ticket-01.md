@@ -1,18 +1,18 @@
 ---
 artifact: implementation_report
-id: IMPLEMENTATION-20261013-007
+id: IMPLEMENTATION-20261013-009
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-004
-  - SPEC-20261013-004
-  - TEST-20261013-007
+  - TICKET-SET-20261013-005
+  - SPEC-20261013-005
+  - TEST-20261013-009
 ---
 
 ## Input
 
-Ticket 01 de `TICKET-SET-20261013-004`. Objetivo: publicar o workflow de `edge-case-analysis` e migrar o catálogo para 15 skills `implemented` e 3 `scaffold`.
+Ticket 01 de `TICKET-SET-20261013-005`. Objetivo: publicar o workflow de `edge-case-analysis` e migrar o catálogo para 16 skills `implemented` e 2 `scaffold` depois que `refactor` ocupou a v1-A15.
 
 ## Plan
 
@@ -28,7 +28,7 @@ Estender a asserção de catálogo, observar o RED, publicar o mesmo workflow no
 
 ## Behaviour Changed
 
-`edge-case-analysis` passa a ter workflow operacional. O catálogo fica em 15 skills `implemented` e 3 `scaffold`. As listas de dependência permanecem vazias. `CHANGE_SET` continua named-only. Relatório `ready` não autoriza `implement` a mudar comportamento do produto. `implement` não passa a invocar esta skill.
+`edge-case-analysis` passa a ter workflow operacional. O catálogo fica em 16 skills `implemented` e 2 `scaffold`. As listas de dependência permanecem vazias. `CHANGE_SET` continua named-only. Relatório `ready` não autoriza `implement` a mudar comportamento do produto. `implement` não passa a invocar esta skill.
 
 ## Validation Performed
 
@@ -36,7 +36,7 @@ RED focado antes da migração. GREEN focado depois. `npm test` 48/48. `node scr
 
 ## Tests
 
-`TEST-20261013-007`.
+`TEST-20261013-009`.
 
 ## Known Limitations
 
