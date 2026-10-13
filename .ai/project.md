@@ -4,7 +4,7 @@ Estado verificado em 2026-10-13. A suíte estrutural passou neste Linux com Node
 
 Objetivo: manter 18 skills reutilizáveis de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. Entrega atual: catálogo, contratos, templates, descritores declarativos, CLI de ajuda/validação e testes do validador.
 
-`context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `code-review` e `handoff` possuem workflows operacionais; as outras 6 skills permanecem scaffold. Sync, doctor, list e routing automático não estão implementados. A distribuição por target está implementada.
+`context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `code-review`, `handoff` e `diagnose` possuem workflows operacionais; as outras 5 skills permanecem scaffold. Sync, doctor, list e routing automático não estão implementados. A distribuição por target está implementada.
 
 GitHub Issues com fallback local e rótulos padrão foram confirmados pelo mantenedor. A configuração deste repositório foi preenchida manualmente; a conformidade do bootstrap foi demonstrada separadamente em fixtures locais.
 

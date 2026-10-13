@@ -1,6 +1,18 @@
 # Validation result
 
-## Current observation — operational handoff, Linux, 2026-10-13
+## Current observation — operational diagnose, Linux, 2026-10-13
+
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A13 implements `diagnose` without adding an executor, dependency, schema, template, target or CLI command. A classified failure uses the existing diagnosis template. A probable cause, an unconfirmed hypothesis, or a confirmed cause without regression evidence does not authorize implementation. A blocked path writes no file from that attempt. Optional `tdd` is not invoked. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 13 `implemented` and 5 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-004` records fourteen isolated agent-conducted scenarios in a temporary directory: a confirmed cause with an existing failing test, an unchanged rerun, an in-place version update, a probable cause, an unconfirmed hypothesis, a confirmed cause without regression evidence, missing project context, a blocked project context, an unknown symptom, an unobserved repository, an omitted secret, a conflict with an existing decision, an external fact, and combined blockers that preserve an existing diagnosis and application file.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+This run covers the structural suite on Linux with Node.js 22 and the agent-applied scenarios. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified. An earlier same-day run recorded `gh issue list` returning `Resource not accessible by integration`. No issue was created.
+
+## Previous observation — operational handoff, Linux, 2026-10-13
 
 Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A12 implements `handoff` without adding an executor, dependency, schema, template, target or CLI command. A verified transfer uses the existing handoff template. A non-ready input is recorded and does not authorize implementation. A blocked path writes no file from that attempt. ADR `0001` is unchanged.
 

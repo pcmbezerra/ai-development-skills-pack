@@ -1,0 +1,14 @@
+Status: BLOCKED
+
+Reason
+Project context is missing and the symptom is not known.
+
+Evidence
+No project-context input was observed. The request did not name a failure.
+
+Missing prerequisite
+project context
+symptom
+
+Recommended next skill/action
+context-engineering
