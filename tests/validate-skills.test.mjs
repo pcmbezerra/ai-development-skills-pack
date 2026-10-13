@@ -43,6 +43,27 @@ async function markSkillImplemented(root, name) {
     .replace('Do not claim to have executed this skill from this skeleton.', 'Execute the workflow and report its observable result.'));
   return skill;
 }
+async function restoreModernizeScaffold(root) {
+  await changeManifest(root,m=>m.skills.find(s=>s.name==='modernize').status='scaffold');
+  await changeText(root,'contracts/skills/modernize.md',s=>`${s
+    .replace('Status: implemented.', 'Status: scaffold.')
+    .replace(/## Workflow\r?\n\r?\n[\s\S]*?\r?\n## Quality gates/,'## Workflow\n\nPending implementation. Read inputs and the shared artifact contract; operational steps are outside this scaffold.\n\n## Quality gates')}\n This scaffold does not execute the workflow or produce ready artifacts.\n`);
+  await writeFile(join(root,'skills/modernization/modernize/SKILL.md'),`---
+name: modernize
+description: "Plan and orchestrate legacy modernization."
+---
+
+# modernize
+
+Status: scaffold; the operational workflow is not implemented.
+
+When preparing this skill for implementation, read its [contract](../../../contracts/skills/modernize.md) for inputs, outputs, constraints, gates and failure behaviour.
+
+Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+
+Do not claim to have executed this skill from this skeleton.
+`);
+}
 async function implementSkill(root, name) {
   const skill = await markSkillImplemented(root,name);
   await changeText(root,skill.contract,s=>s.replace(
@@ -77,6 +98,7 @@ for (const [format,eol] of [['LF','\n'],['CRLF','\r\n']]) {
   }));
 }
 test('accepts one consistently implemented skill in the scaffold catalogue',()=>fixture(async root=>{
+  await restoreModernizeScaffold(root);
   await implementSkill(root,'modernize');
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
@@ -98,9 +120,9 @@ const failures = [
   ['implemented bootstrap migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='setup-ai-development-skills').status='scaffold'), /setup-ai-development-skills: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['implemented context migration status divergence', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').status='scaffold'), /context-engineering: status mismatch \(manifest scaffold, contract implemented, source implemented\)/],
   ['unknown skill status', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='implement').status='experimental'), /implement: invalid skill status experimental/],
-  ['skill status divergence in contract', root=>changeText(root,'contracts/skills/modernize.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')), /modernize: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
-  ['skill status divergence in source', root=>changeText(root,'skills/modernization/modernize/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')), /modernize: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
-  ['skill status divergence in manifest', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='modernize').status='implemented'), /modernize: status mismatch \(manifest implemented, contract scaffold, source scaffold\)/],
+  ['skill status divergence in contract', async root=>{ await restoreModernizeScaffold(root); await changeText(root,'contracts/skills/modernize.md',s=>s.replace('Status: scaffold.', 'Status: implemented.')); }, /modernize: status mismatch \(manifest scaffold, contract implemented, source scaffold\)/],
+  ['skill status divergence in source', async root=>{ await restoreModernizeScaffold(root); await changeText(root,'skills/modernization/modernize/SKILL.md',s=>s.replace('Status: scaffold;', 'Status: implemented;')); }, /modernize: status mismatch \(manifest scaffold, contract scaffold, source implemented\)/],
+  ['skill status divergence in manifest', async root=>{ await restoreModernizeScaffold(root); await changeManifest(root,m=>m.skills.find(s=>s.name==='modernize').status='implemented'); }, /modernize: status mismatch \(manifest implemented, contract scaffold, source scaffold\)/],
   ['implemented skill with pending workflow', async root=>{
     await implementSkill(root,'implement');
     await changeText(root,'contracts/skills/implement.md',s=>`${s}\nPending implementation.\n`);
@@ -109,8 +131,9 @@ const failures = [
     await implementSkill(root,'implement');
     await changeText(root,'skills/development/implement/SKILL.md',s=>`${s}\nDo not claim to have executed this skill from this skeleton.\n`);
   }, /implement: implemented skill declares pending or unavailable workflow/],
-  ['implemented skill without operational workflow', root=>markSkillImplemented(root,'modernize'), /modernize: implemented skill must define workflow in contract and source/],
+  ['implemented skill without operational workflow', async root=>{ await restoreModernizeScaffold(root); await markSkillImplemented(root,'modernize'); }, /modernize: implemented skill must define workflow in contract and source/],
   ['implemented skill with workflow placeholder', async root=>{
+    await restoreModernizeScaffold(root);
     const skill = await implementSkill(root,'modernize');
     await changeText(root,skill.path,s=>`${s}\nTBD\n`);
   }, /modernize: implemented skill declares pending or unavailable workflow/],
@@ -157,10 +180,16 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current catalogue implements docs, edge-case-analysis, refactor, diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
+test('current catalogue implements modernize, docs, edge-case-analysis, refactor, diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','refactor','edge-case-analysis','code-review','docs']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,1);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','refactor','edge-case-analysis','code-review','docs','modernize']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,0);
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='modernize').dependencies,{required:[],conditional:[],optional:['diagnose','research','architecture-design','tdd','to-tickets']});
+  assert.deepEqual(manifest.artifacts.MODERNIZATION_PLAN,{
+    contract: 'contracts/artifacts.md',
+    template: 'templates/artifacts/modernization-plan.md',
+    schema: 'defined',
+  });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='docs').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.artifacts.DOC_UPDATE,{
     contract: 'contracts/artifacts.md',
