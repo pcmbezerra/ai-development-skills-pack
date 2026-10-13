@@ -1,6 +1,6 @@
 # AI - Development Skills Pack
 
-Baseline arquitetural v1 + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7/v1-A8/v1-A9/v1-A10/v1-A11/v1-A12/v1-A13/v1-A14/v1-A15/v1-A16/v1-A17 com exatamente 18 skills para Cursor, Codex, Gemini Antigravity e Claude Code, reconciliado com o [contrato completo](references/architecture-contract-v1.md), seções 1–27. Requer Node.js >=22 e Git; sem dependências npm e sem necessidade de `npm install`.
+Baseline arquitetural v1 + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7/v1-A8/v1-A9/v1-A10/v1-A11/v1-A12/v1-A13/v1-A14/v1-A15/v1-A16/v1-A17/v1-A18 com exatamente 18 skills para Cursor, Codex, Gemini Antigravity e Claude Code, reconciliado com o [contrato completo](references/architecture-contract-v1.md), seções 1–27. Requer Node.js >=22 e Git; sem dependências npm e sem necessidade de `npm install`.
 
 ```sh
 npm run validate
@@ -13,7 +13,7 @@ node bin/ai-dev-skills.mjs validate --target codex --path ../consumer-repo
 node bin/ai-dev-skills.mjs --help
 ```
 
-O [manifest](manifest/skills.json) declara classificação primária, entradas/saídas, artefatos definidos e apenas nomeados, dependências obrigatórias, condicionais e opcionais. Cada skill pode estar `scaffold` ou `implemented`, com o mesmo estado no manifest, contrato e fonte; `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `handoff`, `research`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `refactor`, `edge-case-analysis`, `code-review`, `diagnose` e `docs` estão `implemented` e a outra permanece `scaffold`. Os quatro targets têm descritores declarativos `implemented`, independentes do ciclo de vida das skills.
+O [manifest](manifest/skills.json) declara classificação primária, entradas/saídas, artefatos definidos e apenas nomeados, dependências obrigatórias, condicionais e opcionais. Cada skill pode estar `scaffold` ou `implemented`, com o mesmo estado no manifest, contrato e fonte; `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `handoff`, `research`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `refactor`, `edge-case-analysis`, `code-review`, `diagnose`, `docs` e `modernize` estão `implemented` e nenhuma permanece `scaffold`. Os quatro targets têm descritores declarativos `implemented`, independentes do ciclo de vida das skills.
 
 A CLI empacota, instala e valida o catálogo completo por target. `package` sempre cria um subdiretório por target sob `--output`; `install` escreve no diretório nativo do projeto de destino; `validate --target` exige igualdade com a fonte canônica. Reinstalação idêntica é idempotente. Uma skill existente e divergente bloqueia toda a operação antes da cópia e nunca é sobrescrita.
 
