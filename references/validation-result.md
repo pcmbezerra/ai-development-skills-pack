@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — operational tdd and code-review, macOS, 2026-10-10
+## Current observation — structural suite on Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. `node_modules` was absent. The scripts use Node.js built-ins only. This run re-executes the structural suite and CLI after amendment v1-A11. It does not re-run the agent-driven semantic matrices and does not certify live discovery in Cursor, Codex, Gemini Antigravity or Claude Code.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 11 `implemented` and 7 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos.
+- `git diff --check`: PASS on the clean tree before this note.
+- `node bin/ai-dev-skills.mjs --help` and `node bin/ai-dev-skills.mjs validate`: exit 0.
+
+`gh` is on PATH and authenticated as the Cursor integration. `gh issue list` returned `Resource not accessible by integration`. Remote issues and labels remain unreconciled. No issue was created.
+
+Node.js 22 and Linux structural execution are verified by this run. Live product discovery remains unverified.
+
+## Previous observation — operational tdd and code-review, macOS, 2026-10-10
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A11 implements `tdd` and `code-review` without adding an executor, dependency, schema, template, target or CLI command. `tdd` writes its own ready test evidence and does not rewrite evidence whose `created_by` is `implement`. `code-review` writes a ready review report and does not edit code. A blocked path writes no file from that attempt. ADR `0001` is unchanged. `implement` still does not invoke either skill.
 

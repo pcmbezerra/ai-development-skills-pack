@@ -7,4 +7,6 @@
 - `gh` não encontrado no PATH da sessão. Acesso/autenticação e estado remoto das issues não verificados.
 - Checkout inspecionado: contratos/templates com CRLF; índice Git com LF.
 
-O relatório anterior registra macOS e Node v26.5.0, com 17 testes aprovados em 2026-10-05. Nesta sessão Windows, validação falhou e 17/20 testes passaram. Linux e instalações reais nos quatro targets (Cursor, Codex, Gemini Antigravity e Claude Code) permanecem não verificados.
+O relatório anterior registra macOS e Node v26.5.0, com 17 testes aprovados em 2026-10-05. Nesta sessão Windows, validação falhou e 17/20 testes passaram. Naquela data, Linux e instalações reais nos quatro targets (Cursor, Codex, Gemini Antigravity e Claude Code) permaneciam não verificados.
+
+- Ambiente observado em 2026-10-13: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. `npm run validate` e `npm test` PASS, 48/48. `gh` está no PATH; `gh issue list` respondeu `Resource not accessible by integration`. A descoberta real nos quatro targets permanece sem verificação.
