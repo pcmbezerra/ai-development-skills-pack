@@ -199,7 +199,7 @@
       "path": "skills/discovery/research/SKILL.md",
       "description": "Establish externally verifiable technical facts.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Establish externally verifiable technical facts",
       "inputs": [
         "research question",

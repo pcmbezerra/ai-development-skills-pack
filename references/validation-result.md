@@ -1,12 +1,26 @@
 # Validation result
 
-## Current observation — operational diagnose, Linux, 2026-10-13
+## Current observation — operational research, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A14 implements `research` without adding an executor, dependency, schema, template, target or CLI command. A question that is an external fact, with project context, writes one ready research report. Unsupported claims stay in Unknowns when external access cannot be used. A blocked path writes no file from that attempt. A ready report whose unknowns can still change the requested next step does not authorize or recommend a consumer. ADR `0001` is unchanged. The skill does not invoke `to-spec`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 14 `implemented` and 4 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-005` records the catalogue RED before migration and GREEN after it.
+- `TEST-20261013-006` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited repository fact, an unchanged rerun, an in-place version update, an unresolved external claim, missing project context, a missing question, a project choice, a conflict with an existing decision, an omitted secret, a premise left unresolved, a blocked decision set whose blocker is the researched fact, a different ambiguity, an evidenced absence, no neighboring artifacts, combined blockers, a rejected alternative, a separated recommendation, and a rerun that preserves the unknown.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A13 observation below records 13 `implemented` and 5 `scaffold`, the catalogue at the close of `diagnose`.
+
+## Previous observation — operational diagnose, Linux, 2026-10-13
 
 Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A13 implements `diagnose` without adding an executor, dependency, schema, template, target or CLI command. A classified failure uses the existing diagnosis template. A probable cause, an unconfirmed hypothesis, or a confirmed cause without regression evidence does not authorize implementation. A blocked path writes no file from that attempt. Optional `tdd` is not invoked. ADR `0001` is unchanged.
 
 - `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 13 `implemented` and 5 `scaffold`; four implemented target descriptors.
 - `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
 - `git diff --check`: PASS.
+- `TEST-20261013-003` records the catalogue RED before migration and GREEN after it for `diagnose`.
 - `TEST-20261013-004` records fourteen isolated agent-conducted scenarios in a temporary directory: a confirmed cause with an existing failing test, an unchanged rerun, an in-place version update, a probable cause, an unconfirmed hypothesis, a confirmed cause without regression evidence, missing project context, a blocked project context, an unknown symptom, an unobserved repository, an omitted secret, a conflict with an existing decision, an external fact, and combined blockers that preserve an existing diagnosis and application file.
 - The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
 

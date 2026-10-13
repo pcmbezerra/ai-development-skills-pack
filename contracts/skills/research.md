@@ -1,6 +1,6 @@
 # research
 
-Status: scaffold. Primary invocation: user.
+Status: implemented. Primary invocation: user.
 
 ## Goal
 
@@ -30,14 +30,33 @@ External access SHALL be optional.
 
 If unavailable, unsupported claims SHALL remain explicitly unresolved.
 
+Restrictions:
+
+```text
+MUST NOT invent a fact or a business or architectural decision
+MUST NOT persist a draft, blocked or partial research report
+MUST NOT invoke the recommended skill
+MUST NOT modify application code
+MUST NOT add a dependency
+MUST NOT present an unsupported claim as a finding
+```
+
 ## Workflow
 
-Pending implementation. Read inputs and the shared artifact contract; operational steps are outside this scaffold.
+1. Read the invoked research question, the project context and the decision context when it is present. A glossary entry is not a decision and does not by itself establish a fact. Never copy secret values; record only their existence and effect. Record blockers through step 6 and continue; the only BLOCKED return is step 8.
+2. When project context is missing, record that blocker and recommend `context-engineering`. Do not run that skill and do not add it as a dependency.
+3. The objective is the research question. When no research question is present, record that blocker and recommend `clarify`. A question that chooses scope, behaviour, architecture, data model, security or acceptance criteria is a material decision, not an external fact. Record that blocker and recommend `clarify`. Do not run that skill and do not add it as a dependency. An external fact is information outside the repository, including current API behaviour, library capabilities, version compatibility, platform limits, standards and framework behaviour, as named by R4.
+4. Read decision context when it is present: a decision set, an ADR and an explicit decision in the request or project context. A missing decision set does not block when the question is already an external fact. A decision set that is not `ready` does not block when its blocking question is the external fact this question asks to establish. Research does not close that decision and does not edit the decision set. When a present decision set is not `ready` because a different material ambiguity can change which fact to establish, record a decision blocker that recommends `clarify`. When the question conflicts with an existing decision, including ADR `0001`, preserve that decision and record a decision blocker that recommends `clarify`. Do not supersede the decision and do not extend ADR `0001`.
+5. Do not invent a fact, a business decision or an architectural decision. A premise does not become a finding and does not by itself block the report. Record the premise under Unknowns, labelled as a premise. A recommendation does not become a resolved decision. Leave a rejected alternative out of the findings. When a claim is not supported by repository evidence, project context or a cited external source, record it under Unknowns and do not place it under Findings.
+6. Prefer repository evidence and project context. Cite the input used for each finding. When the fact is already in those inputs, do not use external access. The optional external research capability stays optional and is not a dependency. When that capability cannot be used, leave the unsupported claim explicitly unresolved under Unknowns, cite that the claim has no source, and do not present the claim as a finding. Do not add a dependency and do not invent a source.
+7. When no blocker remains, write one research report for that question under `.ai/artifacts/research/`, using the existing template and frontmatter and including every required section. Set status `ready` and `created_by` to `research`. Do not leave template draft markers. List the consumed artifact identifiers in `inputs`. Separate findings from the recommendation. On a later execution of the same question, update that same file and increment `version`. The research report that already cites that question is the report for it. Do not create a duplicate. When the consumed inputs are unchanged, keep the material sections, status and recorded findings unchanged.
+8. When any blocker remains, write no file. Return one BLOCKED report with `Status: BLOCKED`, `Reason`, `Evidence`, `Missing prerequisite` and `Recommended next skill/action`, and name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the skill for the earliest blocker, in this order: missing project context, then a missing research question or a question that is not an external fact, then a decision conflict or a decision-set problem that can change which fact to establish.
+9. Stop. When a research report was written, report its path and status. A `ready` report whose unknowns cannot change the requested next step authorizes the consumer whose existing routing prerequisite is a ready research report. Recommend at most that consumer and do not invoke it: `to-spec` when the canonical sequence has no ready specification yet, otherwise the consumer already named by routing. A `ready` report whose unknowns can still change the requested next step does not authorize that step and does not recommend a consumer. When the requester did not ask for a step beyond the report, report that it is `ready` and whether a downstream consumer is authorized. Do not invoke another skill. Do not write the glossary, `CONTEXT.md`, a decision set, a specification, any other artifact, or extend ADR `0001`.
 
 ## Quality gates
 
-Clearly separate facts from recommendations, cite evidence, and leave unsupported claims unresolved when external access is unavailable. Blocked inputs cannot authorize implementation.
+Apply the required sections in the [artifact contract](../artifacts.md). Facts and recommendations stay clearly separated. Cite evidence for each finding. When external access cannot be used, unsupported claims stay explicitly unresolved and are not findings. A premise stays labelled under Unknowns and does not become a finding. Only a `ready` research report is persisted. A missing project context, a missing research question, a question that is a material decision rather than an external fact, a conflict with an existing decision, and a decision-set problem that can change which fact to establish do not authorize a research report. ADR `0001` stays limited to decision sets. Dependencies stay empty. The optional external research capability stays optional. Blocked inputs cannot authorize implementation.
 
 ## Failure behaviour
 
-Follow the [failure contract](../failure.md): Status: BLOCKED; Reason; Evidence; Missing prerequisite; Recommended next skill/action. This scaffold does not execute the workflow or produce ready artifacts.
+Follow the [failure contract](../failure.md): Status: BLOCKED; Reason; Evidence; Missing prerequisite; Recommended next skill/action. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a missing research question or a question that is not an external fact recommends `clarify`; a decision conflict or a decision-set problem that can change which fact to establish recommends `clarify`. Do not leave a research-report file. The only file this skill writes is a ready research report. Never present the BLOCKED result as a ready research report.
