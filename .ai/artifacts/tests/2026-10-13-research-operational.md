@@ -1,17 +1,17 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-004
+id: TEST-20261013-006
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-002
-  - SPEC-20261013-002
+  - TICKET-SET-20261013-003
+  - SPEC-20261013-003
 ---
 
 ## Tests Added
 
-Nenhum arquivo de teste Node novo. A asserção de catálogo do ticket 01 já exige 13 skills `implemented` e 5 `scaffold`. Os dezoito cenários abaixo são avaliação agent-driven, separada da suíte Node.
+Nenhum arquivo de teste Node novo. A asserção de catálogo do ticket 01 já exige 14 skills `implemented` e 4 `scaffold`. Os dezoito cenários abaixo são avaliação agent-driven, separada da suíte Node.
 
 ## Tests Executed
 
@@ -56,7 +56,7 @@ Cada cenário partiu de uma entrada isolada em `/tmp/research-a12`, aplicou `con
 - `npm run skills:validate`: PASS.
 - `npm test`: PASS, 48/48, sem falhas, skips ou TODOs, na observação do ticket 01 e reexecutado no fechamento.
 - `git diff --check`: executado no fechamento.
-- Manifest: treze skills `implemented` e cinco `scaffold`; quatro targets preservados; `RESEARCH_REPORT` com esquema `defined`.
+- Manifest: quatorze skills `implemented` e quatro `scaffold`; quatro targets preservados; `RESEARCH_REPORT` com esquema `defined`.
 
 ## Failures
 

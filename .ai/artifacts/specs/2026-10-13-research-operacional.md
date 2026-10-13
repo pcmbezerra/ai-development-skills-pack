@@ -1,18 +1,18 @@
 ---
 artifact: spec
-id: SPEC-20261013-002
+id: SPEC-20261013-003
 version: 1
 status: ready
 created_by: to-spec
 inputs:
-  - DECISION-SET-20261013-002
+  - DECISION-SET-20261013-003
   - HANDOFF-20261006-001
   - SPEC-20261010-001
   - CONTEXT.md
   - ADR-0001
 ---
 
-# research operacional — emenda v1-A13
+# research operacional — emenda v1-A14
 
 ## Problem
 
@@ -20,11 +20,11 @@ A skill `research` existe apenas como scaffold. O contrato, o template de `RESEA
 
 ## Goal
 
-Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabelece fatos verificáveis, grava um `RESEARCH_REPORT` `ready` e devolve `BLOCKED` sem arquivo quando o insumo não autoriza o relatório.
+Tornar `research` operacional na emenda v1-A14. Quando invocada, a skill estabelece fatos verificáveis, grava um `RESEARCH_REPORT` `ready` e devolve `BLOCKED` sem arquivo quando o insumo não autoriza o relatório.
 
 ## Scope
 
-- Implementar o workflow de `research` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-002` e a regra de status `implemented` em `contracts/skill-contract.md`.
+- Implementar o workflow de `research` no contrato e na fonte, com o mesmo texto operacional nos dois lugares. Evidência: `DECISION-SET-20261013-003` e a regra de status `implemented` em `contracts/skill-contract.md`.
 - Migrar `research` de `scaffold` para `implemented` no manifest, no contrato e na fonte.
 - Consumir a pergunta, o contexto do projeto e o contexto de decisão quando existir. Gravar um único relatório `ready` por pergunta em `.ai/artifacts/research/`, com o template existente e `created_by: research`.
 - Separar findings de recomendação. Citar a evidência de cada finding. Deixar alegação sem fonte em Unknowns.
@@ -35,7 +35,7 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 - Manter o ADR `0001` restrito ao conjunto de decisões e sem modificação. Não reabrir `SPEC-20261010-001`.
 - Preservar as listas de dependência vazias e a capability opcional `external-research`.
 - Estender a regressão estrutural de catálogo já existente e executar os cenários por agente, separados da suíte Node.
-- Registrar a mudança como emenda v1-A13 e reconciliar a documentação que declara a contagem de skills.
+- Registrar a mudança como emenda v1-A14 e reconciliar a documentação que declara a contagem de skills.
 
 ## Non-goals
 
@@ -49,7 +49,7 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 - Gravar relatório `draft`, `blocked` ou parcial.
 - Apagar relatório existente.
 - Invocar `to-spec`, `clarify`, `context-engineering` ou qualquer outra skill a partir de `research`.
-- Alterar `handoff`, fechada na v1-A12. Implementar `diagnose`, `refactor`, `edge-case-analysis`, `docs`, `modernize` ou qualquer outra skill scaffold.
+- Alterar `handoff`, fechada na v1-A12, ou `diagnose`, fechada na v1-A13. Implementar `refactor`, `edge-case-analysis`, `docs`, `modernize` ou qualquer outra skill scaffold.
 - Adicionar comando CLI ou target.
 - Certificar execução real em Cursor, Codex, Gemini Antigravity ou Claude Code.
 - Acessar a rede para responder os cenários desta emenda.
@@ -62,19 +62,19 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 
 ## Functional Requirements
 
-1. `research`, quando invocada, lê a pergunta, o contexto do projeto e o contexto de decisão presente, e não copia valor secreto. Evidência: `DECISION-SET-20261013-002`.
-2. Quando o gate passa, a skill grava um relatório `ready` em `.ai/artifacts/research/`, com o template existente, `created_by: research`, as seções obrigatórias preenchidas e os identificadores consumidos em `inputs`. O arquivo não conserva marcador de rascunho. Findings e recomendação ficam separados. Evidência: `DECISION-SET-20261013-002`.
+1. `research`, quando invocada, lê a pergunta, o contexto do projeto e o contexto de decisão presente, e não copia valor secreto. Evidência: `DECISION-SET-20261013-003`.
+2. Quando o gate passa, a skill grava um relatório `ready` em `.ai/artifacts/research/`, com o template existente, `created_by: research`, as seções obrigatórias preenchidas e os identificadores consumidos em `inputs`. O arquivo não conserva marcador de rascunho. Findings e recomendação ficam separados. Evidência: `DECISION-SET-20261013-003`.
 3. Fato já presente no repositório ou no contexto do projeto é citado sem acesso externo. Evidência: o contrato de `research`.
 4. Acesso externo que não pode ser usado deixa a alegação em Unknowns. O relatório fica `ready` e não autoriza o próximo passo. Evidência: a capability `external-research`.
 5. Contexto do projeto ausente produz `BLOCKED`, recomenda `context-engineering` e não grava arquivo. Evidência: o seam que recomenda o produtor do insumo ausente.
 6. Pergunta ausente, ou pergunta que escolhe escopo, comportamento, arquitetura, modelo de dados, segurança ou critério de aceite, produz `BLOCKED`, recomenda `clarify` e não grava arquivo. Evidência: R3 e R4.
-7. Conflito com decisão existente produz `BLOCKED`, recomenda `clarify`, preserva a decisão e não grava arquivo. Evidência: `DECISION-SET-20261013-002` e o ADR `0001`.
+7. Conflito com decisão existente produz `BLOCKED`, recomenda `clarify`, preserva a decisão e não grava arquivo. Evidência: `DECISION-SET-20261013-003` e o ADR `0001`.
 8. Conjunto de decisões que não está `ready` não bloqueia quando a questão bloqueante é o fato que a pergunta pede para estabelecer. A skill não edita o conjunto. Uma ambiguidade diferente, que muda qual fato estabelecer, produz `BLOCKED` e recomenda `clarify`. Evidência: o contrato de `research`.
-9. Premissa não vira finding e não bloqueia o relatório por si. Fica rotulada em Unknowns. Evidência: `DECISION-SET-20261013-002`.
+9. Premissa não vira finding e não bloqueia o relatório por si. Fica rotulada em Unknowns. Evidência: `DECISION-SET-20261013-003`.
 10. Alternativa rejeitada não entra em Findings. Ausência evidenciada preenche a seção correspondente. Evidência: o contrato de artefatos.
 11. A execução seguinte da mesma pergunta, com insumos iguais, atualiza o mesmo arquivo e incrementa `version`. Insumos alterados atualizam o mesmo arquivo e preservam a pergunta. Evidência: o seam de atualização no lugar.
-12. `research` não invoca outra skill e não grava spec, conjunto de decisões, ADR, glossário ou `CONTEXT.md`. Evidência: `DECISION-SET-20261013-002`.
-13. O catálogo final contém exatamente treze skills `implemented` e cinco `scaffold`. `research` junta-se às doze já implementadas, inclusive `handoff`. As listas de dependência de `research` permanecem vazias. A capability opcional permanece. Evidência: `DECISION-SET-20261013-002`.
+12. `research` não invoca outra skill e não grava spec, conjunto de decisões, ADR, glossário ou `CONTEXT.md`. Evidência: `DECISION-SET-20261013-003`.
+13. O catálogo final contém exatamente quatorze skills `implemented` e quatro `scaffold`. `research` junta-se às treze já implementadas, inclusive `handoff` e `diagnose`. As listas de dependência de `research` permanecem vazias. A capability opcional permanece. Evidência: `DECISION-SET-20261013-003`.
 
 ## Business Rules
 
@@ -97,7 +97,7 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 
 ## Technical Constraints
 
-- Alterar somente o necessário para operacionalizar `research` e registrar a emenda v1-A13.
+- Alterar somente o necessário para operacionalizar `research` e registrar a emenda v1-A14.
 - Não alterar o contrato de routing, o contrato de artefatos, as sequências canônicas nem o template de research report.
 - Não alterar o workflow operacional das skills já fechadas.
 - Não criar runtime nem executor da skill.
@@ -114,7 +114,7 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 
 ## Acceptance Criteria
 
-1. `research` está `implemented` de forma consistente no manifest, no contrato e na fonte. O catálogo contém 13 skills `implemented` e 5 `scaffold`. As listas de dependência permanecem vazias. A capability `external-research` permanece.
+1. `research` está `implemented` de forma consistente no manifest, no contrato e na fonte. O catálogo contém 14 skills `implemented` e 4 `scaffold`. As listas de dependência permanecem vazias. A capability `external-research` permanece.
 2. Invocação com contexto do projeto e fato já registrado no repositório produz relatório `ready` com `created_by: research`, findings citados e recomendação separada. `to-spec` fica indicado e não é invocado.
 3. A execução seguinte da mesma pergunta, com insumos iguais, atualiza o mesmo arquivo, incrementa `version` e preserva as seções materiais.
 4. A mesma pergunta, com o insumo alterado, atualiza o mesmo arquivo a partir da versão 1 e registra o fato novo.
@@ -133,10 +133,10 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 17. Valor secreto citado no insumo não aparece no relatório.
 18. A segunda execução da alegação sem fonte incrementa `version`, preserva o unknown e não inventa fonte.
 19. Esquema, template, R1–R17, dependências, targets, CLI e as outras skills permanecem inalterados. O ADR `0001` não é estendido. Nenhuma chave nova entra em `.ai/config.json`.
-20. A regressão determinística cobre a migração 13/5, as listas de dependência vazias, a capability opcional e a preservação de `RESEARCH_REPORT` como esquema definido. Nenhum arquivo de teste novo é adicionado.
+20. A regressão determinística cobre a migração 14/4, as listas de dependência vazias, a capability opcional e a preservação de `RESEARCH_REPORT` como esquema definido. Nenhum arquivo de teste novo é adicionado.
 21. Os cenários de fato citado, unknown, atualização, bloqueio e sigilo ficam em evidência separada dos testes Node.
 22. `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-23. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A13 sem declarar capacidades não verificadas.
+23. Proveniência, README, estado arquitetural, padrões, estado do projeto, frase de lifecycle, evidências e handoff refletem a v1-A14 sem declarar capacidades não verificadas.
 
 ## Risks
 
@@ -147,16 +147,16 @@ Tornar `research` operacional na emenda v1-A13. Quando invocada, a skill estabel
 
 ## Open Questions
 
-Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação das outras cinco skills scaffold permanecem fora deste recorte.
+Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliação com GitHub Issues continuam sem verificação e não alteram este recorte. Executor automático, arquivo de teste novo, alteração de esquema, extensão do ADR `0001` e implementação das outras quatro skills scaffold permanecem fora deste recorte.
 
 ## Testing Decisions
 
 - Um bom teste observa comportamento externo: insumos entram e relatório `ready` sai, ou o relatório `BLOCKED` sai sem arquivo. Não afirma redação interna da skill além do resultado observável.
-- O teste determinístico, no seam de catálogo já existente, passa a exigir `research` entre as skills `implemented`, treze no total e cinco `scaffold`, preserva as listas de dependência vazias, a capability opcional e `RESEARCH_REPORT` com esquema `defined` e o template atual. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
+- O teste determinístico, no seam de catálogo já existente, passa a exigir `research` entre as skills `implemented`, quatorze no total e quatro `scaffold`, preserva as listas de dependência vazias, a capability opcional e `RESEARCH_REPORT` com esquema `defined` e o template atual. Nenhum executor Node será criado. Nenhum arquivo de teste novo será criado.
 - Os cenários conduzidos por agente aplicam o contrato e a fonte em diretório temporário e inspecionam o relatório, ou a ausência de arquivo junto com o relatório `BLOCKED`.
 - O precedente é a asserção de catálogo da v1-A11 e a evidência separada da suíte Node naquela emenda.
 - Asserções não serão relaxadas para acomodar a implementação.
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-002`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-003`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.

@@ -1,17 +1,17 @@
 ---
 artifact: test_evidence
-id: TEST-20261013-003
+id: TEST-20261013-005
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-002
-  - SPEC-20261013-002
+  - TICKET-SET-20261013-003
+  - SPEC-20261013-003
 ---
 
 ## Tests Added
 
-Nenhum arquivo de teste novo. A asserção de catálogo já existente em `tests/validate-skills.test.mjs` passou a exigir `research` entre as skills `implemented`, treze no total e cinco `scaffold`, listas de dependência vazias, a capability `external-research` e `RESEARCH_REPORT` com esquema `defined`.
+Nenhum arquivo de teste novo. A asserção de catálogo já existente em `tests/validate-skills.test.mjs` passou a exigir `research` entre as skills `implemented`, quatorze no total e quatro `scaffold`, listas de dependência vazias, a capability `external-research` e `RESEARCH_REPORT` com esquema `defined`. As mutações que exigem uma skill `scaffold` usam `refactor`, porque `diagnose` e `research` estão `implemented`.
 
 ## Tests Executed
 

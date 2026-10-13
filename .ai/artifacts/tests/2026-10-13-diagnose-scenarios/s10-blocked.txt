@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The repository was not observed.
+
+Evidence
+SYM-S10 names save() writing zero bytes. CTX-S10 is ready. No repository file was observed.
+
+Missing prerequisite
+repository observation
+
+Recommended next skill/action
+Observe the repository and retry diagnose.

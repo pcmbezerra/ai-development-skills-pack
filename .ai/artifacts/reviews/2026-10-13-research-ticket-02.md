@@ -1,18 +1,18 @@
 ---
 artifact: review_report
-id: REVIEW-20261013-003
+id: REVIEW-20261013-005
 version: 1
 status: ready
 created_by: code-review
 inputs:
-  - SPEC-20261013-002
-  - TICKET-SET-20261013-002
-  - TEST-20261013-004
+  - SPEC-20261013-003
+  - TICKET-SET-20261013-003
+  - TEST-20261013-006
 ---
 
 ## Scope Reviewed
 
-Working tree do ticket 02: cenários em `.ai/artifacts/tests/2026-10-13-research-scenarios/`, `TEST-20261013-004` e a documentação que declara treze skills `implemented` e cinco `scaffold` na v1-A13. A revisão comparou a tabela dos dezoito cenários com os arquivos copiados e com os critérios 2–18 e 21–23 da spec.
+Working tree do ticket 02: cenários em `.ai/artifacts/tests/2026-10-13-research-scenarios/`, `TEST-20261013-006` e a documentação que declara quatorze skills `implemented` e quatro `scaffold` na v1-A14. A revisão comparou a tabela dos dezoito cenários com os arquivos copiados e com os critérios 2–18 e 21–23 da spec.
 
 ## Blocking Findings
 

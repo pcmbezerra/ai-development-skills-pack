@@ -1,18 +1,18 @@
 ---
 artifact: implementation_report
-id: IMPLEMENTATION-20261013-003
+id: IMPLEMENTATION-20261013-005
 version: 1
 status: ready
 created_by: implement
 inputs:
-  - TICKET-SET-20261013-002
-  - SPEC-20261013-002
-  - TEST-20261013-003
+  - TICKET-SET-20261013-003
+  - SPEC-20261013-003
+  - TEST-20261013-005
 ---
 
 ## Input
 
-Ticket 01 de `TICKET-SET-20261013-002`. Objetivo: publicar o workflow de `research` e migrar o catálogo para 13 skills `implemented` e 5 `scaffold`.
+Ticket 01 de `TICKET-SET-20261013-003`. Objetivo: publicar o workflow de `research` e migrar o catálogo para 14 skills `implemented` e 4 `scaffold`.
 
 ## Plan
 
@@ -28,7 +28,7 @@ Estender a asserção de catálogo, observar o RED, publicar o mesmo workflow no
 
 ## Behaviour Changed
 
-`research` passa a ter workflow operacional. O catálogo fica em 13 skills `implemented` e 5 `scaffold`. As listas de dependência permanecem vazias. A capability `external-research` permanece. O passo 9 não recomenda consumidor quando um unknown ainda muda o próximo passo.
+`research` passa a ter workflow operacional. O catálogo fica em 14 skills `implemented` e 4 `scaffold`. As listas de dependência permanecem vazias. A capability `external-research` permanece. O passo 9 não recomenda consumidor quando um unknown ainda muda o próximo passo.
 
 ## Validation Performed
 
@@ -36,7 +36,7 @@ RED focado antes da migração. GREEN focado depois. `npm test` 48/48. `node scr
 
 ## Tests
 
-`TEST-20261013-003`.
+`TEST-20261013-005`.
 
 ## Known Limitations
 
@@ -48,4 +48,4 @@ Nenhum restante neste ticket. O fechamento documental está no ticket 02.
 
 ## Change Reference
 
-Commits `f218029` e `42d0f3a` na branch `cursor/research-operational-v1-a12-39e8`. O identificador publicado da emenda é v1-A13, depois da reconciliação com `origin/main`, onde v1-A12 já é `handoff`.
+Commits `f218029` e `42d0f3a` na branch `cursor/research-operational-v1-a12-39e8`. O identificador publicado da emenda é v1-A14, depois da reconciliação com `origin/main` `60607fe`, onde v1-A12 é `handoff` e v1-A13 é `diagnose`.

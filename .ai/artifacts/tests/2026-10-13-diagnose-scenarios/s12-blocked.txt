@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The requested cause conflicts with an existing decision.
+
+Evidence
+The request would treat blocked decision sets as not persisted. ADR-0001 records that blocked decision sets are persisted.
+
+Missing prerequisite
+decision compatible with ADR-0001
+
+Recommended next skill/action
+clarify
