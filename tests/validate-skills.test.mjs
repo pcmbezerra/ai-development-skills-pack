@@ -157,10 +157,10 @@ test('optional composition cycles do not become mandatory prerequisites',()=>fix
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
-test('current catalogue implements diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
+test('current catalogue implements edge-case-analysis, refactor, diagnose, research, handoff, code-review, tdd, implement, architecture-design, domain-modelling, to-tickets, to-spec, clarify, workflow, context and bootstrap without defining named-only outputs',async()=>{
   const manifest = JSON.parse(await readFile(join(source,'manifest/skills.json'),'utf8'));
-  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','refactor','code-review']);
-  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,3);
+  assert.deepEqual(manifest.skills.filter(skill=>skill.status==='implemented').map(skill=>skill.name),['setup-ai-development-skills','workflow','clarify','context-engineering','handoff','research','to-spec','domain-modelling','architecture-design','to-tickets','diagnose','implement','tdd','refactor','edge-case-analysis','code-review']);
+  assert.equal(manifest.skills.filter(skill=>skill.status==='scaffold').length,2);
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='refactor').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='diagnose').dependencies,{required:[],conditional:[],optional:['tdd']});
   assert.deepEqual(manifest.artifacts.DIAGNOSIS_REPORT,{
@@ -182,6 +182,12 @@ test('current catalogue implements diagnose, research, handoff, code-review, tdd
     schema: 'defined',
   });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='tdd').dependencies,{required:[],conditional:[],optional:[]});
+  assert.deepEqual(manifest.skills.find(skill=>skill.name==='edge-case-analysis').dependencies,{required:[],conditional:[],optional:[]});
+  assert.deepEqual(manifest.artifacts.EDGE_CASE_REPORT,{
+    contract: 'contracts/artifacts.md',
+    template: 'templates/artifacts/edge-case-report.md',
+    schema: 'defined',
+  });
   assert.deepEqual(manifest.skills.find(skill=>skill.name==='code-review').dependencies,{required:[],conditional:[],optional:[]});
   assert.deepEqual(manifest.artifacts.REVIEW_REPORT,{
     contract: 'contracts/artifacts.md',

@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — operational refactor, Linux, Node.js 22, 2026-10-13
+## Current observation — operational edge-case-analysis, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A16 implements `edge-case-analysis`. The branch first used v1-A15 and the identifiers `004`, `007` and `008`. Origin/main published `refactor` as v1-A15 with those identifiers, so this record uses v1-A16 and the next free identifiers. The skill adds no executor, dependency, schema, template, target or CLI command. A ready specification and a working-tree change that exposes an untested boundary write one ready edge-case report. A recommended test stays inside already-specified behaviour. A proposal that would broaden product behaviour is not a recommended test. A blocked path writes no file from that attempt. A ready report does not authorize `implement` to change product behaviour. ADR `0001` is unchanged. The skill does not invoke `tdd` or `code-review`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 16 `implemented` and 2 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion covers both `refactor` and `edge-case-analysis`; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-009` records the catalogue expectation for `edge-case-analysis` after `refactor` is already implemented.
+- `TEST-20261013-010` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited boundary gap, an unchanged rerun, an in-place coverage update, evidenced absence of R12 risk, a missing specification, a draft specification, a missing change, a draft domain model, an absent domain model, a ready domain model used by the specification, unobserved tests, observed absence of tests, a conflict with an existing decision, a broadening proposal, combined blockers, an omitted secret, no neighboring artifacts, and a blocked rerun that preserves an existing report.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A15 observation below records 15 `implemented` and 3 `scaffold`, the catalogue at the close of `refactor`.
+
+## Previous observation — operational refactor, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A15 implements `refactor` without adding an executor, dependency, schema, template, target or CLI command. Origin/main already published v1-A13 as `diagnose` and v1-A14 as `research`, so this amendment keeps those records and uses the next free artifact ids. A bounded structural objective uses the existing implementation-report and test-evidence templates. External behaviour stays unchanged unless that objective explicitly authorizes one named change. A blocked path writes no file from that attempt and leaves no change from that attempt. ADR `0001` is unchanged. The artifact contract names `refactor` beside the existing producers.
 
