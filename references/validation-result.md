@@ -1,6 +1,17 @@
 # Validation result
 
-## Current observation — documented skill discovery, v1-A19, Linux, Node.js 22, 2026-10-13
+## Current observation — v1-A20 analysis only, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A19 is closed on `origin/main` at `52c35d7`. `cf74225` is the v1-A18 ancestor. Amendment v1-A20 records the selective in-directory projection and does not change skills, the installer, targets, or canonical contracts. This record uses `RESEARCH-20261013-402`, `DECISION-SET-20261013-009`, `SPEC-20261013-009`, `ARCHITECTURE-20261013-002`, `ADR-0002`, `TICKET-SET-20261013-009` and `HANDOFF-20261013-009`. Eighteen skills stay `implemented`. The 108 `SKILL.md` links still point at `contracts/` and `manifest/skills.json`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 50 tests, zero failures, skips, or todos. No projection test was added.
+- `git diff --check`: PASS on the planning tree.
+- `node bin/ai-dev-skills.mjs --help` and `node bin/ai-dev-skills.mjs validate`: exit 0. The help text still has no `list`, `doctor`, or `sync`.
+
+The structural suite does not launch Cursor, Codex, Gemini Antigravity, or Claude Code. Live discovery and live opening of supporting files remain unverified. The next implementation step is `TICKET-SET-20261013-009`, which is not started.
+
+## Previous observation — documented skill discovery, v1-A19, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A19 gives every skill a one-line discovery description with a `Use when` clause and a 240-character pack budget. It does not add an executor, dependency, schema, template, target, CLI command, vendor frontmatter field, or host process. `origin/main` at the start of this amendment is `cf74225`. This record uses `RESEARCH-20261013-401`, `DECISION-SET-20261013-008`, `ARCHITECTURE-20261013-001`, `SPEC-20261013-008`, `TICKET-SET-20261013-008`, `TEST-20261013-015`, `IMPLEMENTATION-20261013-015`, `REVIEW-20261013-011` and `HANDOFF-20261013-008`. Eighteen skills stay `implemented`. Goals, workflows, and dependencies stay. ADR `0001` is unchanged.
 

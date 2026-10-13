@@ -1,6 +1,6 @@
 # Projeto
 
-Estado verificado em 2026-10-13. A suíte estrutural passou neste Linux com Node.js v22.14.0 e npm 10.9.9, 48/48. Pacote privado `ai-development-skills-pack`, versão `1.0.0-scaffold`, baseline arquitetural v1 + emendas v1-A1 (Claude Code), v1-A2 (contexto e bootstrap), v1-A3 (distribuição), v1-A4 (workflow consultivo), v1-A5 (`clarify`), v1-A6 (`to-spec`), v1-A7 (`to-tickets`), v1-A8 (`domain-modelling`), v1-A9 (`architecture-design`), v1-A10 (`implement`), v1-A11 (`tdd` e `code-review`), v1-A12 (`handoff`), v1-A13 (`diagnose`), v1-A14 (`research`), v1-A15 (`refactor`), v1-A16 (`edge-case-analysis`), v1-A17 (`docs`) e v1-A18 (`modernize`). Repositório: `pcmbezerra/ai-development-skills-pack`; commit inicial inspecionado: `347b05a`.
+Estado verificado em 2026-10-13. A suíte estrutural passou neste Linux com Node.js v22.14.0 e npm 10.9.9, 50/50. Pacote privado `ai-development-skills-pack`, versão `1.0.0-scaffold`, baseline arquitetural v1 + emendas v1-A1 (Claude Code) a v1-A18 (`modernize`), com a v1-A19 (descoberta documentada) encerrada em `origin/main` no commit `52c35d7`. A v1-A20 está aberta como análise de skill autocontida; os `SKILL.md` ainda não carregam a projeção. Repositório: `pcmbezerra/ai-development-skills-pack`; commit inicial inspecionado: `347b05a`.
 
 Objetivo: manter 18 skills reutilizáveis de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. Entrega atual: catálogo, contratos, templates, descritores declarativos, CLI de ajuda/validação e testes do validador.
 
