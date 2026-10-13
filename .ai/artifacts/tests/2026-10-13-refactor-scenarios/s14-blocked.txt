@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+A relevant test failed after the change. The edit changed the returned string without authorization, so the change from this attempt was reverted.
+
+Evidence
+node --test greeting.test.mjs exited 0 before the edit and exited 1 after greeting() returned hello!. The file was restored to the original hash. No report file was written.
+
+Missing prerequisite
+a structure-only change that keeps the return value
+
+Recommended next skill/action
+Repeat refactor with a structure-only change.
