@@ -1,6 +1,6 @@
 ---
 name: diagnose
-description: "Identify root cause of unknown failures."
+description: "Identifies the cause of an unknown failure. Use when the symptom is known and the root cause is not. Do not use to change code first."
 ---
 
 # diagnose

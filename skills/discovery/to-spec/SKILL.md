@@ -1,6 +1,6 @@
 ---
 name: to-spec
-description: "Convert resolved requirements into implementation-ready specification."
+description: "Writes one ready specification from resolved decisions and project context. Use when decisions are resolved and the next step is a specification, not code."
 ---
 
 # to-spec

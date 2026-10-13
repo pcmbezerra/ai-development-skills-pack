@@ -1,6 +1,6 @@
 ---
 name: architecture-design
-description: "Define technical solution and architectural decisions."
+description: "Defines the technical solution and durable architectural decisions. Use when boundaries, interfaces, data, integrations, security, concurrency, or deployment change."
 ---
 
 # architecture-design

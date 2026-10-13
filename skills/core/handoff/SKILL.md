@@ -1,6 +1,6 @@
 ---
 name: handoff
-description: "Transfer verified work state between agents/sessions."
+description: "Transfers verified work state to another agent or session. Use when work is incomplete, context may be lost, or an explicit handoff was requested."
 ---
 
 # handoff

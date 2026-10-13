@@ -1,6 +1,6 @@
 ---
 name: workflow
-description: "Route work to the correct skill/workflow."
+description: "Recommends the smallest skill sequence and does not execute it. Use when several skills could apply or the order of work is unclear."
 ---
 
 # workflow

@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "Improve internal structure without changing external behaviour."
+description: "Improves internal structure while external behaviour stays stable. Use when the objective is structural and behaviour must not change unless one named change is authorized."
 ---
 
 # refactor

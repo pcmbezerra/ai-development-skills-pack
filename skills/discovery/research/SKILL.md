@@ -1,6 +1,6 @@
 ---
 name: research
-description: "Establish externally verifiable technical facts."
+description: "Establishes external technical facts and leaves unsupported claims unresolved. Use when API behaviour, library capability, compatibility, or a platform limit can change the next step."
 ---
 
 # research

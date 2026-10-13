@@ -1,6 +1,6 @@
 ---
 name: docs
-description: "Create/update documentation from evidence."
+description: "Updates documentation to match verified repository state. Use when a change affects an API, architecture, configuration, operations, onboarding, or visible behaviour."
 ---
 
 # docs

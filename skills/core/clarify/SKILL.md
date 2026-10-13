@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: "Resolve material ambiguities."
+description: "Resolves material ambiguity before a specification or change. Use when an open question can change scope, behaviour, architecture, data, security, or acceptance."
 ---
 
 # clarify

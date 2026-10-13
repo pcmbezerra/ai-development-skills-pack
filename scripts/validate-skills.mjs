@@ -84,6 +84,8 @@ export async function validate(root = rootDirectory) {
       const model = ['context-engineering','domain-modelling','tdd','edge-case-analysis','code-review'].includes(s.name);
       check(s.primaryInvocation === (model ? 'model' : 'user'), `${s.name}: invalid invocation`);
       for (const f of ['description','goal']) check(typeof s[f] === 'string' && s[f].trim(), `${s.name}: missing ${f}`);
+      check(s.description.length <= 240, `${s.name}: discovery description exceeds the 240-character pack budget`);
+      check(/\bUse when\b/.test(s.description), `${s.name}: discovery description must state when to use the skill`);
       for (const f of ['inputs','outputs','references']) check(Array.isArray(s[f]) && s[f].length && s[f].every(v=>typeof v === 'string' && v.trim()), `${s.name}: invalid ${f}`);
       check(skillStatuses.includes(s.status), `${s.name}: invalid skill status ${s.status}`);
       for (const key of ['artifactInputs','artifactOutputs']) {

@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: "Perform semantic review of a change."
+description: "Reviews a non-trivial change and does not edit code. Use when an implementation or refactor should be reviewed before it is treated as complete."
 ---
 
 # code-review

@@ -1,6 +1,17 @@
 # Validation result
 
-## Current observation — operational modernize, v1-A18, Linux, Node.js 22, 2026-10-13
+## Current observation — documented skill discovery, v1-A19, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A19 gives every skill a one-line discovery description with a `Use when` clause and a 240-character pack budget. It does not add an executor, dependency, schema, template, target, CLI command, vendor frontmatter field, or host process. `origin/main` at the start of this amendment is `cf74225`. This record uses `RESEARCH-20261013-401`, `DECISION-SET-20261013-008`, `ARCHITECTURE-20261013-001`, `SPEC-20261013-008`, `TICKET-SET-20261013-008`, `TEST-20261013-015`, `IMPLEMENTATION-20261013-015`, `REVIEW-20261013-011` and `HANDOFF-20261013-008`. Eighteen skills stay `implemented`. Goals, workflows, and dependencies stay. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 50 tests, zero failures, skips, or todos. Two new rejections cover a description without `Use when` and a description over the 240-character pack budget. The scaffold fixture for `modernize` keeps the discovery description so frontmatter still matches the manifest.
+- `git diff --check`: PASS at this run.
+- `node bin/ai-dev-skills.mjs` still rejects `list`, `doctor`, and `sync`. That assertion is the existing CLI test, not a new command.
+
+The structural suite does not launch Cursor, Codex, Gemini Antigravity, or Claude Code. Live discovery remains unverified. The 240-character budget is pack policy derived from Codex's published 8,000-character listing cap; the listing format itself was not measured. The next free amendment identifier is v1-A20.
+
+## Previous observation — operational modernize, v1-A18, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A18 implements `modernize` without adding an executor, dependency, schema, template, target or CLI command. `origin/main` is `ecbd29e`, the v1-A17 close. This record uses `SPEC-20261013-007`, `TEST-20261013-013`, `TEST-20261013-014`, `REVIEW-20261013-010` and `HANDOFF-20261013-007`. Eighteen skills are `implemented` and none remain `scaffold`. A bounded modernization objective uses the existing modernization-plan template. A blocked path writes no file from that attempt and leaves application code unchanged. A ready plan authorizes `to-tickets` and does not authorize `implement` directly. ADR `0001` is unchanged. The producer of `MODERNIZATION_PLAN` stays `modernize`. The optional dependencies stay `diagnose`, `research`, `architecture-design`, `tdd` and `to-tickets`.
 

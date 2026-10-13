@@ -1,6 +1,6 @@
 ---
 name: domain-modelling
-description: "Model business concepts and invariants when warranted."
+description: "Models business concepts and invariants when they matter. Use when terminology, invariants, state transitions, events, or context boundaries are in play."
 ---
 
 # domain-modelling

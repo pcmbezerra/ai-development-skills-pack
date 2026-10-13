@@ -1,6 +1,6 @@
 ---
 name: tdd
-description: "Execute Red \u2192 Green \u2192 Refactor workflow."
+description: "Applies a red, green, and refactor cycle for one behaviour. Use when a regression test, complex behaviour, or an explicit test-first request is required."
 ---
 
 # tdd
