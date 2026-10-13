@@ -26,7 +26,7 @@ Transferir o pacote com `edge-case-analysis` operacional, sem repetir a emenda v
 
 - Repositório: `pcmbezerra/ai-development-skills-pack`, branch `cursor/edge-case-analysis-operational-v1-a15-abf5`. Este arquivo entra no commit da emenda. `origin/main` em `8899e04` já publicou a v1-A15 como `refactor`. O identificador v1-A15 e os artefatos `004`, `007` e `008` permanecem com `refactor`. Este recorte foi reemitido como v1-A16.
 - `SPEC-20261013-005` está concluída e a frontier está vazia. `SPEC-20261013-004` permanece fechada com `refactor`. `SPEC-20261013-003`, `SPEC-20261013-002`, `SPEC-20261013-001`, `SPEC-20261010-001`, `SPEC-20261009-002`, `SPEC-20261009-003` e `SPEC-20261009-004` permanecem fechadas.
-- Catálogo: 18 skills. Dezesseis `implemented`: `setup-ai-development-skills`, `context-engineering`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `refactor`, `code-review`, `handoff`, `diagnose`, `research` e `edge-case-analysis`. Duas permanecem `scaffold`: `docs` e `modernize`.
+- Catálogo neste fechamento de v1-A16: 18 skills. Dezesseis `implemented`: `setup-ai-development-skills`, `context-engineering`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `refactor`, `code-review`, `handoff`, `diagnose`, `research` e `edge-case-analysis`. Duas permaneciam `scaffold`: `docs` e `modernize`. O merge seguinte torna `docs` operacional como v1-A17; `modernize` permanece a única skill scaffold.
 - Quatro targets: Codex, Cursor, Gemini Antigravity e Claude Code.
 - Estado longo: `.ai/artifacts/handoffs/2026-10-06-project-state.md`, versão 27. Este handoff prevalece para a retomada da v1-A16. O handoff de sessão da v1-A15 permanece em `.ai/artifacts/handoffs/2026-10-13-session-handoff-v1-a15.md`.
 
@@ -72,9 +72,11 @@ Nenhuma questão bloqueante.
 
 ## Next Actions
 
-1. Ler `AGENTS.md`, este handoff e `.ai/artifacts/handoffs/2026-10-06-project-state.md`.
-2. Não reabrir `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004`, `SPEC-20261010-001`, `SPEC-20261013-001`, `SPEC-20261013-002`, `SPEC-20261013-003`, `SPEC-20261013-004` nem `SPEC-20261013-005`.
-3. Iniciar somente um recorte que o mantenedor nomear. Na sequência de feature nova, o próximo scaffold é `docs`.
+No fechamento de v1-A16, o próximo scaffold nomeado era `docs`. O merge seguinte implementa `docs` como v1-A17. A retomada lê `.ai/artifacts/handoffs/2026-10-13-session-handoff-v1-a17.md`. A única skill que permanece scaffold é `modernize`. A próxima emenda livre é v1-A18. Não reutilizar `SPEC-20261013-005`, `TEST-20261013-009`, `TEST-20261013-010`, `REVIEW-20261013-007`, `REVIEW-20261013-008` nem `HANDOFF-20261013-005`.
+
+1. Ler `AGENTS.md`, `.ai/artifacts/handoffs/2026-10-13-session-handoff-v1-a17.md` e `.ai/artifacts/handoffs/2026-10-06-project-state.md`.
+2. Não reabrir `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004`, `SPEC-20261010-001`, `SPEC-20261013-001`, `SPEC-20261013-002`, `SPEC-20261013-003`, `SPEC-20261013-004`, `SPEC-20261013-005` nem `SPEC-20261013-006`.
+3. Iniciar somente um recorte que o mantenedor nomear. A única skill que permanece scaffold é `modernize`.
 
 ## Constraints
 

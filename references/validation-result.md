@@ -1,6 +1,17 @@
 # Validation result
 
-## Current observation — operational edge-case-analysis, Linux, Node.js 22, 2026-10-13
+## Current observation — merged catalogue, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. This merge keeps `edge-case-analysis` as amendment v1-A16 and reissues `docs` as v1-A17. Origin/main already published v1-A16 with `SPEC-20261013-005`, `TEST-20261013-009`, `TEST-20261013-010`, `REVIEW-20261013-007`, `REVIEW-20261013-008` and `HANDOFF-20261013-005`. The docs record uses `SPEC-20261013-006`, `TEST-20261013-011`, `TEST-20261013-012`, `REVIEW-20261013-009` and `HANDOFF-20261013-006`. The next free amendment identifier is v1-A18. Seventeen skills are `implemented` and `modernize` remains the only `scaffold`. Neither skill adds an executor, dependency, schema, template, target or CLI command. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 17 `implemented` and 1 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion lists both `edge-case-analysis` and `docs`; the scaffold sample is `modernize`. No new test file was added.
+- `git diff --check`: PASS at the merge closure.
+- The semantic matrix is evidence from the agent sessions below, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite on the merged catalogue. The v1-A16 observation below records 16 `implemented` and 2 `scaffold`, the catalogue at the close of `edge-case-analysis`.
+
+## Previous observation — operational edge-case-analysis, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A16 implements `edge-case-analysis`. The branch first used v1-A15 and the identifiers `004`, `007` and `008`. Origin/main published `refactor` as v1-A15 with those identifiers, so this record uses v1-A16 and the next free identifiers. The skill adds no executor, dependency, schema, template, target or CLI command. A ready specification and a working-tree change that exposes an untested boundary write one ready edge-case report. A recommended test stays inside already-specified behaviour. A proposal that would broaden product behaviour is not a recommended test. A blocked path writes no file from that attempt. A ready report does not authorize `implement` to change product behaviour. ADR `0001` is unchanged. The skill does not invoke `tdd` or `code-review`.
 
@@ -9,9 +20,22 @@ Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A16 implemen
 - `git diff --check`: PASS.
 - `TEST-20261013-009` records the catalogue expectation for `edge-case-analysis` after `refactor` is already implemented.
 - `TEST-20261013-010` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited boundary gap, an unchanged rerun, an in-place coverage update, evidenced absence of R12 risk, a missing specification, a draft specification, a missing change, a draft domain model, an absent domain model, a ready domain model used by the specification, unobserved tests, observed absence of tests, a conflict with an existing decision, a broadening proposal, combined blockers, an omitted secret, no neighboring artifacts, and a blocked rerun that preserves an existing report.
-- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
 
-Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A15 observation below records 15 `implemented` and 3 `scaffold`, the catalogue at the close of `refactor`.
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. That Linux run covers the structural suite and the agent-applied scenarios at the close of v1-A16. The v1-A17 observation below records the docs work after its identifiers moved off `005`, `009`, `010` and `007`.
+
+## Previous observation — operational docs, reissued as v1-A17, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A17 implements `docs` without adding an executor, dependency, schema, template, target or CLI command. This branch first recorded the cut as v1-A16 with `TEST-20261013-009` and `TEST-20261013-010`. Origin/main published `edge-case-analysis` as v1-A16 with those identifiers, so this record uses `TEST-20261013-011` and `TEST-20261013-012`. A bounded documentation objective uses the existing documentation-update template. Documentation matches verified repository state. Future design stays marked as future design. A blocked path writes no file from that attempt and leaves no documentation change from that attempt. A ready documentation update does not authorize implementation. ADR `0001` is unchanged. The producer of `DOC_UPDATE` stays `docs`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; at that close on this branch, before the merge, 16 `implemented` and 2 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS at that closure.
+- `TEST-20261013-011` records the catalogue RED before migration and GREEN after it for `docs`.
+- `TEST-20261013-012` records eighteen isolated agent-conducted scenarios in a temporary directory: a verified documentation update, an unchanged rerun, an in-place additional edit, combined blockers with preserved files, an escaping docs path, a missing objective, an intentional behaviour change, an unknown failure, a structural request, a modernization request, a conflict with an existing decision, an unsupported public-API claim, a draft specification, future design kept distinct from current behaviour, a draft architecture design, a draft research report, documentation that already matched, and a foreign update left unchanged.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. That Linux run covers the structural suite and the agent-applied scenarios. The v1-A15 observation below records 15 `implemented` and 3 `scaffold`, the catalogue at the close of `refactor`.
 
 ## Previous observation — operational refactor, Linux, Node.js 22, 2026-10-13
 

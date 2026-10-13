@@ -640,7 +640,7 @@
       "path": "skills/documentation/docs/SKILL.md",
       "description": "Create/update documentation from evidence.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Create/update documentation from evidence",
       "inputs": [
         "repository evidence",
