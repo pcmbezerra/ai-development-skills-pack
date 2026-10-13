@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Current state is missing. The gap is project context.
+
+Evidence
+No current-state input was observed. Project context was not supplied.
+
+Missing prerequisite
+project context
+
+Recommended next skill/action
+context-engineering

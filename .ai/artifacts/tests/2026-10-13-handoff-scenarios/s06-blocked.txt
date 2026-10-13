@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Change state was not observed.
+
+Evidence
+STATE-S06 and INV-S06 were observed. No change-state input was observed.
+
+Missing prerequisite
+change state
+
+Recommended next skill/action
+Capture the working-tree change state, then retry handoff.

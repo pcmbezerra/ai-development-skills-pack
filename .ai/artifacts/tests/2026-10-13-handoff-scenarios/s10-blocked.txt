@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+An external library fact would have to be stated as verified.
+
+Evidence
+The current state names unverified v9 API behaviour. No ready research report was observed.
+
+Missing prerequisite
+verified external fact
+
+Recommended next skill/action
+research

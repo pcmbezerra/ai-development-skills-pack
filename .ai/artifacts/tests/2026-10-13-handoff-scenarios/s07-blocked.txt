@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The existing-artifact inventory was not observed.
+
+Evidence
+STATE-S07 and CHANGE-S07 were observed. No artifact inventory was observed.
+
+Missing prerequisite
+artifact inventory
+
+Recommended next skill/action
+Inventory the artifacts, then retry handoff.

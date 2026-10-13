@@ -1,6 +1,18 @@
 # Validation result
 
-## Current observation — operational tdd and code-review, macOS, 2026-10-10
+## Current observation — operational handoff, Linux, 2026-10-13
+
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A12 implements `handoff` without adding an executor, dependency, schema, template, target or CLI command. A verified transfer uses the existing handoff template. A non-ready input is recorded and does not authorize implementation. A blocked path writes no file from that attempt. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 12 `implemented` and 6 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-002` records twelve isolated agent-conducted scenarios in a temporary directory: a ready transfer with an empty frontier, an unchanged rerun, an in-place version update, a blocked specification with a draft ticket, missing project context, unobserved change state, an unobserved artifact inventory, an omitted secret, a conflict with an existing decision, an external fact, combined blockers that preserve an existing handoff and application file, and a ready transfer that leaves glossary and application code unchanged.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+This run covers the structural suite on Linux with Node.js 22 and the agent-applied scenarios. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified.
+
+## Previous observation — operational tdd and code-review, macOS, 2026-10-10
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A11 implements `tdd` and `code-review` without adding an executor, dependency, schema, template, target or CLI command. `tdd` writes its own ready test evidence and does not rewrite evidence whose `created_by` is `implement`. `code-review` writes a ready review report and does not edit code. A blocked path writes no file from that attempt. ADR `0001` is unchanged. `implement` still does not invoke either skill.
 
