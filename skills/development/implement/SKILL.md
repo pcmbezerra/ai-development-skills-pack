@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Execute a defined change."
+description: "Applies the smallest correct behaviour change for one bounded objective. Use when the desired behaviour and scope are already clear."
 ---
 
 # implement

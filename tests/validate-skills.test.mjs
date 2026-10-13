@@ -50,7 +50,7 @@ async function restoreModernizeScaffold(root) {
     .replace(/## Workflow\r?\n\r?\n[\s\S]*?\r?\n## Quality gates/,'## Workflow\n\nPending implementation. Read inputs and the shared artifact contract; operational steps are outside this scaffold.\n\n## Quality gates')}\n This scaffold does not execute the workflow or produce ready artifacts.\n`);
   await writeFile(join(root,'skills/modernization/modernize/SKILL.md'),`---
 name: modernize
-description: "Plan and orchestrate legacy modernization."
+description: "Plans a bounded runtime, framework, or architecture migration and does not apply it. Use when the work is modernization rather than an ordinary refactor."
 ---
 
 # modernize
@@ -168,6 +168,16 @@ const failures = [
   ['hardcoded target path', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s+'\nInstall at .cursor/skills\n'), /hardcoded target/],
   ['mandatory cycle', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').dependencies.required.push('setup-ai-development-skills')), /Mandatory cycle/],
   ['conditional cycle', root=>changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').dependencies.conditional.push({skill:'setup-ai-development-skills',when:'fixture'})), /Mandatory\/conditional cycle/],
+  ['discovery description without trigger', async root=>{
+    const description = 'Recommends a skill sequence.';
+    await changeManifest(root,m=>m.skills.find(s=>s.name==='workflow').description=description);
+    await changeText(root,'skills/core/workflow/SKILL.md',s=>s.replace(/^description: .+$/m,`description: ${JSON.stringify(description)}`));
+  }, /workflow: discovery description must state when to use the skill/],
+  ['discovery description over the pack budget', async root=>{
+    const description = `Use when ${'x'.repeat(240)}`;
+    await changeManifest(root,m=>m.skills.find(s=>s.name==='workflow').description=description);
+    await changeText(root,'skills/core/workflow/SKILL.md',s=>s.replace(/^description: .+$/m,`description: ${JSON.stringify(description)}`));
+  }, /workflow: discovery description exceeds the 240-character pack budget/],
 ];
 for (const [name,mutate,expected] of failures) test(`rejects ${name}`,()=>fixture(async root=>{
   await mutate(root);

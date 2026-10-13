@@ -1,6 +1,6 @@
 ---
 name: setup-ai-development-skills
-description: "Bootstrap repository for the pack."
+description: "Creates local pack configuration and project context. Use when a repository has no ready .ai configuration and the pack should be bootstrapped."
 ---
 
 # setup-ai-development-skills

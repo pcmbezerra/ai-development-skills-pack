@@ -1,6 +1,6 @@
 ---
 name: edge-case-analysis
-description: "Identify untested boundary/adversarial scenarios."
+description: "Finds untested boundaries inside behaviour that is already specified. Use when input, state, time, concurrency, integration, security, or integrity risk is exposed."
 ---
 
 # edge-case-analysis

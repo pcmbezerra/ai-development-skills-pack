@@ -1,6 +1,6 @@
 ---
 name: context-engineering
-description: "Discover and maintain project context."
+description: "Discovers and maintains project context from repository evidence. Use when project context is missing or stale and a later skill needs it."
 ---
 
 # context-engineering

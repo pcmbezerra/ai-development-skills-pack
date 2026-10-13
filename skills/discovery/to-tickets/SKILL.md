@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: "Decompose specification into executable work."
+description: "Splits one ready specification into an executable ticket set. Use when a specification is ready and the next step is tickets, not code."
 ---
 
 # to-tickets

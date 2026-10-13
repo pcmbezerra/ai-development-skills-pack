@@ -1,6 +1,6 @@
 ---
 name: modernize
-description: "Plan and orchestrate legacy modernization."
+description: "Plans a bounded runtime, framework, or architecture migration and does not apply it. Use when the work is modernization rather than an ordinary refactor."
 ---
 
 # modernize
