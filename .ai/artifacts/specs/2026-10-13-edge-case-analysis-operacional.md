@@ -160,4 +160,4 @@ Nenhuma questão bloqueante. Descoberta real nos quatro produtos e reconciliaç�
 
 ## Further Notes
 
-Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-004`. Os tickets 01 e 02 ainda não estão concluídos.
+Esta spec satisfaz o gate de especificação: escopo delimitado, critérios verificáveis e nenhuma ambiguidade bloqueante. R8 e R9 não se aplicam. O conjunto de tickets é `TICKET-SET-20261013-004`. Os tickets 01 e 02 estão concluídos. A frontier desta spec está vazia.

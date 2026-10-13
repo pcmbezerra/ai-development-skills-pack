@@ -56,14 +56,14 @@ Nenhuma. `SPEC-20261013-004` está `ready`.
 
 ## Acceptance Criteria
 
-- [ ] `edge-case-analysis` está `implemented` no manifest, no contrato e na fonte.
-- [ ] O catálogo contém exatamente 15 skills `implemented` e 3 `scaffold`.
-- [ ] As listas de dependência permanecem vazias. A dependência opcional de `implement` permanece.
-- [ ] `EDGE_CASE_REPORT` permanece com esquema `defined` e o template existente.
-- [ ] A seção Workflow do contrato e a da fonte são o mesmo texto.
-- [ ] A frase de lifecycle em `contracts/skill-contract.md` cita v1-A15, quinze skills implementadas e três scaffold.
-- [ ] Nenhum arquivo de teste novo foi criado. A asserção de catálogo já existente cobre a migração.
-- [ ] `npm test` e `npm run validate` passam depois da migração.
+- [x] `edge-case-analysis` está `implemented` no manifest, no contrato e na fonte.
+- [x] O catálogo contém exatamente 15 skills `implemented` e 3 `scaffold`.
+- [x] As listas de dependência permanecem vazias. A dependência opcional de `implement` permanece.
+- [x] `EDGE_CASE_REPORT` permanece com esquema `defined` e o template existente.
+- [x] A seção Workflow do contrato e a da fonte são o mesmo texto.
+- [x] A frase de lifecycle em `contracts/skill-contract.md` cita v1-A15, quinze skills implementadas e três scaffold.
+- [x] Nenhum arquivo de teste novo foi criado. A asserção de catálogo já existente cobre a migração.
+- [x] `npm test` e `npm run validate` passam depois da migração.
 
 ## Tests
 
@@ -108,12 +108,12 @@ Ticket 01.
 
 ## Acceptance Criteria
 
-- [ ] Os dezoito cenários estão registrados e nenhum foi omitido.
-- [ ] Relatório `ready` usa o template, `created_by: edge-case-analysis` e as sete seções de cada achado.
-- [ ] O caminho bloqueado não deixa arquivo desta tentativa e recomenda a skill do bloqueio mais cedo.
-- [ ] Valor secreto não aparece no relatório. Proposta que alarga o produto não entra em Recommended Test.
-- [ ] A documentação declara 15 skills `implemented` e 3 `scaffold`, sem capability não verificada.
-- [ ] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero nesta observação.
+- [x] Os dezoito cenários estão registrados e nenhum foi omitido.
+- [x] Relatório `ready` usa o template, `created_by: edge-case-analysis` e as sete seções de cada achado.
+- [x] O caminho bloqueado não deixa arquivo desta tentativa e recomenda a skill do bloqueio mais cedo.
+- [x] Valor secreto não aparece no relatório. Proposta que alarga o produto não entra em Recommended Test.
+- [x] A documentação declara 15 skills `implemented` e 3 `scaffold`, sem capability não verificada.
+- [x] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero nesta observação.
 
 ## Tests
 
