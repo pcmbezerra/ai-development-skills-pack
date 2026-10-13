@@ -124,18 +124,23 @@ Cada cenário usa um diretório temporário. Registrar entrada, evidência consu
 
 ## Acceptance Criteria
 
-- [ ] Os cenários de atualização, desenho futuro, bloqueio e sigilo estão registrados fora da suíte Node.
-- [ ] Nenhum cenário invoca outra skill.
-- [ ] A documentação declara dezesseis skills `implemented` e duas `scaffold`, sem capability não verificada.
-- [ ] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
-- [ ] O review final não contém achado bloqueante de Standards ou Spec.
-- [ ] A frontier de `SPEC-20261013-005` fica vazia somente depois deste ticket.
+- [x] Os cenários de atualização, desenho futuro, bloqueio e sigilo estão registrados fora da suíte Node.
+- [x] Nenhum cenário invoca outra skill.
+- [x] A documentação declara dezesseis skills `implemented` e duas `scaffold`, sem capability não verificada.
+- [x] `npm run validate`, `npm run skills:validate`, `npm test` e `git diff --check` terminam com código zero.
+- [x] O review final não contém achado bloqueante de Standards ou Spec.
+- [x] A frontier de `SPEC-20261013-005` fica vazia somente depois deste ticket.
 
 ## Validation
 
-Pendente até a matriz e a suíte de fechamento.
+- Matriz agent-driven: 18/18, em `TEST-20261013-010`. Nenhum cenário invocou outra skill.
+- `npm run validate` e `npm run skills:validate`: PASS, 18 skills; 16 `implemented` e 2 `scaffold`.
+- `npm test`: PASS, 48/48, sem falhas, skips ou TODOs.
+- `git diff --check`: conferido no fechamento.
+- Ambiente: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9.
+- Review: `REVIEW-20261013-007`, PASS.
 
 ## Definition of Done
 
-- [ ] A evidência semântica, a suíte e o review autorizam o fechamento da emenda v1-A16.
-- [ ] O handoff distingue esta emenda do fechamento da v1-A15.
+- [x] A evidência semântica, a suíte e o review autorizam o fechamento da emenda v1-A16.
+- [x] O handoff distingue esta emenda do fechamento da v1-A15.

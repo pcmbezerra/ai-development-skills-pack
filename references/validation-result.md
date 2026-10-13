@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — operational refactor, Linux, Node.js 22, 2026-10-13
+## Current observation — operational docs, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A16 implements `docs` without adding an executor, dependency, schema, template, target or CLI command. A bounded documentation objective uses the existing documentation-update template. Documentation matches verified repository state. Future design stays marked as future design. A blocked path writes no file from that attempt and leaves no documentation change from that attempt. A ready documentation update does not authorize implementation. ADR `0001` is unchanged. The producer of `DOC_UPDATE` stays `docs`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 16 `implemented` and 2 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS at closure.
+- `TEST-20261013-009` records the catalogue RED before migration and GREEN after it for `docs`.
+- `TEST-20261013-010` records eighteen isolated agent-conducted scenarios in a temporary directory: a verified documentation update, an unchanged rerun, an in-place additional edit, combined blockers with preserved files, an escaping docs path, a missing objective, an intentional behaviour change, an unknown failure, a structural request, a modernization request, a conflict with an existing decision, an unsupported public-API claim, a draft specification, future design kept distinct from current behaviour, a draft architecture design, a draft research report, documentation that already matched, and a foreign update left unchanged.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A15 observation below records 15 `implemented` and 3 `scaffold`, the catalogue at the close of `refactor`.
+
+## Previous observation — operational refactor, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A15 implements `refactor` without adding an executor, dependency, schema, template, target or CLI command. Origin/main already published v1-A13 as `diagnose` and v1-A14 as `research`, so this amendment keeps those records and uses the next free artifact ids. A bounded structural objective uses the existing implementation-report and test-evidence templates. External behaviour stays unchanged unless that objective explicitly authorizes one named change. A blocked path writes no file from that attempt and leaves no change from that attempt. ADR `0001` is unchanged. The artifact contract names `refactor` beside the existing producers.
 
