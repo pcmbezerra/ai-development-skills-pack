@@ -1,6 +1,17 @@
 # Validation result
 
-## Current observation — operational tdd and code-review, macOS, 2026-10-10
+## Current observation — post-v1-A11 structural suite, Linux, 2026-10-13
+
+Linux 6.12.94+, Node.js v22.14.0, npm 10.9.9. Amendments v1-A1 through v1-A11 are on `origin/main` at `3fcf258`. This run does not add a skill, executor, dependency, schema, template, target or CLI command.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 11 `implemented` and 7 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos.
+- `git diff --check`: PASS after these documentation edits. No skill source changed.
+- `SPEC-20261010-001` and `TICKET-SET-20261010-001` are LF in the index since `6dd8671`.
+- `gh issue list` for `pcmbezerra/ai-development-skills-pack` returned `Resource not accessible by integration`.
+- Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified.
+
+## Previous observation — operational tdd and code-review, macOS, 2026-10-10
 
 Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A11 implements `tdd` and `code-review` without adding an executor, dependency, schema, template, target or CLI command. `tdd` writes its own ready test evidence and does not rewrite evidence whose `created_by` is `implement`. `code-review` writes a ready review report and does not edit code. A blocked path writes no file from that attempt. ADR `0001` is unchanged. `implement` still does not invoke either skill.
 

@@ -60,6 +60,10 @@ The maintainer asked for a new slice. The canonical new-feature sequence places 
 
 The maintainer opened amendment v1-A11 for `tdd` when R11 applies and `code-review` for the change. `SPEC-20261009-004` stays closed: `implement` still does not invoke either skill. `tdd` persists its own ready test evidence and a test change, and applies an implementation change only when `implement` composes that execution. `code-review` persists a ready review report, does not write a change-set file and does not edit code. A blocked path writes no file from that attempt. ADR `0001` stays limited to decision sets. Thirteen agent-conducted scenarios validate these semantics separately from the deterministic Node.js suite. The push was not requested.
 
+## Continuity after v1-A11, 2026-10-13
+
+Amendments v1-A1 through v1-A11 are applied on `origin/main`. The maintainer authorized the session handoff commit and push recorded in `3fcf258`. The structural suite was re-run on Linux 6.12.94+ with Node.js v22.14.0 and npm 10.9.9: `npm run validate` PASS and `npm test` 48/48. Live discovery in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified. The seven scaffold skills remain `handoff`, `research`, `diagnose`, `refactor`, `edge-case-analysis`, `docs` and `modernize`.
+
 ## Representation choices and remaining limitations
 
 - Exactly 18 runtime skills; primary invocation remains a classification allowing composition and explicit requests for model skills.
