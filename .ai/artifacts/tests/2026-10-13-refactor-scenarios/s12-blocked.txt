@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The objective conflicts with an existing decision.
+
+Evidence
+.ai/decisions/0001.md says the local binding name remains message. The objective would rename that binding to text. The decision file and greeting.js were left unchanged. No report file was written.
+
+Missing prerequisite
+a decision that allows the rename
+
+Recommended next skill/action
+clarify

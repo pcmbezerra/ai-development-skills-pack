@@ -1,6 +1,18 @@
 # Validation result
 
-## Current observation — operational handoff, Linux, 2026-10-13
+## Current observation — operational refactor, Linux, 2026-10-13
+
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A13 implements `refactor` without adding an executor, dependency, schema, template, target or CLI command. A bounded structural objective uses the existing implementation-report and test-evidence templates. External behaviour stays unchanged unless that objective explicitly authorizes one named change. A blocked path writes no file from that attempt and leaves no change from that attempt. ADR `0001` is unchanged. The artifact contract names `refactor` beside the existing producers.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 13 `implemented` and 5 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS at closure.
+- `TEST-20261013-004` records eighteen isolated agent-conducted scenarios in a temporary directory: a ready structural rename, an unchanged rerun, an in-place additional edit, missing project context, an unobserved baseline, a failing test before the change, an unbounded objective, an intentional behaviour change, one explicitly authorized behaviour change, a modernization request, a draft research report, a conflict with an existing decision, an omitted secret, a reverted post-change failure, combined blockers, a blocked attempt that preserves existing files, a speculative abstraction, and a trivial rename.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+This run covers the structural suite on Linux with Node.js 22 and the agent-applied scenarios. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified.
+
+## Previous observation — operational handoff, Linux, 2026-10-13
 
 Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A12 implements `handoff` without adding an executor, dependency, schema, template, target or CLI command. A verified transfer uses the existing handoff template. A non-ready input is recorded and does not authorize implementation. A blocked path writes no file from that attempt. ADR `0001` is unchanged.
 
