@@ -1,7 +1,7 @@
 ---
 artifact: handoff
 id: HANDOFF-20261013-001
-version: 1
+version: 2
 status: ready
 created_by: handoff
 inputs:
@@ -26,7 +26,7 @@ Transferir o pacote com `handoff` operacional, sem repetir a emenda v1-A12 e sem
 - `SPEC-20261013-001` está concluída e a frontier está vazia. `SPEC-20261010-001`, `SPEC-20261009-002`, `SPEC-20261009-003` e `SPEC-20261009-004` permanecem fechadas.
 - Catálogo: 18 skills. Doze `implemented`: `setup-ai-development-skills`, `context-engineering`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `code-review` e `handoff`. Seis permanecem `scaffold`: `research`, `diagnose`, `refactor`, `edge-case-analysis`, `docs` e `modernize`.
 - Quatro targets: Codex, Cursor, Gemini Antigravity e Claude Code.
-- Estado longo: `.ai/artifacts/handoffs/2026-10-06-project-state.md`, versão 22. Este handoff prevalece para a retomada da v1-A12.
+- Estado longo: `.ai/artifacts/handoffs/2026-10-06-project-state.md`, versão 23. Este handoff prevalece para a retomada da v1-A12. `origin/main` em `9307f6c` registra a suíte estrutural sobre o catálogo da v1-A11.
 
 ## Completed Work
 
@@ -61,7 +61,7 @@ Registrada em `.ai/artifacts/tests/2026-10-13-handoff-operational.md` e `referen
 
 - Descoberta real nos quatro produtos não foi verificada.
 - Não há executor das skills operacionais. Seis skills seguem scaffold.
-- Issues remotas não reconciliadas. Licença placeholder. Pacote privado.
+- Issues remotas não reconciliadas. Em 2026-10-13 `gh issue list` respondeu `Resource not accessible by integration`. Licença placeholder. Pacote privado.
 
 ## Open Questions
 

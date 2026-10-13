@@ -1,19 +1,19 @@
 ---
 artifact: handoff
 id: HANDOFF-20261006-001
-version: 22
+version: 23
 status: ready
 created_by: handoff
-inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392", "amendment-v1-A7", "SPEC-20261009-001", "TICKET-SET-20261009-001", "TEST-20261009-001", "e3cfc47", "c65bf52", "REVIEW-20261009-001", "HANDOFF-20261009-002", "83d54eb", "HANDOFF-20261009-003", "amendment-v1-A8", "DECISION-SET-20261009-001", "SPEC-20261009-002", "TICKET-SET-20261009-002", "TEST-20261009-002", "REVIEW-20261009-002", "IMPLEMENTATION-20261009-002", "HANDOFF-20261009-004", "amendment-v1-A9", "DECISION-SET-20261009-002", "SPEC-20261009-003", "TICKET-SET-20261009-003", "TEST-20261009-003", "REVIEW-20261009-003", "IMPLEMENTATION-20261009-003", "HANDOFF-20261009-005", "ce43b7e", "amendment-v1-A10", "DECISION-SET-20261009-003", "SPEC-20261009-004", "TICKET-SET-20261009-004", "TEST-20261009-004", "REVIEW-20261009-004", "IMPLEMENTATION-20261009-004", "HANDOFF-20261009-006", "HANDOFF-20261012-001", "amendment-v1-A11", "SPEC-20261010-001", "amendment-v1-A12", "DECISION-SET-20261013-001", "SPEC-20261013-001", "TICKET-SET-20261013-001", "TEST-20261013-002"]
+inputs: ["baseline-v1", "amendment-v1-A1", "amendment-v1-A2", "amendment-v1-A3", "amendment-v1-A4", "amendment-v1-A5", "800db27", "9634dfe", "9a15a46", "9a252e6", "cf7b39e", "68d607d", "6ea8c2c", "61bbe7e", "0baf527", "361a617", "maintainer-confirmations-2026-10-06", "maintainer-confirmations-2026-10-08", "maintainer-decision-2026-10-08-clarify", "lf-crlf-fix-2026-10-06", "SPEC-20261006-001", "TICKET-SET-20261006-001", "SPEC-20261008-001", "TICKET-SET-20261008-001", "SPEC-20261008-002", "TICKET-SET-20261008-002", "TEST-20261006-002", "TEST-20261006-003", "TEST-20261006-004", "TEST-20261008-001", "TEST-20261008-002", "REVIEW-20261006-003", "REVIEW-20261006-004", "REVIEW-20261008-001", "REVIEW-20261008-002", "ADR-0001", "HANDOFF-20261008-002", "amendment-v1-A6", "SPEC-20261008-003", "TICKET-SET-20261008-003", "TEST-20261008-003", "REVIEW-20261008-003", "HANDOFF-20261008-003", "HANDOFF-20261009-001", "e1c00b4", "263f227", "8e96392", "amendment-v1-A7", "SPEC-20261009-001", "TICKET-SET-20261009-001", "TEST-20261009-001", "e3cfc47", "c65bf52", "REVIEW-20261009-001", "HANDOFF-20261009-002", "83d54eb", "HANDOFF-20261009-003", "amendment-v1-A8", "DECISION-SET-20261009-001", "SPEC-20261009-002", "TICKET-SET-20261009-002", "TEST-20261009-002", "REVIEW-20261009-002", "IMPLEMENTATION-20261009-002", "HANDOFF-20261009-004", "amendment-v1-A9", "DECISION-SET-20261009-002", "SPEC-20261009-003", "TICKET-SET-20261009-003", "TEST-20261009-003", "REVIEW-20261009-003", "IMPLEMENTATION-20261009-003", "HANDOFF-20261009-005", "ce43b7e", "amendment-v1-A10", "DECISION-SET-20261009-003", "SPEC-20261009-004", "TICKET-SET-20261009-004", "TEST-20261009-004", "REVIEW-20261009-004", "IMPLEMENTATION-20261009-004", "HANDOFF-20261009-006", "HANDOFF-20261012-001", "linux-node22-validation-2026-10-13", "amendment-v1-A11", "SPEC-20261010-001", "amendment-v1-A12", "DECISION-SET-20261013-001", "SPEC-20261013-001", "TICKET-SET-20261013-001", "TEST-20261013-002"]
 ---
 
 ## Objective
 
-Preservar continuidade verificável após fechar a emenda v1-A12, com frontier vazia para `SPEC-20261013-001`. `handoff` deste pacote está operacional e gravou a versão 22 deste arquivo.
+Preservar continuidade verificável após fechar a emenda v1-A12, com frontier vazia para `SPEC-20261013-001`, incorporando a observação estrutural de Linux e Node.js 22 que entrou em `origin/main`. `handoff` deste pacote está operacional e gravou a versão 23 deste arquivo.
 
 ## Current State
 
-Baseline v1 reconciliado + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7/v1-A8/v1-A9/v1-A10, branch `main`. A emenda v1-A7 começa depois de `db2d995`. A operacionalização de v1-A7 está em `e3cfc47` e `c65bf52`, e o fechamento daquela emenda está em `83d54eb`. O mantenedor autorizou o commit de v1-A8 e v1-A9 em `ce43b7e`. O mantenedor autorizou o commit de v1-A10 a partir de `ce43b7e`; esse commit contém este handoff. O envio a `origin/main` não foi solicitado. Pacote privado `1.0.0-scaffold`, licença ainda placeholder.
+Baseline v1 reconciliado + emendas v1-A1 a v1-A12, branch `cursor/handoff-operational-v1-a12-bdcc`. A emenda v1-A7 começa depois de `db2d995`. A operacionalização de v1-A7 está em `e3cfc47` e `c65bf52`, e o fechamento daquela emenda está em `83d54eb`. O mantenedor autorizou o commit de v1-A8 e v1-A9 em `ce43b7e`. O mantenedor autorizou o commit de v1-A10 a partir de `ce43b7e`. A emenda v1-A11 está em `d7a4bab` e `6dd8671`; o handoff dessa sessão está em `3fcf258` e o mantenedor autorizou esse commit e o push. `origin/main` inclui `9307f6c`, a observação estrutural em Linux com Node.js 22 sobre o catálogo da v1-A11. Pacote privado `1.0.0-scaffold`, licença ainda placeholder. Em 2026-10-13 a suíte estrutural passou neste Linux com Node.js v22.14.0 e npm 10.9.9. A descoberta real nos quatro produtos permanece sem verificação.
 
 18 skills: 13 com invocação primária user e 5 model. `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `code-review` e `handoff` estão `implemented`; as outras 6 permanecem `scaffold`: `research`, `diagnose`, `refactor`, `edge-case-analysis`, `docs` e `modernize`. O registro contém 20 nomes de artefatos: 15 com templates, TICKET contido em TICKET_SET e quatro saídas apenas nomeadas. Quatro targets declarativos implementados: Cursor, Codex, Gemini Antigravity e Claude Code, com empacotamento, instalação explícita em projeto e validação contra a fonte canônica.
 
@@ -72,6 +72,8 @@ A emenda v1-A6 implementa `to-spec`. O mantenedor confirmou o seam de catálogo 
 
 A emenda v1-A10 implementa `implement`. O mantenedor pediu um novo recorte e a sequência canônica nomeia essa skill depois de `to-tickets`. A skill aplica a menor mudança correta, grava somente relatório `ready` e evidência `ready`, e cita `CHANGE_SET` como working tree. Devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa. Não invoca `tdd` nem `code-review`. O ADR `0001` não foi estendido. As dependências opcionais já declaradas permanecem. As outras 9 skills permanecem scaffold. O commit foi autorizado e contém este handoff.
 
+A emenda v1-A11 implementa `tdd` e `code-review`. O mantenedor nomeou esse único recorte depois de `implement`. `tdd` grava evidência própria `ready`; `code-review` grava relatório `ready` e não edita código. O caminho bloqueado não grava arquivo. `implement` não passou a invocá-las. O ADR `0001` não foi estendido. Onze skills estão `implemented` e sete permanecem `scaffold`. O commit e o push foram autorizados e estão em `origin/main`. A atualização `9307f6c` registra a suíte estrutural em Linux com Node.js 22 e não abre v1-A12. A emenda v1-A12 foi aberta depois, neste branch.
+
 A emenda v1-A9 implementa `architecture-design`. O mantenedor pediu continuidade em v1-A9 e a sequência canônica nomeia essa skill depois de `domain-modelling`. A skill grava somente desenho `ready` e, quando a spec já registra a decisão durável, um ADR `ready`. Devolve `BLOCKED` sem arquivo desta tentativa quando o gate não passa. O ADR `0001` não foi estendido. As dependências condicionais já declaradas permanecem. As outras 10 skills permanecem scaffold.
 
 A emenda v1-A8 implementa `domain-modelling`. O mantenedor confirmou o seam de catálogo e de comportamento. A skill grava somente modelo `ready` e devolve `BLOCKED` sem arquivo quando o gate não passa. O ADR `0001` não foi estendido. As outras 11 skills permanecem scaffold.
@@ -107,6 +109,7 @@ O ticket 04 atualizou o validador e seus testes para impedir dependências npm e
 ## Validation
 
 - Emenda v1-A12: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 12/12 cenários, em `TEST-20261013-002`. Ambiente: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Descoberta real nos quatro produtos não foi executada.
+- Observação 2026-10-13 sobre o catálogo da v1-A11, Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9: `npm run validate`, `npm run skills:validate` e `npm test` PASS, 48/48, zero falhas, skips ou TODOs. `node bin/ai-dev-skills.mjs --help` e `validate` saíram 0. `git diff --check` PASS na árvore limpa antes dessa nota. A matriz agent-driven não foi reexecutada. `gh issue list` respondeu `Resource not accessible by integration`. Detalhe em `references/validation-result.md`.
 - Emenda v1-A10: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 18/18 cenários, em `TEST-20261009-004`. Review: `REVIEW-20261009-004`, PASS.
 - Emenda v1-A9: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 18/18 cenários, em `TEST-20261009-003`. Review: `REVIEW-20261009-003`, PASS.
 - Emenda v1-A8: `npm run validate`, `npm run skills:validate` e `git diff --check` PASS; `npm test` PASS, 48/48 sem falhas, skips ou TODOs. Matriz agent-driven: 18/18 cenários, em `TEST-20261009-002`. Review: `REVIEW-20261009-002`, PASS após correções.
@@ -144,13 +147,13 @@ Evidência detalhada e histórico preservados em `references/validation-result.m
 ## Known Issues
 
 1. **Limite intencional do estado parcial:** as outras 6 skills, sync, doctor, list e routing automático permanecem scaffold/inexistentes; sem executor das skills operacionais. A cobertura semântica é a soma dos nove cenários de workflow, dos onze de clarify, dos dezesseis de to-spec, dos dezoito de to-tickets, dos dezoito de domain-modelling, dos dezoito de architecture-design, dos dezoito de implement, dos treze de tdd e code-review e dos doze de handoff.
-2. **Plataformas não verificadas:** descoberta real das skills nos quatro produtos. A suíte estrutural da v1-A12 rodou em Linux com Node.js v22.14.0. As suítes estruturais de v1-A5 e v1-A6 rodaram em macOS; os layouts dos targets foram validados antes em fixtures Windows.
-3. **Integrações não verificadas:** `gh` ausente no PATH na sessão anterior; issues/labels remotas não verificadas.
+2. **Plataformas:** a suíte estrutural passou em 2026-10-13 em Linux 6.12.94+ com Node.js v22.14.0 e npm 10.9.9, 48/48, primeiro sobre o catálogo da v1-A11 e depois sobre o da v1-A12. As suítes de v1-A5 a v1-A11 também passaram antes em macOS. A descoberta real das skills em Cursor, Codex, Gemini Antigravity e Claude Code permanece sem verificação. Os layouts dos targets foram validados antes em fixtures Windows.
+3. **Integrações não verificadas:** em 2026-10-13 `gh` está no PATH e autenticado como a integração Cursor. `gh issue list` respondeu `Resource not accessible by integration`. Issues e labels remotas continuam sem reconciliação. Nenhuma issue foi criada.
 4. **Publicação futura:** licença placeholder e pacote privado exigirão decisão própria antes de distribuir.
 
 ## Open Questions
 
-Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-20261008-002`, `SPEC-20261008-003`, `SPEC-20261009-001`, `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004`, `SPEC-20261010-001` e `SPEC-20261013-001` estão concluídas e suas frontiers estão vazias.
+Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-20261008-002`, `SPEC-20261008-003`, `SPEC-20261009-001`, `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004`, `SPEC-20261010-001` e `SPEC-20261013-001` estão concluídas e suas frontiers estão vazias. v1-A11 está em `origin/main`.
 
 ## Next Actions
 
@@ -158,9 +161,9 @@ Nenhuma questão bloqueante. `SPEC-20261006-001`, `SPEC-20261008-001`, `SPEC-202
 2. Não reabrir `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004`, `SPEC-20261010-001` nem `SPEC-20261013-001`.
 3. Iniciar somente um recorte de skill explicitamente aprovado. O próximo buraco scaffold, na ordem do catálogo, é `research`.
 4. Validar descoberta em uma execução real de cada produto quando os quatro CLIs/IDEs estiverem disponíveis.
-5. Reconciliar os arquivos locais com GitHub Issues quando essa reconciliação for pedida, sem criar duplicatas.
+5. Reconciliar os arquivos locais com GitHub Issues quando a integração tiver acesso de leitura às issues, sem criar duplicatas.
 
-Prompt de retomada: "Leia AGENTS.md, `.ai/artifacts/handoffs/2026-10-13-session-handoff-v1-a12.md` e `.ai/artifacts/handoffs/2026-10-06-project-state.md`. v1-A12 está commitada e a frontier de `SPEC-20261013-001` está vazia. Inicie somente um recorte que eu nomear."
+Prompt de retomada: "Leia AGENTS.md, `.ai/artifacts/handoffs/2026-10-13-session-handoff-v1-a12.md` e `.ai/artifacts/handoffs/2026-10-06-project-state.md`. v1-A12 está commitada e a frontier de `SPEC-20261013-001` está vazia. A suíte estrutural passou em Linux com Node.js 22. Inicie somente um recorte que eu nomear."
 
 ## Suggested Skills
 
