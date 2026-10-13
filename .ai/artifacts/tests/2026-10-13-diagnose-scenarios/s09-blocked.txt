@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The symptom is not known.
+
+Evidence
+CTX-S09 is ready and the repository was observed. The request did not name a failure.
+
+Missing prerequisite
+symptom
+
+Recommended next skill/action
+Supply the symptom and retry diagnose.

@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Project context is not ready. Its status is blocked.
+
+Evidence
+CTX-S08 has status blocked.
+
+Missing prerequisite
+ready project context
+
+Recommended next skill/action
+context-engineering
