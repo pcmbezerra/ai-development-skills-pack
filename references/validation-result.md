@@ -1,15 +1,118 @@
 # Validation result
 
-## Current observation — post-v1-A11 structural suite, Linux, 2026-10-13
+## Current observation — operational modernize, v1-A18, Linux, Node.js 22, 2026-10-13
 
-Linux 6.12.94+, Node.js v22.14.0, npm 10.9.9. Amendments v1-A1 through v1-A11 are on `origin/main` at `3fcf258`. This run does not add a skill, executor, dependency, schema, template, target or CLI command.
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A18 implements `modernize` without adding an executor, dependency, schema, template, target or CLI command. `origin/main` is `ecbd29e`, the v1-A17 close. This record uses `SPEC-20261013-007`, `TEST-20261013-013`, `TEST-20261013-014`, `REVIEW-20261013-010` and `HANDOFF-20261013-007`. Eighteen skills are `implemented` and none remain `scaffold`. A bounded modernization objective uses the existing modernization-plan template. A blocked path writes no file from that attempt and leaves application code unchanged. A ready plan authorizes `to-tickets` and does not authorize `implement` directly. ADR `0001` is unchanged. The producer of `MODERNIZATION_PLAN` stays `modernize`. The optional dependencies stay `diagnose`, `research`, `architecture-design`, `tdd` and `to-tickets`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion lists `modernize`. Scaffold-sample checks restore `modernize` inside the fixture. No new test file was added.
+- `git diff --check`: PASS at the close.
+- `TEST-20261013-013` records the catalogue RED before migration and GREEN after it. The workflow text is identical in the contract and the source, 9143 characters.
+- `TEST-20261013-014` records eighteen isolated agent-conducted scenarios in a temporary directory: a bounded runtime migration, an unchanged rerun, an in-place validation update, missing architecture, an uncontrolled upgrade, a behaviour change, an unknown failure, an ordinary refactor, a documentation request, an unobserved baseline, missing rollback, missing stages, an external fact, a conflict with ADR `0001`, a non-ready research report, a non-ready architecture design, a plan created by another skill, and combined blockers.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. The next free amendment identifier is v1-A19.
+
+## Previous observation — merged catalogue, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. This merge keeps `edge-case-analysis` as amendment v1-A16 and reissues `docs` as v1-A17. Origin/main already published v1-A16 with `SPEC-20261013-005`, `TEST-20261013-009`, `TEST-20261013-010`, `REVIEW-20261013-007`, `REVIEW-20261013-008` and `HANDOFF-20261013-005`. The docs record uses `SPEC-20261013-006`, `TEST-20261013-011`, `TEST-20261013-012`, `REVIEW-20261013-009` and `HANDOFF-20261013-006`. The next free amendment identifier is v1-A18. Seventeen skills are `implemented` and `modernize` remains the only `scaffold`. Neither skill adds an executor, dependency, schema, template, target or CLI command. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 17 `implemented` and 1 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion lists both `edge-case-analysis` and `docs`; the scaffold sample is `modernize`. No new test file was added.
+- `git diff --check`: PASS at the merge closure.
+- The semantic matrix is evidence from the agent sessions below, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite on the merged catalogue. The v1-A16 observation below records 16 `implemented` and 2 `scaffold`, the catalogue at the close of `edge-case-analysis`.
+
+## Previous observation — operational edge-case-analysis, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A16 implements `edge-case-analysis`. The branch first used v1-A15 and the identifiers `004`, `007` and `008`. Origin/main published `refactor` as v1-A15 with those identifiers, so this record uses v1-A16 and the next free identifiers. The skill adds no executor, dependency, schema, template, target or CLI command. A ready specification and a working-tree change that exposes an untested boundary write one ready edge-case report. A recommended test stays inside already-specified behaviour. A proposal that would broaden product behaviour is not a recommended test. A blocked path writes no file from that attempt. A ready report does not authorize `implement` to change product behaviour. ADR `0001` is unchanged. The skill does not invoke `tdd` or `code-review`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 16 `implemented` and 2 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion covers both `refactor` and `edge-case-analysis`; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-009` records the catalogue expectation for `edge-case-analysis` after `refactor` is already implemented.
+- `TEST-20261013-010` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited boundary gap, an unchanged rerun, an in-place coverage update, evidenced absence of R12 risk, a missing specification, a draft specification, a missing change, a draft domain model, an absent domain model, a ready domain model used by the specification, unobserved tests, observed absence of tests, a conflict with an existing decision, a broadening proposal, combined blockers, an omitted secret, no neighboring artifacts, and a blocked rerun that preserves an existing report.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. That Linux run covers the structural suite and the agent-applied scenarios at the close of v1-A16. The v1-A17 observation below records the docs work after its identifiers moved off `005`, `009`, `010` and `007`.
+
+## Previous observation — operational docs, reissued as v1-A17, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A17 implements `docs` without adding an executor, dependency, schema, template, target or CLI command. This branch first recorded the cut as v1-A16 with `TEST-20261013-009` and `TEST-20261013-010`. Origin/main published `edge-case-analysis` as v1-A16 with those identifiers, so this record uses `TEST-20261013-011` and `TEST-20261013-012`. A bounded documentation objective uses the existing documentation-update template. Documentation matches verified repository state. Future design stays marked as future design. A blocked path writes no file from that attempt and leaves no documentation change from that attempt. A ready documentation update does not authorize implementation. ADR `0001` is unchanged. The producer of `DOC_UPDATE` stays `docs`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; at that close on this branch, before the merge, 16 `implemented` and 2 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS at that closure.
+- `TEST-20261013-011` records the catalogue RED before migration and GREEN after it for `docs`.
+- `TEST-20261013-012` records eighteen isolated agent-conducted scenarios in a temporary directory: a verified documentation update, an unchanged rerun, an in-place additional edit, combined blockers with preserved files, an escaping docs path, a missing objective, an intentional behaviour change, an unknown failure, a structural request, a modernization request, a conflict with an existing decision, an unsupported public-API claim, a draft specification, future design kept distinct from current behaviour, a draft architecture design, a draft research report, documentation that already matched, and a foreign update left unchanged.
+- The semantic matrix is evidence from that agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. That Linux run covers the structural suite and the agent-applied scenarios. The v1-A15 observation below records 15 `implemented` and 3 `scaffold`, the catalogue at the close of `refactor`.
+
+## Previous observation — operational refactor, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A15 implements `refactor` without adding an executor, dependency, schema, template, target or CLI command. Origin/main already published v1-A13 as `diagnose` and v1-A14 as `research`, so this amendment keeps those records and uses the next free artifact ids. A bounded structural objective uses the existing implementation-report and test-evidence templates. External behaviour stays unchanged unless that objective explicitly authorizes one named change. A blocked path writes no file from that attempt and leaves no change from that attempt. ADR `0001` is unchanged. The artifact contract names `refactor` beside the existing producers.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 15 `implemented` and 3 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS at closure.
+- `TEST-20261013-007` records the catalogue RED before migration and GREEN after it for `refactor`.
+- `TEST-20261013-008` records eighteen isolated agent-conducted scenarios in a temporary directory: a ready structural rename, an unchanged rerun, an in-place additional edit, missing project context, an unobserved baseline, a failing test before the change, an unbounded objective, an intentional behaviour change, one explicitly authorized behaviour change, a modernization request, a draft research report, a conflict with an existing decision, an omitted secret, a reverted post-change failure, combined blockers, a blocked attempt that preserves existing files, a speculative abstraction, and a trivial rename.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A14 observation below records 14 `implemented` and 4 `scaffold`, the catalogue at the close of `research`.
+
+## Previous observation — operational research, Linux, Node.js 22, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A14 implements `research` without adding an executor, dependency, schema, template, target or CLI command. A question that is an external fact, with project context, writes one ready research report. Unsupported claims stay in Unknowns when external access cannot be used. A blocked path writes no file from that attempt. A ready report whose unknowns can still change the requested next step does not authorize or recommend a consumer. ADR `0001` is unchanged. The skill does not invoke `to-spec`.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 14 `implemented` and 4 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-005` records the catalogue RED before migration and GREEN after it.
+- `TEST-20261013-006` records eighteen isolated agent-conducted scenarios in a temporary directory: a cited repository fact, an unchanged rerun, an in-place version update, an unresolved external claim, missing project context, a missing question, a project choice, a conflict with an existing decision, an omitted secret, a premise left unresolved, a blocked decision set whose blocker is the researched fact, a different ambiguity, an evidenced absence, no neighboring artifacts, combined blockers, a rejected alternative, a separated recommendation, and a rerun that preserves the unknown.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This Linux run covers the structural suite and the agent-applied scenarios. The v1-A13 observation below records 13 `implemented` and 5 `scaffold`, the catalogue at the close of `diagnose`.
+
+## Previous observation — operational diagnose, Linux, 2026-10-13
+
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A13 implements `diagnose` without adding an executor, dependency, schema, template, target or CLI command. A classified failure uses the existing diagnosis template. A probable cause, an unconfirmed hypothesis, or a confirmed cause without regression evidence does not authorize implementation. A blocked path writes no file from that attempt. Optional `tdd` is not invoked. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 13 `implemented` and 5 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-003` records the catalogue RED before migration and GREEN after it for `diagnose`.
+- `TEST-20261013-004` records fourteen isolated agent-conducted scenarios in a temporary directory: a confirmed cause with an existing failing test, an unchanged rerun, an in-place version update, a probable cause, an unconfirmed hypothesis, a confirmed cause without regression evidence, missing project context, a blocked project context, an unknown symptom, an unobserved repository, an omitted secret, a conflict with an existing decision, an external fact, and combined blockers that preserve an existing diagnosis and application file.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+This run covers the structural suite on Linux with Node.js 22 and the agent-applied scenarios. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified. An earlier same-day run recorded `gh issue list` returning `Resource not accessible by integration`. No issue was created.
+
+## Previous observation — operational handoff, Linux, 2026-10-13
+
+Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. Amendment v1-A12 implements `handoff` without adding an executor, dependency, schema, template, target or CLI command. A verified transfer uses the existing handoff template. A non-ready input is recorded and does not authorize implementation. A blocked path writes no file from that attempt. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 12 `implemented` and 6 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 48 tests, zero failures/skips/todos. The catalogue assertion already covered the migration; no new test file was added.
+- `git diff --check`: PASS.
+- `TEST-20261013-002` records twelve isolated agent-conducted scenarios in a temporary directory: a ready transfer with an empty frontier, an unchanged rerun, an in-place version update, a blocked specification with a draft ticket, missing project context, unobserved change state, an unobserved artifact inventory, an omitted secret, a conflict with an existing decision, an external fact, combined blockers that preserve an existing handoff and application file, and a ready transfer that leaves glossary and application code unchanged.
+- The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
+
+This run covers the structural suite on Linux with Node.js 22 and the agent-applied scenarios. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified. An earlier same-day run on the v1-A11 tree, recorded below, found `gh` on PATH and `gh issue list` returning `Resource not accessible by integration`. No issue was created.
+
+## Previous observation — structural suite on Linux, Node.js 22, after v1-A11, 2026-10-13
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. `node_modules` was absent. The scripts use Node.js built-ins only. This run re-executes the structural suite and CLI after amendment v1-A11. It does not re-run the agent-driven semantic matrices and does not certify live discovery in Cursor, Codex, Gemini Antigravity or Claude Code.
 
 - `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 11 `implemented` and 7 `scaffold`; four implemented target descriptors.
 - `npm test`: PASS, 48 tests, zero failures/skips/todos.
-- `git diff --check`: PASS after these documentation edits. No skill source changed.
-- `SPEC-20261010-001` and `TICKET-SET-20261010-001` are LF in the index since `6dd8671`.
-- `gh issue list` for `pcmbezerra/ai-development-skills-pack` returned `Resource not accessible by integration`.
-- Live discovery and execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified.
+- `git diff --check`: PASS on the clean tree before this note.
+- `node bin/ai-dev-skills.mjs --help` and `node bin/ai-dev-skills.mjs validate`: exit 0.
+
+`gh` is on PATH and authenticated as the Cursor integration. `gh issue list` returned `Resource not accessible by integration`. Remote issues and labels remain unreconciled. No issue was created.
+
+Node.js 22 and Linux structural execution are verified by this run. Live product discovery remains unverified.
 
 ## Previous observation — operational tdd and code-review, macOS, 2026-10-10
 
@@ -21,7 +124,7 @@ Node.js v26.5.0, npm 11.17.0, macOS 26.6.2 (Darwin 25.6.0). Amendment v1-A11 imp
 - `TEST-20261010-002` records thirteen isolated agent-conducted scenarios in a temporary directory: a ready test with no existing tests, an unchanged rerun, an in-place version update, explicit TDD with RED before any implementation edit, a missing objective, a draft ticket, a draft specification, a review without spec or ticket, an unchanged review rerun, missing project context, a missing change, an omitted secret, and a conflict with an existing decision.
 - The semantic matrix is evidence from this agent session, not a deterministic Node.js executor or live product certification.
 
-Node.js 22, Linux and live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remain unverified. This macOS run covers the structural suite and the agent-applied scenarios only.
+This macOS run did not itself verify Node.js 22 or Linux. Those structural runs are recorded in the 2026-10-13 observations above. Live discovery/execution in Cursor, Codex, Gemini Antigravity and Claude Code remains unverified.
 
 ## Previous observation — operational implement, macOS, 2026-10-09
 

@@ -1,6 +1,6 @@
 # Convenções
 
-Preservar exatamente as 18 skills do manifest. Fonte reutilizável independente da ferramenta; estado específico fora de `skills/`. Sem dependências npm. A distribuição em escopo de projeto está implementada; instalação global, sobrescrita e detecção automática de target não estão. Contexto, bootstrap, workflow, clarify, to-spec, to-tickets, domain-modelling, architecture-design, implement, tdd e code-review estão operacionais nesta etapa; as outras 7 skills permanecem scaffold.
+Preservar exatamente as 18 skills do manifest. Fonte reutilizável independente da ferramenta; estado específico fora de `skills/`. Sem dependências npm de produção ou implementação de instalador. Contexto, bootstrap, workflow, clarify, handoff, research, to-spec, to-tickets, domain-modelling, architecture-design, implement, tdd, refactor, edge-case-analysis, code-review, diagnose, docs e modernize estão operacionais nesta etapa; nenhuma skill permanece scaffold.
 
 Antes de alterar contratos, ler proveniência e contrato da skill; para artefatos ou routing, ler os contratos compartilhados correspondentes. Alterações arquiteturais exigem tratamento explícito de versão.
 

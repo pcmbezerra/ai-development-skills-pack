@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+The request is modernization under R16, not an ordinary refactor.
+
+Evidence
+The objective asks to migrate greeting.js from the current runtime to another framework. greeting.js was left unchanged. No report file was written.
+
+Missing prerequisite
+a modernization plan for a framework migration
+
+Recommended next skill/action
+modernize

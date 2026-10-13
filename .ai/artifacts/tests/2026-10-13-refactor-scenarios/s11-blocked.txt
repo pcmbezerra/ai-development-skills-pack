@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+A research report is present and its status is draft.
+
+Evidence
+.ai/artifacts/research/draft.md has status draft. The objective would have adopted it. The network was not accessed. greeting.js was left unchanged. No report file was written.
+
+Missing prerequisite
+research report with status ready
+
+Recommended next skill/action
+research

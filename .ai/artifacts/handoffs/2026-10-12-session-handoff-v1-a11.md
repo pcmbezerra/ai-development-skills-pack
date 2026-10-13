@@ -59,12 +59,14 @@ Este handoff. O restante da emenda já está em `d7a4bab` e `6dd8671`.
 
 Registrada em `.ai/artifacts/tests/2026-10-10-tdd-code-review-operational.md` e `references/validation-result.md`. Suíte 48/48. Matriz agent-driven 13/13, separada da suíte Node. Review do ticket 01: `REVIEW-20261010-001`, PASS.
 
+Atualização posterior, 2026-10-13: a suíte estrutural passou em Linux 6.12.94+ com Node.js v22.14.0 e npm 10.9.9, 48/48. A matriz agent-driven não foi reexecutada. A descoberta real nos quatro produtos permanece sem verificação. Detalhe em `references/validation-result.md`.
+
 ## Known Issues
 
-- Node.js 22, Linux e descoberta real nos quatro produtos não foram verificados.
+- A suíte estrutural em Node.js 22 e Linux foi verificada em 2026-10-13. A descoberta real nos quatro produtos permanece sem verificação.
 - Não há executor das skills operacionais. Sete skills seguem scaffold.
-- `REVIEW-20261010-002` ainda diz `CHANGES_REQUIRED`. Os cenários 2 e 9 já foram refeitos em `6dd8671`. Dois achados baixos permanecem nesse relatório: fim de linha da spec e do conjunto de tickets, e o objetivo do estado longo ainda encerrado em v1-A10.
-- Issues remotas não reconciliadas. Licença placeholder. Pacote privado.
+- `REVIEW-20261010-002` ainda diz `CHANGES_REQUIRED`. Os cenários 2 e 9 já foram refeitos em `6dd8671`. O achado baixo de fim de linha da spec e do conjunto de tickets permanece nesse relatório. O objetivo do estado longo foi atualizado em 2026-10-13 para v1-A11; não houve review nova.
+- Em 2026-10-13 `gh issue list` respondeu `Resource not accessible by integration`. Issues remotas não reconciliadas. Licença placeholder. Pacote privado.
 
 ## Open Questions
 
@@ -73,7 +75,7 @@ Nenhuma questão bloqueante.
 ## Next Actions
 
 1. Ler `AGENTS.md`, este handoff e `.ai/artifacts/handoffs/2026-10-06-project-state.md`.
-2. Verificar `git status --short --branch` e `git log -1 --oneline`. A árvore deve estar limpa e o último commit deve ser este handoff, já em `origin/main`.
+2. Em `3fcf258` a árvore estava limpa e esse commit é este handoff, já em `origin/main`. A observação Linux/Node.js 22 de 2026-10-13 fica no commit de evidência seguinte.
 3. Não reabrir `SPEC-20261009-002`, `SPEC-20261009-003`, `SPEC-20261009-004` nem `SPEC-20261010-001`.
 4. Não tratar `REVIEW-20261010-002` como trabalho pendente sem uma review nova pedida pelo mantenedor.
 5. Iniciar somente um recorte que o mantenedor nomear.

@@ -1,0 +1,13 @@
+Status: BLOCKED
+
+Reason
+Relevant tests fail before the change. The cause is unknown.
+
+Evidence
+node --test greeting.test.mjs exited 1 before any edit. The assertion expected hi and greeting() returns hello. greeting.js was not modified. No report file was written.
+
+Missing prerequisite
+confirmed cause of the failing test
+
+Recommended next skill/action
+diagnose

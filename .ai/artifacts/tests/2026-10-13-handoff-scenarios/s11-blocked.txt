@@ -1,0 +1,14 @@
+Status: BLOCKED
+
+Reason
+Current state is missing and change state was not observed. The earliest gap is project context.
+
+Evidence
+No current-state input was observed, and the gap is project context. No change-state input was observed. HANDOFF-S11-EXISTING and app.js were already present.
+
+Missing prerequisite
+project context
+change state
+
+Recommended next skill/action
+context-engineering

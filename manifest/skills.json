@@ -167,7 +167,7 @@
       "path": "skills/core/handoff/SKILL.md",
       "description": "Transfer verified work state between agents/sessions.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Transfer verified work state between agents/sessions",
       "inputs": [
         "current state",
@@ -199,7 +199,7 @@
       "path": "skills/discovery/research/SKILL.md",
       "description": "Establish externally verifiable technical facts.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Establish externally verifiable technical facts",
       "inputs": [
         "research question",
@@ -403,7 +403,7 @@
       "path": "skills/development/diagnose/SKILL.md",
       "description": "Identify root cause of unknown failures.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Identify root cause of unknown failures",
       "inputs": [
         "symptom",
@@ -525,7 +525,7 @@
       "path": "skills/development/refactor/SKILL.md",
       "description": "Improve internal structure without changing external behaviour.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Improve internal structure without changing external behaviour",
       "inputs": [
         "refactor objective",
@@ -564,7 +564,7 @@
       "path": "skills/quality/edge-case-analysis/SKILL.md",
       "description": "Identify untested boundary/adversarial scenarios.",
       "primaryInvocation": "model",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Identify untested boundary/adversarial scenarios",
       "inputs": [
         "SPEC",
@@ -640,7 +640,7 @@
       "path": "skills/documentation/docs/SKILL.md",
       "description": "Create/update documentation from evidence.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Create/update documentation from evidence",
       "inputs": [
         "repository evidence",
@@ -679,7 +679,7 @@
       "path": "skills/modernization/modernize/SKILL.md",
       "description": "Plan and orchestrate legacy modernization.",
       "primaryInvocation": "user",
-      "status": "scaffold",
+      "status": "implemented",
       "goal": "Plan and orchestrate legacy modernization",
       "inputs": [
         "PROJECT_CONTEXT",
