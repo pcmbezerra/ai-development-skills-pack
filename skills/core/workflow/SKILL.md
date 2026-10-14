@@ -7,9 +7,9 @@ description: "Recommends the smallest skill sequence and does not execute it. Us
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/workflow.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult the [catalogue](references/catalogue.json) for invocation and dependencies, the [artifact contract](references/artifacts.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -21,4 +21,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) after the plan when the first required step is unavailable or a prerequisite is blocked. Never present a scaffold skill or blocked artifact as executable.
+Return the [contracted `BLOCKED` result](references/failure.md) after the plan when the first required step is unavailable or a prerequisite is blocked. Never present a scaffold skill or blocked artifact as executable.

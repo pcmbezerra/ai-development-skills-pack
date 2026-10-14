@@ -7,9 +7,9 @@ description: "Models business concepts and invariants when they matter. Use when
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/domain-modelling.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, the [artifact contract](references/artifacts.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a decision-set problem recommends `clarify`; a specification problem recommends `to-spec`; an external fact recommends `research`; a change that does not justify a model recommends `architecture-design` when R9 applies and otherwise `to-tickets`. Do not leave a domain-model file. The only file this skill writes is a ready domain model. Never present the BLOCKED result as a ready domain model.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a decision-set problem recommends `clarify`; a specification problem recommends `to-spec`; an external fact recommends `research`; a change that does not justify a model recommends `architecture-design` when R9 applies and otherwise `to-tickets`. Do not leave a domain-model file. The only file this skill writes is a ready domain model. Never present the BLOCKED result as a ready domain model.

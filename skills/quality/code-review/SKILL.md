@@ -7,9 +7,9 @@ description: "Reviews a non-trivial change and does not edit code. Use when an i
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/code-review.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [review-report.md](assets/review-report.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -24,4 +24,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing project context recommends `context-engineering`. A missing change recommends `implement`. A conflict with an existing decision recommends `clarify`. Do not leave a review report from this attempt. Do not delete an existing report. The file this skill writes is a ready review report. Never present the BLOCKED result as a ready review report.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing project context recommends `context-engineering`. A missing change recommends `implement`. A conflict with an existing decision recommends `clarify`. Do not leave a review report from this attempt. Do not delete an existing report. The file this skill writes is a ready review report. Never present the BLOCKED result as a ready review report.

@@ -7,9 +7,9 @@ description: "Resolves material ambiguity before a specification or change. Use 
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/clarify.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [decision-set.md](assets/decision-set.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -24,4 +24,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) with the persisted decision set when a blocking question remains, the input is blocked, an external fact still affects the requested next step, or a premise was not accepted as the user's own decision. Never present that result as authorization to specify or implement.
+Return the [contracted `BLOCKED` result](references/failure.md) with the persisted decision set when a blocking question remains, the input is blocked, an external fact still affects the requested next step, or a premise was not accepted as the user's own decision. Never present that result as authorization to specify or implement.

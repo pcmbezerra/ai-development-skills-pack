@@ -7,7 +7,7 @@ description: "Creates local pack configuration and project context. Use when a r
 
 Status: implemented; the operational workflow is available.
 
-Before executing this skill, read its [contract](../../../contracts/skills/setup-ai-development-skills.md), the [manifest](../../../manifest/skills.json), the [shared skill contract](../../../contracts/skill-contract.md), the [artifact contract](../../../contracts/artifacts.md), the [routing rules](../../../contracts/routing.md) and the [failure contract](../../../contracts/failure.md).
+Before executing this skill, read its [contract](references/contract.md), the [routing rules](references/routing.md) and the [failure contract](references/failure.md).
 
 ## Workflow
 

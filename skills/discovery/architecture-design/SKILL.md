@@ -7,9 +7,9 @@ description: "Defines the technical solution and durable architectural decisions
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/architecture-design.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [architecture-design.md](assets/architecture-design.md) and [adr.md](assets/adr.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains or the architecture gate cannot pass without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a specification problem recommends `to-spec`; a decision problem recommends `clarify`; an external fact or a research report that is present and not `ready` recommends `research`; a domain model that is required or present and not `ready` recommends `domain-modelling`; a change that does not justify a design recommends `to-tickets`. Do not leave an architecture-design file or an ADR from this attempt. Do not delete an existing ADR. The files this skill writes are a ready architecture design and, only when the ready specification already records a durable architectural decision, one ready ADR. Never present the BLOCKED result as a ready architecture design.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains or the architecture gate cannot pass without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a specification problem recommends `to-spec`; a decision problem recommends `clarify`; an external fact or a research report that is present and not `ready` recommends `research`; a domain model that is required or present and not `ready` recommends `domain-modelling`; a change that does not justify a design recommends `to-tickets`. Do not leave an architecture-design file or an ADR from this attempt. Do not delete an existing ADR. The files this skill writes are a ready architecture design and, only when the ready specification already records a durable architectural decision, one ready ADR. Never present the BLOCKED result as a ready architecture design.

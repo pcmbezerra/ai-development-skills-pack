@@ -7,9 +7,9 @@ description: "Transfers verified work state to another agent or session. Use whe
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/handoff.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [handoff.md](assets/handoff.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing project context recommends `context-engineering`. Any other missing current state recommends supplying that state and retrying `handoff`. Unobserved change state recommends capturing it and retrying `handoff`. An unobserved artifact inventory recommends inventorying it and retrying `handoff`. A decision problem recommends `clarify`. An external fact recommends `research`. Do not leave a handoff file from this attempt. Do not delete an existing handoff. Do not modify application code. The file this skill writes is a ready handoff. Never present the BLOCKED result as a ready handoff.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing project context recommends `context-engineering`. Any other missing current state recommends supplying that state and retrying `handoff`. Unobserved change state recommends capturing it and retrying `handoff`. An unobserved artifact inventory recommends inventorying it and retrying `handoff`. A decision problem recommends `clarify`. An external fact recommends `research`. Do not leave a handoff file from this attempt. Do not delete an existing handoff. Do not modify application code. The file this skill writes is a ready handoff. Never present the BLOCKED result as a ready handoff.

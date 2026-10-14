@@ -7,9 +7,9 @@ description: "Finds untested boundaries inside behaviour that is already specifi
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/edge-case-analysis.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, the [artifact contract](references/artifacts.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. A missing or not-ready specification recommends `to-spec`. A missing change recommends `implement`. A domain model that is present and not ready recommends `domain-modelling`. Existing tests that were not observed recommend reading the existing tests. A conflict with an existing decision recommends `clarify`. Do not leave an edge-case report from this attempt. Do not delete an existing report. The file this skill writes is a ready edge-case report. Never present the BLOCKED result as a ready edge-case report.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. A missing or not-ready specification recommends `to-spec`. A missing change recommends `implement`. A domain model that is present and not ready recommends `domain-modelling`. Existing tests that were not observed recommend reading the existing tests. A conflict with an existing decision recommends `clarify`. Do not leave an edge-case report from this attempt. Do not delete an existing report. The file this skill writes is a ready edge-case report. Never present the BLOCKED result as a ready edge-case report.

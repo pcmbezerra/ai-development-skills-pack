@@ -1,0 +1,215 @@
+{
+  "skills": [
+    {
+      "name": "setup-ai-development-skills",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [
+          "context-engineering"
+        ],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "workflow",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "clarify",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "context-engineering"
+        ]
+      }
+    },
+    {
+      "name": "context-engineering",
+      "status": "implemented",
+      "primaryInvocation": "model",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "handoff",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "research",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "to-spec",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [
+          {
+            "skill": "clarify",
+            "when": "material ambiguity exists"
+          }
+        ],
+        "optional": []
+      }
+    },
+    {
+      "name": "domain-modelling",
+      "status": "implemented",
+      "primaryInvocation": "model",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "architecture-design",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [
+          {
+            "skill": "research",
+            "when": "external facts affect decisions"
+          },
+          {
+            "skill": "domain-modelling",
+            "when": "business invariants affect design"
+          }
+        ],
+        "optional": []
+      }
+    },
+    {
+      "name": "to-tickets",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "diagnose",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "tdd"
+        ]
+      }
+    },
+    {
+      "name": "implement",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "tdd",
+          "edge-case-analysis",
+          "code-review",
+          "context-engineering"
+        ]
+      }
+    },
+    {
+      "name": "tdd",
+      "status": "implemented",
+      "primaryInvocation": "model",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "refactor",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "edge-case-analysis",
+      "status": "implemented",
+      "primaryInvocation": "model",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "code-review",
+      "status": "implemented",
+      "primaryInvocation": "model",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "docs",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": []
+      }
+    },
+    {
+      "name": "modernize",
+      "status": "implemented",
+      "primaryInvocation": "user",
+      "dependencies": {
+        "required": [],
+        "conditional": [],
+        "optional": [
+          "diagnose",
+          "research",
+          "architecture-design",
+          "tdd",
+          "to-tickets"
+        ]
+      }
+    }
+  ]
+}

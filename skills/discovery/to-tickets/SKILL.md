@@ -7,9 +7,9 @@ description: "Splits one ready specification into an executable ticket set. Use 
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/to-tickets.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [ticket-set.md](assets/ticket-set.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains or a valid decomposition cannot be formed without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: a missing or non-ready specification recommends `to-spec`; a decision problem recommends `clarify`; a domain-model problem recommends `domain-modelling`; an architecture-design problem recommends `architecture-design`; an external fact recommends `research`. Do not leave a ticket-set file. Do not publish a remote issue. The only file this skill writes is a ready ticket set. Never present the BLOCKED result as a ready ticket set.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains or a valid decomposition cannot be formed without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: a missing or non-ready specification recommends `to-spec`; a decision problem recommends `clarify`; a domain-model problem recommends `domain-modelling`; an architecture-design problem recommends `architecture-design`; an external fact recommends `research`. Do not leave a ticket-set file. Do not publish a remote issue. The only file this skill writes is a ready ticket set. Never present the BLOCKED result as a ready ticket set.
