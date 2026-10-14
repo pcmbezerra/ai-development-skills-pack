@@ -1,11 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { installTarget, packageTargets, targetNames, validateTarget } from '../scripts/distribute-skills.mjs';
+import { installTarget, packageTargets, readTarget, targetNames, validateTarget } from '../scripts/distribute-skills.mjs';
 
 const source = fileURLToPath(new URL('../', import.meta.url));
 
@@ -49,6 +49,52 @@ test('installation is idempotent and refuses divergent collisions before copying
     'setup-ai-development-skills: differs from canonical source',
     'workflow: missing',
   ]);
+}));
+
+async function filesUnder(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...await filesUnder(path));
+    else if (entry.isFile()) files.push(path);
+  }
+  return files;
+}
+
+test('four targets install without the origin repository and resolve local links', () => temporary(async destination => {
+  await assert.rejects(stat(join(destination, 'contracts')));
+  await assert.rejects(stat(join(destination, 'manifest', 'skills.json')));
+  const names = await targetNames(source);
+  assert.deepEqual(names.length, 4);
+  for (const name of names) {
+    const installed = await installTarget({ target: name, destination, root: source });
+    assert.equal(installed.actions.length, 18);
+    const again = await installTarget({ target: name, destination, root: source });
+    assert.equal(again.actions.filter(action => action.status === 'unchanged').length, 18);
+    const descriptor = await readTarget(name, source);
+    const skillsRoot = join(destination, descriptor.projectSkillsPath);
+    const skillDirs = (await readdir(skillsRoot, { withFileTypes: true })).filter(entry => entry.isDirectory());
+    assert.equal(skillDirs.length, 18);
+    for (const entry of skillDirs) {
+      const skillDir = join(skillsRoot, entry.name);
+      for (const file of await filesUnder(skillDir)) {
+        if (!file.endsWith('.md')) continue;
+        const text = await readFile(file, 'utf8');
+        assert.doesNotMatch(text, /contracts\/|manifest\/skills\.json|templates\/artifacts\//);
+        for (const match of text.matchAll(/\[[^\]\n]*\]\(([^)\s]+)\)/g)) {
+          const link = match[1];
+          if (/^[a-z][a-z0-9+.-]*:/i.test(link)) continue;
+          const target = link.startsWith('#') ? file : resolve(dirname(file), decodeURIComponent(link.split('#')[0]));
+          const rel = relative(skillDir, target);
+          assert.equal(rel.startsWith('..'), false, `${name}/${entry.name}: ${link}`);
+          assert.equal((await stat(target)).isFile(), true, link);
+          assert.equal(relative(source, target).startsWith('..'), true, link);
+        }
+      }
+    }
+  }
+  await assert.rejects(stat(join(destination, 'contracts')));
+  await assert.rejects(stat(join(destination, 'manifest', 'skills.json')));
 }));
 
 test('CLI packages and validates a selected target', () => temporary(async output => {
