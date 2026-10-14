@@ -5,7 +5,7 @@ import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { validate } from '../scripts/validate-skills.mjs';
+import { projectCatalogue, projectContract, validate } from '../scripts/validate-skills.mjs';
 
 const source = fileURLToPath(new URL('../', import.meta.url));
 async function fixture(run) {
@@ -27,6 +27,11 @@ async function changeText(root,path,edit) {
   const target = join(root,path);
   await writeFile(target,edit(await readFile(target,'utf8')));
 }
+async function refreshContractProjection(root, contractPath) {
+  const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
+  const skill = manifest.skills.find(item=>item.contract===contractPath);
+  await writeFile(join(root,skill.path.replace(/SKILL\.md$/,'references/contract.md')), projectContract(await readFile(join(root,contractPath),'utf8')));
+}
 async function markSkillImplemented(root, name) {
   let skill;
   await changeManifest(root,m=>{
@@ -37,6 +42,7 @@ async function markSkillImplemented(root, name) {
     .replace('Status: scaffold.', 'Status: implemented.')
     .replace(/Pending implementation\. Read inputs and the shared artifact contract; operational steps are outside this scaffold\.\r?\n/, '')
     .replace(' This scaffold does not execute the workflow or produce ready artifacts.', ''));
+  await refreshContractProjection(root, skill.contract);
   await changeText(root,skill.path,s=>s
     .replace('Status: scaffold; the operational workflow is not implemented.', 'Status: implemented; the operational workflow is available.')
     .replace('When preparing this skill for implementation,', 'Before executing this skill,')
@@ -48,6 +54,7 @@ async function restoreModernizeScaffold(root) {
   await changeText(root,'contracts/skills/modernize.md',s=>`${s
     .replace('Status: implemented.', 'Status: scaffold.')
     .replace(/## Workflow\r?\n\r?\n[\s\S]*?\r?\n## Quality gates/,'## Workflow\n\nPending implementation. Read inputs and the shared artifact contract; operational steps are outside this scaffold.\n\n## Quality gates')}\n This scaffold does not execute the workflow or produce ready artifacts.\n`);
+  await refreshContractProjection(root, 'contracts/skills/modernize.md');
   await writeFile(join(root,'skills/modernization/modernize/SKILL.md'),`---
 name: modernize
 description: "Plans a bounded runtime, framework, or architecture migration and does not apply it. Use when the work is modernization rather than an ordinary refactor."
@@ -57,9 +64,9 @@ description: "Plans a bounded runtime, framework, or architecture migration and 
 
 Status: scaffold; the operational workflow is not implemented.
 
-When preparing this skill for implementation, read its [contract](../../../contracts/skills/modernize.md) for inputs, outputs, constraints, gates and failure behaviour.
+When preparing this skill for implementation, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [modernization-plan.md](assets/modernization-plan.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 Do not claim to have executed this skill from this skeleton.
 `);
@@ -70,6 +77,7 @@ async function implementSkill(root, name) {
     /## Workflow\r?\n\r?\n(?=## Quality gates)/,
     '## Workflow\n\n1. Read the approved input and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and record evidence.\n\n',
   ));
+  await refreshContractProjection(root, skill.contract);
   await changeText(root,skill.path,s=>`${s}\n## Workflow\n\n1. Read the requested change and repository context.\n2. Apply the smallest scoped change.\n3. Validate behavior and report evidence.\n`);
   return skill;
 }
@@ -86,12 +94,14 @@ for (const [format,eol] of [['LF','\n'],['CRLF','\r\n']]) {
     assert.equal(result.ok,true);
     assert.equal(result.skills,18);
   }));
-  for (const [artifact,path,section] of [
-    ['SPEC','templates/artifacts/spec.md','Acceptance Criteria'],
-    ['ADR','templates/artifacts/adr.md','Decision'],
+  for (const [artifact,path,section,asset] of [
+    ['SPEC','templates/artifacts/spec.md','Acceptance Criteria','skills/discovery/to-spec/assets/spec.md'],
+    ['ADR','templates/artifacts/adr.md','Decision','skills/discovery/architecture-design/assets/adr.md'],
   ]) test(`rejects missing ${artifact} section with ${format}`,()=>fixture(async root=>{
     await artifactLineEndings(root,eol);
-    await changeText(root,path,s=>s.replace(`## ${section}${eol}`,''));
+    const strip = text=>text.replace(`## ${section}\r\n`,'').replace(`## ${section}\n`,'');
+    await changeText(root,path,strip);
+    await changeText(root,asset,strip);
     const result = await validate(root);
     assert.equal(result.ok,false);
     assert.deepEqual(result.errors,[`${artifact}: missing template section ${section}`]);
@@ -173,6 +183,8 @@ const failures = [
     await changeManifest(root,m=>m.skills.find(s=>s.name==='workflow').description=description);
     await changeText(root,'skills/core/workflow/SKILL.md',s=>s.replace(/^description: .+$/m,`description: ${JSON.stringify(description)}`));
   }, /workflow: discovery description must state when to use the skill/],
+  ['link that escapes the skill directory', root=>changeText(root,'skills/development/implement/SKILL.md',s=>s.replace('](references/contract.md)','](../../../contracts/skills/implement.md)')), /implement: link escapes skill directory/],
+  ['projection drifted from the canonical source', root=>changeText(root,'skills/development/implement/references/failure.md',s=>`${s}\nlocal drift\n`), /implement: failure projection drifted/],
   ['discovery description over the pack budget', async root=>{
     const description = `Use when ${'x'.repeat(240)}`;
     await changeManifest(root,m=>m.skills.find(s=>s.name==='workflow').description=description);
@@ -187,6 +199,8 @@ for (const [name,mutate,expected] of failures) test(`rejects ${name}`,()=>fixtur
 }));
 test('optional composition cycles do not become mandatory prerequisites',()=>fixture(async root=>{
   await changeManifest(root,m=>m.skills.find(s=>s.name==='context-engineering').dependencies.optional.push('setup-ai-development-skills'));
+  const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
+  await writeFile(join(root,'skills/core/workflow/references/catalogue.json'), projectCatalogue(manifest.skills));
   const result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
 }));
