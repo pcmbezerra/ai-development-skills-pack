@@ -1,7 +1,7 @@
 ---
 artifact: test_evidence
 id: TEST-20261014-002
-version: 1
+version: 3
 status: ready
 created_by: handoff
 inputs:
@@ -12,63 +12,68 @@ inputs:
 
 # Relatório da v1-A21
 
-Veredito: `INCOMPLETE`.
+Veredito: `OBSERVED`.
 
-Nenhum host foi executado. O veredito não aprova e não reprova descoberta, descrição, seleção, invocação ou abertura de arquivo.
+Ao menos um host passou todas as gates: o Antigravity IDE. O Cursor também não apresentou `FAIL`; sua seleção automática ficou parcialmente `INCONCLUSIVE`, estado aceito pela spec. Codex e Claude Code permanecem `NOT_RUN` nas gates do modelo. Nenhuma falha do pacote, da distribuição ou da instalação dos targets foi identificada.
 
-Baseline conferida nesta sessão: `b86f41d`, 18 skills `implemented`, suíte 53/53 em Linux 6.12.94+ com Node.js v22.14.0 e npm 10.9.9. `npm run validate` e `npm run skills:validate` passaram depois dos installs externos. `git diff` não mostra `skills/`, `contracts/`, `manifest/`, `scripts/`, `targets/`, `bin/` nem `package.json`.
+## Baseline preservada
 
-## Evidência por host
+- baseline funcional: `b86f41d`;
+- HEAD e `origin/main`: `4cfad4f`, descendente documental sem mudança de produto;
+- 18 skills em estado `implemented`;
+- v1-A19 e v1-A20 concluídas;
+- v1-A21 agora contém evidência real de host;
+- v1-A22 não foi aberta.
 
-| Host | Lançamento | Layout instalado | Sessão no produto |
+## Resultado por host
+
+| Host | Sessão | Resultado | Resumo |
 | --- | --- | --- | --- |
-| Cursor | `NOT_RUN`, `cursor` e `agent` saída 127 | 18 skills em `.cursor/skills`, validate PASS | nenhuma |
-| Codex | `NOT_RUN`, `codex` saída 127 | 18 skills em `.agents/skills`, validate PASS | nenhuma |
-| Antigravity | `NOT_RUN` em app, CLI e IDE | 18 skills em `.agents/skills`, árvore separada da do Codex, validate PASS | nenhuma |
-| Claude Code | `NOT_RUN`, `claude` saída 127 | 18 skills em `.claude/skills`, validate PASS | nenhuma |
+| Cursor 3.24.18 | executada | `PASS`, com seleção automática `INCONCLUSIVE` | descoberta 18/18, descrições 18/18, explícitas 4/4, `references/` 4/4 e assets 2/2; seleção automática 2 `PASS` e 2 stalls sem resposta final |
+| Codex CLI 0.146.0-alpha.3 | não iniciada no modelo | `NOT_RUN` | binário disponível, mas sem login; `codex exec` recebeu `401 Unauthorized` antes de resposta |
+| Antigravity IDE 2.5.5 | executada | `PASS` | descoberta 18/18, descrições 18/18, seleção automática 4/4, explícitas 4/4, `references/` 4/4 e assets 2/2 |
+| Claude Code | não executada | `NOT_RUN` | fora do conjunto autorizado nesta repetição; layout instalado continua validado |
 
-Detalhe em `environment.md` e nas matrizes `cursor/matrix.md`, `codex/matrix.md`, `antigravity/matrix.md` e `claude-code/matrix.md`.
+O veredito segue o ticket 06: Antigravity passou todas as gates; Cursor não tem gate em `FAIL` e a spec aceita seleção automática `INCONCLUSIVE`; os demais hosts não produziram sessão do modelo e ficam `NOT_RUN`.
 
-## Gates
+## Fatos observados
 
-Para os quatro hosts, as seis gates ficaram `NOT_RUN`: descoberta, descrição, seleção automática, invocação explícita, `references/` e `assets/`. Nenhuma gate ficou `PASS`, `FAIL` ou `INCONCLUSIVE`.
+- Cursor e Antigravity descobriram uma única ocorrência de cada uma das 18 skills instaladas no projeto consumidor.
+- Ambos apresentaram descrições compatíveis com o frontmatter e preservaram `Use when`.
+- As oito invocações explícitas, quatro em cada IDE, carregaram a skill correspondente.
+- Os dois IDEs leram `references/contract.md` nas quatro sondas.
+- `clarify` abriu `assets/decision-set.md` e citou `artifact: decision_set`.
+- `research` abriu `assets/research-report.md` e citou `artifact: research_report`.
+- `workflow` abriu `references/catalogue.json` e citou `"when": "external facts affect decisions"`.
+- `context-engineering` e `workflow` confirmaram ausência de `assets/` sem inventar arquivo.
+- Antigravity abriu `references/` e `assets/` apesar de a documentação do produto nomear `resources/`; essa diferença não foi obstáculo nesta versão/superfície.
+- O Codex instalado não possui sessão autenticada. A falha `401` ocorreu antes do modelo e não demonstra problema no pacote.
+- Nenhum workflow gravou arquivo nos consumidores. Só os diretórios dos targets instalados permanecem nas árvores.
+- A quarentena temporária foi revertida: 14 diretórios restaurados e zero remanescente.
 
-`N/A` de `assets/` para `context-engineering` e `workflow` também não foi avaliado, porque a sonda não rodou.
+## Estados inconclusivos
 
-## Diferenças observadas entre os hosts
+No Cursor, as sondas automáticas de `context-engineering` e `research` abriram material da skill, mas permaneceram em `Thinking` sem resposta final dentro da janela de observação. Elas ficam `INCONCLUSIVE`, não `FAIL`. As sondas automáticas de `clarify` e `workflow` passaram.
 
-Nenhuma diferença de comportamento foi observada. Os quatro produtos não abriram.
+No Antigravity, a sonda de contexto carregou e citou `context-engineering`, mas recomendou `setup-ai-development-skills` como primeiro comando porque o consumidor vazio não continha `.ai/config.json`. Isso satisfaz o critério de carga da FR6 e é coerente com o roteamento do pacote.
 
-Fato de documentação, relido em 2026-10-14 e não reexecutado aqui: os caminhos de install diferem, o Codex documenta encurtamento de descrição, o Claude Code documenta descarte de descrição acima de 1% da janela, e o Antigravity documenta a pasta `resources/`. Essas frases continuam hipótese de comportamento até uma sessão existir.
+## Limites
 
-## Fatos
+- O Codex exige autenticação do usuário para que suas gates possam ser observadas.
+- Claude Code não foi incluído na autorização desta repetição.
+- A execução não mede taxa futura de acerto da seleção automática.
+- Não foi feito controle com diretório `resources/`, pois ele está fora do escopo da v1-A21.
 
-- Os comandos `cursor`, `agent`, `codex`, `claude`, `agy`, `antigravity` e `gemini` não estão no PATH e saíram 127.
-- As raízes de usuário documentadas para os 18 nomes estão ausentes, salvo `/home/ubuntu/.cursor/skills-cursor`, cuja interseção com o pacote é vazia.
-- O install e o `validate --target` passaram nos quatro consumidores fora do pacote.
-- A suíte do pacote permanece 53/53.
-- Nenhum arquivo de skill, contrato, target ou CLI foi editado.
+## Validação estrutural final
 
-## Hipóteses
+- `npm test`: `PASS`, 53/53, zero falhas, skips ou TODOs.
+- `npm run validate`: `PASS`, 18 skills.
+- `npm run skills:validate`: `PASS`, 18 skills.
+- `git diff --check`: `PASS`.
+- Nenhum diff em `skills/`, `contracts/`, `manifest/`, `scripts/`, `targets/`, `bin/` ou `package.json`.
 
-- Uma máquina com o binário no PATH pode listar as 18 skills a partir desses consumidores.
-- O orçamento do Codex ou do Claude Code pode cortar `Use when`.
-- O Antigravity pode ou não abrir `references/` e `assets/`.
-- O agente de nuvem desta sessão, se apontado para um workspace que já contivesse `.cursor/skills`, poderia ver as skills. Esta sessão não fez esse teste. O workspace do pacote não contém essa pasta.
+## Decisão
 
-Nenhuma hipótese acima entra como resultado.
+O pacote permanece estável e sem regressões conhecidas. Nenhuma correção estrutural, mudança de descrição, ajuste de diretório ou mudança de comportamento é autorizada por esta coleta, pois não houve `FAIL` reproduzível. Não abrir a v1-A22 neste momento.
 
-## Resultados NOT_RUN
-
-Cursor, Codex, Antigravity (app, CLI e IDE) e Claude Code. A checagem está em `environment.md`.
-
-## Recomendações para a v1-A22
-
-1. Não abrir a v1-A22 como correção de skill, descrição, pasta, contrato, target ou CLI. Esta execução não produziu `FAIL`.
-2. Manter a v1-A21 como a emenda de observação. Repetir os tickets 02 a 05 numa máquina em que o produto saia de 127, reutilizando `SPEC-20261014-001`.
-3. Só criar a v1-A22 depois de uma gate `FAIL` registrada com transcript. O escopo dessa emenda futura deve ser o achado citado, não uma hipótese desta lista.
-4. Enquanto o veredito for `INCOMPLETE`, o pacote permanece o de `b86f41d` mais este registro.
-
-## Limitações da coleta
-
-Não há transcript, captura de lista nem leitura de ferramenta de `references/` ou `assets/` por um produto. O validate do consumidor não substitui essa leitura. Os diretórios em `/tmp/v1-a21-consumers` não estão no Git; os comandos em `environment.md` os recriam.
+Uma repetição futura pode completar Codex após login e Claude Code quando autorizado, mas isso não invalida a evidência positiva já coletada em Cursor e Antigravity.

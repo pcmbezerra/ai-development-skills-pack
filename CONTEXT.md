@@ -72,6 +72,26 @@ _Avoid_: skill específica de IDE
 Registro verificável do estado do trabalho, suas pendências e próximos passos para continuidade.
 _Avoid_: promessa de conclusão
 
+**Observação de host**:
+Sessão real em um produto suportado que permite verificar descoberta, seleção, invocação e abertura dos arquivos de uma skill.
+_Avoid_: validação estrutural, inspeção do layout instalado
+
+**NOT_RUN**:
+Estado de uma observação de host que não pôde ser executada; não aprova nem reprova o comportamento observado.
+_Avoid_: falha, aprovação, inconclusivo
+
+**INCONCLUSIVE**:
+Estado de uma gate executada sem evidência suficiente para aprovar ou reprovar o comportamento observado.
+_Avoid_: NOT_RUN, falha, aprovação
+
+**INCOMPLETE**:
+Veredito de uma observação sem evidência suficiente para aprovar ou reprovar o comportamento dos hosts.
+_Avoid_: falha do pacote, aprovação parcial
+
+**OBSERVED**:
+Veredito de uma observação em que ao menos um host passou as gates e nenhum host executado apresentou `FAIL`, conforme o protocolo vigente.
+_Avoid_: certificado, garantia futura, aprovação de host não executado
+
 ## Decisões
 
 **Ambiguidade material**:

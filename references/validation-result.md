@@ -1,5 +1,19 @@
 # Validation result
 
+## Current observation — live hosts, v1-A21, OBSERVED, Windows, Node.js 25, 2026-10-14
+
+Windows NT 10.0.26200.0, Node.js v25.2.0 and npm 11.6.2. The functional baseline remains `b86f41d`; HEAD and `origin/main` are `4cfad4f`, which adds only the v1-A21 protocol and evidence. The verdict is `OBSERVED`.
+
+- Antigravity IDE 2.5.5: PASS for 18/18 discovery and descriptions, 4/4 automatic selection, 4/4 explicit invocation, four `references/` probes and both applicable `assets/` probes.
+- Cursor 3.24.18: PASS for discovery, descriptions, explicit invocation, `references/` and applicable `assets/`; automatic selection is 2 PASS and 2 INCONCLUSIVE because the model did not publish a final response.
+- Codex CLI 0.146.0-alpha.3: model gates NOT_RUN because the local CLI is not logged in and returned 401 before a response.
+- Claude Code: NOT_RUN in this repetition.
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills.
+- `npm test`: PASS, 53 tests, zero failures, skips, or todos.
+- `git diff --check`: PASS.
+- Temporary quarantine was fully restored: 14 directories restored, zero remaining.
+- No package or target-installation failure is known. v1-A22 remains unopened.
+
 ## Current observation — live-host run, v1-A21, INCOMPLETE, Linux, Node.js 22, 2026-10-14
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0 at `/exec-daemon/node`, npm 10.9.9. Amendment v1-A21 executed `TICKET-SET-20261014-001` from `b86f41d` plus the observation protocol commit. The verdict is `INCOMPLETE`. This record uses `TEST-20261014-001`, `TEST-20261014-002` and `HANDOFF-20261014-003`. Eighteen skills stay `implemented`. Skills, contracts, targets, the installer and the CLI were not edited.

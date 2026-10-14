@@ -1,14 +1,16 @@
 # Codex — matriz
 
-Estado do host: `NOT_RUN`. Evidência de lançamento: `environment.md`. Nenhuma sessão foi aberta. Nenhuma célula abaixo é `PASS`, `FAIL` ou `INCONCLUSIVE`.
+Host: Codex CLI 0.146.0-alpha.3. Consumidor: `...\v1-a21-consumers-20261014-windows\codex`. Resultado da sessão do modelo: `NOT_RUN` por barreira de autenticação.
+
+O binário foi localizado e executado. `codex login status` retornou `Not logged in`. A tentativa `codex exec --ephemeral --sandbox read-only` terminou antes da resposta do modelo com `401 Unauthorized: Missing bearer or basic authentication`.
 
 | Gate | Estado | Evidência |
 | --- | --- | --- |
-| Descoberta das 18 skills | `NOT_RUN` | `codex --version` saiu 127 |
-| Descrição apresentada ao modelo | `NOT_RUN` | sem sessão |
-| Seleção automática das quatro sondas | `NOT_RUN` | sem sessão |
-| Invocação explícita `$nome` ou `/skills` | `NOT_RUN` | sem sessão |
-| Abertura de `references/` | `NOT_RUN` | sem sessão |
-| Abertura de `assets/` | `NOT_RUN` | sem sessão |
+| Descoberta das 18 skills | `NOT_RUN` | não houve sessão autenticada do modelo |
+| Descrição apresentada ao modelo | `NOT_RUN` | não houve resposta do modelo |
+| Seleção automática das quatro sondas | `NOT_RUN` | bloqueada antes da primeira sonda |
+| Invocação explícita `$nome` ou `/skills` | `NOT_RUN` | bloqueada antes da primeira sonda |
+| Abertura de `references/` | `NOT_RUN` | bloqueada antes da primeira sonda |
+| Abertura de `assets/` | `NOT_RUN` | bloqueada antes da primeira sonda |
 
-O install em `/tmp/v1-a21-consumers/codex/.agents/skills` gravou 18 `SKILL.md` e `validate --target codex` passou. Esse resultado é layout em disco. O aviso de orçamento do Codex não foi observado.
+O target continua íntegro: 18 skills em `.agents\skills` e `validate --target codex` em `PASS`. A barreira é ambiental e não constitui `FAIL` do pacote. Nenhuma tentativa de login ou alteração de credencial foi feita.

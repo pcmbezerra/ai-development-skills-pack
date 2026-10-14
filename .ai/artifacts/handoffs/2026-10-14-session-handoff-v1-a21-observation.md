@@ -1,7 +1,7 @@
 ---
 artifact: handoff
 id: HANDOFF-20261014-003
-version: 1
+version: 3
 status: ready
 created_by: handoff
 inputs:
@@ -14,48 +14,52 @@ inputs:
 
 ## Objective
 
-Registrar a execução observacional da v1-A21. O veredito é `INCOMPLETE`.
+Registrar a repetição observacional da v1-A21 em hosts Windows instalados. Veredito: `OBSERVED`.
 
 ## Current State
 
-A baseline continua `b86f41d`. Dezoito skills seguem `implemented`. A suíte passou 53/53 depois dos installs externos. Os quatro hosts estão `NOT_RUN`. Nenhuma gate foi aprovada, reprovada ou inconclusiva. Skills, contratos, targets e CLI permanecem.
+A baseline funcional continua `b86f41d`; HEAD e `origin/main` estão em `4cfad4f`, sem mudança de produto. Dezoito skills seguem `implemented`. Antigravity IDE passou todas as gates. Cursor passou descoberta, descrição, invocação explícita e abertura de arquivos; duas das quatro seleções automáticas ficaram `INCONCLUSIVE` por stall do modelo. Codex ficou `NOT_RUN` nas gates por ausência de login. Claude Code não entrou nesta repetição.
 
 ## Completed Work
 
-Ticket 01: quatro consumidores em `/tmp/v1-a21-consumers`, install e validate PASS, pré-checagem dos 18 nomes, lançamento com saída 127. Tickets 02 a 05: matrizes `NOT_RUN`, sem sessão. Ticket 06: `REPORT.md` com veredito `INCOMPLETE` e recomendações para a v1-A22.
+- Consumidores Windows isolados confirmados com 18 skills e `validate --target` em `PASS`.
+- Quarentena temporária aplicada aos sete nomes globais conflitantes nas raízes `.agents` e `.claude`.
+- Cursor 3.24.18 observado em janela isolada.
+- Codex CLI 0.146.0-alpha.3 tentado; sessão bloqueada por `Not logged in` e `401 Unauthorized`.
+- Antigravity IDE 2.5.5 observado em janela isolada com Gemini 3.8 Flash High.
+- Matrizes e relatório consolidados sem alterar arquivos de produto.
+- Quarentena revertida: 14/14 diretórios restaurados; zero remanescente.
 
 ## Decisions
 
-Nenhuma correção de produto. `NOT_RUN` não foi convertido em aprovação nem em reprovação. A v1-A22 não abre por esta evidência. R8 e R9 não se aplicam. ADR `0001` e ADR `0002` não foram estendidos.
+O veredito anterior `INCOMPLETE` foi superado por evidência real de host. O novo veredito é `OBSERVED`, não `CERTIFIED`. Não houve `FAIL`, falha estrutural, falha de instalação ou regressão conhecida. Nenhuma correção do pacote está autorizada. A v1-A22 não foi aberta.
 
 ## Artifacts
 
-`TEST-20261014-001`, `TEST-20261014-002` e este handoff. O protocolo continua em `SPEC-20261014-001`.
+- `TEST-20261014-001`: ambiente Windows, isolamento e restauração da quarentena.
+- `TEST-20261014-002`: relatório consolidado.
+- Matrizes de Cursor, Codex, Antigravity e Claude Code na pasta de evidência.
 
 ## Files Changed
 
-A pasta `.ai/artifacts/tests/2026-10-14-live-host-observation/`, este handoff, o handoff de continuidade e a evidência de validação. `skills/`, `scripts/`, `targets/`, manifesto e contratos canônicos não mudaram.
+A execução atual altera somente `.ai/artifacts/tests/2026-10-14-live-host-observation/` e este handoff. Alterações documentais anteriores do mantenedor permanecem preservadas. `skills/`, `contracts/`, `manifest/`, `scripts/`, `targets/`, `bin/` e `package.json` não mudaram.
 
 ## Validation
 
-`npm test` 53/53. `npm run validate` e `npm run skills:validate` PASS. Ambiente: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9.
+Windows NT 10.0.26200.0, Node.js v25.2.0 e npm 11.6.2: `npm test` passou 53/53, sem falhas, skips ou TODOs; `npm run validate` e `npm run skills:validate` passaram para 18 skills; `git diff --check` passou. A primeira tentativa no sandbox falhou apenas por `EPERM` ao criar fixtures em `%TEMP%`; a reexecução fora do sandbox passou integralmente.
 
 ## Known Issues
 
-Descoberta ao vivo continua sem sessão de produto. O Antigravity segue sem observação de `references/` e `assets/`. Os orçamentos de listagem do Codex e do Claude Code seguem sem medição.
+- Codex requer login do usuário antes de uma sessão de modelo.
+- Duas sondas automáticas do Cursor não publicaram resposta final.
+- Claude Code permanece `NOT_RUN` nesta repetição.
 
-## Open Questions
-
-Nenhuma questão bloqueante. A repetição da observação depende de uma máquina em que o host abra.
+Nenhum item acima é `FAIL` do pacote.
 
 ## Next Actions
 
-Repetir os tickets 02 a 05 quando um host sair de 127. Não alterar o pacote entre esta evidência e essa repetição. Não abrir a v1-A22 sem um `FAIL` citado.
+Não abrir a v1-A22. Opcionalmente repetir somente as células ainda `NOT_RUN` ou `INCONCLUSIVE` quando houver Codex autenticado, Claude Code autorizado ou uma nova janela de observação do Cursor. Fazer correção estrutural apenas após `FAIL` reproduzível.
 
 ## Constraints
 
-Não acrescentar comando de CLI, chave de target, dependência npm ou campo de frontmatter. Não tratar o validate do consumidor como descoberta.
-
-## Suggested Skills
-
-Nenhuma. A próxima sessão observa o produto; não executa uma skill do pacote no lugar dele.
+Não acrescentar comando de CLI, chave de target, dependência npm, diretório alternativo ou campo de frontmatter como consequência desta observação.
