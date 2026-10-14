@@ -7,9 +7,9 @@ description: "Identifies the cause of an unknown failure. Use when the symptom i
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/diagnose.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [diagnosis-report.md](assets/diagnosis-report.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing or non-ready project context recommends `context-engineering`. An unknown symptom recommends supplying it and retrying `diagnose`. An unobserved repository recommends observing it and retrying `diagnose`. A decision problem recommends `clarify`. An external fact recommends `research`. Do not leave a diagnosis file from this attempt. Do not delete an existing diagnosis. Do not modify application code and do not write a test. The file this skill writes is a ready diagnosis report. Never present the BLOCKED result as a ready diagnosis.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains. Name every missing prerequisite. `Evidence` cites the input for each blocker. Missing or non-ready project context recommends `context-engineering`. An unknown symptom recommends supplying it and retrying `diagnose`. An unobserved repository recommends observing it and retrying `diagnose`. A decision problem recommends `clarify`. An external fact recommends `research`. Do not leave a diagnosis file from this attempt. Do not delete an existing diagnosis. Do not modify application code and do not write a test. The file this skill writes is a ready diagnosis report. Never present the BLOCKED result as a ready diagnosis.

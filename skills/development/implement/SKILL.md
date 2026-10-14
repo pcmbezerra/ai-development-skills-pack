@@ -7,9 +7,9 @@ description: "Applies the smallest correct behaviour change for one bounded obje
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/implement.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [implementation-report.md](assets/implementation-report.md) and [test-evidence.md](assets/test-evidence.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -25,4 +25,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains or the implementation gate cannot pass without invention, an unrelated change or a speculative abstraction. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a diagnosis whose root cause is not confirmed, or an unknown failure, recommends `diagnose`; a ticket problem recommends `to-tickets`; a specification problem recommends `to-spec`; a decision problem recommends `clarify`; an external fact or a research report that is present and not `ready` recommends `research`; a ready specification that is not one bounded change recommends `to-tickets`; a change that cannot stay smallest recommends the producer named in the workflow. Do not leave an implementation report, a test-evidence file or a code change from this attempt. Do not delete an existing report or test-evidence file. The files this skill writes are a ready implementation report and a ready test-evidence file. Never present the BLOCKED result as a ready implementation report.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains or the implementation gate cannot pass without invention, an unrelated change or a speculative abstraction. Name every missing prerequisite. `Evidence` cites the input for each blocker. Recommend the earliest blocker: missing project context recommends `context-engineering`; a diagnosis whose root cause is not confirmed, or an unknown failure, recommends `diagnose`; a ticket problem recommends `to-tickets`; a specification problem recommends `to-spec`; a decision problem recommends `clarify`; an external fact or a research report that is present and not `ready` recommends `research`; a ready specification that is not one bounded change recommends `to-tickets`; a change that cannot stay smallest recommends the producer named in the workflow. Do not leave an implementation report, a test-evidence file or a code change from this attempt. Do not delete an existing report or test-evidence file. The files this skill writes are a ready implementation report and a ready test-evidence file. Never present the BLOCKED result as a ready implementation report.

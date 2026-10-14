@@ -3,6 +3,46 @@ import { resolve, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const rootDirectory = fileURLToPath(new URL('../', import.meta.url));
 const catalogue = { core: ['setup-ai-development-skills','workflow','clarify','context-engineering','handoff'], discovery: ['research','to-spec','domain-modelling','architecture-design','to-tickets'], development: ['diagnose','implement','tdd','refactor'], quality: ['edge-case-analysis','code-review'], documentation: ['docs'], modernization: ['modernize'] };
+const namedOnlyArtifacts = new Set(['PROJECT_CONTEXT','WORKFLOW_PLAN','CHANGE_SET','BOOTSTRAP_READINESS']);
+const routingCitation = /routing\.md|\bR(?:1[0-7]|[1-9])\b/;
+const packReadPath = /contracts\/|manifest\/skills\.json|templates\/artifacts\//;
+
+export function normalizeNewlines(text) {
+  return text.replace(/\r\n/g, '\n');
+}
+export function projectContract(text) {
+  return text.replaceAll('](../failure.md)', '](failure.md)').replaceAll('](../quality-gates.md)', '](quality-gates.md)').replaceAll('](../artifacts.md)', '](artifacts.md)');
+}
+export function projectArtifacts(text) {
+  // The canonical file links ../manifest/skills.json. From references/ that path is not a file inside the skill directory, and the manifest stays out of the projection.
+  return text.replaceAll('](../manifest/skills.json)', '](#machine-readable-catalogue-and-named-outputs)');
+}
+export function projectCatalogue(skills) {
+  return `${JSON.stringify({ skills: skills.map(skill => ({
+    name: skill.name,
+    status: skill.status,
+    primaryInvocation: skill.primaryInvocation,
+    dependencies: {
+      required: [...skill.dependencies.required],
+      conditional: skill.dependencies.conditional.map(item => ({ skill: item.skill, when: item.when })),
+      optional: [...skill.dependencies.optional],
+    },
+  })) }, null, 2)}\n`;
+}
+export function projectionFiles(skill, contractText, skillText, artifacts) {
+  const files = new Set(['SKILL.md', 'references/contract.md', 'references/failure.md']);
+  const contract = contractText ?? '';
+  if (contract.includes('](../quality-gates.md)') || contract.includes('](quality-gates.md)')) files.add('references/quality-gates.md');
+  if (contract.includes('](../artifacts.md)') || contract.includes('](artifacts.md)') || skill.name === 'workflow') files.add('references/artifacts.md');
+  if (routingCitation.test(`${contract}\n${skillText ?? ''}`)) files.add('references/routing.md');
+  if (skill.name === 'workflow') files.add('references/catalogue.json');
+  for (const id of skill.artifactOutputs ?? []) {
+    const template = artifacts?.[id]?.template;
+    if (!template || namedOnlyArtifacts.has(id) || id === 'TICKET') continue;
+    files.add(`assets/${template.split('/').pop()}`);
+  }
+  return files;
+}
 export async function validate(root = rootDirectory) {
   root = resolve(root);
   const errors = [];
@@ -133,6 +173,42 @@ export async function validate(root = rootDirectory) {
       check(new Set(deps).size === deps.length, `${s.name}: duplicate dependency`);
       for (const n of deps) check(names.includes(n) && n !== s.name, `${s.name}: unknown/self dependency ${n}`);
       for (const x of d.conditional) check(typeof x.when === 'string' && x.when.trim(), `${s.name}: missing dependency condition`);
+      const skillDir = resolve(root, dirname(s.path));
+      const expectedFiles = projectionFiles(s, contract, body, artifacts);
+      const actualFiles = (await walk(skillDir)).map(file => relative(skillDir, file).split(sep).join('/'));
+      for (const file of expectedFiles) check(actualFiles.includes(file), `${s.name}: missing projection ${file}`);
+      for (const file of actualFiles) check(expectedFiles.has(file), `${s.name}: unexpected projection file ${file}`);
+      async function matchesProjection(file, expected, message) {
+        try { check(normalizeNewlines(await readFile(resolve(skillDir, file), 'utf8')) === normalizeNewlines(expected), message); }
+        catch (error) { if (error.code !== 'ENOENT') throw error; }
+      }
+      await matchesProjection('references/contract.md', projectContract(contract), `${s.name}: contract projection drifted`);
+      await matchesProjection('references/failure.md', failure, `${s.name}: failure projection drifted`);
+      if (expectedFiles.has('references/quality-gates.md')) await matchesProjection('references/quality-gates.md', gates, `${s.name}: quality-gates projection drifted`);
+      if (expectedFiles.has('references/artifacts.md')) await matchesProjection('references/artifacts.md', projectArtifacts(await readFile(resolve(root, 'contracts/artifacts.md'), 'utf8')), `${s.name}: artifacts projection drifted`);
+      if (expectedFiles.has('references/routing.md')) await matchesProjection('references/routing.md', routing, `${s.name}: routing projection drifted`);
+      if (expectedFiles.has('references/catalogue.json')) await matchesProjection('references/catalogue.json', projectCatalogue(skills), `${s.name}: catalogue projection drifted`);
+      for (const id of s.artifactOutputs ?? []) {
+        const template = artifacts?.[id]?.template;
+        if (!template || !expectedFiles.has(`assets/${template.split('/').pop()}`)) continue;
+        await matchesProjection(`assets/${template.split('/').pop()}`, await readFile(resolve(root, template), 'utf8'), `${s.name}: template projection drifted ${template.split('/').pop()}`);
+      }
+      check(!packReadPath.test(body), `${s.name}: external pack read path`);
+      for (const file of actualFiles.filter(item => item.endsWith('.md'))) {
+        const text = await readFile(resolve(skillDir, file), 'utf8');
+        if (file !== 'SKILL.md') check(!packReadPath.test(text), `${s.name}: external pack read path in ${file}`);
+        for (const match of text.matchAll(/\[[^\]\n]*\]\(([^)\s]+)\)/g)) {
+          const link = match[1];
+          if (/^(?:[a-z][a-z0-9+.-]*:|#)/i.test(link)) continue;
+          let target;
+          try { target = resolve(dirname(resolve(skillDir, file)), decodeURIComponent(link.split('#')[0])); }
+          catch { errors.push(`${s.name}: link escapes skill directory ${link}`); continue; }
+          const rel = relative(skillDir, target);
+          if (!rel || rel === '..' || rel.startsWith(`..${sep}`)) { errors.push(`${s.name}: link escapes skill directory ${link}`); continue; }
+          try { check((await stat(target)).isFile(), `${s.name}: link does not resolve inside the skill directory ${link}`); }
+          catch { errors.push(`${s.name}: link does not resolve inside the skill directory ${link}`); }
+        }
+      }
     }
     for (const conditional of [false,true]) {
       const active = new Set(), done = new Set();

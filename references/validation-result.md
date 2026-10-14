@@ -1,6 +1,17 @@
 # Validation result
 
-## Current observation — v1-A20 analysis only, Linux, Node.js 22, 2026-10-13
+## Current observation — installed skill projection, v1-A20, Linux, Node.js 22, 2026-10-14
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A20 is implemented from `origin/main` at `754849f`. Eighteen skills stay `implemented`. Each skill directory contains the selective projection. `SKILL.md` navigation stays inside that directory. Workflow steps, goals, status and dependency edges stay. The installer still copies the directory and does not rewrite links. `references/artifacts.md` rewrites one canonical href, `../manifest/skills.json`, to a same-file anchor; the canonical `contracts/artifacts.md` is unchanged. This record uses `SPEC-20261013-009`, `TICKET-SET-20261013-009`, `TEST-20261013-016`, `IMPLEMENTATION-20261013-016`, `REVIEW-20261013-012` and `HANDOFF-20261014-001`. The projection on disk is 84 files and 263465 bytes. ADR `0001` is unchanged.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 53 tests, zero failures, skips, or todos. New rejections cover a link that leaves the skill directory and a projection that drifts. A new distribution test installs all four targets into a destination with no `contracts/` directory and no `manifest/skills.json`, then resolves every markdown link from the installed directory.
+- `git diff --check`: PASS on this implementation tree.
+- `node bin/ai-dev-skills.mjs --help`: exit 0. `list`, `doctor` and `sync` still exit 1.
+
+The structural suite does not launch Cursor, Codex, Gemini Antigravity, or Claude Code. A file inside the installed directory is not evidence that a host opened it. Live discovery and live opening of `references/` or `assets/` remain unverified.
+
+## Previous observation — v1-A20 analysis only, Linux, Node.js 22, 2026-10-13
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A19 is closed on `origin/main` at `52c35d7`. `cf74225` is the v1-A18 ancestor. Amendment v1-A20 records the selective in-directory projection and does not change skills, the installer, targets, or canonical contracts. This record uses `RESEARCH-20261013-402`, `DECISION-SET-20261013-009`, `SPEC-20261013-009`, `ARCHITECTURE-20261013-002`, `ADR-0002`, `TICKET-SET-20261013-009` and `HANDOFF-20261013-009`. Eighteen skills stay `implemented`. The 108 `SKILL.md` links still point at `contracts/` and `manifest/skills.json`.
 

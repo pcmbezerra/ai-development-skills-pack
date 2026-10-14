@@ -7,7 +7,7 @@ description: "Discovers and maintains project context from repository evidence. 
 
 Status: implemented; the operational workflow is available.
 
-Read the [contract](../../../contracts/skills/context-engineering.md), the [manifest](../../../manifest/skills.json), the [shared skill contract](../../../contracts/skill-contract.md), the [artifact contract](../../../contracts/artifacts.md) and the [failure contract](../../../contracts/failure.md) before execution.
+Read the [contract](references/contract.md) and the [failure contract](references/failure.md) before execution.
 
 ## Workflow
 
@@ -21,4 +21,4 @@ Read the [contract](../../../contracts/skills/context-engineering.md), the [mani
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) before writing when the repository root is unavailable or ambiguous, a material conflict is unresolved, secret-safe processing is not possible, or the five-document write boundary cannot be maintained.
+Return the [contracted `BLOCKED` result](references/failure.md) before writing when the repository root is unavailable or ambiguous, a material conflict is unresolved, secret-safe processing is not possible, or the five-document write boundary cannot be maintained.

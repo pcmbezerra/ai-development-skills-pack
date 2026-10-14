@@ -7,9 +7,9 @@ description: "Applies a red, green, and refactor cycle for one behaviour. Use wh
 
 Status: implemented; the operational workflow is available.
 
-Before execution, read its [contract](../../../contracts/skills/tdd.md) for inputs, outputs, constraints, gates and failure behaviour.
+Before execution, read its [contract](references/contract.md) for inputs, outputs, constraints, gates and failure behaviour.
 
-Consult the [manifest](../../../manifest/skills.json) for invocation and dependencies, the [shared skill contract](../../../contracts/skill-contract.md) for composition, the [artifact contract](../../../contracts/artifacts.md) for persistence, and [routing rules](../../../contracts/routing.md) for prerequisites.
+Consult that contract for invocation and dependencies, [test-evidence.md](assets/test-evidence.md) for persistence, and [routing rules](references/routing.md) for prerequisites.
 
 ## Workflow
 
@@ -23,4 +23,4 @@ Consult the [manifest](../../../manifest/skills.json) for invocation and depende
 
 ## Failure behaviour
 
-Return the [contracted `BLOCKED` result](../../../contracts/failure.md) when any blocker remains or the cycle cannot be completed without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. A ticket that defines the objective and is not `ready` recommends `to-tickets`. A specification that defines the objective and is not `ready` recommends `to-spec`. A conflict with an existing decision recommends `clarify`. Do not leave a test-evidence file or a change from this attempt. Do not delete an existing evidence file. The file this skill writes is a ready test-evidence file. Never present the BLOCKED result as ready evidence.
+Return the [contracted `BLOCKED` result](references/failure.md) when any blocker remains or the cycle cannot be completed without invention. Name every missing prerequisite. `Evidence` cites the input for each blocker. A ticket that defines the objective and is not `ready` recommends `to-tickets`. A specification that defines the objective and is not `ready` recommends `to-spec`. A conflict with an existing decision recommends `clarify`. Do not leave a test-evidence file or a change from this attempt. Do not delete an existing evidence file. The file this skill writes is a ready test-evidence file. Never present the BLOCKED result as ready evidence.
