@@ -28,7 +28,7 @@ A emenda v1-A19 prepara a descoberta que esses produtos documentam. Cada `descri
 
 A emenda v1-A20 grava essa projeção dentro de cada diretório de skill. O `SKILL.md` aponta para `references/` e `assets/` no próprio diretório. O contrato canônico continua em `contracts/`. O instalador copia o diretório e não reescreve links. O validador rejeita link que saia do diretório e projeção que divirja da fonte. Arquivo presente no disco não significa que Cursor, Codex, Gemini Antigravity ou Claude Code tenha aberto esse arquivo.
 
-A emenda v1-A21 está aberta como protocolo dessa observação, em `SPEC-20261014-001`. Ela não muda skills, contratos, targets nem a CLI. Os tickets ainda não foram executados. Host ausente fica registrado como não executado e não conta como aprovação.
+A emenda v1-A21 executou esse protocolo em 2026-10-14. Os quatro hosts ficaram `NOT_RUN` e o relatório em `.ai/artifacts/tests/2026-10-14-live-host-observation/REPORT.md` tem veredito `INCOMPLETE`. O install nos consumidores de prova não substitui a sessão no produto. Skills, contratos, targets e CLI permanecem.
 
 Consulte [proveniência e limitações](references/provenance.md), [contrato compartilhado](contracts/skill-contract.md), [artefatos](contracts/artifacts.md), [routing R1–R17](contracts/routing.md), [gates de qualidade](contracts/quality-gates.md), [falha e fallback](contracts/failure.md) e [sequências de workflow](contracts/workflows.md).
 

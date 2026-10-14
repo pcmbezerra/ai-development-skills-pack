@@ -1,6 +1,19 @@
 # Validation result
 
-## Current observation — live-host protocol only, v1-A21, Linux, Node.js 22, 2026-10-14
+## Current observation — live-host run, v1-A21, INCOMPLETE, Linux, Node.js 22, 2026-10-14
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0 at `/exec-daemon/node`, npm 10.9.9. Amendment v1-A21 executed `TICKET-SET-20261014-001` from `b86f41d` plus the observation protocol commit. The verdict is `INCOMPLETE`. This record uses `TEST-20261014-001`, `TEST-20261014-002` and `HANDOFF-20261014-003`. Eighteen skills stay `implemented`. Skills, contracts, targets, the installer and the CLI were not edited.
+
+- Four consumer repositories under `/tmp/v1-a21-consumers` sit outside `/workspace`. Each received one `install --target` and passed `validate --target`, 18 skills. Codex and Antigravity used separate trees. Those results check installed bytes. They do not show a host listing a skill.
+- `cursor`, `agent`, `codex`, `claude`, `agy`, `antigravity` and `gemini` each exited 127, `command not found`. No `.desktop` entry for those names was found. All four hosts, and all three Antigravity surfaces, are `NOT_RUN`.
+- User skill roots documented for the pack names are absent, except `/home/ubuntu/.cursor/skills-cursor`, which shares no directory name with the 18 pack skills. `/workspace` has no `.cursor`, `.agents`, `.claude` or `.codex` directory.
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills.
+- `npm test`: PASS, 53 tests, zero failures, skips, or todos.
+- No gate is `PASS`, `FAIL` or `INCONCLUSIVE`. The report does not infer approval or rejection.
+
+The next action is to repeat host tickets where a product launches. v1-A22 stays unopened until a cited `FAIL` exists.
+
+## Previous observation — live-host protocol only, v1-A21, Linux, Node.js 22, 2026-10-14
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A20 is implemented on `origin/main` at `b86f41d`. Amendment v1-A21 records the live observation protocol and does not change skills, the installer, targets, or canonical contracts. This record uses `RESEARCH-20261014-403`, `DECISION-SET-20261014-001`, `SPEC-20261014-001`, `TICKET-SET-20261014-001` and `HANDOFF-20261014-002`. Eighteen skills stay `implemented`. The projection measured again in this session is 84 files and 263465 bytes. Descriptions are 132 to 183 characters, all with `Use when`. A synthetic `- name: description` listing is 3016 characters; that format is not a host listing.
 
