@@ -1,6 +1,20 @@
 # Validation result
 
-## Current observation — installed skill projection, v1-A20, Linux, Node.js 22, 2026-10-14
+## Current observation — live-host protocol only, v1-A21, Linux, Node.js 22, 2026-10-14
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A20 is implemented on `origin/main` at `b86f41d`. Amendment v1-A21 records the live observation protocol and does not change skills, the installer, targets, or canonical contracts. This record uses `RESEARCH-20261014-403`, `DECISION-SET-20261014-001`, `SPEC-20261014-001`, `TICKET-SET-20261014-001` and `HANDOFF-20261014-002`. Eighteen skills stay `implemented`. The projection measured again in this session is 84 files and 263465 bytes. Descriptions are 132 to 183 characters, all with `Use when`. A synthetic `- name: description` listing is 3016 characters; that format is not a host listing.
+
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills; 18 `implemented` and 0 `scaffold`; four implemented target descriptors.
+- `npm test`: PASS, 53 tests, zero failures, skips, or todos. No new test was added.
+- `git diff --check`: PASS on the tree before these planning artifacts.
+- `node bin/ai-dev-skills.mjs --help`: exit 0. `list`, `doctor` and `sync` still exit 1.
+- `cursor`, `agent`, `codex`, `claude`, `agy` and `antigravity` are not on `PATH` in this session. That absence does not mark a host `NOT_RUN` for the amendment.
+
+Public pages read on 2026-10-14: https://cursor.com/docs/skills, https://developers.openai.com/codex/skills, https://antigravity.google/docs/skills/, https://code.claude.com/docs/en/skills and https://agentskills.io/specification. Codex documents an initial list of name, description and path, capped at 2% of the window or 8,000 characters, shortening descriptions before omitting skills. Claude Code documents a 1% listing budget, keeps every name, and drops overflowing descriptions starting with the least-invoked skills. Antigravity documents `resources/` and does not name `references/` or `assets/`. None of those pages was executed.
+
+The structural suite does not launch Cursor, Codex, Gemini Antigravity, or Claude Code. Live discovery and live opening of `references/` or `assets/` remain unverified. The next step is `TICKET-SET-20261014-001`, which is not started.
+
+## Previous observation — installed skill projection, v1-A20, Linux, Node.js 22, 2026-10-14
 
 Linux 6.12.94+ (x86_64), Node.js v22.14.0, npm 10.9.9. Amendment v1-A20 is implemented from `origin/main` at `754849f`. Eighteen skills stay `implemented`. Each skill directory contains the selective projection. `SKILL.md` navigation stays inside that directory. Workflow steps, goals, status and dependency edges stay. The installer still copies the directory and does not rewrite links. `references/artifacts.md` rewrites one canonical href, `../manifest/skills.json`, to a same-file anchor; the canonical `contracts/artifacts.md` is unchanged. This record uses `SPEC-20261013-009`, `TICKET-SET-20261013-009`, `TEST-20261013-016`, `IMPLEMENTATION-20261013-016`, `REVIEW-20261013-012` and `HANDOFF-20261014-001`. The projection on disk is 84 files and 263465 bytes. ADR `0001` is unchanged.
 
