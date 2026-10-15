@@ -8,6 +8,8 @@ Objetivo: manter 18 skills reutilizáveis de engenharia para Cursor, Codex, Gemi
 
 Em 2026-10-15 o mantenedor confirmou que o contrato deixa de fora de propósito, e que isso não é o próximo passo: `list`, `doctor`, `sync`, roteador automático, desinstalação, instalação global, detecção de plataforma, `meta-skills/skill-authoring` e testes semânticos de overlap. A versão `1.0.0-scaffold` permanece o identificador congelado na v1-A1. Ela não é o estado **Scaffold** do glossário: esse estado é o de uma skill sem workflow operacional, e nenhuma skill está nele. A v1-A22 não se abre para renomear a versão nem para implementar essas exclusões.
 
+No mesmo dia, o target Cursor foi instalado no consumidor Agent-Career, fora deste pacote. O fluxo até `TICKET-20261015-001` e a regressão do `implement` estão em `HANDOFF-20261015-002`. Esse uso não é `FAIL` do pacote. O `HEAD` antes desse registro é `2cdf1e0`.
+
 GitHub Issues com fallback local e rótulos padrão foram confirmados pelo mantenedor. A configuração deste repositório foi preenchida manualmente; a conformidade do bootstrap foi demonstrada separadamente em fixtures locais.
 
-Continuidade: `.ai/artifacts/handoffs/2026-10-15-session-handoff.md` e `.ai/artifacts/handoffs/2026-10-06-project-state.md`.
+Continuidade: `.ai/artifacts/handoffs/2026-10-15-agent-career-consumer-handoff.md` e `.ai/artifacts/handoffs/2026-10-06-project-state.md`. `HANDOFF-20261015-001` permanece o registro da repetição macOS.
