@@ -1,13 +1,14 @@
 ---
 artifact: test_evidence
 id: TEST-20261014-002
-version: 3
+version: 4
 status: ready
 created_by: handoff
 inputs:
   - SPEC-20261014-001
   - TICKET-SET-20261014-001
   - TEST-20261014-001
+  - TEST-20261015-001
 ---
 
 # Relatório da v1-A21
@@ -76,4 +77,8 @@ No Antigravity, a sonda de contexto carregou e citou `context-engineering`, mas 
 
 O pacote permanece estável e sem regressões conhecidas. Nenhuma correção estrutural, mudança de descrição, ajuste de diretório ou mudança de comportamento é autorizada por esta coleta, pois não houve `FAIL` reproduzível. Não abrir a v1-A22 neste momento.
 
-Uma repetição futura pode completar Codex após login e Claude Code quando autorizado, mas isso não invalida a evidência positiva já coletada em Cursor e Antigravity.
+Uma repetição futura pode completar Codex após login e as duas sondas automáticas do Cursor que ficaram em `Thinking`. Claude Code fica de fora enquanto o mantenedor não tiver esse ambiente. Isso não invalida a evidência positiva já coletada em Cursor e Antigravity.
+
+## Retomada em 2026-10-15
+
+`TEST-20261015-001` procurou só as células ainda abertas neste Linux. `codex`, `cursor` e `agent` não estão no PATH. Codex permanece `NOT_RUN`. As sondas automáticas de `context-engineering` e `research` permanecem `INCONCLUSIVE`. Claude Code não foi sondado, por exclusão do mantenedor, e permanece `NOT_RUN`. O veredito continua `OBSERVED`. A v1-A22 continua fechada.

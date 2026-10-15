@@ -11,7 +11,7 @@ inputs:
 
 # Observação ao vivo nos hosts — emenda v1-A21
 
-Conjunto executável derivado de `SPEC-20261014-001`. Cada bloco é um TICKET. Rótulo local: `ready-for-human`. Publicação remota pendente. O Markdown local é a fonte até reconciliação com GitHub Issues.
+Conjunto executável derivado de `SPEC-20261014-001`. Cada bloco é um TICKET. Rótulo local: `ready-for-human`. Em 2026-10-15 a lista remota de issues foi lida e está vazia. Este conjunto não tem número remoto e não foi publicado. O Markdown local continua a fonte. Publicação permanece decisão própria.
 
 Nenhum ticket altera `skills/`, `contracts/`, `manifest/`, `scripts/`, `targets/` ou `package.json`. A execução grava evidência em `.ai/artifacts/tests/2026-10-14-live-host-observation/`.
 

@@ -12,3 +12,7 @@ Estado do host: `NOT_RUN`. Esta repetição foi autorizada para Cursor, Codex e 
 | Abertura de `assets/` | `NOT_RUN` | sem sessão |
 
 O consumidor Windows contém 18 skills em `.claude\skills` e `validate --target claude-code` passou. Isso continua sendo evidência de layout, não de comportamento do host.
+
+## Retomada em 2026-10-15
+
+O mantenedor excluiu Claude Code desta repetição porque não tem esse ambiente. A matriz permanece `NOT_RUN`. O binário `claude` também não está no PATH deste Linux. Detalhe em `TEST-20261015-001`.

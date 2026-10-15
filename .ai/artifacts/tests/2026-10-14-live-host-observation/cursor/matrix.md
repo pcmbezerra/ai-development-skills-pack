@@ -32,3 +32,7 @@ Os dois estados inconclusivos são stalls do host/modelo, não erro de arquivo o
 | `research` | `Status: implemented. Primary invocation: user.` | `assets/research-report.md`: `artifact: research_report` | `PASS` |
 
 Nenhuma sonda gravou artefato no consumidor.
+
+## Retomada em 2026-10-15
+
+As sondas automáticas de `context-engineering` e `research` não foram repetidas. `cursor` e `agent` não estão no PATH deste Linux. As duas células permanecem `INCONCLUSIVE`. Detalhe em `TEST-20261015-001`.
