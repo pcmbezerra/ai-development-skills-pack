@@ -1,5 +1,7 @@
 # Codex — matriz
 
+A repetição de 2026-10-15 está em [../repetition-2026-10-15.md](../repetition-2026-10-15.md) e não muda o veredito `OBSERVED`. O registro abaixo é a execução Windows.
+
 Host: Codex CLI 0.146.0-alpha.3. Consumidor: `...\v1-a21-consumers-20261014-windows\codex`. Resultado da sessão do modelo: `NOT_RUN` por barreira de autenticação.
 
 O binário foi localizado e executado. `codex login status` retornou `Not logged in`. A tentativa `codex exec --ephemeral --sandbox read-only` terminou antes da resposta do modelo com `401 Unauthorized: Missing bearer or basic authentication`.

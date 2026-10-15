@@ -14,7 +14,9 @@ inputs:
 
 Veredito: `OBSERVED`.
 
-Ao menos um host passou todas as gates: o Antigravity IDE. O Cursor também não apresentou `FAIL`; sua seleção automática ficou parcialmente `INCONCLUSIVE`, estado aceito pela spec. Codex e Claude Code permanecem `NOT_RUN` nas gates do modelo. Nenhuma falha do pacote, da distribuição ou da instalação dos targets foi identificada.
+Ao menos um host passou todas as gates: o Antigravity IDE. O Cursor também não apresentou `FAIL`; na IDE Windows a seleção automática ficou parcialmente `INCONCLUSIVE`, estado aceito pela spec. Nessa repetição Windows, Codex e Claude Code ficaram `NOT_RUN` nas gates do modelo. Nenhuma falha do pacote, da distribuição ou da instalação dos targets foi identificada.
+
+A repetição de 2026-10-15 em [repetition-2026-10-15.md](repetition-2026-10-15.md) não muda este veredito e não reabre a emenda. O Codex CLI autenticado passou as gates que estavam `NOT_RUN`. As duas seleções automáticas do Cursor que estavam `INCONCLUSIVE` passaram na CLI. Claude Code continua no projeto e fora da validação, `NOT_RUN`, por decisão do mantenedor.
 
 ## Baseline preservada
 

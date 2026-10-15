@@ -13,8 +13,8 @@ Conjunto fechado das 18 skills integrantes do pack v1.
 _Avoid_: todas as skills instaladas no ambiente
 
 **Scaffold**:
-Estrutura que expressa contratos e pontos de extensão, sem implementar os workflows operacionais das skills.
-_Avoid_: produto operacional, workflow concluído
+Estado de uma skill do catálogo que expressa contratos e pontos de extensão, sem workflow operacional.
+_Avoid_: versão do pacote, produto operacional, workflow concluído
 
 **Artefato**:
 Registro estruturado de trabalho que permite transferir decisões, evidências e resultados entre etapas.

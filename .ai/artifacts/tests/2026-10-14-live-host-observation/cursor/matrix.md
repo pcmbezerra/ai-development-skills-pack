@@ -1,5 +1,7 @@
 # Cursor — matriz
 
+A repetição de 2026-10-15 das duas seleções automáticas `INCONCLUSIVE` está em [../repetition-2026-10-15.md](../repetition-2026-10-15.md) e não muda o veredito `OBSERVED`. O registro abaixo é a IDE Windows.
+
 Host: Cursor IDE 3.24.18. Consumidor: `...\v1-a21-consumers-20261014-windows\cursor`. Superfície: IDE. Resultado do host: `PASS`, com seleção automática `INCONCLUSIVE` aceita pela spec e sem gate em `FAIL`.
 
 | Gate | Estado | Evidência observada |

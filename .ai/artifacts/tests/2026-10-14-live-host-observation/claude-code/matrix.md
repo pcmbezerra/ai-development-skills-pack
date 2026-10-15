@@ -1,5 +1,7 @@
 # Claude Code — matriz
 
+A repetição de 2026-10-15 não executou este host. O mantenedor manteve o target no projeto e excluiu a validação porque o serviço não está disponível. O estado continua `NOT_RUN`.
+
 Estado do host: `NOT_RUN`. Esta repetição foi autorizada para Cursor, Codex e Antigravity; nenhuma sessão do Claude Code foi aberta.
 
 | Gate | Estado | Evidência |
