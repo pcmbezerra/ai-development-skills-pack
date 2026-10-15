@@ -10,3 +10,4 @@
 O relatório anterior registra macOS e Node v26.5.0, com 17 testes aprovados em 2026-10-05. Nesta sessão Windows, validação falhou e 17/20 testes passaram. Naquela data, Linux e instalações reais nos quatro targets (Cursor, Codex, Gemini Antigravity e Claude Code) permaneciam não verificados.
 
 - Ambiente observado em 2026-10-13: Linux 6.12.94+ x86_64, Node.js v22.14.0, npm 10.9.9. `npm run validate` e `npm test` PASS, 48/48. `gh` está no PATH; `gh issue list` respondeu `Resource not accessible by integration`. A descoberta real nos quatro targets permanece sem verificação.
+- Ambiente observado em 2026-10-15: o mesmo Linux, Node.js v22.14.0 e npm 10.9.9. `npm run validate` e `npm test` PASS, 53/53. `gh issue list --state all` devolveu lista vazia. O repositório está `PRIVATE`. `codex`, `cursor`, `agent` e `claude` não estão no PATH.

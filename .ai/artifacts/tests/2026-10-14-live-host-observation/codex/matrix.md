@@ -14,3 +14,7 @@ O binário foi localizado e executado. `codex login status` retornou `Not logged
 | Abertura de `assets/` | `NOT_RUN` | bloqueada antes da primeira sonda |
 
 O target continua íntegro: 18 skills em `.agents\skills` e `validate --target codex` em `PASS`. A barreira é ambiental e não constitui `FAIL` do pacote. Nenhuma tentativa de login ou alteração de credencial foi feita.
+
+## Retomada em 2026-10-15
+
+`codex` não está no PATH deste Linux. O login não foi testado. As gates do modelo permanecem `NOT_RUN`. Detalhe em `TEST-20261015-001`.

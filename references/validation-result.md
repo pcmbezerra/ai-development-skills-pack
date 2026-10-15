@@ -1,6 +1,23 @@
 # Validation result
 
-## Current observation — live hosts, v1-A21, OBSERVED, Windows, Node.js 25, 2026-10-14
+## Current observation — v1-A21 resume, Linux, Node.js 22, 2026-10-15
+
+Linux 6.12.94+ (x86_64), Node.js v22.14.0 at `/exec-daemon/node`, npm 10.9.9. The functional baseline remains `b86f41d`. This session started at `c95a62a`. The verdict stays `OBSERVED`. This record is `TEST-20261015-001` and `HANDOFF-20261015-001`. Eighteen skills stay `implemented`. Skills, contracts, targets, the installer, the CLI and `LICENSE` were not edited.
+
+- `codex`, `cursor`, `agent`, `claude`, `agy`, `antigravity` and `gemini` are absent from `PATH`. Codex login was not tested. The Codex model gates stay `NOT_RUN`.
+- Cursor automatic probes for `context-engineering` and `research` stay `INCONCLUSIVE`. No IDE session published a new response.
+- Claude Code was not probed. The maintainer does not have that environment. It stays `NOT_RUN`.
+- `gh issue list --state all` returned `[]`. Nineteen local ticket sets have no remote issue number. No issue was created. Of the five triage roles, only `wontfix` exists remotely.
+- `gh pr list --state all` returned 14 pull requests: 13 `MERGED` and 1 `CLOSED` (`#9`). None is open. Pull requests are not a request surface.
+- `gh repo view` reported visibility `PRIVATE`. `package.json` remains `private` at `1.0.0-scaffold`. `LICENSE` remains a placeholder.
+- `npm run validate` and `npm run skills:validate`: PASS, 18 skills.
+- `npm test`: PASS, 53 tests, zero failures, skips, or todos.
+- `git diff --check`: PASS on the clean tree before these notes and again on the documentation diff.
+- `node bin/ai-dev-skills.mjs --help`: exit 0. `list`, `doctor` and `sync` still exit 1.
+
+No host `FAIL` was reproduced. v1-A22 stays unopened.
+
+## Previous observation — live hosts, v1-A21, OBSERVED, Windows, Node.js 25, 2026-10-14
 
 Windows NT 10.0.26200.0, Node.js v25.2.0 and npm 11.6.2. The functional baseline remains `b86f41d`; HEAD and `origin/main` are `4cfad4f`, which adds only the v1-A21 protocol and evidence. The verdict is `OBSERVED`.
 

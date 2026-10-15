@@ -1,6 +1,6 @@
 # Triage labels
 
-Confirmed by the maintainer on 2026-10-06. Local conventions only; remote label existence is unverified.
+Confirmed by the maintainer on 2026-10-06. On 2026-10-15, `gh label list` could read `pcmbezerra/ai-development-skills-pack`. Of the five roles below, only `wontfix` exists remotely. Its remote description is the GitHub default, "This will not be worked on". `needs-triage`, `needs-info`, `ready-for-agent` and `ready-for-human` are absent and were not created. The other remote names are GitHub defaults (`bug`, `accessibility`, `documentation`, `duplicate`, `enhancement`, `good first issue`, `help wanted`, `invalid`, `question`) and are not triage roles.
 
 | Canonical role | Tracker label | Meaning |
 | --- | --- | --- |
