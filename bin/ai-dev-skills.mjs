@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFile } from 'node:fs/promises';
 import { packageTargets, installTarget, validateTarget } from '../scripts/distribute-skills.mjs';
 import { validate, report } from '../scripts/validate-skills.mjs';
 
@@ -8,6 +9,7 @@ Usage:
   ai-dev-skills validate --target <codex|cursor|antigravity|claude-code> --path <root>
   ai-dev-skills install --target <target> --destination <project-root>
   ai-dev-skills package --target <target|all> --output <directory>
+  ai-dev-skills list
   ai-dev-skills --help`;
 
 function options(args) {
@@ -65,6 +67,12 @@ async function main(args) {
     requireOnly(parsed, ['target', 'output']);
     const results = await packageTargets({ target: parsed.target, output: parsed.output });
     for (const result of results) console.log(`PASS: packaged ${result.target} at ${result.destination}.`);
+    return;
+  }
+  if (command === 'list') {
+    requireOnly(parsed, []);
+    const manifest = JSON.parse(await readFile(new URL('../manifest/skills.json', import.meta.url), 'utf8'));
+    for (const skill of manifest.skills) console.log(skill.name);
     return;
   }
   throw new Error(`Unsupported command: ${command}. Use --help.`);

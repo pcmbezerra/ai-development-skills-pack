@@ -1,39 +1,133 @@
-# AI - Development Skills Pack
+# AI Development Skills Pack
 
-Baseline arquitetural v1 + emendas v1-A1/v1-A2/v1-A3/v1-A4/v1-A5/v1-A6/v1-A7/v1-A8/v1-A9/v1-A10/v1-A11/v1-A12/v1-A13/v1-A14/v1-A15/v1-A16/v1-A17/v1-A18 com exatamente 18 skills para Cursor, Codex, Gemini Antigravity e Claude Code, reconciliado com o [contrato completo](references/architecture-contract-v1.md), seções 1–27. Requer Node.js >=22 e Git; sem dependências npm e sem necessidade de `npm install`.
+Dezoito skills de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. A fonte é a mesma; cada target recebe o catálogo no diretório nativo do projeto.
+
+Baseline arquitetural v1, emendas v1-A1 a v1-A22. A v1-A22 adiciona o comando `list`. O identificador de versão permanece `1.0.0-scaffold`.
+
+**[Instalação](#instalação) · [Catálogo](#catálogo) · [Validação](#validação) · [Limites](#limites) · [Documentação](#documentação)**
+
+## Instalação
+
+Requer Node.js >= 22. Não há dependências npm e não é necessário `npm install`.
+
+```sh
+git clone https://github.com/pcmbezerra/ai-development-skills-pack.git
+cd ai-development-skills-pack
+node bin/ai-dev-skills.mjs --help
+node bin/ai-dev-skills.mjs list
+node bin/ai-dev-skills.mjs package --target all --output ./dist
+node bin/ai-dev-skills.mjs install --target codex --destination ../consumer-repo
+node bin/ai-dev-skills.mjs validate --target codex --path ../consumer-repo
+```
+
+`package` cria um subdiretório por target em `--output`. `install` grava no diretório nativo do projeto de destino. `validate --target` exige igualdade com a fonte canônica. Reinstalação idêntica é idempotente. Uma skill existente e divergente bloqueia a operação antes da cópia.
+
+| Target | Nome na CLI | Diretório no projeto |
+| --- | --- | --- |
+| Cursor | `cursor` | `.cursor/skills` |
+| Codex | `codex` | `.agents/skills` |
+| Gemini Antigravity | `antigravity` | `.agents/skills` |
+| Claude Code | `claude-code` | `.claude/skills` |
+
+Codex e Gemini Antigravity usam o mesmo caminho.
+
+## Catálogo
+
+As 18 skills estão `implemented`. Nenhuma permanece `scaffold`. `primaryInvocation` classifica a entrada preferencial e não impede pedido explícito nem composição.
+
+`context-engineering`, `domain-modelling`, `tdd`, `edge-case-analysis` e `code-review` estão classificadas como `model`. As outras treze estão classificadas como `user`.
+
+As frases abaixo traduzem a `description` de `manifest/skills.json`. O texto em inglês do manifest permanece a descrição canônica.
+
+### core
+
+- [setup-ai-development-skills](skills/core/setup-ai-development-skills/SKILL.md) — Cria a configuração local do pacote e o contexto do projeto. Use quando um repositório não tem configuração `.ai` pronta e o pacote deve ser inicializado.
+- [workflow](skills/core/workflow/SKILL.md) — Recomenda a menor sequência de skills e não a executa. Use quando várias skills puderem se aplicar ou a ordem do trabalho não estiver clara.
+- [clarify](skills/core/clarify/SKILL.md) — Resolve ambiguidade material antes de uma especificação ou mudança. Use quando uma pergunta em aberto puder alterar escopo, comportamento, arquitetura, dados, segurança ou aceitação.
+- [context-engineering](skills/core/context-engineering/SKILL.md) — Descobre e mantém o contexto do projeto a partir da evidência do repositório. Use quando o contexto do projeto estiver ausente ou desatualizado e uma skill posterior precisar dele.
+- [handoff](skills/core/handoff/SKILL.md) — Transfere o estado verificado do trabalho para outro agente ou outra sessão. Use quando o trabalho estiver incompleto, o contexto puder se perder ou uma transferência explícita tiver sido pedida.
+
+### discovery
+
+- [research](skills/discovery/research/SKILL.md) — Estabelece fatos técnicos externos e deixa alegações sem suporte sem resolução. Use quando o comportamento de uma API, a capacidade de uma biblioteca, a compatibilidade ou um limite de plataforma puder alterar o próximo passo.
+- [to-spec](skills/discovery/to-spec/SKILL.md) — Escreve uma especificação `ready` a partir de decisões resolvidas e do contexto do projeto. Use quando as decisões estiverem resolvidas e o próximo passo for uma especificação, não código.
+- [domain-modelling](skills/discovery/domain-modelling/SKILL.md) — Modela conceitos de negócio e invariantes quando eles importam. Use quando terminologia, invariantes, transições de estado, eventos ou fronteiras de contexto estiverem em jogo.
+- [architecture-design](skills/discovery/architecture-design/SKILL.md) — Define a solução técnica e as decisões arquiteturais duráveis. Use quando fronteiras, interfaces, dados, integrações, segurança, concorrência ou deploy mudarem.
+- [to-tickets](skills/discovery/to-tickets/SKILL.md) — Divide uma especificação `ready` em um conjunto executável de tickets. Use quando uma especificação estiver `ready` e o próximo passo forem tickets, não código.
+
+### development
+
+- [diagnose](skills/development/diagnose/SKILL.md) — Identifica a causa de uma falha desconhecida. Use quando o sintoma for conhecido e a causa não. Não use para alterar código primeiro.
+- [implement](skills/development/implement/SKILL.md) — Aplica a menor mudança correta de comportamento para um objetivo delimitado. Use quando o comportamento desejado e o escopo já estiverem claros.
+- [tdd](skills/development/tdd/SKILL.md) — Aplica um ciclo red, green e refactor para um comportamento. Use quando um teste de regressão, um comportamento complexo ou um pedido explícito de teste primeiro for necessário.
+- [refactor](skills/development/refactor/SKILL.md) — Melhora a estrutura interna enquanto o comportamento externo permanece estável. Use quando o objetivo for estrutural e o comportamento não deva mudar, salvo autorização de uma mudança nomeada.
+
+### quality
+
+- [edge-case-analysis](skills/quality/edge-case-analysis/SKILL.md) — Encontra fronteiras não testadas dentro de comportamento já especificado. Use quando houver risco de entrada, estado, tempo, concorrência, integração, segurança ou integridade.
+- [code-review](skills/quality/code-review/SKILL.md) — Revisa uma mudança não trivial e não edita código. Use quando uma implementação ou um refactor deva ser revisado antes de ser tratado como concluído.
+
+### documentation
+
+- [docs](skills/documentation/docs/SKILL.md) — Atualiza a documentação para que ela confira com o estado verificado do repositório. Use quando uma mudança afetar API, arquitetura, configuração, operação, onboarding ou comportamento visível.
+
+### modernization
+
+- [modernize](skills/modernization/modernize/SKILL.md) — Planeja uma migração delimitada de runtime, framework ou arquitetura e não a aplica. Use quando o trabalho for modernização, e não um refactor comum.
+
+`workflow` recomenda a rota e não executa skills nem persiste `WORKFLOW_PLAN`. As demais skills gravam somente artefato `ready` e devolvem `BLOCKED` sem arquivo desta tentativa quando o gate não passa. `implement` e `refactor` aplicam a mudança no working tree; `tdd` altera implementação somente quando `implement` compõe a execução. Artefato fora de `ready` não autoriza implementação.
+
+## Validação
 
 ```sh
 npm run validate
 npm run skills:validate
 npm test
 node bin/ai-dev-skills.mjs validate
-node bin/ai-dev-skills.mjs package --target all --output ./dist
-node bin/ai-dev-skills.mjs install --target codex --destination ../consumer-repo
-node bin/ai-dev-skills.mjs validate --target codex --path ../consumer-repo
-node bin/ai-dev-skills.mjs --help
 ```
 
-O [manifest](manifest/skills.json) declara classificação primária, entradas/saídas, artefatos definidos e apenas nomeados, dependências obrigatórias, condicionais e opcionais. Cada skill pode estar `scaffold` ou `implemented`, com o mesmo estado no manifest, contrato e fonte; `context-engineering`, `setup-ai-development-skills`, `workflow`, `clarify`, `handoff`, `research`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design`, `implement`, `tdd`, `refactor`, `edge-case-analysis`, `code-review`, `diagnose`, `docs` e `modernize` estão `implemented` e nenhuma permanece `scaffold`. Os quatro targets têm descritores declarativos `implemented`, independentes do ciclo de vida das skills.
+O validador confere catálogo, nomes, frontmatter, status, dependências, projeção dentro do diretório da skill e descritores dos targets. Ele não executa Cursor, Codex, Gemini Antigravity nem Claude Code.
 
-A CLI empacota, instala e valida o catálogo completo por target. `package` sempre cria um subdiretório por target sob `--output`; `install` escreve no diretório nativo do projeto de destino; `validate --target` exige igualdade com a fonte canônica. Reinstalação idêntica é idempotente. Uma skill existente e divergente bloqueia toda a operação antes da cópia e nunca é sobrescrita.
+`.ai/project.md` registra a suíte estrutural em 53 testes.
 
-| Target | Diretório no projeto |
-| --- | --- |
-| Codex | `.agents/skills` |
-| Cursor | `.cursor/skills` |
-| Gemini Antigravity | `.agents/skills` |
-| Claude Code | `.claude/skills` |
+## Limites
 
-A emenda v1-A19 prepara a descoberta que esses produtos documentam. Cada `description` diz o que a skill faz e quando usá-la. Colocar o diretório canônico em `projectSkillsPath` é o mecanismo de descoberta. O validador confere esse formato, inclusive o orçamento de 240 caracteres e a cláusula `Use when`. Ele não executa Cursor, Codex, Gemini Antigravity nem Claude Code. `list`, `doctor`, `sync` e detecção automática de plataforma continuam ausentes.
+A observação de host da v1-A21 tem veredito `OBSERVED`: Antigravity IDE passou as gates; Cursor não apresentou `FAIL`; em 2026-10-15 o Codex CLI autenticado passou as gates abertas e as duas seleções automáticas do Cursor que estavam `INCONCLUSIVE` passaram na CLI. Claude Code permanece `NOT_RUN`. `OBSERVED` não certifica os hosts.
 
-A emenda v1-A20 grava essa projeção dentro de cada diretório de skill. O `SKILL.md` aponta para `references/` e `assets/` no próprio diretório. O contrato canônico continua em `contracts/`. O instalador copia o diretório e não reescreve links. O validador rejeita link que saia do diretório e projeção que divirja da fonte. Arquivo presente no disco não significa que Cursor, Codex, Gemini Antigravity ou Claude Code tenha aberto esse arquivo.
+`list` imprime o nome de cada skill do manifesto, uma por linha, na ordem de `skills`. Não aceita opção e não grava arquivo. Continuam ausentes: `doctor`, `sync`, desinstalação, instalação global, detecção de plataforma, roteador automático e `meta-skills/skill-authoring`. A v1-A22 cobre somente `list`.
 
-A emenda v1-A21 executou esse protocolo em 2026-10-14. A execução Linux ficou `INCOMPLETE`, com os quatro hosts `NOT_RUN`. A repetição em hosts Windows tem veredito `OBSERVED` no relatório `.ai/artifacts/tests/2026-10-14-live-host-observation/REPORT.md`: Antigravity IDE passou as gates; Cursor não apresentou `FAIL`, com duas seleções automáticas `INCONCLUSIVE` na IDE; Codex e Claude Code ficaram `NOT_RUN` nessa repetição. Em 2026-10-15, uma repetição das células abertas, registrada em `.ai/artifacts/tests/2026-10-14-live-host-observation/repetition-2026-10-15.md`, não reabre a emenda e não muda `OBSERVED`: o Codex CLI autenticado passou as gates, e as duas seleções automáticas do Cursor que estavam `INCONCLUSIVE` passaram na CLI. Claude Code permanece no projeto e fora da validação, `NOT_RUN`. `OBSERVED` não certifica os hosts. O install nos consumidores de prova não substitui a sessão no produto. Skills, contratos, targets e CLI permanecem. A v1-A22 não está aberta.
+O arquivo `LICENSE` é um placeholder. Nenhuma licença foi escolhida e ele não concede permissão de uso, distribuição ou sublicenciamento. `package.json` declara `private: true` e `license` `UNLICENSED`.
 
-Consulte [proveniência e limitações](references/provenance.md), [contrato compartilhado](contracts/skill-contract.md), [artefatos](contracts/artifacts.md), [routing R1–R17](contracts/routing.md), [gates de qualidade](contracts/quality-gates.md), [falha e fallback](contracts/failure.md) e [sequências de workflow](contracts/workflows.md).
+## Estrutura
 
-O validador verifica catálogo físico, nomes, frontmatter no subconjunto emitido, ciclo de vida e consistência de status, classificação, dependências, referências locais, artefatos/templates, ciclos obrigatórios e condicionais e descritores dos targets. Uma skill `implemented` deve definir uma seção `Workflow` não vazia no contrato e na fonte, sem avisos de workflow pendente ou indisponível. O validador por target compara todas as pastas instaladas com a fonte canônica. Ele não executa as skills nem certifica o comportamento dos produtos de destino.
+```text
+manifest/skills.json     catálogo, invocação, artefatos e dependências
+contracts/               contratos compartilhados e por skill
+skills/                  fonte das 18 skills
+targets/                 descritores dos quatro targets
+scripts/                 validação e distribuição
+bin/ai-dev-skills.mjs    CLI
+templates/               templates de artefatos
+docs/agents/             issue tracker, rótulos e domínio
+.ai/                     contexto e artefatos deste repositório
+```
 
-Templates são rascunhos: substitua placeholders e valide evidências antes de marcar `ready`. `LICENSE` permanece placeholder e o pacote está privado. Contexto, bootstrap local, roteamento consultivo por `workflow`, `clarify`, `to-spec`, `to-tickets`, `domain-modelling`, `architecture-design` e distribuição por target estão operacionais. `workflow` recomenda a rota e não executa skills nem persiste `WORKFLOW_PLAN`. `clarify` grava conjunto de decisões `ready` ou `blocked` e não executa a skill seguinte. `to-spec` grava somente spec `ready`. `to-tickets` grava somente conjunto `ready`. `domain-modelling` grava somente modelo `ready`. `architecture-design` grava somente desenho `ready` e, quando a spec já registra a decisão durável, um ADR `ready`. `implement` aplica a menor mudança correta, grava somente relatório `ready` e evidência `ready`, e cita `CHANGE_SET` como working tree. `tdd` grava evidência `ready` própria e a mudança de teste, e só altera implementação quando `implement` compõe a execução. `code-review` grava somente relatório `ready` e não altera código. `handoff` grava somente handoff `ready` com estado verificado e devolve `BLOCKED` sem arquivo desta tentativa quando o gate não passa. Insumo fora de `ready` não autoriza implementação. `research` grava somente relatório `ready`; alegação sem fonte fica em Unknowns e não autoriza o próximo passo. `diagnose` grava somente diagnóstico `ready`, distingue causa confirmada, causa provável e hipótese não confirmada, e devolve `BLOCKED` sem arquivo desta tentativa quando o gate não passa. Causa que não está confirmada, ou causa confirmada sem evidência de regressão, não autoriza implementação. `diagnose` não invoca `tdd`. `refactor` aplica a menor mudança estrutural, grava somente relatório `ready` e evidência `ready`, cita `CHANGE_SET` como working tree e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa. O comportamento externo permanece, salvo autorização explícita de uma mudança nomeada. `edge-case-analysis` grava somente relatório `ready`. Cada achado informa comportamento esperado e cobertura. O teste recomendado não alarga o produto. Relatório `ready` não autoriza `implement` a mudar comportamento. Risco de R12 autoriza `code-review` sem invocá-lo. Ausência evidenciada de risco de R12 informa que `code-review` pode ser omitido. O caminho bloqueado não grava arquivo desta tentativa. `docs` grava somente `DOC_UPDATE` `ready` quando a documentação confere com o estado verificado e devolve `BLOCKED` sem arquivo e sem mudança desta tentativa quando o gate não passa; a atualização pronta não autoriza implementação.
+Cada diretório de skill carrega `SKILL.md`, `references/` e `assets/`. O contrato canônico continua em `contracts/`. O instalador copia o diretório e não reescreve links.
 
-Estado atualizado em 2026-10-14: `.ai/artifacts/handoffs/2026-10-06-project-state.md`. A abertura da v1-A21 reexecutou a suíte da v1-A20, 53/53, sem lançar os quatro produtos; a repetição Windows observou hosts e o veredito vigente é `OBSERVED`. Contexto local em `.ai/`, glossário em `CONTEXT.md` e configuração das skills auxiliares em `docs/agents/`. A suíte determinística passou no checkout Windows, em macOS e, na v1-A18, em Linux com Node.js v22.14.0. Na v1-A19 a mesma suíte, com duas rejeições de descrição, passa 50/50 em Linux com Node.js v22.14.0. A abertura da v1-A20 reexecutou essa suíte, 50/50, sem teste novo de projeção. A implementação da v1-A20 passa 53/53 em Linux com Node.js v22.14.0, incluindo rejeição de link que escapa, rejeição de projeção divergente e instalação dos quatro targets num destino sem `contracts/` nem `manifest/`. Nove cenários agent-driven cobrem o roteamento, onze cobrem `clarify`, dezesseis cobrem `to-spec`, dezoito cobrem `to-tickets`, dezoito cobrem `domain-modelling`, dezoito cobrem `architecture-design`, dezoito cobrem `implement`, treze cobrem `tdd` e `code-review`, doze cobrem `handoff`, dezoito cobrem `research`, quatorze cobrem `diagnose`, dezoito cobrem `refactor`, dezoito cobrem `edge-case-analysis`, dezoito cobrem `docs` e dezoito cobrem `modernize`, sem substituir a suíte determinística. Consulte [references/validation-result.md](references/validation-result.md) para evidências e limites.
+## Documentação
+
+- [Proveniência e limitações](references/provenance.md)
+- [Contrato arquitetural v1](references/architecture-contract-v1.md)
+- [Evidência de validação](references/validation-result.md)
+- [Contrato compartilhado](contracts/skill-contract.md)
+- [Artefatos](contracts/artifacts.md)
+- [Routing R1–R17](contracts/routing.md)
+- [Gates](contracts/quality-gates.md)
+- [Falha e fallback](contracts/failure.md)
+- [Sequências de workflow](contracts/workflows.md)
+- [Glossário](CONTEXT.md)
+- [Arquitetura deste repositório](.ai/architecture.md)
+- [Estado do projeto](.ai/project.md)
+- [Domínio para agentes](docs/agents/domain.md)
+- [Issue tracker](docs/agents/issue-tracker.md)
+- [Rótulos de triagem](docs/agents/triage-labels.md)

@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { cp, mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
+import { readFileSync } from 'node:fs';
+import { cp, mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,7 +12,10 @@ const source = fileURLToPath(new URL('../', import.meta.url));
 async function fixture(run) {
   const root = await mkdtemp(join(tmpdir(), 'skills-validation-'));
   try {
-    for (const path of ['bin','skills','contracts','templates','targets','manifest','references','package.json','README.md','AGENTS.md']) await cp(join(source,path),join(root,path),{recursive:true});
+    for (const path of ['bin','skills','contracts','templates','targets','manifest','references','package.json','README.md','AGENTS.md','CONTEXT.md']) await cp(join(source,path),join(root,path),{recursive:true});
+    await mkdir(join(root,'.ai'),{recursive:true});
+    await mkdir(join(root,'docs/agents'),{recursive:true});
+    for (const path of ['.ai/architecture.md','.ai/project.md','docs/agents/domain.md','docs/agents/issue-tracker.md','docs/agents/triage-labels.md']) await cp(join(source,path),join(root,path));
     await run(root);
   } finally {
     await rm(root,{recursive:true,force:true});
@@ -327,13 +331,21 @@ test('current catalogue implements modernize, docs, edge-case-analysis, refactor
 });
 test('CLI exposes distribution commands while rejecting unsupported commands',()=>{
   const cli = join(source,'bin/ai-dev-skills.mjs');
+  const names = JSON.parse(readFileSync(join(source,'manifest/skills.json'),'utf8')).skills.map(skill=>skill.name);
   for (const command of ['--help','help','-h']) {
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);
+    assert.match(result.stdout,/ai-dev-skills list/);
     assert.match(result.stdout,/ai-dev-skills install --target/);
     assert.match(result.stdout,/ai-dev-skills package --target/);
   }
-  for (const command of ['bootstrap','doctor','list','sync']) {
+  const listed = spawnSync(process.execPath,[cli,'list'],{encoding:'utf8'});
+  assert.equal(listed.status,0,listed.stderr);
+  assert.equal(listed.stdout,`${names.join('\n')}\n`);
+  const rejected = spawnSync(process.execPath,[cli,'list','--target','cursor'],{encoding:'utf8'});
+  assert.equal(rejected.status,1,rejected.stdout);
+  assert.match(rejected.stderr,/ERROR:/);
+  for (const command of ['bootstrap','doctor','sync']) {
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,1,`${command}: ${result.stdout}${result.stderr}`);
     assert.match(result.stderr,/ERROR:/);
