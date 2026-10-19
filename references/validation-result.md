@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — list command published, v1-A22, 2026-10-18
+
+This section records the later state of amendment v1-A22. It does not replace the host observations below, and it does not change their results.
+
+On 2026-10-14 the observations in this file recorded a prior decision: v1-A22 stayed unopened until a cited host `FAIL` existed. No such `FAIL` was recorded, and the v1-A21 verdict stayed `OBSERVED`. On 2026-10-16 the maintainer revised that exclusion for `list` only and authorized v1-A22 without a host `FAIL`. `ADR-0003` records the exception to the ADR `0002` constraint against a new CLI command. ADR `0001` and ADR `0002` were not rewritten. The approved scope is only the `list` command. `doctor`, `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A23. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+`HANDOFF-20261018-001` recorded the tree before the commit, when `HEAD` was `2ef0b3d` and the change was uncommitted. That handoff reported `npm test` 53/53 and `npm run validate` PASS with 18 skills from the implementation close, and did not re-execute those commands. The completed `list` command was published on `origin/main` at `fe298cc` (`fe298ccd8d12ba315af00fdfbf61d138e3299516`). `main` matches `origin/main` at that commit. `ai-dev-skills list` reads `manifest/skills.json` and prints each `name` on its own line, in array order. It accepts no options and writes no file. The sentences below that say v1-A22 remains unopened are the decision in force at those 2026-10-14 runs.
+
+This state update was checked on macOS 26.6.2 (Darwin 25.6.0 arm64), Node.js v26.5.0 and npm 11.17.0. `npm test`: PASS, 53 tests, zero failures, skips or todos. `npm run validate`: PASS, 18 skills. `git diff --check`: PASS. `node bin/ai-dev-skills.mjs list` exited 0 and printed 18 names. `doctor` exited 1.
+
 ## Current observation — live hosts, v1-A21, OBSERVED, Windows, Node.js 25, 2026-10-14
 
 Windows NT 10.0.26200.0, Node.js v25.2.0 and npm 11.6.2. The functional baseline remains `b86f41d`; HEAD and `origin/main` are `4cfad4f`, which adds only the v1-A21 protocol and evidence. The verdict is `OBSERVED`.
