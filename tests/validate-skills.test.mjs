@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, realpathSync } from 'node:fs';
 import { chmod, cp, mkdtemp, mkdir, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { delimiter, join } from 'node:path';
@@ -30,6 +30,14 @@ async function changeManifest(root, edit) {
 async function changeText(root,path,edit) {
   const target = join(root,path);
   await writeFile(target,edit(await readFile(target,'utf8')));
+}
+async function setDescription(root, name, description) {
+  let skill;
+  await changeManifest(root, manifest => {
+    skill = manifest.skills.find(item => item.name === name);
+    skill.description = description;
+  });
+  await changeText(root, skill.path, text => text.replace(/^description: .+$/m, `description: ${JSON.stringify(description)}`));
 }
 async function refreshContractProjection(root, contractPath) {
   const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
@@ -329,6 +337,57 @@ test('current catalogue implements modernize, docs, edge-case-analysis, refactor
     schema: 'named-only',
   });
 });
+test('validate rejects two skills with the same stored description',()=>fixture(async root=>{
+  const description = 'Use when alpha.';
+  await setDescription(root,'workflow',description);
+  await setDescription(root,'clarify',description);
+  const result = await validate(root);
+  assert.equal(result.ok,false);
+  assert.deepEqual(result.errors,['workflow: identical manifest description clarify']);
+  await cp(join(source,'scripts'),join(root,'scripts'),{recursive:true});
+  const cli = spawnSync(process.execPath,[realpathSync(join(root,'scripts/validate-skills.mjs'))],{encoding:'utf8'});
+  assert.equal(cli.status,1);
+  assert.match(cli.stderr,/^- workflow: identical manifest description clarify$/m);
+}));
+test('validate rejects every pair of identical stored descriptions',()=>fixture(async root=>{
+  const description = 'Use when alpha.';
+  await setDescription(root,'workflow',description);
+  await setDescription(root,'clarify',description);
+  await setDescription(root,'context-engineering',description);
+  const result = await validate(root);
+  assert.deepEqual(result.errors,[
+    'workflow: identical manifest description clarify',
+    'workflow: identical manifest description context-engineering',
+    'clarify: identical manifest description context-engineering',
+  ]);
+}));
+test('validate keeps case, trailing space and unicode form distinct',()=>fixture(async root=>{
+  const nfc = 'Use when café.';
+  const nfd = 'Use when cafe\u0301.';
+  assert.notEqual(nfc,nfd);
+  assert.equal(nfc.normalize('NFC'),nfd.normalize('NFC'));
+  await setDescription(root,'workflow','Use when alpha.');
+  await setDescription(root,'clarify','Use when Alpha.');
+  let result = await validate(root);
+  assert.equal(result.ok,true,result.errors.join('\n'));
+  await setDescription(root,'clarify','Use when alpha. ');
+  result = await validate(root);
+  assert.equal(result.ok,true,result.errors.join('\n'));
+  await setDescription(root,'workflow',nfc);
+  await setDescription(root,'clarify',nfd);
+  result = await validate(root);
+  assert.equal(result.ok,true,result.errors.join('\n'));
+}));
+test('validate compares description spaces without trimming',()=>fixture(async root=>{
+  await setDescription(root,'workflow',' ');
+  await setDescription(root,'clarify',' ');
+  const same = await validate(root);
+  assert.equal(same.ok,false);
+  assert.ok(same.errors.includes('workflow: identical manifest description clarify'));
+  await setDescription(root,'clarify','  ');
+  const different = await validate(root);
+  assert.equal(different.errors.includes('workflow: identical manifest description clarify'),false);
+}));
 test('CLI exposes distribution commands while rejecting unsupported commands',()=>{
   const cli = join(source,'bin/ai-dev-skills.mjs');
   const names = JSON.parse(readFileSync(join(source,'manifest/skills.json'),'utf8')).skills.map(skill=>skill.name);
@@ -524,4 +583,6 @@ test('current mixed catalogue satisfies the complete baseline checks',async()=>{
   const result = await validate(source);
   assert.equal(result.ok,true,result.errors.join('\n'));
   assert.equal(result.skills,18);
+  const cli = spawnSync(process.execPath,[join(source,'scripts/validate-skills.mjs')],{encoding:'utf8'});
+  assert.equal(cli.status,0,cli.stderr);
 });

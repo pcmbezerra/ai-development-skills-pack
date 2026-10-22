@@ -117,6 +117,11 @@ export async function validate(root = rootDirectory) {
     const skills = m.skills, names = skills.map(s=>s.name), expected = Object.values(catalogue).flat();
     const skillStatuses = ['scaffold','implemented'];
     check(skills.length === 18 && new Set(names).size === 18 && expected.every(n=>names.includes(n)), 'Invalid canonical catalogue');
+    for (let i = 0; i < skills.length; i++) {
+      for (let j = i + 1; j < skills.length; j++) {
+        check(skills[i].description !== skills[j].description, `${skills[i].name}: identical manifest description ${skills[j].name}`);
+      }
+    }
     for (const s of skills) {
       check(typeof s.name === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s.name) && s.name.length < 64, `Invalid name ${s.name}`);
       check(catalogue[s.category]?.includes(s.name), `${s.name}: invalid category`);
