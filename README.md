@@ -2,7 +2,7 @@
 
 Dezoito skills de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. A fonte é a mesma; cada target recebe o catálogo no diretório nativo do projeto.
 
-Baseline arquitetural v1, emendas v1-A1 a v1-A22. A v1-A22 adiciona o comando `list`. O identificador de versão permanece `1.0.0-scaffold`.
+Baseline arquitetural v1, emendas v1-A1 a v1-A23. A v1-A22 adiciona o comando `list`. A v1-A23 adiciona o comando `doctor`. O identificador de versão permanece `1.0.0-scaffold`.
 
 **[Instalação](#instalação) · [Catálogo](#catálogo) · [Validação](#validação) · [Limites](#limites) · [Documentação](#documentação)**
 
@@ -15,6 +15,7 @@ git clone https://github.com/pcmbezerra/ai-development-skills-pack.git
 cd ai-development-skills-pack
 node bin/ai-dev-skills.mjs --help
 node bin/ai-dev-skills.mjs list
+node bin/ai-dev-skills.mjs doctor
 node bin/ai-dev-skills.mjs package --target all --output ./dist
 node bin/ai-dev-skills.mjs install --target codex --destination ../consumer-repo
 node bin/ai-dev-skills.mjs validate --target codex --path ../consumer-repo
@@ -94,7 +95,11 @@ O validador confere catálogo, nomes, frontmatter, status, dependências, proje�
 
 A observação de host da v1-A21 tem veredito `OBSERVED`: Antigravity IDE passou as gates; Cursor não apresentou `FAIL`; em 2026-10-15 o Codex CLI autenticado passou as gates abertas e as duas seleções automáticas do Cursor que estavam `INCONCLUSIVE` passaram na CLI. Claude Code permanece `NOT_RUN`. `OBSERVED` não certifica os hosts.
 
-`list` imprime o nome de cada skill do manifesto, uma por linha, na ordem de `skills`. Não aceita opção e não grava arquivo. Continuam ausentes: `doctor`, `sync`, desinstalação, instalação global, detecção de plataforma, roteador automático e `meta-skills/skill-authoring`. A v1-A22 cobre somente `list`.
+`list` imprime o nome de cada skill do manifesto, uma por linha, na ordem de `skills`. Não aceita opção e não grava arquivo. A v1-A22 cobre somente `list`.
+
+`doctor` não aceita opção nem argumento. Imprime duas linhas, nesta ordem: `node pass <versão>` ou `node fail <versão>`, depois `git pass` ou `git fail`. `<versão>` é `process.versions.node`. A saída é 0 só quando as duas passam; nesse caminho a stderr fica vazia. Git passa quando um arquivo executável de nome `git` é resolvido no `PATH`. O comando não executa `git`, não trata `git.exe` como esse nome, não grava arquivo e não chama `validate`. Opção ou argumento termina com saída 1 e `ERROR:` na stderr, sem as duas linhas. A v1-A23 cobre somente `doctor`.
+
+Continuam ausentes: `sync`, desinstalação, instalação global, detecção de plataforma, roteador automático e `meta-skills/skill-authoring`.
 
 O arquivo `LICENSE` é um placeholder. Nenhuma licença foi escolhida e ele não concede permissão de uso, distribuição ou sublicenciamento. `package.json` declara `private: true` e `license` `UNLICENSED`.
 

@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — doctor command, v1-A23, 2026-10-21
+
+This section records the later state of amendment v1-A23. It does not replace the host observations below, and it does not change their results.
+
+On 2026-10-19 the maintainer revised the 2026-10-15 exclusion for `doctor` only. `ADR-0004` records the exception to the ADR `0002` constraint against a new CLI command. ADR `0001`, ADR `0002` and ADR `0003` were not rewritten. `ai-dev-skills doctor` prints two lines, `node pass` or `node fail` with `process.versions.node`, then `git pass` or `git fail`. It accepts no option, does not execute `git`, does not treat `git.exe` as that name, and writes no file. `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A24. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+The sentences below that say `doctor` stays excluded or exits 1 are the decision in force at those earlier runs.
+
+This state update was checked on Darwin 25.6.0, Node.js v26.5.0 and npm 11.17.0. `npm test`: PASS, 60 tests, zero failures, skips or todos. `npm run validate`: PASS, 18 skills. `git diff --check`: PASS. `node bin/ai-dev-skills.mjs doctor` exited 0 and printed `node pass 26.5.0` and `git pass`.
+
 ## State update — list command published, v1-A22, 2026-10-18
 
 This section records the later state of amendment v1-A22. It does not replace the host observations below, and it does not change their results.

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
-import { readFile } from 'node:fs/promises';
+import { readFile, stat } from 'node:fs/promises';
+import { delimiter, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { packageTargets, installTarget, validateTarget } from '../scripts/distribute-skills.mjs';
 import { validate, report } from '../scripts/validate-skills.mjs';
 
@@ -10,7 +12,38 @@ Usage:
   ai-dev-skills install --target <target> --destination <project-root>
   ai-dev-skills package --target <target|all> --output <directory>
   ai-dev-skills list
+  ai-dev-skills doctor
   ai-dev-skills --help`;
+
+export function nodeLine(version) {
+  const major = Number(String(version).split('.')[0]);
+  const result = Number.isInteger(major) && major >= 22 ? 'pass' : 'fail';
+  return `node ${result} ${version}`;
+}
+
+export async function gitLine(pathEnv, lookup = observeGit) {
+  try {
+    return await lookup(pathEnv) ? 'git pass' : 'git fail';
+  } catch {
+    return 'git fail';
+  }
+}
+
+async function observeGit(pathEnv) {
+  for (const segment of String(pathEnv ?? '').split(delimiter)) {
+    if (!segment) continue;
+    let info;
+    try {
+      info = await stat(join(segment, 'git'));
+    } catch (error) {
+      if (error?.code === 'ENOENT') continue;
+      throw error;
+    }
+    if (!info.isFile()) continue;
+    return (info.mode & 0o111) !== 0;
+  }
+  return false;
+}
 
 function options(args) {
   const parsed = {};
@@ -75,12 +108,23 @@ async function main(args) {
     for (const skill of manifest.skills) console.log(skill.name);
     return;
   }
+  if (command === 'doctor') {
+    requireOnly(parsed, []);
+    const node = nodeLine(process.versions.node);
+    const git = await gitLine(process.env.PATH);
+    console.log(node);
+    console.log(git);
+    if (node.split(' ')[1] === 'fail' || git === 'git fail') process.exitCode = 1;
+    return;
+  }
   throw new Error(`Unsupported command: ${command}. Use --help.`);
 }
 
-try {
-  await main(process.argv.slice(2));
-} catch (error) {
-  console.error(`ERROR: ${error.message}`);
-  process.exitCode = 1;
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  try {
+    await main(process.argv.slice(2));
+  } catch (error) {
+    console.error(`ERROR: ${error.message}`);
+    process.exitCode = 1;
+  }
 }

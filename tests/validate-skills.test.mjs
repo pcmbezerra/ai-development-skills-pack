@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import { cp, mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
+import { chmod, cp, mkdtemp, mkdir, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { delimiter, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projectCatalogue, projectContract, validate } from '../scripts/validate-skills.mjs';
 
@@ -336,6 +336,7 @@ test('CLI exposes distribution commands while rejecting unsupported commands',()
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,0,result.stderr);
     assert.match(result.stdout,/ai-dev-skills list/);
+    assert.match(result.stdout,/ai-dev-skills doctor/);
     assert.match(result.stdout,/ai-dev-skills install --target/);
     assert.match(result.stdout,/ai-dev-skills package --target/);
   }
@@ -345,10 +346,178 @@ test('CLI exposes distribution commands while rejecting unsupported commands',()
   const rejected = spawnSync(process.execPath,[cli,'list','--target','cursor'],{encoding:'utf8'});
   assert.equal(rejected.status,1,rejected.stdout);
   assert.match(rejected.stderr,/ERROR:/);
-  for (const command of ['bootstrap','doctor','sync']) {
+  for (const command of ['bootstrap','sync']) {
     const result = spawnSync(process.execPath,[cli,command],{encoding:'utf8'});
     assert.equal(result.status,1,`${command}: ${result.stdout}${result.stderr}`);
     assert.match(result.stderr,/ERROR:/);
+  }
+});
+test('doctor reports node and git without calling validate', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const root = await mkdtemp(join(tmpdir(),'doctor-'));
+  try {
+    const git = join(root,'git');
+    const empty = join(root,'empty');
+    await writeFile(git,'');
+    await chmod(git,0o755);
+    await mkdir(empty);
+    const passed = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
+    assert.equal(passed.status,0,passed.stderr);
+    assert.equal(passed.stderr,'');
+    assert.equal(passed.stdout,`node pass ${process.versions.node}\ngit pass\n`);
+    assert.deepEqual((await readdir(root)).sort(),['empty','git']);
+    const missing = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:empty}});
+    assert.equal(missing.status,1,missing.stderr);
+    assert.equal(missing.stderr,'');
+    assert.equal(missing.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+    await chmod(git,0o644);
+    const plain = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
+    assert.equal(plain.status,1,plain.stderr);
+    assert.equal(plain.stderr,'');
+    assert.equal(plain.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+    const rejected = spawnSync(process.execPath,[cli,'doctor','--target','cursor'],{encoding:'utf8'});
+    assert.equal(rejected.status,1);
+    assert.match(rejected.stderr,/ERROR:/);
+    assert.doesNotMatch(rejected.stdout,/node (?:pass|fail)/);
+    const body = readFileSync(cli,'utf8');
+    const start = body.indexOf("if (command === 'doctor')");
+    const end = body.indexOf('throw new Error(`Unsupported command:');
+    assert.equal(start >= 0, true, 'doctor branch marker missing');
+    assert.equal(end > start, true, 'unsupported-command marker missing or before doctor');
+    const branch = body.slice(start, end);
+    assert.equal(branch.length > 0, true, 'doctor branch slice is empty');
+    assert.equal(branch.includes('gitLine'), true, 'doctor branch slice missed gitLine');
+    assert.equal(branch.includes('validateTarget'), false);
+    assert.equal(branch.includes('validate('), false);
+    assert.equal(branch.includes('child_process'), false);
+    assert.equal(branch.includes('fetch('), false);
+    assert.equal(branch.includes('node:net'), false);
+    assert.equal(branch.includes('node:http'), false);
+    const {nodeLine,gitLine} = await import('../bin/ai-dev-skills.mjs');
+    assert.equal(nodeLine('21.9.9'),'node fail 21.9.9');
+    assert.equal(nodeLine('22.0.0'),'node pass 22.0.0');
+    assert.equal(nodeLine('23.1.0'),'node pass 23.1.0');
+    assert.equal(await gitLine(root,async () => { throw new Error('boom'); }),'git fail');
+    assert.equal(`${nodeLine('21.9.9')}\n${await gitLine(empty)}`,'node fail 21.9.9\ngit fail');
+    await chmod(git,0o755);
+    assert.equal(`${nodeLine('21.9.9')}\n${await gitLine(root)}`,'node fail 21.9.9\ngit pass');
+    const blocker = join(root,'not-dir');
+    await writeFile(blocker,'');
+    const observed = await stat(join(blocker,'git')).then(() => null, error => error);
+    assert.equal(observed instanceof Error && observed.code !== 'ENOENT', true, 'git observation did not throw a non-ENOENT error');
+    const thrown = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:blocker}});
+    assert.equal(thrown.status,1,thrown.stderr);
+    assert.equal(thrown.stderr,'');
+    assert.equal(thrown.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+  } finally {
+    await rm(root,{recursive:true,force:true});
+  }
+});
+test('doctor fails git for an empty, omitted, or delimiter-only PATH', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const expected = `node pass ${process.versions.node}\ngit fail\n`;
+  const omitted = {...process.env};
+  delete omitted.PATH;
+  for (const env of [{...process.env,PATH:''}, omitted, {...process.env,PATH:delimiter}]) {
+    const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env});
+    assert.equal(result.status,1,result.stderr);
+    assert.equal(result.stderr,'');
+    assert.equal(result.stdout,expected);
+  }
+});
+test('doctor passes git found only in a later PATH segment', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const root = await mkdtemp(join(tmpdir(),'doctor-later-'));
+  try {
+    const first = join(root,'first');
+    const second = join(root,'second');
+    await mkdir(first);
+    await mkdir(second);
+    const git = join(second,'git');
+    await writeFile(git,'');
+    await chmod(git,0o755);
+    const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:[first,second].join(delimiter)}});
+    assert.equal(result.status,0,result.stderr);
+    assert.equal(result.stderr,'');
+    assert.equal(result.stdout,`node pass ${process.versions.node}\ngit pass\n`);
+  } finally {
+    await rm(root,{recursive:true,force:true});
+  }
+});
+test('doctor fails when the resolved git name is a directory', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const root = await mkdtemp(join(tmpdir(),'doctor-dir-'));
+  try {
+    await mkdir(join(root,'git'),{recursive:true});
+    const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
+    assert.equal(result.status,1,result.stderr);
+    assert.equal(result.stderr,'');
+    assert.equal(result.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+  } finally {
+    await rm(root,{recursive:true,force:true});
+  }
+});
+test('doctor fails when PATH contains only an executable git.exe', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const root = await mkdtemp(join(tmpdir(),'doctor-exe-'));
+  try {
+    const git = join(root,'git.exe');
+    await writeFile(git,'');
+    await chmod(git,0o755);
+    const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
+    assert.equal(result.status,1,result.stderr);
+    assert.equal(result.stderr,'');
+    assert.equal(result.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+  } finally {
+    await rm(root,{recursive:true,force:true});
+  }
+});
+test('doctor rejects a positional argument and an option without a value', () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  for (const args of [['doctor','extra'],['doctor','--target']]) {
+    const result = spawnSync(process.execPath,[cli,...args],{encoding:'utf8'});
+    assert.equal(result.status,1,result.stderr);
+    assert.match(result.stderr,/ERROR:/);
+    assert.doesNotMatch(result.stdout,/node (?:pass|fail)/);
+  }
+});
+test('doctor does not change the working directory or the PATH directory', async () => {
+  const cli = join(source,'bin/ai-dev-skills.mjs');
+  const root = await mkdtemp(join(tmpdir(),'doctor-files-'));
+  try {
+    const listed = async dir => {
+      const rows = [];
+      for (const name of (await readdir(dir)).sort()) {
+        const info = await stat(join(dir,name));
+        rows.push([name,info.size,info.mode]);
+      }
+      return rows;
+    };
+    const gitDir = join(root,'git-dir');
+    const empty = join(root,'empty');
+    const blocker = join(root,'not-dir');
+    await mkdir(gitDir);
+    await mkdir(empty);
+    await writeFile(join(gitDir,'git'),'');
+    await chmod(join(gitDir,'git'),0o755);
+    await writeFile(blocker,'');
+    const cases = [
+      [gitDir,0,`node pass ${process.versions.node}\ngit pass\n`],
+      [empty,1,`node pass ${process.versions.node}\ngit fail\n`],
+      [blocker,1,`node pass ${process.versions.node}\ngit fail\n`],
+    ];
+    for (const [pathEnv,status,stdout] of cases) {
+      const cwdBefore = (await readdir(process.cwd())).sort();
+      const pathBefore = pathEnv === blocker ? await listed(root) : await listed(pathEnv);
+      const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:pathEnv}});
+      assert.equal(result.status,status,result.stderr);
+      assert.equal(result.stderr,'');
+      assert.equal(result.stdout,stdout);
+      assert.deepEqual((await readdir(process.cwd())).sort(),cwdBefore);
+      assert.deepEqual(pathEnv === blocker ? await listed(root) : await listed(pathEnv),pathBefore);
+    }
+  } finally {
+    await rm(root,{recursive:true,force:true});
   }
 });
 test('current mixed catalogue satisfies the complete baseline checks',async()=>{
