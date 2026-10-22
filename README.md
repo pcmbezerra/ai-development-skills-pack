@@ -109,7 +109,7 @@ A v1-A27 cobre somente a matriz de referência em `.ai/artifacts/quality/2026-10
 
 Continuam ausentes: `sync`, desinstalação, instalação global, detecção de plataforma, roteador automático e `meta-skills/skill-authoring`.
 
-O arquivo `LICENSE` é um placeholder. Nenhuma licença foi escolhida e ele não concede permissão de uso, distribuição ou sublicenciamento. `package.json` declara `private: true` e `license` `UNLICENSED`.
+A licença é MIT. `package.json` declara `private: true` e `license` `MIT`.
 
 ## Estrutura
 

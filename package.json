@@ -4,7 +4,7 @@
   "private": true,
   "description": "Architecture v1 scaffold for 18 AI development skills",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "engines": {
     "node": ">=22"
   },
