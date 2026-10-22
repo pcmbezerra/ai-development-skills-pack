@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — known-route reference matrix, v1-A27, 2026-10-22
+
+This section records the later state of amendment v1-A27. It does not replace the sections below, and it does not change their results.
+
+On 2026-10-22 the maintainer accepted a reference matrix of known cases K1–K8 as the only objective of v1-A27. The matrix validates those known cases and does not automatically measure all semantic similarity between skills. It is not a semantic classifier and does not change R1–R17. `validate()` does not gain a semantic comparison or these cases. The v1-A24 exact `description` comparison remains. No CLI command was added. ADR `0001`, ADR `0002`, ADR `0003` and ADR `0004` were not rewritten. `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and automatic semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The publishing commit is `1f4585c`. The next free amendment identifier is v1-A28. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+`REVIEW-20261022-005` is `PASS`. The matrix check is a reading of the eight cases, not a Node test. The count of 78 tests below remains the suite of v1-A26. The sentences below that name v1-A27 as the next free identifier are the state before this amendment.
+
+This state update was checked on Darwin 25.6.0, Node.js v26.5.0 and npm 11.17.0, after the five internal records were aligned and before any publishing commit. `npm test`: PASS, 78 tests, zero failures, skips or todos, duration 12123 ms. `npm run validate`: PASS, 18 skills. `git diff --check` passed. Two distribution tests failed earlier inside the sandbox with `EPERM` on `mkdir` under `/var/folders`; the same suite outside that restriction passed 78/78. That sandbox failure is not a change in the package.
+
 ## State update — duplicate target name diagnostic, v1-A26, 2026-10-22
 
 This section records the later state of amendment v1-A26. It does not replace the sections below, and it does not change their results.
