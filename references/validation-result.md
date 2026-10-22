@@ -1,5 +1,11 @@
 # Validation result
 
+## State update — MIT license, v1-A28, 2026-10-22
+
+This section records the later state of amendment v1-A28. It does not replace the sections below, and it does not change their results.
+
+Amendment v1-A28 was published at `8f92189`. It adopts the MIT license. `private` remains `true`. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A29. The sentences below that name v1-A28 as the next free identifier are the state before this alignment. No new Node test was added. No SPDX assertion was added. The count of 78 tests remains the suite of v1-A26.
+
 ## State update — known-route reference matrix, v1-A27, 2026-10-22
 
 This section records the later state of amendment v1-A27. It does not replace the sections below, and it does not change their results.
