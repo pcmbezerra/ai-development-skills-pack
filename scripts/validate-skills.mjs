@@ -231,6 +231,11 @@ export async function validate(root = rootDirectory) {
     const targetPaths = { cursor: '.cursor/skills', codex: '.agents/skills', antigravity: '.agents/skills', 'claude-code': '.claude/skills' };
     check(m.targets.length === 4 && Object.keys(targetPaths).every(n=>m.targets.some(t=>t.name===n)), 'Invalid targets');
     check(new Set(m.targets.map(t=>t.name)).size === 4, 'Duplicate targets');
+    for (let i = 0; i < m.targets.length; i++) {
+      for (let j = i + 1; j < m.targets.length; j++) {
+        check(m.targets[i].name !== m.targets[j].name, `${m.targets[i].name}: duplicate target name ${m.targets[j].name}`);
+      }
+    }
     for (const t of m.targets) {
       check(t.path === `targets/${t.name}.mjs`, `${t.name}: invalid target path`);
       await reference(t.path,t.name);

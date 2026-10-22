@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — duplicate target name diagnostic, v1-A26, 2026-10-22
+
+This section records the later state of amendment v1-A26. It does not replace the sections below, and it does not change their results.
+
+On 2026-10-22 the maintainer accepted an additional exact diagnostic of duplicate stored target `name` values as the only objective of v1-A26. `validate()` emits one error per pair `i < j`, `<earlier name>: duplicate target name <later name>`. The comparison does not trim, change case or apply Unicode normalization. The `Invalid targets` and `Duplicate targets` checks remain. The v1-A25 skill-name comparison and the v1-A24 `description` comparison remain. `validateTarget` does not perform the target-name comparison. No CLI command was added. ADR `0001`, ADR `0002`, ADR `0003` and ADR `0004` were not rewritten. `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A27. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+`REVIEW-20261022-004` is `PASS`. The three identical target names produce three identical strings; the two-pair test asserts `i < j` order. `EDGE-CASE-20261022-001` records no missing coverage. The sentences below that name v1-A26 as the next free identifier are the state before this amendment. The counts 53, 60, 64 and 69 in those sections remain the suites of those earlier amendments.
+
+This state update was checked on Darwin 25.6.0, Node.js v26.5.0 and npm 11.17.0, after the five internal records were aligned. `npm test`: PASS, 78 tests, zero failures, skips or todos, duration 9003 ms. `npm run validate`: PASS, 18 skills. `git diff --check` passed.
+
 ## State update — duplicate name diagnostic, v1-A25, 2026-10-22
 
 This section records the later state of amendment v1-A25. It does not replace the sections below, and it does not change their results.

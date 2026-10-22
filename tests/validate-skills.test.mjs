@@ -443,6 +443,107 @@ test('validate keeps distinct names when descriptions match',()=>fixture(async r
   assert.ok(result.errors.includes('workflow: identical manifest description clarify'));
   assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
 }));
+test('validate rejects two targets with the same stored name',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{ manifest.targets[2] = manifest.targets[1]; });
+  const result = await validate(root);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.includes('cursor: duplicate target name cursor'));
+  assert.ok(result.errors.includes('Invalid targets'));
+  assert.ok(result.errors.includes('Duplicate targets'));
+  assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
+  await cp(join(source,'scripts'),join(root,'scripts'),{recursive:true});
+  const cli = spawnSync(process.execPath,[join(root,'scripts/validate-skills.mjs')],{encoding:'utf8'});
+  assert.equal(cli.status,1);
+  assert.match(cli.stderr,/^- cursor: duplicate target name cursor$/m);
+  assert.match(cli.stderr,/^- Invalid targets$/m);
+  assert.match(cli.stderr,/^- Duplicate targets$/m);
+}));
+test('validate rejects distinct target name pairs in index order',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{
+    manifest.targets[2] = manifest.targets[0];
+    manifest.targets[3] = manifest.targets[1];
+  });
+  const result = await validate(root);
+  assert.ok(result.errors.includes('Invalid targets'));
+  assert.ok(result.errors.includes('Duplicate targets'));
+  assert.deepEqual(result.errors.filter(error=>error.includes('duplicate target name')),[
+    'claude-code: duplicate target name claude-code',
+    'cursor: duplicate target name cursor',
+  ]);
+}));
+test('validate rejects every pair of three identical target names',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{
+    manifest.targets[0] = manifest.targets[1];
+    manifest.targets[2] = manifest.targets[1];
+  });
+  const result = await validate(root);
+  assert.ok(result.errors.includes('Invalid targets'));
+  assert.ok(result.errors.includes('Duplicate targets'));
+  assert.deepEqual(result.errors.filter(error=>error.includes('duplicate target name')),[
+    'cursor: duplicate target name cursor',
+    'cursor: duplicate target name cursor',
+    'cursor: duplicate target name cursor',
+  ]);
+}));
+test('validate names a repeated target when four unique names remain',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{ manifest.targets.push({...manifest.targets[0]}); });
+  const result = await validate(root);
+  assert.ok(result.errors.includes('claude-code: duplicate target name claude-code'));
+  assert.ok(result.errors.includes('Invalid targets'));
+  assert.equal(result.errors.includes('Duplicate targets'),false);
+}));
+test('validate keeps Duplicate targets when a target is absent and names do not repeat',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{ manifest.targets = manifest.targets.filter(target=>target.name!=='claude-code'); });
+  const result = await validate(root);
+  assert.ok(result.errors.includes('Invalid targets'));
+  assert.ok(result.errors.includes('Duplicate targets'));
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+}));
+test('validate keeps case, trailing space and unicode form distinct for target names',()=>fixture(async root=>{
+  const nfc = 'café';
+  const nfd = 'cafe\u0301';
+  assert.notEqual(nfc,nfd);
+  assert.equal(nfc.normalize('NFC'),nfd.normalize('NFC'));
+  await changeManifest(root,manifest=>{ manifest.targets[1].name = 'Cursor'; });
+  let result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+  await changeManifest(root,manifest=>{
+    manifest.targets[1].name = 'cursor';
+    manifest.targets[2].name = 'cursor ';
+  });
+  result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+  await changeManifest(root,manifest=>{
+    manifest.targets[0].name = nfc;
+    manifest.targets[1].name = nfd;
+  });
+  result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+}));
+test('validate compares target name spaces without trimming',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{
+    manifest.targets[1].name = 'cursor ';
+    manifest.targets[2].name = 'cursor ';
+  });
+  const result = await validate(root);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.includes('cursor : duplicate target name cursor '));
+}));
+test('validate keeps a duplicate skill name out of the target diagnostic',()=>fixture(async root=>{
+  await setName(root,'clarify','workflow');
+  const result = await validate(root);
+  assert.ok(result.errors.includes('workflow: duplicate manifest name workflow'));
+  assert.ok(result.errors.includes('Invalid canonical catalogue'));
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+}));
+test('validate keeps matching descriptions out of the target diagnostic',()=>fixture(async root=>{
+  const description = 'Use when alpha.';
+  await setDescription(root,'workflow',description);
+  await setDescription(root,'clarify',description);
+  const result = await validate(root);
+  assert.ok(result.errors.includes('workflow: identical manifest description clarify'));
+  assert.equal(result.errors.some(error=>error.includes('duplicate target name')),false);
+}));
 test('validate compares description spaces without trimming',()=>fixture(async root=>{
   await setDescription(root,'workflow',' ');
   await setDescription(root,'clarify',' ');
