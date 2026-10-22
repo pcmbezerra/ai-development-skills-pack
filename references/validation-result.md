@@ -1,5 +1,17 @@
 # Validation result
 
+## State update — SPDX assertion, v1-A31, 2026-10-22
+
+This section records the later state of amendment v1-A31. It does not replace the sections below, and it does not change their results.
+
+Amendment v1-A31 was published at `0dde35f`. It introduces the offline deterministic SPDX assertion. The MIT license was adopted by amendment v1-A28 and remains MIT. `private` remains `true`. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A32. The sentences below that say `No SPDX assertion was added` are the state before v1-A31. `REVIEW-20261022-009` records `npm test` 86/86, duration 12008.531625 ms, exit 0, and `npm run validate` with `PASS: 18 skills`, exit 0. This section does not report a new suite run.
+
+## State update — internal records, v1-A30, 2026-10-22
+
+This section records the later state of amendment v1-A30. It does not replace the sections below, and it does not change their results.
+
+Amendment v1-A30 was published at `6e4173b`. It aligns the internal records with the published v1-A29. The license remains MIT. `private` remains `true`. The package version remains `1.0.0-scaffold`. No new Node test was added. No SPDX assertion was added. The sentences below that name v1-A30 as the next free identifier are the state before this alignment. The count of 78 tests remains the suite of v1-A26.
+
 ## State update — internal records, v1-A29, 2026-10-22
 
 This section records the later state of amendment v1-A29. It does not replace the sections below, and it does not change their results.
