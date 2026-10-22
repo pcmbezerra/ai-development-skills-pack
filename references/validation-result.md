@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — duplicate name diagnostic, v1-A25, 2026-10-22
+
+This section records the later state of amendment v1-A25. It does not replace the sections below, and it does not change their results.
+
+On 2026-10-22 the maintainer accepted an additional exact diagnostic of duplicate stored `name` values as the only objective of v1-A25. `validate()` emits one error per pair `i < j`, `<earlier name>: duplicate manifest name <later name>`. The comparison does not trim, change case or apply Unicode normalization. The `Invalid canonical catalogue` check remains. The v1-A24 `description` comparison remains. `validateTarget` does not perform the name comparison. No CLI command was added. ADR `0001`, ADR `0002`, ADR `0003` and ADR `0004` were not rewritten. `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A26. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+`REVIEW-20261022-003` is `PASS_WITH_NOTES`. The three-pair test compares three identical error strings, so that assertion does not distinguish a reversed emission. The loop in `scripts/validate-skills.mjs` emits pairs with `i` ascending and `j` starting at `i + 1`. The sentences below that name v1-A25 as the next free identifier are the state before this amendment.
+
+This state update was checked on Darwin 25.6.0, Node.js v26.5.0 and npm 11.17.0, after the five internal records were aligned and before the publishing commit. `npm test`: PASS, 69 tests, zero failures, skips or todos, duration 7713 ms. `npm run validate`: PASS, 18 skills. `git diff --check` passed. `list` and `doctor` exited 0. `sync` and `bootstrap` exited 1.
+
 ## State update — exact description equality, v1-A24, 2026-10-22
 
 This section records the later state of amendment v1-A24. It does not replace the host observations below, and it does not change their results.

@@ -39,6 +39,11 @@ async function setDescription(root, name, description) {
   });
   await changeText(root, skill.path, text => text.replace(/^description: .+$/m, `description: ${JSON.stringify(description)}`));
 }
+async function setName(root, name, next) {
+  await changeManifest(root, manifest => {
+    manifest.skills.find(item => item.name === name).name = next;
+  });
+}
 async function refreshContractProjection(root, contractPath) {
   const manifest = JSON.parse(await readFile(join(root,'manifest/skills.json'),'utf8'));
   const skill = manifest.skills.find(item=>item.contract===contractPath);
@@ -377,6 +382,66 @@ test('validate keeps case, trailing space and unicode form distinct',()=>fixture
   await setDescription(root,'clarify',nfd);
   result = await validate(root);
   assert.equal(result.ok,true,result.errors.join('\n'));
+}));
+test('validate rejects two skills with the same stored name',()=>fixture(async root=>{
+  await setName(root,'clarify','workflow');
+  const result = await validate(root);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.includes('workflow: duplicate manifest name workflow'));
+  assert.ok(result.errors.includes('Invalid canonical catalogue'));
+  await cp(join(source,'scripts'),join(root,'scripts'),{recursive:true});
+  const cli = spawnSync(process.execPath,[join(root,'scripts/validate-skills.mjs')],{encoding:'utf8'});
+  assert.equal(cli.status,1);
+  assert.match(cli.stderr,/^- workflow: duplicate manifest name workflow$/m);
+  assert.match(cli.stderr,/^- Invalid canonical catalogue$/m);
+}));
+test('validate rejects every pair of identical stored names',()=>fixture(async root=>{
+  await setName(root,'clarify','workflow');
+  await setName(root,'context-engineering','workflow');
+  const result = await validate(root);
+  assert.ok(result.errors.includes('Invalid canonical catalogue'));
+  assert.deepEqual(result.errors.filter(error=>error.includes('duplicate manifest name')),[
+    'workflow: duplicate manifest name workflow',
+    'workflow: duplicate manifest name workflow',
+    'workflow: duplicate manifest name workflow',
+  ]);
+}));
+test('validate keeps case, trailing space and unicode form distinct for names',()=>fixture(async root=>{
+  const nfc = 'café';
+  const nfd = 'cafe\u0301';
+  assert.notEqual(nfc,nfd);
+  assert.equal(nfc.normalize('NFC'),nfd.normalize('NFC'));
+  await setName(root,'clarify','Workflow');
+  let result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
+  assert.ok(result.errors.includes('Invalid name Workflow'));
+  await setName(root,'Workflow','workflow ');
+  result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
+  assert.ok(result.errors.includes('Invalid name workflow '));
+  await setName(root,'workflow',nfc);
+  await setName(root,'workflow ',nfd);
+  result = await validate(root);
+  assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
+}));
+test('validate compares name spaces without trimming',()=>fixture(async root=>{
+  await changeManifest(root,manifest=>{
+    manifest.skills.find(skill=>skill.name==='workflow').name = 'workflow ';
+    manifest.skills.find(skill=>skill.name==='clarify').name = 'workflow ';
+  });
+  const result = await validate(root);
+  assert.equal(result.ok,false);
+  assert.ok(result.errors.includes('workflow : duplicate manifest name workflow '));
+  assert.ok(result.errors.includes('Invalid name workflow '));
+  assert.ok(result.errors.includes('Invalid canonical catalogue'));
+}));
+test('validate keeps distinct names when descriptions match',()=>fixture(async root=>{
+  const description = 'Use when alpha.';
+  await setDescription(root,'workflow',description);
+  await setDescription(root,'clarify',description);
+  const result = await validate(root);
+  assert.ok(result.errors.includes('workflow: identical manifest description clarify'));
+  assert.equal(result.errors.some(error=>error.includes('duplicate manifest name')),false);
 }));
 test('validate compares description spaces without trimming',()=>fixture(async root=>{
   await setDescription(root,'workflow',' ');

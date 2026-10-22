@@ -119,6 +119,7 @@ export async function validate(root = rootDirectory) {
     check(skills.length === 18 && new Set(names).size === 18 && expected.every(n=>names.includes(n)), 'Invalid canonical catalogue');
     for (let i = 0; i < skills.length; i++) {
       for (let j = i + 1; j < skills.length; j++) {
+        check(skills[i].name !== skills[j].name, `${skills[i].name}: duplicate manifest name ${skills[j].name}`);
         check(skills[i].description !== skills[j].description, `${skills[i].name}: identical manifest description ${skills[j].name}`);
       }
     }

@@ -2,7 +2,7 @@
 
 Dezoito skills de engenharia para Cursor, Codex, Gemini Antigravity e Claude Code. A fonte é a mesma; cada target recebe o catálogo no diretório nativo do projeto.
 
-Baseline arquitetural v1, emendas v1-A1 a v1-A24. A v1-A22 adiciona o comando `list`. A v1-A23 adiciona o comando `doctor`. A v1-A24 faz o validador rejeitar duas skills cuja `description` armazenada no manifesto é a mesma string. O identificador de versão permanece `1.0.0-scaffold`.
+Baseline arquitetural v1, emendas v1-A1 a v1-A25. A v1-A22 adiciona o comando `list`. A v1-A23 adiciona o comando `doctor`. A v1-A24 faz o validador rejeitar duas skills cuja `description` armazenada no manifesto é a mesma string. A v1-A25 faz o validador emitir um erro adicional quando duas entradas têm o mesmo `name` armazenado. O identificador de versão permanece `1.0.0-scaffold`.
 
 **[Instalação](#instalação) · [Catálogo](#catálogo) · [Validação](#validação) · [Limites](#limites) · [Documentação](#documentação)**
 
@@ -87,7 +87,7 @@ npm test
 node bin/ai-dev-skills.mjs validate
 ```
 
-O validador confere catálogo, nomes, frontmatter, status, dependências, projeção dentro do diretório da skill e descritores dos targets. Também rejeita duas entradas de `manifest.skills` cuja `description` é a mesma string, sem normalizar e sem análise semântica. Ele não executa Cursor, Codex, Gemini Antigravity nem Claude Code.
+O validador confere catálogo, nomes, frontmatter, status, dependências, projeção dentro do diretório da skill e descritores dos targets. Também rejeita duas entradas de `manifest.skills` cuja `description` é a mesma string, sem normalizar e sem análise semântica. Emite um erro adicional quando o `name` de duas entradas é a mesma string, sem `trim`, sem mudança de caixa e sem normalização Unicode. A mensagem de catálogo `Invalid canonical catalogue` permanece. Ele não executa Cursor, Codex, Gemini Antigravity nem Claude Code.
 
 `.ai/project.md` registra a suíte estrutural em 53 testes.
 
@@ -100,6 +100,8 @@ A observação de host da v1-A21 tem veredito `OBSERVED`: Antigravity IDE passou
 `doctor` não aceita opção nem argumento. Imprime duas linhas, nesta ordem: `node pass <versão>` ou `node fail <versão>`, depois `git pass` ou `git fail`. `<versão>` é `process.versions.node`. A saída é 0 só quando as duas passam; nesse caminho a stderr fica vazia. Git passa quando um arquivo executável de nome `git` é resolvido no `PATH`. O comando não executa `git`, não trata `git.exe` como esse nome, não grava arquivo e não chama `validate`. Opção ou argumento termina com saída 1 e `ERROR:` na stderr, sem as duas linhas. A v1-A23 cobre somente `doctor`.
 
 A v1-A24 cobre somente a igualdade exata da `description` já armazenada em `manifest.skills`. Cada par igual produz `<nome anterior>: identical manifest description <nome posterior>`. Diferença de caixa, de espaço ou de forma Unicode não é duplicidade. `validateTarget` não faz essa comparação.
+
+A v1-A25 cobre somente o diagnóstico exato de `name` duplicado em `manifest.skills`, além da condição que já produz `Invalid canonical catalogue`. Cada par `i < j` igual produz `<nome anterior>: duplicate manifest name <nome posterior>`. Diferença de caixa, de espaço ou de forma Unicode não é duplicidade. `validateTarget` não faz essa comparação.
 
 Continuam ausentes: `sync`, desinstalação, instalação global, detecção de plataforma, roteador automático e `meta-skills/skill-authoring`.
 
