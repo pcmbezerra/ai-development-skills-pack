@@ -7,7 +7,7 @@
 - `targets/`: quatro descritores declarativos implementados com paths de projeto por target.
 - `scripts/validate-skills.mjs`: validação estrutural, referências, projeção dentro do diretório da skill, targets e ciclos obrigatórios/condicionais.
 - `scripts/distribute-skills.mjs`: empacotamento, instalação idempotente e validação contra a fonte canônica.
-- `bin/ai-dev-skills.mjs`: CLI de ajuda, validação, empacotamento, instalação, `list` e `doctor`. `list` imprime o `name` de cada skill do manifesto, uma por linha, sem opção e sem gravar arquivo. `doctor` imprime as duas linhas de Node.js e Git, sem opção, sem executar `git` e sem gravar arquivo.
+- `bin/ai-dev-skills.mjs`: CLI de ajuda, validação, empacotamento, instalação, `list` e `doctor`. `list` imprime o `name` de cada skill do manifesto, uma por linha, sem opção e sem gravar arquivo. `doctor` imprime as duas linhas de Node.js e Git, sem opção, sem executar `git` e sem gravar arquivo. `validate()` rejeita duas entradas cuja `description` armazenada é a mesma string, sem normalizar.
 - `tests/`: 60 testes com fixtures isoladas. A v1-A19 acrescentou duas rejeições de descrição. A v1-A20 acrescentou rejeição de link que escapa, rejeição de projeção divergente e instalação dos quatro targets sem o repositório de origem.
 
 Fontes normativas: `references/architecture-contract-v1.md`, `references/provenance.md` e contratos operacionais. O snapshot recovered é histórico.

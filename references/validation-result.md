@@ -1,5 +1,15 @@
 # Validation result
 
+## State update — exact description equality, v1-A24, 2026-10-22
+
+This section records the later state of amendment v1-A24. It does not replace the host observations below, and it does not change their results.
+
+On 2026-10-22 the maintainer accepted exact equality of the stored `description` as the only objective of v1-A24. `validate()` rejects each pair of `manifest.skills` entries whose `description` strings are identical and does not normalize or measure semantic overlap. `validateTarget` does not perform that comparison. No CLI command was added. ADR `0001`, ADR `0002`, ADR `0003` and ADR `0004` were not rewritten. `sync`, uninstall, global installation, platform detection, an automatic router, `meta-skills/skill-authoring` and semantic overlap tests stay excluded. The package version remains `1.0.0-scaffold`. The next free amendment identifier is v1-A25. Claude Code stays `NOT_RUN`. `OBSERVED` is not certification.
+
+The implementation is commit `9cec927`. A later correction compares the invoked script path with `realpath`, so the fixture CLI test no longer calls `realpathSync`. The sentences below that name v1-A24 as the next free identifier are the state before this amendment.
+
+This state update was checked on Darwin 25.6.0, Node.js v26.5.0 and npm 11.17.0, after that path correction. `npm test`: PASS, 64 tests, zero failures, skips or todos. `npm run validate`: PASS, 18 skills.
+
 ## State update — doctor command, v1-A23, 2026-10-21
 
 This section records the later state of amendment v1-A23. It does not replace the host observations below, and it does not change their results.

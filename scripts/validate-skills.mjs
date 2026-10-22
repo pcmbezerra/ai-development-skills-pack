@@ -1,4 +1,4 @@
-import { readFile, readdir, stat } from 'node:fs/promises';
+import { readFile, readdir, realpath, stat } from 'node:fs/promises';
 import { resolve, relative, dirname, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const rootDirectory = fileURLToPath(new URL('../', import.meta.url));
@@ -262,6 +262,13 @@ export function report(r) {
   if (r.ok) console.log(`PASS: ${r.skills} skills; catalogue, lifecycle status, frontmatter, artifacts/templates, R1–R17, gates, failure contract, dependencies, references, mandatory/conditional cycles and target descriptors validated.`);
   else console.error(`FAIL:\n${r.errors.map(e=>`- ${e}`).join('\n')}`);
 }
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+async function sameInvokedFile(entry, modulePath) {
+  try {
+    return await realpath(entry) === await realpath(modulePath);
+  } catch {
+    return resolve(entry) === resolve(modulePath);
+  }
+}
+if (process.argv[1] && await sameInvokedFile(process.argv[1], fileURLToPath(import.meta.url))) {
   const r = await validate(); report(r); process.exitCode = r.ok ? 0 : 1;
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync, realpathSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { chmod, cp, mkdtemp, mkdir, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { delimiter, join } from 'node:path';
@@ -345,7 +345,7 @@ test('validate rejects two skills with the same stored description',()=>fixture(
   assert.equal(result.ok,false);
   assert.deepEqual(result.errors,['workflow: identical manifest description clarify']);
   await cp(join(source,'scripts'),join(root,'scripts'),{recursive:true});
-  const cli = spawnSync(process.execPath,[realpathSync(join(root,'scripts/validate-skills.mjs'))],{encoding:'utf8'});
+  const cli = spawnSync(process.execPath,[join(root,'scripts/validate-skills.mjs')],{encoding:'utf8'});
   assert.equal(cli.status,1);
   assert.match(cli.stderr,/^- workflow: identical manifest description clarify$/m);
 }));
