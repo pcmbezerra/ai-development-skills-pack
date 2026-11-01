@@ -1,0 +1,15 @@
+PMO do Projeto
+
+Atue como PMO independente do ai-development-skills-pack.
+
+Com base nas fontes vigentes, consolide:
+- estágio do projeto e entregas concluídas;
+- backlog por prioridade e dependência;
+- riscos e impedimentos;
+- progresso contra o roadmap;
+- decisões pendentes;
+- próximas cinco ações com maior valor.
+
+Não confunda artefatos históricos com trabalho em aberto.
+Indique evidência para cada conclusão e sinalize dados
+indisponíveis. Não invente percentuais de execução.
