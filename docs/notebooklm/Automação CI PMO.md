@@ -3,8 +3,8 @@
 **Projeto:** ai-development-skills-pack  
 **Fase:** Produção Mínima Viável — MVP Beta  
 **Prioridade:** P0  
-**Status:** IMPLEMENTED / BLOCKED FOR ACCEPTANCE  
-**Data de atualização:** 01/11/2026
+**Status:** ACCEPTED  
+**Data de atualização:** 19/11/2026
 
 ## 1. Objetivo
 
@@ -58,29 +58,25 @@ A P0.1b ainda precisa de formalização e definição de escopo.
 - [x] Validação sintática aprovada.
 - [x] Matriz Linux/Windows configurada.
 - [x] Código das Skills e contratos preservado.
-- [ ] Workflow versionado em branch e submetido por PR.
-- [ ] Todos os testes aprovados em Linux e Windows.
-- [ ] Validação estrutural aprovada no GitHub Actions.
-- [ ] PR revisado e incorporado à `main`.
-- [ ] Execução automatizada bem-sucedida na `main`.
-- [ ] Evidências anexadas à Issue P0.1.
+- [x] Workflow versionado em branch e submetido por PR.
+- [x] Todos os testes aprovados em Linux e Windows.
+- [x] Validação estrutural aprovada no GitHub Actions.
+- [x] PR revisado e incorporado à `main`.
+- [x] Execução automatizada bem-sucedida na `main`.
+- [x] Evidências registradas no PR #17. Não havia Issue P0.1.
 
 ## 6. Decisão atual
 
-**GO WITH CONDITIONS para continuidade da P0.1.**
+**ACCEPTED em 19/11/2026.**
 
-A implementação local do workflow está concluída, mas a iniciativa não pode ser encerrada.
+O PR #17 foi incorporado à `main` por merge commit `58683bb1a62ff99407a1fe49067e770f5d476246`, preservando `f4a55d8` (v1-A33) e `be8406339029bfa515efee4ad499225935dd14b0` (P0.1c). O PR #16 foi encerrado sem merge, substituído pelo #17.
 
-Não alterar silenciosamente CLI, testes ou contratos dentro da P0.1.
+A execução nova na `main` está em https://github.com/pcmbezerra/ai-development-skills-pack/actions/runs/44592435141. Ubuntu e Windows passaram em `npm test` (86/86) e em `npm run validate` (18 skills), com Node.js 22. A seção 3 permanece o registro anterior, de 01/11/2026.
 
 ## 7. Próximas ações
 
-1. Formalizar a Issue P0.1 no GitHub.
-2. Abrir uma pendência separada para avaliação da compatibilidade Windows do `doctor`.
-3. Definir a menor correção compatível com os contratos vigentes.
-4. Validar os resultados no GitHub Actions.
-5. Encerrar P0.1 somente após todos os critérios de aceite.
-6. Avançar para P0.2 — Segurança do Instalador.
+1. P0.1 está encerrada.
+2. P0.2 — Testes de Segurança do Instalador está aberta. O registro inicial está em `P0.2 Segurança do Instalador.md`.
 
 ## 8. Governança
 
