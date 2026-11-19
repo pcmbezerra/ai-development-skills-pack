@@ -581,7 +581,7 @@ test('doctor reports node and git without calling validate', async () => {
   const cli = join(source,'bin/ai-dev-skills.mjs');
   const root = await mkdtemp(join(tmpdir(),'doctor-'));
   try {
-    const git = join(root,'git');
+    const git = join(root,process.platform === 'win32' ? 'git.exe' : 'git');
     const empty = join(root,'empty');
     await writeFile(git,'');
     await chmod(git,0o755);
@@ -590,16 +590,22 @@ test('doctor reports node and git without calling validate', async () => {
     assert.equal(passed.status,0,passed.stderr);
     assert.equal(passed.stderr,'');
     assert.equal(passed.stdout,`node pass ${process.versions.node}\ngit pass\n`);
-    assert.deepEqual((await readdir(root)).sort(),['empty','git']);
+    assert.deepEqual((await readdir(root)).sort(),['empty',process.platform === 'win32' ? 'git.exe' : 'git']);
     const missing = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:empty}});
     assert.equal(missing.status,1,missing.stderr);
     assert.equal(missing.stderr,'');
     assert.equal(missing.stdout,`node pass ${process.versions.node}\ngit fail\n`);
     await chmod(git,0o644);
     const plain = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
-    assert.equal(plain.status,1,plain.stderr);
-    assert.equal(plain.stderr,'');
-    assert.equal(plain.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+    if (process.platform === 'win32') {
+      assert.equal(plain.status,0,plain.stderr);
+      assert.equal(plain.stderr,'');
+      assert.equal(plain.stdout,`node pass ${process.versions.node}\ngit pass\n`);
+    } else {
+      assert.equal(plain.status,1,plain.stderr);
+      assert.equal(plain.stderr,'');
+      assert.equal(plain.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+    }
     const rejected = spawnSync(process.execPath,[cli,'doctor','--target','cursor'],{encoding:'utf8'});
     assert.equal(rejected.status,1);
     assert.match(rejected.stderr,/ERROR:/);
@@ -618,6 +624,21 @@ test('doctor reports node and git without calling validate', async () => {
     assert.equal(branch.includes('fetch('), false);
     assert.equal(branch.includes('node:net'), false);
     assert.equal(branch.includes('node:http'), false);
+    const observeStart = body.indexOf('async function observeGit');
+    const observeEnd = body.indexOf('\nfunction options(');
+    assert.equal(observeStart >= 0, true, 'observeGit marker missing');
+    assert.equal(observeEnd > observeStart, true, 'options marker missing or before observeGit');
+    const observe = body.slice(observeStart, observeEnd);
+    assert.equal(observe.includes("process.platform === 'win32'"), true);
+    assert.equal(observe.includes("'git.exe'"), true);
+    assert.equal(observe.includes('0o111'), true);
+    assert.equal(observe.includes('isFile()'), true);
+    assert.equal(observe.includes('0o222'), false);
+    assert.equal(observe.includes('PATHEXT'), false);
+    assert.equal(observe.includes('child_process'), false);
+    assert.equal(observe.includes('spawn'), false);
+    assert.equal(observe.includes('execFile'), false);
+    assert.equal(observe.includes('exec('), false);
     const {nodeLine,gitLine} = await import('../bin/ai-dev-skills.mjs');
     assert.equal(nodeLine('21.9.9'),'node fail 21.9.9');
     assert.equal(nodeLine('22.0.0'),'node pass 22.0.0');
@@ -628,8 +649,12 @@ test('doctor reports node and git without calling validate', async () => {
     assert.equal(`${nodeLine('21.9.9')}\n${await gitLine(root)}`,'node fail 21.9.9\ngit pass');
     const blocker = join(root,'not-dir');
     await writeFile(blocker,'');
-    const observed = await stat(join(blocker,'git')).then(() => null, error => error);
-    assert.equal(observed instanceof Error && observed.code !== 'ENOENT', true, 'git observation did not throw a non-ENOENT error');
+    const observed = await stat(join(blocker,process.platform === 'win32' ? 'git.exe' : 'git')).then(() => null, error => error);
+    if (process.platform === 'win32') {
+      assert.equal(observed instanceof Error && observed.code === 'ENOENT', true, 'Windows file segment did not report ENOENT');
+    } else {
+      assert.equal(observed instanceof Error && observed.code !== 'ENOENT', true, 'git observation did not throw a non-ENOENT error');
+    }
     const thrown = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:blocker}});
     assert.equal(thrown.status,1,thrown.stderr);
     assert.equal(thrown.stderr,'');
@@ -642,8 +667,15 @@ test('doctor fails git for an empty, omitted, or delimiter-only PATH', async () 
   const cli = join(source,'bin/ai-dev-skills.mjs');
   const expected = `node pass ${process.versions.node}\ngit fail\n`;
   const omitted = {...process.env};
-  delete omitted.PATH;
+  for (const key of Object.keys(omitted)) {
+    if (key.toLowerCase() === 'path') delete omitted[key];
+  }
   for (const env of [{...process.env,PATH:''}, omitted, {...process.env,PATH:delimiter}]) {
+    if (process.platform === 'win32' && env === omitted) {
+      const {gitLine} = await import('../bin/ai-dev-skills.mjs');
+      assert.equal(await gitLine(undefined), 'git fail');
+      continue;
+    }
     const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env});
     assert.equal(result.status,1,result.stderr);
     assert.equal(result.stderr,'');
@@ -658,9 +690,13 @@ test('doctor passes git found only in a later PATH segment', async () => {
     const second = join(root,'second');
     await mkdir(first);
     await mkdir(second);
-    const git = join(second,'git');
+    const git = join(second,process.platform === 'win32' ? 'git.exe' : 'git');
     await writeFile(git,'');
-    await chmod(git,0o755);
+    if (process.platform === 'win32') {
+      for (const name of ['git','git.cmd','git.bat']) await writeFile(join(first,name),'');
+    } else {
+      await chmod(git,0o755);
+    }
     const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:[first,second].join(delimiter)}});
     assert.equal(result.status,0,result.stderr);
     assert.equal(result.stderr,'');
@@ -673,7 +709,7 @@ test('doctor fails when the resolved git name is a directory', async () => {
   const cli = join(source,'bin/ai-dev-skills.mjs');
   const root = await mkdtemp(join(tmpdir(),'doctor-dir-'));
   try {
-    await mkdir(join(root,'git'),{recursive:true});
+    await mkdir(join(root,process.platform === 'win32' ? 'git.exe' : 'git'),{recursive:true});
     const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
     assert.equal(result.status,1,result.stderr);
     assert.equal(result.stderr,'');
@@ -682,17 +718,42 @@ test('doctor fails when the resolved git name is a directory', async () => {
     await rm(root,{recursive:true,force:true});
   }
 });
-test('doctor fails when PATH contains only an executable git.exe', async () => {
+test('doctor applies the platform git filename', async () => {
   const cli = join(source,'bin/ai-dev-skills.mjs');
   const root = await mkdtemp(join(tmpdir(),'doctor-exe-'));
+  const expectedFail = `node pass ${process.versions.node}\ngit fail\n`;
+  const expectedPass = `node pass ${process.versions.node}\ngit pass\n`;
   try {
-    const git = join(root,'git.exe');
-    await writeFile(git,'');
-    await chmod(git,0o755);
-    const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
-    assert.equal(result.status,1,result.stderr);
-    assert.equal(result.stderr,'');
-    assert.equal(result.stdout,`node pass ${process.versions.node}\ngit fail\n`);
+    if (process.platform === 'win32') {
+      for (const name of ['git','git.cmd','git.bat']) {
+        const dir = join(root,name);
+        await mkdir(dir);
+        await writeFile(join(dir,name),'');
+        await chmod(join(dir,name),0o755);
+        const rejected = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:dir}});
+        assert.equal(rejected.status,1,rejected.stderr);
+        assert.equal(rejected.stderr,'');
+        assert.equal(rejected.stdout,expectedFail);
+      }
+      const acceptedDir = join(root,'exe');
+      await mkdir(acceptedDir);
+      const exe = join(acceptedDir,'git.exe');
+      await writeFile(exe,'');
+      await chmod(exe,0o444);
+      const accepted = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:acceptedDir}});
+      assert.equal(accepted.status,0,accepted.stderr);
+      assert.equal(accepted.stderr,'');
+      assert.equal(accepted.stdout,expectedPass);
+      await chmod(exe,0o666);
+    } else {
+      const git = join(root,'git.exe');
+      await writeFile(git,'');
+      await chmod(git,0o755);
+      const result = spawnSync(process.execPath,[cli,'doctor'],{encoding:'utf8',env:{...process.env,PATH:root}});
+      assert.equal(result.status,1,result.stderr);
+      assert.equal(result.stderr,'');
+      assert.equal(result.stdout,expectedFail);
+    }
   } finally {
     await rm(root,{recursive:true,force:true});
   }
@@ -723,8 +784,9 @@ test('doctor does not change the working directory or the PATH directory', async
     const blocker = join(root,'not-dir');
     await mkdir(gitDir);
     await mkdir(empty);
-    await writeFile(join(gitDir,'git'),'');
-    await chmod(join(gitDir,'git'),0o755);
+    const gitFile = join(gitDir,process.platform === 'win32' ? 'git.exe' : 'git');
+    await writeFile(gitFile,'');
+    if (process.platform !== 'win32') await chmod(gitFile,0o755);
     await writeFile(blocker,'');
     const cases = [
       [gitDir,0,`node pass ${process.versions.node}\ngit pass\n`],

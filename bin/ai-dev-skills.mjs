@@ -30,16 +30,19 @@ export async function gitLine(pathEnv, lookup = observeGit) {
 }
 
 async function observeGit(pathEnv) {
+  const windows = process.platform === 'win32';
+  const name = windows ? 'git.exe' : 'git';
   for (const segment of String(pathEnv ?? '').split(delimiter)) {
     if (!segment) continue;
     let info;
     try {
-      info = await stat(join(segment, 'git'));
+      info = await stat(join(segment, name));
     } catch (error) {
       if (error?.code === 'ENOENT') continue;
       throw error;
     }
     if (!info.isFile()) continue;
+    if (windows) return true;
     return (info.mode & 0o111) !== 0;
   }
   return false;

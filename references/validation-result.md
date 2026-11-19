@@ -1,5 +1,32 @@
 # Validation result
 
+## State update — doctor Git lookup, v1-A33, 2026-11-19
+
+This section records the local evidence for amendment v1-A33. It does not replace the sections below, and it does not change their results. It does not name a commit. It does not accept P0.1 or P0.1b.
+
+`ADR-0005` records the Git lookup. `ADR-0004` is unchanged. On Unix, Git passes for a regular file named `git` with an execute bit `0o111`. On Windows, Git passes only for a regular file named `git.exe`. File mode is not evidence of executability on Windows. `git`, `git.cmd` and `git.bat` are not accepted. The command does not execute `git` and does not read `PATHEXT`. The 18 skills are unchanged. The package version remains `1.0.0-scaffold`.
+
+Environment: Windows 11 Pro 10.0.26300, Node.js v25.2.0, npm 11.6.2. The checkout has `core.autocrlf=true`, so the working tree is CRLF and the index is LF. GitHub Actions checks out LF because the workflow sets `core.autocrlf` false before checkout. Node.js 22 was not run. Ubuntu and macOS were not run.
+
+Before the correction, `node --test --test-name-pattern doctor tests/validate-skills.test.mjs` in the working tree finished with 4 passed and 3 failed. The failures expected exit 0 for a file named `git` with mode `0o755`. On this Windows, `stat` reported mode `0o666` for `git` and for `git.exe`, so `0o111` was clear and `0o222` was set. `npm test` in that same tree, before the omitted-PATH assertion was corrected, finished with 78 passed and 8 failed: those 3 doctor failures were already reduced by the filename correction to 1 remaining doctor failure, plus 7 SPDX failures. The SPDX failures compare `tests/spdx-mit.txt` at 1096 bytes against 1078 and classify CR bytes as `template`. Those files are not in this diff.
+
+After the correction, the same doctor name pattern in the working tree finished with 7 passed and 0 failed. `node bin/ai-dev-skills.mjs doctor` exited 0, wrote `node pass 25.2.0` and `git pass`, and wrote no stderr. `where.exe git` resolved `C:\Program Files\Git\cmd\git.exe`. The command did not execute `git`.
+
+An LF export of HEAD plus these changes, with `tests/spdx-mit.txt` at 1078 bytes and no CR, ran `npm test`: PASS, 86 tests, zero failures, skips or todos, duration 62244.2461 ms, exit 0. `npm run validate`: PASS, 18 skills, exit 0. On Windows, deleting the PATH key from a `spawnSync` environment does not omit PATH: Node restores it, and the real `git.exe` then passes. The omitted-PATH contract is asserted with `gitLine(undefined)`, which returns `git fail`. Empty PATH and delimiter-only PATH still go through the CLI and return `git fail` with empty stderr.
+
+| Check | Result |
+| --- | --- |
+| LF export `npm test` | PASS, 86/86 |
+| LF export `npm run validate` | PASS, 18 skills |
+| Working-tree doctor tests after the correction | PASS, 7/7 |
+| Working-tree `doctor` on the real PATH | PASS, exit 0, `git pass` |
+| Working-tree SPDX bytes | FAIL, CR bytes from `core.autocrlf=true`; not in this diff |
+| Ubuntu | NOT_RUN |
+| macOS | NOT_RUN |
+| GitHub Actions `ubuntu-latest` | NOT_RUN |
+| GitHub Actions `windows-latest` | NOT_RUN |
+| P0.1 acceptance on `main` | BLOCKED |
+
 ## State update — SPDX assertion, v1-A31, 2026-10-22
 
 This section records the later state of amendment v1-A31. It does not replace the sections below, and it does not change their results.
