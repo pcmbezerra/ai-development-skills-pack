@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { dirname, join, relative, resolve } from 'node:path';
+import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { installTarget, packageTargets, readTarget, targetNames, validateTarget } from '../scripts/distribute-skills.mjs';
 
@@ -88,7 +88,8 @@ test('four targets install without the origin repository and resolve local links
           const rel = relative(skillDir, target);
           assert.equal(rel.startsWith('..'), false, `${name}/${entry.name}: ${link}`);
           assert.equal((await stat(target)).isFile(), true, link);
-          assert.equal(relative(source, target).startsWith('..'), true, link);
+          const fromSource = relative(source, target);
+          assert.equal(fromSource.startsWith('..') || isAbsolute(fromSource), true, link);
         }
       }
     }
