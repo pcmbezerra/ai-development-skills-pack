@@ -1,14 +1,38 @@
-import { cp, mkdir, readFile, readdir, stat } from 'node:fs/promises';
-import { dirname, join, relative, resolve, sep } from 'node:path';
+import { cp, mkdir, readFile, readdir, realpath, stat } from 'node:fs/promises';
+import { basename, dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const rootDirectory = fileURLToPath(new URL('../', import.meta.url));
 
-function inside(base, path, label) {
+function assertInside(base, target, label) {
+  const rel = relative(base, target);
+  if (rel === '..' || rel.startsWith(`..${sep}`) || isAbsolute(rel)) {
+    throw new Error(`${label} escapes destination`);
+  }
+}
+
+async function canonical(path) {
+  const missing = [];
+  let current = path;
+  while (true) {
+    try {
+      const real = await realpath(current);
+      return missing.reduceRight((dir, name) => join(dir, name), real);
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+      const parent = dirname(current);
+      if (parent === current) throw error;
+      missing.push(basename(current));
+      current = parent;
+    }
+  }
+}
+
+async function inside(base, path, label) {
   const absoluteBase = resolve(base);
   const absolutePath = resolve(absoluteBase, path);
-  const rel = relative(absoluteBase, absolutePath);
-  if (rel === '..' || rel.startsWith(`..${sep}`)) throw new Error(`${label} escapes destination`);
+  assertInside(absoluteBase, absolutePath, label);
+  assertInside(await canonical(absoluteBase), await canonical(absolutePath), label);
   return absolutePath;
 }
 
@@ -68,12 +92,12 @@ export async function installTarget({ target, destination, root = rootDirectory 
   if (!destination) throw new Error('Missing destination');
   const descriptor = await readTarget(target, root);
   const catalogue = await readCatalogue(root);
-  const skillsRoot = inside(destination, descriptor.projectSkillsPath, `${target}: projectSkillsPath`);
+  const skillsRoot = await inside(destination, descriptor.projectSkillsPath, `${target}: projectSkillsPath`);
   const actions = [];
 
   for (const skill of catalogue.skills) {
     const source = resolve(root, dirname(skill.path));
-    const targetDirectory = inside(skillsRoot, skill.name, `${target}: skill ${skill.name}`);
+    const targetDirectory = await inside(skillsRoot, skill.name, `${target}: skill ${skill.name}`);
     if (await exists(targetDirectory)) {
       if (!await directoriesEqual(source, targetDirectory)) {
         throw new Error(`${target}: refusing to overwrite divergent skill ${skill.name}`);
@@ -105,12 +129,12 @@ export async function validateTarget({ target, path, root = rootDirectory }) {
   if (!path) throw new Error('Missing validation path');
   const descriptor = await readTarget(target, root);
   const catalogue = await readCatalogue(root);
-  const skillsRoot = inside(path, descriptor.projectSkillsPath, `${target}: projectSkillsPath`);
+  const skillsRoot = await inside(path, descriptor.projectSkillsPath, `${target}: projectSkillsPath`);
   const errors = [];
 
   for (const skill of catalogue.skills) {
     const source = resolve(root, dirname(skill.path));
-    const installed = inside(skillsRoot, skill.name, `${target}: skill ${skill.name}`);
+    const installed = await inside(skillsRoot, skill.name, `${target}: skill ${skill.name}`);
     if (!await exists(installed)) {
       errors.push(`${skill.name}: missing`);
     } else if (!await directoriesEqual(source, installed)) {
